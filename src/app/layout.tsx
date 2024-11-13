@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import './globals.css';
 import React from 'react';
 import Head from 'next/head';
+import './globals.scss';
 
 export const metadata: Metadata = {
   title: 'Pictorial',
@@ -18,6 +18,7 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <body>{children}</body>
     </html>
   );
