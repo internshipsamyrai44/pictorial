@@ -1,7 +1,8 @@
 /** @type {{plugins: {tailwindcss: {}}}} */
 const config = {
   plugins: {
-    tailwindcss: {}
+    tailwindcss: {},
+    autoprefixer: {}
   }
 };
 
