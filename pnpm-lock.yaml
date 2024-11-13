@@ -11,11 +11,8 @@ importers:
       '@internshipsamyrai44-ui-kit/components-lib':
         specifier: 0.0.2
         version: 0.0.2(@radix-ui/react-checkbox@1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@radix-ui/react-popover@1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@radix-ui/react-radio-group@1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@radix-ui/react-select@2.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@radix-ui/react-slot@1.1.0(@types/react@18.3.12)(react@18.3.1))(@radix-ui/react-tabs@1.1.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      autoprefixer:
-        specifier: 10.4.20
-        version: 10.4.20(postcss@8.4.49)
       eslint:
-        specifier: '8'
+        specifier: ^8.57.1
         version: 8.57.1
       next:
         specifier: 15.0.3
@@ -45,6 +42,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 8.14.0
         version: 8.14.0(eslint@8.57.1)(typescript@5.6.3)
+      autoprefixer:
+        specifier: 10.4.20
+        version: 10.4.20(postcss@8.4.49)
       eslint-config-next:
         specifier: 15.0.3
         version: 15.0.3(eslint@8.57.1)(typescript@5.6.3)
