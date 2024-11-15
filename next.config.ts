@@ -15,11 +15,13 @@ const regexEqual = (x: RegExp, y: RegExp): boolean => {
 
 const nextConfig: NextConfig = {
   webpack: (config: Configuration) => {
-    const oneOf = config.module.rules.find((rule) => typeof rule.oneOf === 'object');
+    const oneOf = config.module.rules.find((rule: { oneOf: Object }) => typeof rule.oneOf === 'object');
     if (oneOf) {
-      const sassRule = oneOf.oneOf.find((rule) => regexEqual(rule.test, /\.module\.(scss|sass)$/));
+      const sassRule = oneOf.oneOf.find((rule: { test: RegExp }) => regexEqual(rule.test, /\.module\.(scss|sass)$/));
       if (sassRule) {
-        const sassLoader = sassRule.use.find((el) => el.loader.includes('next\\dist\\compiled\\sass-loader'));
+        const sassLoader = sassRule.use.find((el: { loader: string }) =>
+          el.loader.includes('next\\dist\\compiled\\sass-loader')
+        );
         if (sassLoader) {
           sassLoader.loader = 'sass-loader';
         }
