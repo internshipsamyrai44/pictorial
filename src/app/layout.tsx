@@ -1,24 +1,19 @@
-import type { Metadata } from 'next';
 import React from 'react';
-import Head from 'next/head';
+import type { Metadata } from 'next';
 import './globals.scss';
 
 export const metadata: Metadata = {
   title: 'Pictorial',
-  description: 'Pictorial Next App'
+  description: 'Pictorial Next App',
+  icons: {
+    icon: '/favicon.ico'
+  }
 };
 
-export default function RootLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+      <head></head>
       <body>{children}</body>
     </html>
   );
