@@ -1,3 +1,4 @@
+/** @type {import('next').NextConfig} */
 import type { NextConfig } from 'next';
 import { webpack } from 'next/dist/compiled/webpack/webpack';
 import Configuration = webpack.Configuration;
@@ -14,6 +15,7 @@ const regexEqual = (x: RegExp, y: RegExp): boolean => {
 };
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
   webpack: (config: Configuration) => {
     const oneOf = config.module.rules.find((rule: { oneOf: Object }) => typeof rule.oneOf === 'object');
     if (oneOf) {

@@ -11,7 +11,7 @@ export default function Header() {
     <header className={styles.header}>
       <h2>Pictorial Header</h2>
       <Button variant={'primary'} onClick={handleTest}>
-        Sign In
+        Test UI-LIB styles
       </Button>
     </header>
   );
