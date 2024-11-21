@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <Header />
       <Card className={styles.card}>
-        <span>Public page</span>
+        <span>Test global styles - Public page</span>
       </Card>
     </>
   );
