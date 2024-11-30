@@ -1,0 +1,20 @@
+@import '@/shared/styles/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 958px;
+  margin: 0 auto;
+
+  h1 {
+    @include font($size: var(--font-size-xl), $weight: var(--font-weight-bold));
+  }
+
+  .notice {
+    @include font($size: var(--font-size-s));
+
+    text-align: center;
+  }
+}
