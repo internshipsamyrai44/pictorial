@@ -19,13 +19,16 @@ type FormInput = {
 export const ForgotPasswordForm = () => {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [sendEmailToRecoveryPassword] = useSendEmailToRecoveryPasswordMutation();
-  const siteKey = '6LdHxG4qAAAAAPKRxEHrlV5VvLFHIf2BO5NMI8YM';
   const EmailValidationSchema = yup
     .object({
       email: getEmailValidationSchema()
     })
     .required();
-  const { register, handleSubmit } = useForm<FormInput>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid }
+  } = useForm<FormInput>({
     // @ts-ignore
     resolver: yupResolver(EmailValidationSchema),
     mode: 'onBlur'
@@ -43,21 +46,21 @@ export const ForgotPasswordForm = () => {
     };
 
     sendEmailToRecoveryPassword(body);
-
-    console.log('body', body);
   };
 
   return (
     <Card className={s.card}>
       <form onSubmit={handleSubmit(sendLinkToEmail)} className={s.form}>
         <p className={s.header}>Forgot Password</p>
-        <Input {...register('email')} type="text" label={'Email'} />
+        <Input {...register('email')} type="text" label={'Email'} errorMessage={errors.email?.message} />
         <span className={s.description}>Enter your email address and we will send you further instructions </span>
-        <Button className={s.button}>Send Link</Button>
+        <Button className={s.button} disabled={!captchaToken || !isValid}>
+          Send Link
+        </Button>
         <Link className={s.link} href={'/login'}>
           Back to Sign In
         </Link>
-        <ReCAPTCHAComponent sitekey={siteKey} onChange={onsetCaptchaChange} />
+        <ReCAPTCHAComponent sitekey={process.env.RECAPTCHA_ENTERPRISE_API_KEY || ''} onChange={onsetCaptchaChange} />
       </form>
     </Card>
   );
