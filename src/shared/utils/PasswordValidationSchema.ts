@@ -7,10 +7,10 @@ export const getPasswordValidationSchema = (): yup.StringSchema => {
     .string()
     .required('Password is required')
     .matches(/^[A-Za-z\d!#/+*$]+$/, 'Use Latin letters only')
-    .matches(/^.{6,30}$/, `Password must be at most ${MAX_COUNT_PASSWORD} characters`)
+    .matches(/^.{6,20}$/, `Password must be between 6 and ${MAX_COUNT_PASSWORD} characters`)
     .matches(
       // eslint-disable-next-line
       /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~])[A-Za-z0-9!"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]+$/,
-      'The password contains invalid characters'
+      'Must be at least one lowercase letter, one uppercase letter, one number and one special character'
     );
 };

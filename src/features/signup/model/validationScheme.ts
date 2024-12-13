@@ -3,14 +3,18 @@ import { getEmailValidationSchema, getPasswordValidationSchema } from '@/shared/
 
 export const signUpSchema = yup
   .object({
-    userName: yup.string().max(20, 'Username must be at most 20 characters').required('Username is required'),
+    userName: yup
+      .string()
+      .min(6, 'Username must be at least 6 characters')
+      .max(20, 'Username must be at most 20 characters')
+      .required('Username is required'),
     email: getEmailValidationSchema().required('Email is required'),
     password: getPasswordValidationSchema().required('Password is required'),
     confirmPassword: yup
       .string()
       .required('Confirm password is required')
       .oneOf([yup.ref('password')], 'Passwords must match'),
-    terms: yup.boolean().oneOf([true, false]).isTrue('You must accept the terms and conditions')
+    terms: yup.boolean().required('You must accept the terms and conditions').oneOf([true, false])
   })
   .required();
 
