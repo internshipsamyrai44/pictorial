@@ -35,7 +35,7 @@ export const ForgotPasswordForm = () => {
   } = useForm<FormInput>({
     // @ts-ignore
     resolver: yupResolver(EmailValidationSchema),
-    mode: 'onBlur'
+    mode: 'onTouched'
   });
 
   const onsetCaptchaChange = (token: string | null) => {
