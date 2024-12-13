@@ -35,6 +35,15 @@
   margin-top: -12px;
   align-self: flex-start;
 }
+
+.terms-error {
+  color: var(--danger-500);
+  height: 24px;
+  line-height: var(--line-height-m);
+  font-size: var(--font-size-s);
+  align-self: flex-start;
+}
+
 .signup-button {
   margin-top: 12px;
   height: 36px;
