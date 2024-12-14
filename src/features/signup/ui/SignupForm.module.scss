@@ -56,3 +56,18 @@
 .login-button {
   margin-top: 6px;
 }
+
+.modal {
+  width: 330px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 30px;
+  padding-bottom: 26px;
+
+  .button {
+    align-self: flex-end;
+    width: 96px;
+    justify-content: center;
+  }
+}

@@ -1,1 +1,1 @@
-export const getBaseUrl = () => `${window.location.protocol}//${window.location.host}`;
+export const getBaseUrl = (): string => `${window.location.protocol}//${window.location.host}`;

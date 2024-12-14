@@ -10,20 +10,25 @@ import s from './SignupForm.module.scss';
 import { FormSignUp, signUpSchema } from '../model/validationScheme';
 import { useSignUpMutation } from '../api/signUpApi';
 import { getBaseUrl } from '@/shared/utils/';
+import Modal from '@/widgets/modal/Modal';
+import { useEffect, useState } from 'react';
 
 interface Props {
   className?: string;
 }
 
 export const SignupForm = ({ className }: Props) => {
-  const { push } = useRouter();
   const baseUrl = getBaseUrl();
+  const { push } = useRouter();
+
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue
+    setValue,
+    getValues
   } = useForm<FormSignUp>({ resolver: yupResolver(signUpSchema) });
 
   const [signUp, { isLoading, isSuccess, isError }] = useSignUpMutation();
@@ -32,11 +37,14 @@ export const SignupForm = ({ className }: Props) => {
   // const errorText = error?.data?.message[0] ?? 'Unknown error occurred';
   // https://redux-toolkit.js.org/rtk-query/usage-with-typescript#inline-error-handling-example
 
-  console.log('isSuccess: ' + isSuccess);
-  console.log('isError: ' + isError);
+  useEffect(() => {
+    if (isSuccess) {
+      setIsModalActive(true);
+    }
+  }, [isSuccess]);
 
-  if (isSuccess) {
-    push('/registration-confirmation');
+  if (isError) {
+    console.log('isError: ' + isError);
   }
 
   const onSubmit: SubmitHandler<FormSignUp> = ({ email, userName, password }) =>
@@ -105,10 +113,18 @@ export const SignupForm = ({ className }: Props) => {
         </Button>
 
         <p className={s['have-account']}>Have an account?</p>
-        <Button variant={'outlined'} onClick={() => push('/login')} className={s['login-button']}>
+        <Button variant={'outlined'} onClick={() => push('/login')} className={s['login-button']} disabled={isLoading}>
           Sign In
         </Button>
       </Card>
+      {isModalActive && (
+        <Modal title={'Email Sent'} className={s.modal} onClose={() => setIsModalActive(false)}>
+          <p>We have sent a link to confirm your email to {getValues('email')}</p>
+          <Button variant={'primary'} onClick={() => setIsModalActive(false)} className={s.button}>
+            OK
+          </Button>
+        </Modal>
+      )}
     </form>
   );
 };
