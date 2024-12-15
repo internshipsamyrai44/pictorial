@@ -1,6 +1,9 @@
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
-import s from './RegistrationConfirmation.module.scss';
+import Link from 'next/link';
+
 import RegistrationConfirmationSvg from '@/shared/assets/img/RegistrationConfirmationSvg';
+import { PATH } from '@/shared/const/PATH';
+import s from './RegistrationConfirmation.module.scss';
 
 interface Props {
   token?: string | string[];
@@ -12,7 +15,9 @@ export const RegistrationConfirmation = ({ className }: Props) => {
     <div className={`${s.wrapper} ${className}`}>
       <h1 className={s.title}>Congratulations!</h1>
       <p className={s.description}>Your email has been confirmed</p>
-      <Button className={s.button}>Sign In</Button>
+      <Button asChild className={s.button}>
+        <Link href={PATH.LOGIN}>Sign In</Link>
+      </Button>
       <RegistrationConfirmationSvg className={s.img} />
     </div>
   );

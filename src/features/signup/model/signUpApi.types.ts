@@ -1,4 +1,5 @@
-import { FormSignUp } from './validationScheme';
+import { FormSignUp } from '@/features/signup/';
+
 export type SignUpRequest = Omit<FormSignUp, 'confirmPassword' | 'terms'> & { baseUrl: string };
 
 export type SignUpResponse = {

@@ -1,27 +1,27 @@
 import GoogleIconSvg from '@/shared/assets/icons/GoogleIconSvg';
 import GithubIconSvg from '@/shared/assets/icons/GithubIconSvg';
-import { Button, Card, Checkbox, Input } from '@internshipsamyrai44-ui-kit/components-lib';
 
-import { useRouter } from 'next/navigation';
+import { Button, Card, Checkbox, Input } from '@internshipsamyrai44-ui-kit/components-lib';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+
+import { FormSignUp, signUpSchema, useSignUpMutation } from '@/features/signup/';
+import { cn, getBaseUrl } from '@/shared/utils/';
+import Modal from '@/widgets/modal/Modal';
+import { PATH } from '@/shared/const/PATH';
 
 import s from './SignupForm.module.scss';
-import { FormSignUp, signUpSchema } from '../model/validationScheme';
-import { useSignUpMutation } from '../api/signUpApi';
-import { getBaseUrl } from '@/shared/utils/';
-import Modal from '@/widgets/modal/Modal';
-import { useEffect, useState } from 'react';
 
-interface Props {
+type Props = {
   className?: string;
-}
+};
 
 export const SignupForm = ({ className }: Props) => {
   const baseUrl = getBaseUrl();
-  const { push } = useRouter();
 
-  const [isModalActive, setIsModalActive] = useState<boolean>(false);
+  const [isModalActive, setIsModalActive] = useState(false);
 
   const {
     register,
@@ -37,12 +37,6 @@ export const SignupForm = ({ className }: Props) => {
   // const errorText = error?.data?.message[0] ?? 'Unknown error occurred';
   // https://redux-toolkit.js.org/rtk-query/usage-with-typescript#inline-error-handling-example
 
-  useEffect(() => {
-    if (isSuccess) {
-      setIsModalActive(true);
-    }
-  }, [isSuccess]);
-
   if (isError) {
     console.log('isError: ' + isError);
   }
@@ -57,8 +51,14 @@ export const SignupForm = ({ className }: Props) => {
     console.log('github');
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      setIsModalActive(true);
+    }
+  }, [isSuccess]);
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={`${s.form} ${className}`}>
+    <form onSubmit={handleSubmit(onSubmit)} className={cn(s.form, className)}>
       <Card className={s.card}>
         <h1 className={s.title}>Sign Up</h1>
         <div className={s['auth-providers']}>
@@ -67,7 +67,6 @@ export const SignupForm = ({ className }: Props) => {
         </div>
 
         <Input
-          type="text"
           label="Username"
           placeholder="Epam11"
           className={s.input}
@@ -98,11 +97,11 @@ export const SignupForm = ({ className }: Props) => {
           {...register('confirmPassword')}
           errorMessage={errors.confirmPassword?.message}
         />
+        {/* TODO checkbox HOC for useForm */}
         <Checkbox
           label={'Agree to terms and conditions'}
           className={s.terms}
           onChange={(checked) => {
-            console.log('checked: ' + checked);
             setValue('terms', checked ? true : false);
           }}
         />
@@ -113,8 +112,8 @@ export const SignupForm = ({ className }: Props) => {
         </Button>
 
         <p className={s['have-account']}>Have an account?</p>
-        <Button variant={'outlined'} onClick={() => push('/login')} className={s['login-button']} disabled={isLoading}>
-          Sign In
+        <Button asChild variant={'ghost'} className={s['login-button']} disabled={isLoading}>
+          <Link href={PATH.LOGIN}>Sign In</Link>
         </Button>
       </Card>
       {isModalActive && (

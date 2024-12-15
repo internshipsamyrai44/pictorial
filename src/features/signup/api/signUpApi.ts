@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseUrl } from '@/shared/api/baseApi';
-import { SignUpRequest, SignUpResponse } from '../model/signUpApi.types';
+import { SignUpRequest, SignUpResponse } from '@/features/signup';
 
 export const signUpApi = createApi({
   reducerPath: 'signUpApi',
