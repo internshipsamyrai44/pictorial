@@ -1,3 +1,17 @@
+'use client';
+
+import { SignupForm } from '@/features/signup/ui/SignupForm';
+
 export default function SignUp() {
-  return <div>Sign Up</div>;
+  const style = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  };
+
+  return (
+    <div style={style}>
+      <SignupForm />
+    </div>
+  );
 }
