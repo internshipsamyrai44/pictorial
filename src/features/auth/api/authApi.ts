@@ -14,7 +14,7 @@ export const authApi = createApi({
       })
     }),
     createNewPassword: build.mutation<string, createNewPasswordRequest>({
-      query: (...patch) => ({
+      query: ({ ...patch }) => ({
         url: `auth/new-password`,
         method: 'POST',
         body: patch

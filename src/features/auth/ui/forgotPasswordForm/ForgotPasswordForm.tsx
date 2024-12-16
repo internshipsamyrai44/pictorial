@@ -13,6 +13,7 @@ import { useSendEmailToRecoveryPasswordMutation } from '@/features/auth/api/auth
 import * as yup from 'yup';
 import Modal from '@/widgets/modal/Modal';
 import { PATH } from '@/shared/const/PATH';
+import { getBaseUrl } from '@/shared/utils';
 
 type FormInput = {
   email: string;
@@ -23,6 +24,7 @@ export const ForgotPasswordForm = () => {
   const [sendEmailToRecoveryPassword, { isSuccess: isSendEmailSuccess }] = useSendEmailToRecoveryPasswordMutation();
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const [email, setEmail] = useState<string | null>(null);
+  const baseUrl = getBaseUrl();
 
   const EmailValidationSchema = yup
     .object({
@@ -41,14 +43,13 @@ export const ForgotPasswordForm = () => {
 
   const onsetCaptchaChange = (token: string | null) => {
     setCaptchaToken(token);
-    console.log(token);
   };
 
   const sendLinkToEmail = (data: FormInput) => {
     const patch = {
       email: data.email,
       recaptcha: captchaToken || '',
-      baseUrl: 'http://localhost:3000'
+      baseUrl
     };
 
     sendEmailToRecoveryPassword(patch);

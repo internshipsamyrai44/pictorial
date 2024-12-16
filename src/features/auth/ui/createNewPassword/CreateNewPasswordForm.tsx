@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { getPasswordValidationSchema } from '@/shared/utils/PasswordValidationSchema';
 import { useCreateNewPasswordMutation } from '@/features/auth/api/authApi';
+import { useSearchParams } from 'next/navigation';
 
 type FormInput = {
   new_password: string;
@@ -15,6 +16,7 @@ type FormInput = {
 
 export const CreateNewPasswordForm = () => {
   const [createNewPassword] = useCreateNewPasswordMutation();
+  const searchParams = useSearchParams();
 
   const formValidationSchema = yup.object({
     new_password: getPasswordValidationSchema(),
@@ -28,12 +30,10 @@ export const CreateNewPasswordForm = () => {
     // @ts-ignore
   } = useForm<FormInput>({ resolver: yupResolver(formValidationSchema), mode: 'onTouched' });
 
-  console.log('errors', errors);
-
   const sendNewPassword = (data: FormInput) => {
     const patch = {
       newPassword: data.new_password,
-      recoveryCode: ''
+      recoveryCode: searchParams.get('code') || ''
     };
     createNewPassword(patch);
   };
