@@ -1,20 +1,26 @@
-'use client';
-
 import React from 'react';
-import './globals.scss';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import './globals.scss';
+import { GeneralHeader } from '@/widgets/general-header/GeneralHeader';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Pictorial',
+  description: 'Pictorial Next App',
+  icons: {
+    icon: '/favicon.ico'
+  }
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <title>Pictorial</title>
-        <meta name="description" content="Pictorial Next App" />
-        <link rel="icon" href="/favicon.ico" />
-      </head>
       <Provider store={store}>
-        <body>{children}</body>
+        <body>
+          <GeneralHeader />
+          {children}
+        </body>
       </Provider>
     </html>
   );
