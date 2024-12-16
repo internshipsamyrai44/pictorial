@@ -15,6 +15,9 @@ const regexEqual = (x: RegExp, y: RegExp): boolean => {
 };
 
 const nextConfig: NextConfig = {
+  env: {
+    RECAPTCHA_ENTERPRISE_API_KEY: process.env.RECAPTCHA_ENTERPRISE_API_KEY
+  },
   reactStrictMode: true,
   webpack: (config: Configuration) => {
     const oneOf = config.module.rules.find((rule: { oneOf: Object }) => typeof rule.oneOf === 'object');
