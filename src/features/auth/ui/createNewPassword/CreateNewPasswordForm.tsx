@@ -5,7 +5,8 @@ import { Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib'
 import s from './CreateNewPasswordForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { passwordValidationSchema } from '@/shared/utils/PasswordValidationSchema';
+import { getPasswordValidationSchema } from '@/shared/utils/PasswordValidationSchema';
+import { useCreateNewPasswordMutation } from '@/features/auth/api/authApi';
 
 type FormInput = {
   new_password: string;
@@ -13,8 +14,10 @@ type FormInput = {
 };
 
 export const CreateNewPasswordForm = () => {
+  const [createNewPassword] = useCreateNewPasswordMutation();
+
   const formValidationSchema = yup.object({
-    new_password: passwordValidationSchema,
+    new_password: getPasswordValidationSchema(),
     password_confirmation: yup.string().oneOf([yup.ref('new_password')], 'Passwords do not match')
   });
 
@@ -27,8 +30,12 @@ export const CreateNewPasswordForm = () => {
 
   console.log('errors', errors);
 
-  const sendNewPassword = (data: any) => {
-    console.log('data', data);
+  const sendNewPassword = (data: FormInput) => {
+    const patch = {
+      newPassword: data.new_password,
+      recoveryCode: ''
+    };
+    createNewPassword(patch);
   };
 
   return (

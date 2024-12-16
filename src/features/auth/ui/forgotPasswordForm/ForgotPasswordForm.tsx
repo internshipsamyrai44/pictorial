@@ -6,12 +6,13 @@ import ReCAPTCHAComponent from 'react-google-recaptcha';
 import { Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './ForgotPasswordForm.module.scss';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { getEmailValidationSchema } from '@/shared/utils/EmailValidationSchema';
-import { baseUrl } from '@/shared/api/baseApi';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { useSendEmailToRecoveryPasswordMutation } from '@/features/auth/api/authApi';
 import * as yup from 'yup';
 import Modal from '@/widgets/modal/Modal';
+import { PATH } from '@/shared/const/PATH';
 
 type FormInput = {
   email: string;
@@ -40,16 +41,17 @@ export const ForgotPasswordForm = () => {
 
   const onsetCaptchaChange = (token: string | null) => {
     setCaptchaToken(token);
+    console.log(token);
   };
 
   const sendLinkToEmail = (data: FormInput) => {
-    const body = {
+    const patch = {
       email: data.email,
       recaptcha: captchaToken || '',
-      baseUrl
+      baseUrl: 'http://localhost:3000'
     };
 
-    sendEmailToRecoveryPassword(body);
+    sendEmailToRecoveryPassword(patch);
     setEmail(data.email);
     setIsModalActive(true);
   };
@@ -58,11 +60,6 @@ export const ForgotPasswordForm = () => {
     setIsModalActive(false);
   };
 
-  console.log(isSendEmailSuccess);
-
-  /* document.cookie =
-    'aviabeton=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE5NzIsImlhdCI6MTczMzk5MTA4NSwiZXhwIjoxNzMzOTk0Njg1fQ.f0bUcHR7F8nNWw8HBtju45sgn2Z5zgJcCZvMru7YYnk';
-*/
   return (
     <>
       <Card className={s.card}>
@@ -73,7 +70,7 @@ export const ForgotPasswordForm = () => {
           <Button className={s.button} disabled={!captchaToken || !isValid}>
             Send Link
           </Button>
-          <Link className={s.link} href={'/login'}>
+          <Link className={s.link} href={PATH.LOGIN}>
             Back to Sign In
           </Link>
           {!isSendEmailSuccess ? (
@@ -84,7 +81,7 @@ export const ForgotPasswordForm = () => {
           ) : (
             <div>The link has been sent by email. If you don’t receive an email send link again</div>
           )}
-          {isModalActive && ( // TODO if send email is success
+          {isModalActive && isSendEmailSuccess && (
             <Modal className={s.modal} title={'Email sent'} onClose={onModalClose}>
               <div className={s.modalText}>We have sent a link to confirm your email to {email}</div>
               <div className={s.modalButton}>
