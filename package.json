@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "3.9.1",
-    "@internshipsamyrai44-ui-kit/components-lib": "0.1.7",
+    "@internshipsamyrai44-ui-kit/components-lib": "0.2.4",
     "@reduxjs/toolkit": "2.3.0",
     "clsx": "2.1.1",
     "eslint": "^8.57.1",
