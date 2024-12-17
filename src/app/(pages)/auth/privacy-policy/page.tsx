@@ -3,16 +3,15 @@
 import React from 'react';
 import { Privacy } from '@/shared/ui/privacy/Privacy';
 import s from './privacyPage.module.scss';
-import Header from '@/widgets/header/Header';
+import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 
 export default function PrivacyPolicy() {
   return (
-    <>
-      <Header />
-      <div className={s.container}>
-        <button>Back to Sign in</button>
-        <Privacy title={'Privacy Policy'} />
-      </div>
-    </>
+    <div className={s.container}>
+      <Button variant={'ghost'} asChild>
+        <a href={'/auth/login'}>Back to Sign in</a>
+      </Button>
+      <Privacy />
+    </div>
   );
 }
