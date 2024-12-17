@@ -1,9 +1,7 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { store } from './store/store';
-import './globals.scss';
-import { GeneralHeader } from '@/widgets/general-header/GeneralHeader';
 import { Metadata } from 'next';
+import ClientProvider from '@/app/store/ClientProvider';
+import './globals.scss';
 
 export const metadata: Metadata = {
   title: 'Pictorial',
@@ -16,12 +14,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <Provider store={store}>
-        <body>
-          <GeneralHeader />
-          {children}
-        </body>
-      </Provider>
+      <body>
+        <ClientProvider>{children}</ClientProvider>
+      </body>
     </html>
   );
 }
