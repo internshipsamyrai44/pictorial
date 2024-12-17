@@ -1,5 +1,9 @@
+'use client';
+
 import React from 'react';
 import './globals.scss';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,7 +13,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="description" content="Pictorial Next App" />
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body>{children}</body>
+      <Provider store={store}>
+        <body>{children}</body>
+      </Provider>
     </html>
   );
 }
