@@ -59,19 +59,17 @@ export const SigninForm = () => {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-        <Input
-          type="email"
-          label="Email"
-          placeholder="Email"
-          {...register('email')}
-          errorMessage={errors.email?.message}
-        />
+        <Input type="email" label="Email" placeholder="Email" {...register('email')} />
         <Input
           type="password"
           label="Password"
           placeholder="********"
           {...register('password')}
-          errorMessage={errors.password?.message}
+          errorMessage={
+            errors &&
+            `The email or password are incorrect. Try
+again please`
+          }
         />
         <div className={s['forgot-password-wrapper']}>
           <Link href={PATH.FORGOT_PASSWORD}>
