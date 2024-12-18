@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import ReCAPTCHAComponent from 'react-google-recaptcha';
-import { Alertpopup, Button, Card, Input, LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Alertpopup, Button, Card, Input, LoaderLinear, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './ForgotPasswordForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { getEmailValidationSchema } from '@/shared/utils/EmailValidationSchema';
@@ -11,7 +11,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useSendEmailToRecoveryPasswordMutation } from '@/features/auth/api/authApi';
 import * as yup from 'yup';
-import Modal from '@/widgets/modal/Modal';
 import { PATH } from '@/shared/const/PATH';
 import { getBaseUrl } from '@/shared/utils';
 import { useRequestError } from '@/shared/hooks/useRequestError';
