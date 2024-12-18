@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import ReCAPTCHAComponent from 'react-google-recaptcha';
-import { Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Alertpopup, Button, Card, Input, LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './ForgotPasswordForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { getEmailValidationSchema } from '@/shared/utils/EmailValidationSchema';
@@ -14,17 +14,22 @@ import * as yup from 'yup';
 import Modal from '@/widgets/modal/Modal';
 import { PATH } from '@/shared/const/PATH';
 import { getBaseUrl } from '@/shared/utils';
+import { useRequestError } from '@/shared/hooks/useRequestError';
+import { useRouter } from 'next/navigation';
 
 type FormInput = {
   email: string;
 };
 
 export const ForgotPasswordForm = () => {
+  const { push } = useRouter();
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const [sendEmailToRecoveryPassword, { isSuccess: isSendEmailSuccess }] = useSendEmailToRecoveryPasswordMutation();
+  const [sendEmailToRecoveryPassword, { isSuccess: isSendEmailSuccess, isLoading, error }] =
+    useSendEmailToRecoveryPasswordMutation();
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const [email, setEmail] = useState<string | null>(null);
   const baseUrl = getBaseUrl();
+  const errorMessage = useRequestError(error);
 
   const EmailValidationSchema = yup
     .object({
@@ -46,23 +51,26 @@ export const ForgotPasswordForm = () => {
   };
 
   const sendLinkToEmail = (data: FormInput) => {
-    const patch = {
+    const params = {
       email: data.email,
       recaptcha: captchaToken || '',
       baseUrl
     };
 
-    sendEmailToRecoveryPassword(patch);
+    sendEmailToRecoveryPassword(params);
     setEmail(data.email);
     setIsModalActive(true);
   };
 
   const onModalClose = () => {
     setIsModalActive(false);
+    push('/auth/login');
   };
 
   return (
     <>
+      {isLoading && <LoaderLinear />}
+      {errorMessage && <Alertpopup alertType={'error'} message={errorMessage} />}
       <Card className={s.card}>
         <form onSubmit={handleSubmit(sendLinkToEmail)} className={s.form}>
           <p className={s.header}>Forgot Password</p>

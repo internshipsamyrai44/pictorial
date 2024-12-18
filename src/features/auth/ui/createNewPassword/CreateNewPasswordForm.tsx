@@ -1,22 +1,25 @@
 'use client';
 
 import * as yup from 'yup';
-import { Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Alertpopup, Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './CreateNewPasswordForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { getPasswordValidationSchema } from '@/shared/utils/PasswordValidationSchema';
 import { useCreateNewPasswordMutation } from '@/features/auth/api/authApi';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useRequestError } from '@/shared/hooks/useRequestError';
+import { useEffect } from 'react';
 
 type FormInput = {
   new_password: string;
   password_confirmation: string;
 };
-
 export const CreateNewPasswordForm = () => {
-  const [createNewPassword] = useCreateNewPasswordMutation();
+  const [createNewPassword, { error, isSuccess }] = useCreateNewPasswordMutation();
   const searchParams = useSearchParams();
+  const errorMessage = useRequestError(error);
+  const { push } = useRouter();
 
   const formValidationSchema = yup.object({
     new_password: getPasswordValidationSchema(),
@@ -31,15 +34,22 @@ export const CreateNewPasswordForm = () => {
   } = useForm<FormInput>({ resolver: yupResolver(formValidationSchema), mode: 'onTouched' });
 
   const sendNewPassword = (data: FormInput) => {
-    const patch = {
+    const params = {
       newPassword: data.new_password,
       recoveryCode: searchParams.get('code') || ''
     };
-    createNewPassword(patch);
+    createNewPassword(params);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      push('/auth/login');
+    }
+  }, [isSuccess]);
 
   return (
     <>
+      {errorMessage && <Alertpopup alertType={'error'} message={errorMessage} />}
       <Card className={s.card}>
         <form onSubmit={handleSubmit(sendNewPassword)} className={s.form}>
           <p className={s.header}>Forgot Password</p>

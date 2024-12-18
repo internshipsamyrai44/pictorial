@@ -7,17 +7,17 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (build) => ({
     sendEmailToRecoveryPassword: build.mutation<string, RecoveryPasswordRequest>({
-      query: ({ ...patch }) => ({
+      query: (email) => ({
         url: `auth/password-recovery`,
         method: 'POST',
-        body: patch
+        body: email
       })
     }),
     createNewPassword: build.mutation<string, createNewPasswordRequest>({
-      query: ({ ...patch }) => ({
+      query: (newPassword) => ({
         url: `auth/new-password`,
         method: 'POST',
-        body: patch
+        body: newPassword
       })
     })
   })
