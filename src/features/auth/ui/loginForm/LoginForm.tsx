@@ -3,35 +3,91 @@ import { Button, Card, Input, Typography } from '@internshipsamyrai44-ui-kit/com
 import GoogleIconSvg from '@/shared/assets/icons/GoogleIconSvg';
 import GithubIconSvg from '@/shared/assets/icons/GithubIconSvg';
 import Link from 'next/link';
+import { PATH } from '@/shared/const/PATH';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useLoginMutation } from '@/features/auth/api/authApi';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { getEmailValidationSchema, getPasswordValidationSchema } from '@/shared/utils';
 import s from './LoginForm.module.scss';
 
-export const LoginForm = () => {
+const formValidationSchema = yup.object().shape({
+  email: getEmailValidationSchema(),
+  password: getPasswordValidationSchema()
+});
+
+type FormValidationSchema = yup.InferType<typeof formValidationSchema>;
+
+type LoginForm = FormValidationSchema;
+
+export const SigninForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<LoginForm>({ resolver: yupResolver(formValidationSchema), mode: 'onTouched' });
+
+  const [login, { isError }] = useLoginMutation();
+  const onSubmit: SubmitHandler<LoginForm> = ({ email, password }) => {
+    if (email && password) {
+      login({ email, password });
+    } else {
+      console.error('Email and password must be provided');
+    }
+  };
+
+  if (isError) {
+    console.log('isError: ' + isError);
+  }
+
+  const handleGoogleAuthClick = () => {
+    alert('google');
+  };
+
+  const handleGithubAuthClick = () => {
+    alert('github');
+  };
+
   return (
-    <form>
-      <Card>
-        <Typography as={'h1'} variant={'h1'}>
-          Sign Ip
-        </Typography>
-        <div className={s['auth-providers']}>
-          <GoogleIconSvg className={s.icon} />
-          <GithubIconSvg className={s.icon} />
+    <Card className={s.card}>
+      <Typography as={'h1'} variant={'h1'}>
+        Sign In
+      </Typography>
+      <div className={s['auth-providers']}>
+        <GoogleIconSvg onClick={handleGoogleAuthClick} className={s.icon} />
+        <GithubIconSvg onClick={handleGithubAuthClick} className={s.icon} />
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+        <Input
+          type="email"
+          label="Email"
+          placeholder="Email"
+          {...register('email')}
+          errorMessage={errors.email?.message}
+        />
+        <Input
+          type="password"
+          label="Password"
+          placeholder="********"
+          {...register('password')}
+          errorMessage={errors.password?.message}
+        />
+        <div className={s['forgot-password-wrapper']}>
+          <Link href={PATH.FORGOT_PASSWORD}>
+            <Typography className={s['forgot-password']}>Forgot Password</Typography>
+          </Link>
         </div>
-        <Input type="email" label="Email" placeholder="Email" />
-        <Input type="password" label="Password" placeholder="********" />
         <Button variant={'primary'} fullWidth type="submit">
-          Sign Ip
+          Sign In
         </Button>
-        <Link href={'/auth/forgot-password'}>
-          <Typography>Forgot Password</Typography>
-        </Link>
-        <Button asChild variant={'primary'}>
-          <Link href={'/auth/login'}>Sign In</Link>
-        </Button>
-        <Typography>Don’t have an account?</Typography>
-        <Button asChild variant={'ghost'}>
-          <Link href={'/auth/signup'}>Sign Up</Link>
-        </Button>
-      </Card>
-    </form>
+      </form>
+      <Typography variant={'regular-text-16'} className={s['account-text']}>
+        Don’t have an account?
+      </Typography>
+      <Button asChild variant={'ghost'}>
+        <Link href={PATH.SIGNUP}>Sign Up</Link>
+      </Button>
+    </Card>
   );
 };
