@@ -3,3 +3,8 @@ export type RecoveryPasswordRequest = {
   recaptcha: string;
   baseUrl: string;
 };
+
+export type createNewPasswordRequest = {
+  newPassword: string;
+  recoveryCode: string;
+};
