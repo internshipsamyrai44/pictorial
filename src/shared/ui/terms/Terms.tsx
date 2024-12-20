@@ -1,12 +1,13 @@
 import { Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import s from './Terms.module.scss';
 
 export default function Terms() {
   return (
-    <div>
+    <div className={s.wrapper}>
       <Typography as={'h1'} variant={'h1'}>
         Terms of services
       </Typography>
-      <Typography>
+      <Typography className={s.notice}>
         Welcome to Pictorial Site! These Terms of Service (Terms) govern your use of our application and services
         (Services). By accessing or using our Services, you agree to these Terms. If you do not agree to these Terms,
         please do not use our Services. <br />
@@ -26,10 +27,10 @@ export default function Terms() {
         of the Services. Use any data mining, robots, or similar data gathering or extraction methods. <br />
         5. Intellectual Property The Services and their original content, features, and functionality are and will
         remain the exclusive property of [Your Company Name] and its licensors. The Services are protected by copyright,
-        trademark, and other laws of both the United States and foreign countries. 6. Third-Party Links Our Services may
-        contain links to third-party websites or services that are not owned or controlled by Pictorial Site. We have no
-        control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party
-        websites or services. <br />
+        trademark, and other laws of both the United States and foreign countries. <br />
+        6. Third-Party Links Our Services may contain links to third-party websites or services that are not owned or
+        controlled by Pictorial Site. We have no control over, and assume no responsibility for, the content, privacy
+        policies, or practices of any third-party websites or services. <br />
         7. Disclaimer of Warranties Our Services are provided on an &#34;as is&#34; and &#34;as available&#34; basis.
         Pictorial Site makes no warranties, whether express or implied, regarding the Services, including but not
         limited to their reliability, availability, or suitability for your needs. 8. Limitation of Liability In no
