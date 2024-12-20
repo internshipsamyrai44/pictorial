@@ -9,6 +9,7 @@ import { useLoginMutation } from '@/features/auth/api/authApi';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { getEmailValidationSchema, getPasswordValidationSchema } from '@/shared/utils';
+import { OAuthBlock } from '@/widgets/oAuth-block/oAuthBlock';
 import s from './LoginForm.module.scss';
 
 const formValidationSchema = yup.object().shape({
@@ -24,28 +25,21 @@ export const SigninForm = () => {
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { errors }
   } = useForm<LoginForm>({ resolver: yupResolver(formValidationSchema), mode: 'onTouched' });
 
   const [login, { isError }] = useLoginMutation();
-  const onSubmit: SubmitHandler<LoginForm> = ({ email, password }) => {
+
+  const onSubmit: SubmitHandler<LoginForm> = async ({ email, password }) => {
     if (email && password) {
-      login({ email, password });
+      const result = await login({ email, password });
+      if (result.error) {
+        console.error('Login failed:', result.error);
+      }
     } else {
       console.error('Email and password must be provided');
     }
-  };
-
-  if (isError) {
-    console.log('isError: ' + isError);
-  }
-
-  const handleGoogleAuthClick = () => {
-    alert('google');
-  };
-
-  const handleGithubAuthClick = () => {
-    alert('github');
   };
 
   return (
@@ -53,23 +47,26 @@ export const SigninForm = () => {
       <Typography as={'h1'} variant={'h1'}>
         Sign In
       </Typography>
-      <div className={s['auth-providers']}>
-        <GoogleIconSvg onClick={handleGoogleAuthClick} className={s.icon} />
-        <GithubIconSvg onClick={handleGithubAuthClick} className={s.icon} />
-      </div>
-
+      <OAuthBlock />
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-        <Input type="email" label="Email" placeholder="Email" {...register('email')} />
+        <Input
+          type="email"
+          label="Email"
+          placeholder="Email"
+          {...register('email')}
+          onBlur={async () => {
+            await trigger('email');
+          }}
+        />
         <Input
           type="password"
           label="Password"
           placeholder="********"
           {...register('password')}
-          errorMessage={
-            errors &&
-            `The email or password are incorrect. Try
-again please`
-          }
+          onBlur={async () => {
+            await trigger('password');
+          }}
+          errorMessage={(isError || errors.password) && 'The email or password are incorrect. Try again please'}
         />
         <div className={s['forgot-password-wrapper']}>
           <Link href={PATH.FORGOT_PASSWORD}>
