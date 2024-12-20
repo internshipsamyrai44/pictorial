@@ -4,16 +4,18 @@ import s from './ContentSection.module.scss';
 
 type ContentSection = {
   title: string;
-  content: React.ReactNode;
+  typographyContent?: React.ReactNode;
+  content?: React.ReactNode;
 };
 
-export const ContentSection = ({ title, content }: ContentSection) => {
+export const ContentSection = ({ title, typographyContent, content }: ContentSection) => {
   return (
     <div className={s.container}>
       <Typography as={'h1'} variant={'h1'}>
         {title}
       </Typography>
-      <Typography>{content}</Typography>
+      <Typography>{typographyContent}</Typography>
+      {content}
     </div>
   );
 };

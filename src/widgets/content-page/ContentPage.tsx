@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { BackToLink } from '@/widgets/back-to-link/BackToLink';
 import s from './ContentPage.module.scss';
