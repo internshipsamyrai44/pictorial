@@ -1,17 +1,13 @@
 'use client';
 
-import React from 'react';
 import { Privacy } from '@/shared/ui/privacy/Privacy';
-import s from './privacyPage.module.scss';
-import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
+import { PATH } from '@/shared/const/PATH';
+import { ContentPage } from '@/widgets/content-page/ContentPage';
 
 export default function PrivacyPolicy() {
   return (
-    <div className={s.container}>
-      <Button variant={'ghost'} asChild>
-        <a href={'/auth/login'}>Back to Sign in</a>
-      </Button>
+    <ContentPage title={'Back to Sign Up'} backHref={PATH.SIGNUP}>
       <Privacy />
-    </div>
+    </ContentPage>
   );
 }

@@ -1,12 +1,8 @@
-.wrapper {
+.container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 20px;
   max-width: 958px;
   margin: 0 auto;
-
-  .notice {
-    text-align: center;
-  }
+  text-align: center;
 }
