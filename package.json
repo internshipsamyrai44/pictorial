@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "3.9.1",
-    "@internshipsamyrai44-ui-kit/components-lib": "0.2.4",
+    "@internshipsamyrai44-ui-kit/components-lib": "0.2.6",
     "@reduxjs/toolkit": "2.3.0",
     "clsx": "2.1.1",
     "eslint": "^8.57.1",
@@ -31,7 +31,6 @@
     "@types/node": "22.9.0",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
-    "@types/react-google-recaptcha": "2.1.9",
     "@typescript-eslint/eslint-plugin": "8.14.0",
     "@typescript-eslint/parser": "8.14.0",
     "eslint-config-next": "15.0.3",
