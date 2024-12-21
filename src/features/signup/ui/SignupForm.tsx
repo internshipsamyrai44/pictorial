@@ -1,7 +1,7 @@
 import GoogleIconSvg from '@/shared/assets/icons/GoogleIconSvg';
 import GithubIconSvg from '@/shared/assets/icons/GithubIconSvg';
 
-import { Button, Card, Checkbox, Input } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
@@ -13,6 +13,7 @@ import Modal from '@/widgets/modal/Modal';
 import { PATH } from '@/shared/const/PATH';
 
 import s from './SignupForm.module.scss';
+import { CheckboxControl } from '@/shared/ui/formControlled';
 
 type Props = {
   className?: string;
@@ -27,8 +28,8 @@ export const SignupForm = ({ className }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    getValues
+    getValues,
+    control
   } = useForm<FormSignUp>({ resolver: yupResolver(signUpSchema) });
 
   const [signUp, { isLoading, isSuccess, isError }] = useSignUpMutation();
@@ -72,6 +73,7 @@ export const SignupForm = ({ className }: Props) => {
           className={s.input}
           {...register('userName')}
           errorMessage={errors.userName?.message}
+          disabled={isLoading}
         />
         <Input
           type="email"
@@ -80,6 +82,7 @@ export const SignupForm = ({ className }: Props) => {
           className={s.input}
           {...register('email')}
           errorMessage={errors.email?.message}
+          disabled={isLoading}
         />
         <Input
           type="password"
@@ -88,6 +91,7 @@ export const SignupForm = ({ className }: Props) => {
           className={s.input}
           {...register('password')}
           errorMessage={errors.password?.message}
+          disabled={isLoading}
         />
         <Input
           type="password"
@@ -96,14 +100,14 @@ export const SignupForm = ({ className }: Props) => {
           className={s.input}
           {...register('confirmPassword')}
           errorMessage={errors.confirmPassword?.message}
+          disabled={isLoading}
         />
-        {/* TODO checkbox HOC for useForm */}
-        <Checkbox
-          label={'Agree to terms and conditions'}
+        <CheckboxControl
+          label="Agree to terms and conditions"
           className={s.terms}
-          onChange={(checked) => {
-            setValue('terms', checked ? true : false);
-          }}
+          control={control}
+          name="terms"
+          disabled={isLoading}
         />
         <p className={s['terms-error']}>{errors.terms?.message}</p>
 

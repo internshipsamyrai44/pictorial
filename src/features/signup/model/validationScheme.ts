@@ -14,7 +14,10 @@ export const signUpSchema = yup
       .string()
       .required('Confirm password is required')
       .oneOf([yup.ref('password')], 'Passwords must match'),
-    terms: yup.boolean().required('You must accept the terms and conditions').oneOf([true, false])
+    terms: yup
+      .bool()
+      .required('You must accept the terms and conditions')
+      .oneOf([true], 'You must accept the terms and conditions')
   })
   .required();
 
