@@ -1,7 +1,5 @@
 import React from 'react';
-import { Button, Card, Input, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
-import GoogleIconSvg from '@/shared/assets/icons/GoogleIconSvg';
-import GithubIconSvg from '@/shared/assets/icons/GithubIconSvg';
+import { Button, Card, Input, LoaderLinear, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import Link from 'next/link';
 import { PATH } from '@/shared/const/PATH';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -29,7 +27,9 @@ export const SigninForm = () => {
     formState: { errors }
   } = useForm<LoginForm>({ resolver: yupResolver(formValidationSchema), mode: 'onTouched' });
 
-  const [login, { isError }] = useLoginMutation();
+  const [login, { isError, isLoading }] = useLoginMutation();
+
+  if (isLoading) return <LoaderLinear />;
 
   const onSubmit: SubmitHandler<LoginForm> = async ({ email, password }) => {
     if (email && password) {

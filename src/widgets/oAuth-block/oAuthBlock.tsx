@@ -14,9 +14,7 @@ export const OAuthBlock = () => {
   };
 
   const handleGithubAuthClick = () => {
-    const GITHUB_AUTH_URL = process.env.NEXT_PUBLIC_PATH_AUTH_GITHUB;
-
-    window.location.assign(GITHUB_AUTH_URL as string);
+    window.location.assign('https://inctagram.work/api/v1/auth/github/login');
   };
 
   return (
