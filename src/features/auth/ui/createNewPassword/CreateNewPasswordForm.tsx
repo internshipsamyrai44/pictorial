@@ -10,6 +10,7 @@ import { useCreateNewPasswordMutation } from '@/features/auth/api/authApi';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRequestError } from '@/shared/hooks/useRequestError';
 import { useEffect } from 'react';
+import { PATH } from '@/shared/const/PATH';
 
 type FormInput = {
   new_password: string;
@@ -43,7 +44,7 @@ export const CreateNewPasswordForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      push('/auth/login');
+      push(PATH.LOGIN);
     }
   }, [isSuccess]);
 

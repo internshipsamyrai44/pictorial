@@ -63,7 +63,7 @@ export const ForgotPasswordForm = () => {
 
   const onModalClose = () => {
     setIsModalActive(false);
-    push('/auth/login');
+    push(PATH.LOGIN);
   };
 
   return (
