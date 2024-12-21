@@ -1,10 +1,13 @@
 'use client';
 
-import { useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { RegistrationConfirmation } from '@/features/signup/ui/RegistrationConfirmation';
 
 export default function Page() {
-  const { regToken } = useParams();
+  const searchParams = useSearchParams();
+
+  const code = searchParams.get('code');
+  const email = searchParams.get('email');
 
   const style = {
     display: 'flex',
@@ -14,7 +17,7 @@ export default function Page() {
 
   return (
     <div style={style}>
-      <RegistrationConfirmation token={regToken} />
+      <RegistrationConfirmation token={code} email={email} />
     </div>
   );
 }

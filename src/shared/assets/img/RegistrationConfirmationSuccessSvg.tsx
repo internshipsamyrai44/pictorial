@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const RegistrationConfirmationSvg = (props: React.SVGProps<SVGSVGElement>) => {
+const RegistrationConfirmationSuccessSvg = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg width={432} height={300} viewBox="0 0 432 300" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -366,4 +366,4 @@ const RegistrationConfirmationSvg = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-export default RegistrationConfirmationSvg;
+export default RegistrationConfirmationSuccessSvg;
