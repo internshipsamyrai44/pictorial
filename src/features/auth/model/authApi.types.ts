@@ -13,3 +13,21 @@ export type createNewPasswordRequest = {
   newPassword: string;
   recoveryCode: string;
 };
+
+export type GoogleOAuthResponse = {
+  accessToken: string;
+  email: string;
+};
+
+export type GoogleOAuthArgs = {
+  baseUrl?: string;
+  code: string | string[] | undefined;
+};
+
+export type GithubOAuthResponse = {
+  url: string;
+};
+
+export type GithubOAuthArgs = {
+  redirectUrl: string;
+};

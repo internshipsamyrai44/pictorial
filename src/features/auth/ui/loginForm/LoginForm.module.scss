@@ -28,22 +28,4 @@
   .account-text {
     margin: 24px 0 6px;
   }
-
-  .auth-providers {
-    display: flex;
-    flex-direction: row;
-    gap: 60px;
-    justify-content: center;
-    align-items: center;
-    margin: 13px 0 24px;
-
-    .icon {
-      cursor: pointer;
-      transition: transform 0.3s ease;
-
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-  }
 }

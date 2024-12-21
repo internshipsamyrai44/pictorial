@@ -1,6 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseUrl } from '@/shared/api/baseApi';
-import { createNewPasswordRequest, LoginRequest, RecoveryPasswordRequest } from '@/features/auth/model/authApi.types';
+import {
+  createNewPasswordRequest,
+  GoogleOAuthArgs,
+  GoogleOAuthResponse,
+  LoginRequest,
+  RecoveryPasswordRequest
+} from '@/features/auth/model/authApi.types';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -25,6 +31,23 @@ export const authApi = createApi({
         url: `auth/login`,
         method: 'POST',
         body
+      })
+    }),
+    googleOAuth: build.mutation<GoogleOAuthResponse, GoogleOAuthArgs>({
+      async onQueryStarted(_, { queryFulfilled }) {
+        const { data } = await queryFulfilled;
+
+        if (!data) {
+          return;
+        }
+
+        localStorage.setItem('accessToken', data.accessToken.trim());
+      },
+
+      query: (args) => ({
+        body: args,
+        method: 'POST',
+        url: `auth/google/login`
       })
     })
   })
