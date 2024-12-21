@@ -1,0 +1,49 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  width: 380px;
+
+  .form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .forgot-password-wrapper {
+      align-self: flex-end;
+      margin-bottom: 24px;
+      width: 100%;
+
+      .forgot-password {
+        color: var(--light-900);
+        text-align: end;
+      }
+    }
+  }
+
+  .account-text {
+    margin: 24px 0 6px;
+  }
+
+  .auth-providers {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    justify-content: center;
+    align-items: center;
+    margin: 13px 0 24px;
+
+    .icon {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}

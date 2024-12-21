@@ -4,6 +4,11 @@ export type RecoveryPasswordRequest = {
   baseUrl: string;
 };
 
+export type LoginRequest = {
+  email: string;
+  password: string;
+};
+
 export type createNewPasswordRequest = {
   newPassword: string;
   recoveryCode: string;
