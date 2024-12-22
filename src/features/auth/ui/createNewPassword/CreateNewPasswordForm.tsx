@@ -1,20 +1,29 @@
 'use client';
 
 import * as yup from 'yup';
-import { Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Alertpopup, Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './CreateNewPasswordForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { passwordValidationSchema } from '@/shared/utils/PasswordValidationSchema';
+import { getPasswordValidationSchema } from '@/shared/utils/PasswordValidationSchema';
+import { useCreateNewPasswordMutation } from '@/features/auth/api/authApi';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useRequestError } from '@/shared/hooks/useRequestError';
+import { useEffect } from 'react';
+import { PATH } from '@/shared/const/PATH';
 
 type FormInput = {
   new_password: string;
   password_confirmation: string;
 };
-
 export const CreateNewPasswordForm = () => {
+  const [createNewPassword, { error, isSuccess }] = useCreateNewPasswordMutation();
+  const searchParams = useSearchParams();
+  const errorMessage = useRequestError(error);
+  const { push } = useRouter();
+
   const formValidationSchema = yup.object({
-    new_password: passwordValidationSchema,
+    new_password: getPasswordValidationSchema(),
     password_confirmation: yup.string().oneOf([yup.ref('new_password')], 'Passwords do not match')
   });
 
@@ -25,14 +34,23 @@ export const CreateNewPasswordForm = () => {
     // @ts-ignore
   } = useForm<FormInput>({ resolver: yupResolver(formValidationSchema), mode: 'onTouched' });
 
-  console.log('errors', errors);
-
-  const sendNewPassword = (data: any) => {
-    console.log('data', data);
+  const sendNewPassword = (data: FormInput) => {
+    const params = {
+      newPassword: data.new_password,
+      recoveryCode: searchParams.get('code') || ''
+    };
+    createNewPassword(params);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      push(PATH.LOGIN);
+    }
+  }, [isSuccess]);
 
   return (
     <>
+      {errorMessage && <Alertpopup alertType={'error'} message={errorMessage} />}
       <Card className={s.card}>
         <form onSubmit={handleSubmit(sendNewPassword)} className={s.form}>
           <p className={s.header}>Forgot Password</p>
