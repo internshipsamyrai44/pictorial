@@ -1,7 +1,7 @@
 import GoogleIconSvg from '@/shared/assets/icons/GoogleIconSvg';
 import GithubIconSvg from '@/shared/assets/icons/GithubIconSvg';
 
-import { Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, Card, Input, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
@@ -9,7 +9,6 @@ import Link from 'next/link';
 
 import { FormSignUp, signUpSchema, useSignUpMutation } from '@/features/signup/';
 import { cn, getBaseUrl } from '@/shared/utils/';
-import Modal from '@/widgets/modal/Modal';
 import { PATH } from '@/shared/const/PATH';
 
 import s from './SignupForm.module.scss';
