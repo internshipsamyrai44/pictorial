@@ -12,8 +12,8 @@ importers:
         specifier: 3.9.1
         version: 3.9.1(react-hook-form@7.53.2(react@18.3.1))
       '@internshipsamyrai44-ui-kit/components-lib':
-        specifier: 0.2.7
-        version: 0.2.7(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.0.5(@types/node@22.9.0)(jiti@1.21.6)(sass@1.80.7)(yaml@2.6.0))
+        specifier: 0.2.8
+        version: 0.2.8(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.0.5(@types/node@22.9.0)(jiti@1.21.6)(sass@1.80.7)(yaml@2.6.0))
       '@reduxjs/toolkit':
         specifier: 2.3.0
         version: 2.3.0(react-redux@9.1.2(@types/react@18.3.12)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
@@ -452,8 +452,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@internshipsamyrai44-ui-kit/components-lib@0.2.7':
-    resolution: {integrity: sha512-Gb1YGFuNK0OvAG06e9mDEPWiAalUYNF0MA0gv/fueLYd+AvPPDtONgA+VN9SD5cu3OXvuLKYzSmvxyFXshEMLg==}
+  '@internshipsamyrai44-ui-kit/components-lib@0.2.8':
+    resolution: {integrity: sha512-NqY/o2MUXqAVmmNe2sETPVoagW9+AF/aVj1CSwLdRWof66JJkvAUPOB/S1SUy53hzhu+DPFtN1159rSgYVigDQ==}
     peerDependencies:
       react: 18.0.0
       react-dom: 18.0.0
@@ -3198,7 +3198,7 @@ snapshots:
   '@img/sharp-win32-x64@0.33.5':
     optional: true
 
-  '@internshipsamyrai44-ui-kit/components-lib@0.2.7(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.0.5(@types/node@22.9.0)(jiti@1.21.6)(sass@1.80.7)(yaml@2.6.0))':
+  '@internshipsamyrai44-ui-kit/components-lib@0.2.8(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.0.5(@types/node@22.9.0)(jiti@1.21.6)(sass@1.80.7)(yaml@2.6.0))':
     dependencies:
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-popover': 1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
