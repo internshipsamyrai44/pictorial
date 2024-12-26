@@ -9,6 +9,11 @@ export type LoginRequest = {
   password: string;
 };
 
+export type LoginResponse = {
+  accessToken: string;
+  id: string;
+};
+
 export type createNewPasswordRequest = {
   newPassword: string;
   recoveryCode: string;

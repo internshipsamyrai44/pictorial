@@ -5,6 +5,7 @@ import {
   GoogleOAuthArgs,
   GoogleOAuthResponse,
   LoginRequest,
+  LoginResponse,
   RecoveryPasswordRequest
 } from '@/features/auth/model/authApi.types';
 
@@ -26,11 +27,30 @@ export const authApi = createApi({
         body: newPassword
       })
     }),
-    login: build.mutation<string, LoginRequest>({
+    login: build.mutation<LoginResponse, LoginRequest>({
+      async onQueryStarted(_, { queryFulfilled }) {
+        const { data } = await queryFulfilled;
+
+        if (!data) {
+          return;
+        }
+        localStorage.setItem('accessToken', data.accessToken.trim());
+      },
       query: (body) => ({
         url: `auth/login`,
         method: 'POST',
         body
+      })
+    }),
+    logout: build.mutation<void, void>({
+      async onQueryStarted(_, { queryFulfilled }) {
+        await queryFulfilled;
+      },
+      query: (args) => ({
+        body: args,
+        credentials: 'include',
+        method: 'POST',
+        url: `v1/auth/logout`
       })
     }),
     googleOAuth: build.mutation<GoogleOAuthResponse, GoogleOAuthArgs>({
@@ -53,4 +73,9 @@ export const authApi = createApi({
   })
 });
 
-export const { useSendEmailToRecoveryPasswordMutation, useCreateNewPasswordMutation, useLoginMutation } = authApi;
+export const {
+  useSendEmailToRecoveryPasswordMutation,
+  useCreateNewPasswordMutation,
+  useLoginMutation,
+  useLogoutMutation
+} = authApi;
