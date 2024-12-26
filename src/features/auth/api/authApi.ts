@@ -5,6 +5,7 @@ import {
   GoogleOAuthArgs,
   GoogleOAuthResponse,
   LoginRequest,
+  LoginResponse,
   RecoveryPasswordRequest
 } from '@/features/auth/model/authApi.types';
 
@@ -26,7 +27,15 @@ export const authApi = createApi({
         body: newPassword
       })
     }),
-    login: build.mutation<string, LoginRequest>({
+    login: build.mutation<LoginResponse, LoginRequest>({
+      async onQueryStarted(_, { queryFulfilled }) {
+        const { data } = await queryFulfilled;
+
+        if (!data) {
+          return;
+        }
+        localStorage.setItem('accessToken', data.accessToken.trim());
+      },
       query: (body) => ({
         url: `auth/login`,
         method: 'POST',
