@@ -27,6 +27,7 @@ import {
 import { PATH } from '@/shared/const/PATH';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLogout } from '@/shared/hooks/useLogout';
 
 type SideNavBar = {
   className?: string;
@@ -45,11 +46,17 @@ const options = [
 
 export const SideNavBar = ({ className }: SideNavBar) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const router = useRouter();
 
-  const handleLinkClick = (index: number, url: string) => {
-    setActiveIndex(index);
-    router.push(url);
+  const router = useRouter();
+  const { handleLogout } = useLogout();
+
+  const handleLinkClick = async (index: number, url: string) => {
+    if (index === 7) {
+      await handleLogout();
+    } else {
+      setActiveIndex(index);
+      router.push(url);
+    }
   };
 
   return (

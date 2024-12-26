@@ -33,7 +33,7 @@ export const authApi = createApi({
         body
       })
     }),
-    logOut: build.mutation<void, void>({
+    logout: build.mutation<void, void>({
       async onQueryStarted(_, { queryFulfilled }) {
         await queryFulfilled;
       },
@@ -64,4 +64,9 @@ export const authApi = createApi({
   })
 });
 
-export const { useSendEmailToRecoveryPasswordMutation, useCreateNewPasswordMutation, useLoginMutation } = authApi;
+export const {
+  useSendEmailToRecoveryPasswordMutation,
+  useCreateNewPasswordMutation,
+  useLoginMutation,
+  useLogoutMutation
+} = authApi;
