@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  Sidebar,
   CreateActiveIcon,
   CreateIcon,
   FavoritesActiveIcon,
@@ -16,16 +15,22 @@ import {
   MyProfileIcon,
   SearchActiveIcon,
   SearchIcon,
-  StatisticsActiveIcon,
-  StatisticsIcon,
+  Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
   SidebarItem,
-  SidebarLink
+  SidebarLink,
+  StatisticsActiveIcon,
+  StatisticsIcon
 } from '@internshipsamyrai44-ui-kit/components-lib';
 import { PATH } from '@/shared/const/PATH';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+type SideNavBar = {
+  className?: string;
+};
 
 const options = [
   { icon: HomeIcon, iconActive: HomeActiveIcon, title: 'Home', url: PATH.MAIN },
@@ -38,20 +43,22 @@ const options = [
   { icon: LogOutIcon, iconActive: LogOutActiveIcon, title: 'Log Out', url: PATH.LOGIN }
 ];
 
-export const SideNavBar = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+export const SideNavBar = ({ className }: SideNavBar) => {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const router = useRouter();
 
-  const handleLinkClick = (index: number) => {
+  const handleLinkClick = (index: number, url: string) => {
     setActiveIndex(index);
+    router.push(url);
   };
 
   return (
-    <Sidebar>
+    <Sidebar className={`${className} sidebar-height`}>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
             {options.slice(0, 5).map((item, index) => (
-              <SidebarLink href={item.url} key={item.title} onClick={() => handleLinkClick(index)}>
+              <SidebarLink href={item.url} key={item.title} onClick={() => handleLinkClick(index, item.url)}>
                 <SidebarItem
                   icon={item.icon}
                   title={item.title}
@@ -63,7 +70,7 @@ export const SideNavBar = () => {
           </SidebarGroupContent>
           <SidebarGroupContent style={{ gap: '24px' }}>
             {options.slice(5, 7).map((item, index) => (
-              <SidebarLink href={item.url} key={item.title} onClick={() => handleLinkClick(index + 5)}>
+              <SidebarLink href={item.url} key={item.title} onClick={() => handleLinkClick(index + 5, item.url)}>
                 <SidebarItem
                   icon={item.icon}
                   title={item.title}
@@ -75,7 +82,11 @@ export const SideNavBar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
         {options.slice(-1).map((item, index) => (
-          <SidebarLink href={item.url} key={item.title} onClick={() => handleLinkClick(index + options.length - 1)}>
+          <SidebarLink
+            href={item.url}
+            key={item.title}
+            onClick={() => handleLinkClick(index + options.length - 1, item.url)}
+          >
             <SidebarItem
               icon={item.icon}
               title={item.title}

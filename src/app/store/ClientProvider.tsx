@@ -13,8 +13,8 @@ export default function ClientProvider({ children }: { children: React.ReactNode
       <div className={s.container}>
         <GeneralHeader />
         <div className={s.content}>
-          <SideNavBar />
-          {children}
+          <SideNavBar className={s['sidebar-height']} />
+          <div className={s['main-content']}>{children}</div>
         </div>
       </div>
     </Provider>

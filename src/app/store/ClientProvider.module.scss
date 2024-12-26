@@ -7,6 +7,21 @@
 
   .content {
     display: flex;
-    width: 100%;
+
+    .sidebar-height {
+      position: fixed;
+      top: 61px;
+      height: calc(100vh - 61px);
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 85px 0 0 220px;
+      max-width: 1060px;
+      width: 100%;
+    }
   }
 }
