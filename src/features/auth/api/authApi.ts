@@ -33,6 +33,17 @@ export const authApi = createApi({
         body
       })
     }),
+    logout: build.mutation<void, void>({
+      async onQueryStarted(_, { queryFulfilled }) {
+        await queryFulfilled;
+      },
+      query: (args) => ({
+        body: args,
+        credentials: 'include',
+        method: 'POST',
+        url: `v1/auth/logout`
+      })
+    }),
     googleOAuth: build.mutation<GoogleOAuthResponse, GoogleOAuthArgs>({
       async onQueryStarted(_, { queryFulfilled }) {
         const { data } = await queryFulfilled;
@@ -53,4 +64,9 @@ export const authApi = createApi({
   })
 });
 
-export const { useSendEmailToRecoveryPasswordMutation, useCreateNewPasswordMutation, useLoginMutation } = authApi;
+export const {
+  useSendEmailToRecoveryPasswordMutation,
+  useCreateNewPasswordMutation,
+  useLoginMutation,
+  useLogoutMutation
+} = authApi;
