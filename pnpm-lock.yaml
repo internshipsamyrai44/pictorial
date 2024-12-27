@@ -58,7 +58,7 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
       '@types/react-google-recaptcha':
-        specifier: ^2.1.9
+        specifier: 2.1.9
         version: 2.1.9
       '@typescript-eslint/eslint-plugin':
         specifier: 8.14.0
@@ -452,8 +452,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@internshipsamyrai44-ui-kit/components-lib@0.2.7':
-    resolution: {integrity: sha512-Gb1YGFuNK0OvAG06e9mDEPWiAalUYNF0MA0gv/fueLYd+AvPPDtONgA+VN9SD5cu3OXvuLKYzSmvxyFXshEMLg==}
+  '@internshipsamyrai44-ui-kit/components-lib@0.2.10':
+    resolution: {integrity: sha512-taTRag4clXGO3Xq2g6oRg7C3g7mKg7D2UH0PU8KunMCgLD+H0M+VHW971K4TPTOw1t5l5YzdTc0PQdEwR+KBOA==}
     peerDependencies:
       react: 18.0.0
       react-dom: 18.0.0
@@ -3198,7 +3198,7 @@ snapshots:
   '@img/sharp-win32-x64@0.33.5':
     optional: true
 
-  '@internshipsamyrai44-ui-kit/components-lib@0.2.7(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.0.5(@types/node@22.9.0)(jiti@1.21.6)(sass@1.80.7)(yaml@2.6.0))':
+  '@internshipsamyrai44-ui-kit/components-lib@0.2.10(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.0.5(@types/node@22.9.0)(jiti@1.21.6)(sass@1.80.7)(yaml@2.6.0))':
     dependencies:
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-popover': 1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
