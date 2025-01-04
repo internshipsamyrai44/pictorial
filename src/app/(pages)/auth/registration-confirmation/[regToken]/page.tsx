@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { RegistrationConfirmation } from '@/features/signup/ui/RegistrationConfirmation';
+import { RegistrationConfirmation } from '@/features/auth/ui/registrationConfirmation/RegistrationConfirmation';
 
 export default function Page() {
   const { regToken } = useParams();

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Alertpopup, Button, Card, Input, LoaderLinear, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import React from 'react';
+import { Button, Card, Input, LoaderLinear, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import Link from 'next/link';
 import { PATH } from '@/shared/const/PATH';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -8,9 +8,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { getEmailValidationSchema, getPasswordValidationSchema } from '@/shared/utils';
 import { OAuthBlock } from '@/widgets/oAuth-block/oAuthBlock';
-import { router } from 'next/client';
+import { useRouter } from 'next/navigation';
 import s from './LoginForm.module.scss';
-import { useRequestError } from '@/shared/hooks/useRequestError';
 
 const formValidationSchema = yup.object().shape({
   email: getEmailValidationSchema(),
@@ -27,23 +26,19 @@ export const SigninForm = () => {
     formState: { errors }
   } = useForm<FormValidationSchema>({ resolver: yupResolver(formValidationSchema), mode: 'onTouched' });
 
-  const [login, { isError, isLoading, error }] = useLoginMutation();
-  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
-  const errorMessage = useRequestError(error);
+  const [login, { isError, isLoading }] = useLoginMutation();
 
-  const onSubmit: SubmitHandler<FormValidationSchema> = async ({ email, password }) => {
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<FormValidationSchema> = ({ email, password }) => {
     if (email && password) {
-      try {
-        const result = await login({ email, password }).unwrap();
-        // Успешный вход
-        setToast({ type: 'success', message: `Login successful: ${result}` });
-        router.replace(PATH.PROFILE);
-      } catch (err) {
-        setToast({ type: 'error', message: errorMessage || 'An unexpected error occurred' });
-      }
-    } else {
-      console.error('Email and password must be provided');
-      setToast({ type: 'error', message: 'Email and password must be provided' });
+      login({ email, password })
+        .unwrap()
+        .then((data) => {
+          const payload = data.accessToken.split('.')[1];
+          const id = JSON.parse(atob(payload)).userId;
+          router.push(`${PATH.PROFILE}/${id}`);
+        });
     }
   };
 
@@ -55,7 +50,6 @@ export const SigninForm = () => {
         Sign In
       </Typography>
       <OAuthBlock />
-      {toast && <Alertpopup alertType={toast.type} message={toast.message} />}
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <Input
           type="email"
@@ -82,7 +76,7 @@ export const SigninForm = () => {
             <Typography className={s['forgot-password']}>Forgot Password</Typography>
           </Link>
         </div>
-        <Button variant={'primary'} fullWidth type="submit">
+        <Button variant={'primary'} fullWidth type="submit" disabled={isLoading}>
           Sign In
         </Button>
       </form>

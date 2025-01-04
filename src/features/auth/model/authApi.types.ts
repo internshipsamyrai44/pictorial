@@ -1,7 +1,20 @@
+import { FormSignUp } from '@/features/auth/model/validationScheme';
+
 export type RecoveryPasswordRequest = {
   email: string;
   recaptcha: string;
   baseUrl: string;
+};
+
+export type SignUpRequest = Omit<FormSignUp, 'confirmPassword' | 'terms'> & { baseUrl: string };
+
+export type SignUpResponse = {
+  statusCode: number;
+  messages: Array<{
+    message: string;
+    field: string;
+  }>;
+  error: string;
 };
 
 export type LoginRequest = {
@@ -11,7 +24,6 @@ export type LoginRequest = {
 
 export type LoginResponse = {
   accessToken: string;
-  id: string;
 };
 
 export type createNewPasswordRequest = {
@@ -35,4 +47,11 @@ export type GithubOAuthResponse = {
 
 export type GithubOAuthArgs = {
   redirectUrl: string;
+};
+
+export type MeResponse = {
+  userId: string;
+  userName: string;
+  email: string;
+  isBlocked: boolean;
 };

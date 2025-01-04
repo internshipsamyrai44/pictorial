@@ -8,5 +8,7 @@ export const PATH = {
   PRIVACY_POLICY: '/auth/privacy-policy',
   REGISTRATION_CONFIRMATION: '/auth/registration-confirmation',
   TERMS_OF_SERVICE: '/auth/terms-of-service',
+  UPDATE_TOKENS: '/auth/update-tokens',
+  ME: '/auth/me',
   PROFILE: '/profile'
 };
