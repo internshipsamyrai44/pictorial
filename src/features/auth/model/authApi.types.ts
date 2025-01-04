@@ -41,14 +41,6 @@ export type GoogleOAuthArgs = {
   code: string | string[] | undefined;
 };
 
-export type GithubOAuthResponse = {
-  url: string;
-};
-
-export type GithubOAuthArgs = {
-  redirectUrl: string;
-};
-
 export type MeResponse = {
   userId: string;
   userName: string;
