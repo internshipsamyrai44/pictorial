@@ -14,19 +14,6 @@
   line-height: var(--line-height-l);
 }
 
-.auth-providers {
-  display: flex;
-  flex-direction: row;
-  gap: 60px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 13px;
-
-  .icon {
-    cursor: pointer;
-  }
-}
-
 .input {
 }
 

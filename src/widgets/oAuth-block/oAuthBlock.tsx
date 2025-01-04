@@ -1,8 +1,8 @@
 import React from 'react';
 import GoogleIconSvg from '@/shared/assets/icons/GoogleIconSvg';
 import GithubIconSvg from '@/shared/assets/icons/GithubIconSvg';
-import s from './OAuthBlock.module.scss';
 import { useGoogleAuth } from '@/shared/hooks/useGoogleAuth';
+import s from './OAuthBlock.module.scss';
 
 export const OAuthBlock = () => {
   const { login } = useGoogleAuth();

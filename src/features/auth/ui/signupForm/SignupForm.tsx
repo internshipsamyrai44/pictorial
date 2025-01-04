@@ -1,10 +1,7 @@
-import GoogleIconSvg from '@/shared/assets/icons/GoogleIconSvg';
-import GithubIconSvg from '@/shared/assets/icons/GithubIconSvg';
-
-import { Button, Card, Input, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, Card, Input, Modal, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import { cn, getBaseUrl } from '@/shared/utils';
@@ -13,6 +10,7 @@ import { PATH } from '@/shared/const/PATH';
 import { CheckboxControl } from '@/shared/ui/formControlled';
 import { FormSignUp, signUpSchema } from '@/features/auth/model/validationScheme';
 import { useSignUpMutation } from '@/features/auth/api/authApi';
+import { OAuthBlock } from '@/widgets/oAuth-block/oAuthBlock';
 import s from './SignupForm.module.scss';
 
 type Props = {
@@ -45,13 +43,6 @@ export const SignupForm = ({ className }: Props) => {
   const onSubmit: SubmitHandler<FormSignUp> = ({ email, userName, password }) =>
     signUp({ email, userName, password, baseUrl });
 
-  const handleGoogleAuthClick = () => {
-    console.log('google');
-  };
-  const handleGithubAuthClick = () => {
-    console.log('github');
-  };
-
   useEffect(() => {
     if (isSuccess) {
       setIsModalActive(true);
@@ -61,12 +52,10 @@ export const SignupForm = ({ className }: Props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cn(s.form, className)}>
       <Card className={s.card}>
-        <h1 className={s.title}>Sign Up</h1>
-        <div className={s['auth-providers']}>
-          <GoogleIconSvg onClick={handleGoogleAuthClick} className={s.icon} />
-          <GithubIconSvg onClick={handleGithubAuthClick} className={s.icon} />
-        </div>
-
+        <Typography as={'h1'} variant={'h1'}>
+          Sign Up
+        </Typography>
+        <OAuthBlock />
         <Input
           label="Username"
           placeholder="Epam11"
