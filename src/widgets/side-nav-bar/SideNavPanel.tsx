@@ -27,7 +27,7 @@ import {
 import { PATH } from '@/shared/const/PATH';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useLogout } from '@/shared/hooks/useLogout';
+import { useLogoutMutation } from '@/features/auth/api/authApi';
 
 type SideNavBar = {
   className?: string;
@@ -44,19 +44,15 @@ const options = [
   { icon: LogOutIcon, iconActive: LogOutActiveIcon, title: 'Log Out', url: PATH.LOGIN }
 ];
 
-export const SideNavBar = ({ className }: SideNavBar) => {
+export const SideNavPanel = ({ className }: SideNavBar) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const router = useRouter();
-  const { handleLogout } = useLogout();
+  const [logout] = useLogoutMutation();
 
   const handleLinkClick = async (index: number, url: string) => {
-    if (index === 7) {
-      await handleLogout();
-    } else {
-      setActiveIndex(index);
-      router.push(url);
-    }
+    setActiveIndex(index);
+    router.push(url);
   };
 
   return (
@@ -92,7 +88,13 @@ export const SideNavBar = ({ className }: SideNavBar) => {
           <SidebarLink
             href={item.url}
             key={item.title}
-            onClick={() => handleLinkClick(index + options.length - 1, item.url)}
+            onClick={() => {
+              logout()
+                .unwrap()
+                .then(() => {
+                  router.push(PATH.LOGIN);
+                });
+            }}
           >
             <SidebarItem
               icon={item.icon}

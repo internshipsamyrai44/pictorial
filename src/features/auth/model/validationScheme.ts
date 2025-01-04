@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { getEmailValidationSchema, getPasswordValidationSchema } from '@/shared/utils/';
+import { getEmailValidationSchema, getPasswordValidationSchema } from '@/shared/utils';
 
 export const signUpSchema = yup
   .object({

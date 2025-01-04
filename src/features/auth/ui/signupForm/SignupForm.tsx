@@ -7,12 +7,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-import { FormSignUp, signUpSchema, useSignUpMutation } from '@/features/signup/';
-import { cn, getBaseUrl } from '@/shared/utils/';
+import { cn, getBaseUrl } from '@/shared/utils';
 import { PATH } from '@/shared/const/PATH';
 
-import s from './SignupForm.module.scss';
 import { CheckboxControl } from '@/shared/ui/formControlled';
+import { FormSignUp, signUpSchema } from '@/features/auth/model/validationScheme';
+import { useSignUpMutation } from '@/features/auth/api/authApi';
+import s from './SignupForm.module.scss';
 
 type Props = {
   className?: string;
