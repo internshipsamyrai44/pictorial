@@ -15,17 +15,6 @@ const regexEqual = (x: RegExp, y: RegExp): boolean => {
 };
 
 const nextConfig: NextConfig = {
-  /*images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'staging-it-incubator.s3.eu-central-1.amazonaws.com',
-        port: '',
-        pathname: 'trainee-instagram-api/Image/!**',
-        search: ''
-      }
-    ]
-  },*/
   env: {
     RECAPTCHA_ENTERPRISE_API_KEY: process.env.RECAPTCHA_ENTERPRISE_API_KEY,
     NEXT_PUBLIC_PATH_AUTH_GITHUB: process.env.NEXT_PUBLIC_PATH_AUTH_GITHUB,

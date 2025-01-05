@@ -33,3 +33,5 @@ export const useRequestError = (error: FetchBaseQueryError | SerializedError | u
 
   return errorMessage;
 };
+
+// example: const errorMessage = useRequestError(error);
