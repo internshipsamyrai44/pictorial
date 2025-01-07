@@ -4,7 +4,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { GeneralHeader } from '@/widgets/general-header/GeneralHeader';
 import { store } from '@/app/store/store';
-import { SideNavPanel } from '@/widgets/side-nav-bar/SideNavPanel';
+import { SideNavPanel } from '@/widgets/side-nav-panel/SideNavPanel';
 import s from './ClientProvider.module.scss';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 

@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation';
-import { jwtDecode } from 'jwt-decode';
 import { useGoogleOAuthMutation } from '@/features/auth/api/authApi';
 import { useGoogleLogin } from '@react-oauth/google';
 import { PATH } from '@/shared/const/PATH';
+import { getDecodedToken } from '@/shared/utils/getDecodedToken';
 
 export const useGoogleAuth = () => {
   const [authMeGoogle] = useGoogleOAuthMutation();
@@ -19,9 +19,13 @@ export const useGoogleAuth = () => {
         const accessToken = resGoogleOAuth.data?.accessToken;
 
         localStorage.setItem('accessToken', JSON.stringify(accessToken));
-        const decodedToken = jwtDecode<{ userId: string }>(accessToken ? accessToken : '');
-
-        router.push(`${PATH.PROFILE}/${decodedToken.userId}`);
+        const userId = getDecodedToken(accessToken);
+        if (userId) {
+          router.push(`${PATH.PROFILE}/${userId}`);
+        } else {
+          console.error('Ошибка: userId не найден');
+          router.push(PATH.LOGIN);
+        }
       } catch (error) {
         console.log('auth me Error', error);
       }

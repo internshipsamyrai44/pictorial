@@ -6,6 +6,11 @@ export type RecoveryPasswordRequest = {
   baseUrl: string;
 };
 
+export type createNewPasswordRequest = {
+  newPassword: string;
+  recoveryCode: string;
+};
+
 export type SignUpRequest = Omit<FormSignUp, 'confirmPassword' | 'terms'> & { baseUrl: string };
 
 export type SignUpResponse = {
@@ -26,19 +31,14 @@ export type LoginResponse = {
   accessToken: string;
 };
 
-export type createNewPasswordRequest = {
-  newPassword: string;
-  recoveryCode: string;
+export type GoogleOAuthRequest = {
+  baseUrl?: string;
+  code: string | string[] | undefined;
 };
 
 export type GoogleOAuthResponse = {
   accessToken: string;
   email: string;
-};
-
-export type GoogleOAuthArgs = {
-  baseUrl?: string;
-  code: string | string[] | undefined;
 };
 
 export type MeResponse = {

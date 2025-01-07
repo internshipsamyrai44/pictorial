@@ -1,6 +1,6 @@
 import {
   createNewPasswordRequest,
-  GoogleOAuthArgs,
+  GoogleOAuthRequest,
   GoogleOAuthResponse,
   LoginRequest,
   LoginResponse,
@@ -54,7 +54,7 @@ export const authApi = inctagramApi.injectEndpoints({
         body
       })
     }),
-    googleOAuth: build.mutation<GoogleOAuthResponse, GoogleOAuthArgs>({
+    googleOAuth: build.mutation<GoogleOAuthResponse, GoogleOAuthRequest>({
       async onQueryStarted(_, { queryFulfilled }) {
         const { data } = await queryFulfilled;
 

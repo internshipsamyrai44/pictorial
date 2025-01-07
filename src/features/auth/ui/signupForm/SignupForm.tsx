@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { cn, getBaseUrl } from '@/shared/utils';
 import { PATH } from '@/shared/const/PATH';
 
-import { CheckboxControl } from '@/shared/ui/formControlled';
+import { CheckboxControl } from '@/shared/ui/сontrolled';
 import { FormSignUp, signUpSchema } from '@/features/auth/model/validationScheme';
 import { useSignUpMutation } from '@/features/auth/api/authApi';
 import { OAuthBlock } from '@/widgets/oAuth-block/oAuthBlock';

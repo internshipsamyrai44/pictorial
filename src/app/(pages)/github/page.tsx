@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { jwtDecode } from 'jwt-decode';
 import { ContentPage } from '@/widgets/content-page/ContentPage';
 import { PATH } from '@/shared/const/PATH';
+import { getDecodedToken } from '@/shared/utils/getDecodedToken';
+import { LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 
 export default function GithubPage() {
   const router = useRouter();
@@ -12,12 +13,16 @@ export default function GithubPage() {
 
   useEffect(() => {
     const accessToken = searchParams.get('accessToken');
-
     if (accessToken) {
       try {
         localStorage.setItem('accessToken', accessToken);
-        const decoded = jwtDecode<{ userId: string }>(accessToken);
-        router.push(`${PATH.PROFILE}/${decoded.userId}`);
+        const userId = getDecodedToken(accessToken);
+        if (userId) {
+          router.push(`${PATH.PROFILE}/${userId}`);
+        } else {
+          console.error('Ошибка: userId не найден');
+          router.push(PATH.LOGIN);
+        }
       } catch (error) {
         console.error('Ошибка при декодировании токена:', error);
         router.push(PATH.LOGIN);
@@ -27,6 +32,7 @@ export default function GithubPage() {
 
   return (
     <ContentPage title={'Back to home page'} backHref={PATH.MAIN}>
+      <LoaderLinear />
       Processing GitHub authorization...
     </ContentPage>
   );
