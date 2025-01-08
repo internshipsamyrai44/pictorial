@@ -4,6 +4,7 @@ import { Alertpopup, LoaderLinear } from '@internshipsamyrai44-ui-kit/components
 import { useRequestError } from '@/shared/hooks/useRequestError';
 import { useGetProfileQuery, useUpdateProfileMutation } from '@/features/profile/api/profileApi';
 import { ProfileFormValues } from '@/features/profile/model/profileApi.types';
+import s from './GeneralInfo.module.scss';
 
 export const GeneralInfo = () => {
   const { data: profileData, isLoading } = useGetProfileQuery();
@@ -25,7 +26,7 @@ export const GeneralInfo = () => {
     <>
       {updateProfileIsLoading && <LoaderLinear />}
       {errorMessage && <Alertpopup alertType={'error'} message={errorMessage} />}
-      <>
+      <div className={s.container}>
         <AvatarActions />
         <GeneralInfoForm
           disabled={updateProfileIsLoading}
@@ -40,7 +41,7 @@ export const GeneralInfo = () => {
             dateOfBirth: profileData?.dateOfBirth ? new Date(profileData.dateOfBirth) : undefined
           }}
         />
-      </>
+      </div>
     </>
   );
 };
