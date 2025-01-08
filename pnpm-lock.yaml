@@ -12,8 +12,8 @@ importers:
         specifier: 3.9.1
         version: 3.9.1(react-hook-form@7.53.2(react@18.3.1))
       '@internshipsamyrai44-ui-kit/components-lib':
-        specifier: 0.2.12
-        version: 0.2.12(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.0.5(@types/node@22.9.0)(jiti@1.21.6)(sass@1.80.7)(yaml@2.6.0))
+        specifier: 0.2.13
+        version: 0.2.13(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.0.5(@types/node@22.9.0)(jiti@1.21.6)(sass@1.80.7)(yaml@2.6.0))
       '@react-oauth/google':
         specifier: ^0.12.1
         version: 0.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -461,8 +461,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@internshipsamyrai44-ui-kit/components-lib@0.2.12':
-    resolution: {integrity: sha512-WpjbopaU5JqW+r4qZBK2FkY+I72W4XBnxwcn5Pquxp3Vnr9AvxIK+uinAK+F5tFEQByU0HMeCeuj5i+HAVbA0w==}
+  '@internshipsamyrai44-ui-kit/components-lib@0.2.13':
+    resolution: {integrity: sha512-Vceln5I3KtftwhSYdVBINws+OrsLoyHYx6dYjWV1PwzDsH1OyKvNvh5cLRDpkTQ86gqug4EMS75OCMUwE8bvOw==}
     peerDependencies:
       react: 18.0.0
       react-dom: 18.0.0
@@ -3220,7 +3220,7 @@ snapshots:
   '@img/sharp-win32-x64@0.33.5':
     optional: true
 
-  '@internshipsamyrai44-ui-kit/components-lib@0.2.12(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.0.5(@types/node@22.9.0)(jiti@1.21.6)(sass@1.80.7)(yaml@2.6.0))':
+  '@internshipsamyrai44-ui-kit/components-lib@0.2.13(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@6.0.5(@types/node@22.9.0)(jiti@1.21.6)(sass@1.80.7)(yaml@2.6.0))':
     dependencies:
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-popover': 1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

@@ -13,14 +13,14 @@ export const profileFormValidationScheme = yup.object({
     .trim()
     .min(1, 'First Name must be at least 1 character')
     .max(50, 'First Name must be at most 50 characters')
-    .matches(/^[a-zA-Z0-9_-]*$/g, `First Name must contain a-z, A-Z, 0-9, -`)
+    .matches(/^[a-zA-Zа-яА-Я0-9_-]*$/g, `First Name must contain a-z, A-Z, 0-9, -`)
     .required('First Name is required'),
   lastName: yup
     .string()
     .trim()
     .min(1, 'Last Name must be at least 1 character')
     .max(50, 'Last Name must be at most 50 characters')
-    .matches(/^[a-zA-Z0-9_-]*$/g, `Last Name must contain a-z, A-Z, 0-9, -`)
+    .matches(/^[a-zA-Zа-яА-Я0-9_-]*$/g, `Last Name must contain a-z, A-Z, 0-9, -`)
     .required('Last Name is required'),
   aboutMe: yup
     .string()
