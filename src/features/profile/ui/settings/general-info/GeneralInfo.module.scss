@@ -1,4 +1,14 @@
 .container {
+  position: relative;
   display: flex;
   gap: 40px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    border-bottom: 1px solid var(--dark-300);
+    height: 1px;
+    width: 100%;
+    bottom: 60px;
+  }
 }
