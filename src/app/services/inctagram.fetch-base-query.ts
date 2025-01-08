@@ -1,3 +1,5 @@
+'use client';
+
 import { baseUrl } from '@/shared/const/baseApi';
 import { inctagramApi } from '@/app/services/inctagram.api';
 import { PATH } from '@/shared/const/PATH';
