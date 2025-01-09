@@ -65,7 +65,7 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
 
       {/* Forgot password link */}
       <div className={s['forgot-password-wrapper']}>
-        <Link href={PATH.FORGOT_PASSWORD}>
+        <Link href={PATH.AUTH.FORGOT_PASSWORD}>
           <Typography className={s['forgot-password']}>Forgot Password</Typography>
         </Link>
       </div>

@@ -106,7 +106,7 @@ export const SignupForm = ({ className }: Props) => {
 
         <p className={s['have-account']}>Have an account?</p>
         <Button asChild variant={'ghost'} className={s['login-button']} disabled={isLoading}>
-          <Link href={PATH.LOGIN}>Sign In</Link>
+          <Link href={PATH.AUTH.LOGIN}>Sign In</Link>
         </Button>
       </Card>
       {isModalActive && (

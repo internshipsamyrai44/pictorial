@@ -2,7 +2,7 @@
 
 import { ContentSection } from '@/shared/ui/content-section/ContentSection';
 import Image from 'next/image';
-import notFound from '@/public/images/404.png';
+import notFound from '../../../../public/images/404.png';
 import s from './NotFoundContent.module.scss';
 
 export const NotFoundContent = () => {

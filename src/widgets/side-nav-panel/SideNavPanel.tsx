@@ -29,8 +29,8 @@ import {
 } from '@internshipsamyrai44-ui-kit/components-lib';
 import { PATH } from '@/shared/const/PATH';
 import React, { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useLogoutMutation, useMeQuery } from '@/features/auth/api/authApi';
+import { useRouter } from 'next/navigation';
+import { useLogoutMutation } from '@/features/auth/api/authApi';
 import s from './SideNavPanel.module.scss';
 
 type SideNavBar = {
@@ -40,12 +40,12 @@ type SideNavBar = {
 const options = [
   { icon: HomeIcon, iconActive: HomeActiveIcon, title: 'Home', url: PATH.MAIN },
   { icon: CreateIcon, iconActive: CreateActiveIcon, title: 'Create', url: '#' },
-  { icon: MyProfileIcon, iconActive: MyProfileActiveIcon, title: 'My Profile', url: PATH.PROFILE },
+  { icon: MyProfileIcon, iconActive: MyProfileActiveIcon, title: 'My Profile', url: PATH.PROFILE.PROFILE_USERID },
   { icon: MessengerIcon, iconActive: MessengerActiveIcon, title: 'Messenger', url: '#' },
   { icon: SearchIcon, iconActive: SearchActiveIcon, title: 'Search', url: '#' },
   { icon: StatisticsIcon, iconActive: StatisticsActiveIcon, title: 'Statistics', url: '#' },
   { icon: FavoritesIcon, iconActive: FavoritesActiveIcon, title: 'Favorites', url: '#' },
-  { icon: LogOutIcon, iconActive: LogOutActiveIcon, title: 'Log Out', url: PATH.LOGIN }
+  { icon: LogOutIcon, iconActive: LogOutActiveIcon, title: 'Log Out', url: PATH.AUTH.LOGIN }
 ];
 
 export const SideNavPanel = ({ className }: SideNavBar) => {
@@ -128,7 +128,7 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
                   .unwrap()
                   .then(() => {
                     setIsModalActive(false);
-                    router.push(PATH.LOGIN);
+                    router.push(PATH.AUTH.LOGIN);
                   })
                   .catch((error) => {
                     console.error('Logout failed: ', error);

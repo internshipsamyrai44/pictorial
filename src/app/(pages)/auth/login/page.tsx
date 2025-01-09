@@ -17,13 +17,13 @@ import s from '@/features/auth/ui/loginForm/LoginForm.module.scss';
 export default function SignIn() {
   const [login, { isError, isLoading, error }] = useLoginMutation();
   const errorMessage = useRequestError(error);
-  const router = useRouter();
+  const { replace } = useRouter();
 
   const onSubmit: SubmitHandler<FormValidationSchema> = async ({ email, password }) => {
     try {
       const data = await login({ email: email!, password: password! }).unwrap();
       const userId = getDecodedToken(data.accessToken);
-      router.push(`${PATH.PROFILE}/${userId}`);
+      replace(`/profile/${userId}`);
     } catch (error) {
       return <Alertpopup alertType={'error'} message={`${error}`} />;
     }
@@ -48,7 +48,7 @@ export default function SignIn() {
             Don’t have an account?
           </Typography>
           <Button asChild variant="ghost">
-            <Link href={PATH.SIGNUP}>Sign Up</Link>
+            <Link href={PATH.AUTH.SIGNUP}>Sign Up</Link>
           </Button>
         </Card>
       </div>

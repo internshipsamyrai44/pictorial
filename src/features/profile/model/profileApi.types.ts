@@ -1,40 +1,45 @@
-export interface Avatar {
+export type Avatar = {
   createdAt: string;
   fileSize: number;
   height: number;
   url: string;
   width: number;
-}
+};
 
-export interface Profile {
+export type ProfileBase = {
   id: number;
   userName: string;
   firstName: string;
   lastName: string;
   aboutMe?: string;
-  avatars: Avatar[];
   city?: string;
   country?: string;
   region?: string;
   dateOfBirth?: string;
   createdAt: string;
-}
+};
 
-export interface AvatarRequest {
-  file: File;
-}
-
-export interface AvatarResponse {
+export type Profile = ProfileBase & {
   avatars: Avatar[];
-}
+};
 
-export interface ProfileFormValues {
-  firstName: string;
-  lastName: string;
-  aboutMe?: string;
-  city?: string;
-  country?: string;
-  region?: string;
-  userName: string;
+export type AvatarRequest = {
+  file: File;
+};
+
+export type AvatarResponse = {
+  avatars: Avatar[];
+};
+
+export type ProfileFormValues = Omit<ProfileBase, 'id' | 'createdAt'> & {
   dateOfBirth?: Date;
-}
+};
+
+export type UserProfileResponse = ProfileBase & {
+  followersCount: number;
+  followingCount: number;
+  publicationsCount: number;
+  isFollowedBy: boolean;
+  isFollowing: boolean;
+  avatars: Avatar[];
+};

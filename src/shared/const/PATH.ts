@@ -1,14 +1,20 @@
 export const PATH = {
   MAIN: '/',
-  LOGIN: '/auth/login',
-  SIGNUP: '/auth/signup',
-  VERIFICATION_LINK_EXPIRED: '/auth/verification-link-expired',
-  FORGOT_PASSWORD: '/auth/forgot-password',
-  RECOVERY: '/auth/recovery',
-  PRIVACY_POLICY: '/auth/privacy-policy',
-  REGISTRATION_CONFIRMATION: '/auth/registration-confirmation',
-  TERMS_OF_SERVICE: '/auth/terms-of-service',
-  UPDATE_TOKENS: '/auth/update-tokens',
-  ME: '/auth/me',
-  PROFILE: '/profile'
+  AUTH: {
+    LOGIN: '/auth/login',
+    SIGNUP: '/auth/signup',
+    VERIFICATION_LINK_EXPIRED: '/auth/verification-link-expired',
+    FORGOT_PASSWORD: '/auth/forgot-password',
+    RECOVERY: '/auth/recovery',
+    PRIVACY_POLICY: '/auth/privacy-policy',
+    REGISTRATION_CONFIRMATION: '/auth/registration-confirmation',
+    TERMS_OF_SERVICE: '/auth/terms-of-service',
+    UPDATE_TOKENS: '/auth/update-tokens',
+    ME: '/auth/me'
+  },
+  PROFILE: {
+    PROFILE: '/profile',
+    PROFILE_USERID: '/profile/[userId]',
+    SETTINGS: '/profile/settings'
+  }
 };

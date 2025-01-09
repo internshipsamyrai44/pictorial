@@ -63,7 +63,7 @@ export const ForgotPasswordForm = () => {
 
   const onModalClose = () => {
     setIsModalActive(false);
-    push(PATH.LOGIN);
+    push(PATH.AUTH.LOGIN);
   };
 
   return (
@@ -78,7 +78,7 @@ export const ForgotPasswordForm = () => {
           <Button className={s.button} disabled={!captchaToken || !isValid}>
             Send Link
           </Button>
-          <Link className={s.link} href={PATH.LOGIN}>
+          <Link className={s.link} href={PATH.AUTH.LOGIN}>
             Back to Sign In
           </Link>
           {!isSendEmailSuccess ? (

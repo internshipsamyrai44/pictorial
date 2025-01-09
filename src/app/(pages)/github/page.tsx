@@ -18,14 +18,14 @@ export default function GithubPage() {
         localStorage.setItem('accessToken', accessToken);
         const userId = getDecodedToken(accessToken);
         if (userId) {
-          router.push(`${PATH.PROFILE}/${userId}`);
+          router.push(`${PATH.PROFILE.PROFILE_USERID}`);
         } else {
           console.error('Ошибка: userId не найден');
-          router.push(PATH.LOGIN);
+          router.push(PATH.AUTH.LOGIN);
         }
       } catch (error) {
         console.error('Ошибка при декодировании токена:', error);
-        router.push(PATH.LOGIN);
+        router.push(PATH.AUTH.LOGIN);
       }
     }
   }, [router, searchParams]);

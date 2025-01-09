@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { BackToLink } from '@/widgets/back-to-link/BackToLink';
+import { ReturnLink } from '@/widgets/return-link/ReturnLink';
 import s from './ContentPage.module.scss';
 
 type ContentPage = {
@@ -13,7 +13,7 @@ type ContentPage = {
 export const ContentPage = ({ title, backHref, children }: ContentPage) => {
   return (
     <div className={s.container}>
-      {title && backHref && <BackToLink text={title} backHref={backHref} />}
+      {title && backHref && <ReturnLink text={title} backHref={backHref} />}
       {children}
     </div>
   );

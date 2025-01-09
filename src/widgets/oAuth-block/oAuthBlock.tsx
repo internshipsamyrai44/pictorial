@@ -1,6 +1,6 @@
 import React from 'react';
-import GoogleIconSvg from '@/shared/assets/icons/GoogleIconSvg';
-import GithubIconSvg from '@/shared/assets/icons/GithubIconSvg';
+import GoogleIconSvg from '../../../public/icons/GoogleIconSvg';
+import GithubIconSvg from '../../../public/icons/GithubIconSvg';
 import { useGoogleAuth } from '@/shared/hooks/useGoogleAuth';
 import s from './OAuthBlock.module.scss';
 
