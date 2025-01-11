@@ -8,7 +8,7 @@ import { getDecodedToken } from '@/shared/utils/getDecodedToken';
 import { LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 
 export default function GithubPage() {
-  const router = useRouter();
+  const { replace } = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -18,17 +18,17 @@ export default function GithubPage() {
         localStorage.setItem('accessToken', accessToken);
         const userId = getDecodedToken(accessToken);
         if (userId) {
-          router.push(`${PATH.PROFILE.PROFILE_USERID}`);
+          replace(`/profile/${userId}`);
         } else {
           console.error('Ошибка: userId не найден');
-          router.push(PATH.AUTH.LOGIN);
+          replace(PATH.AUTH.LOGIN);
         }
       } catch (error) {
         console.error('Ошибка при декодировании токена:', error);
-        router.push(PATH.AUTH.LOGIN);
+        replace(PATH.AUTH.LOGIN);
       }
     }
-  }, [router, searchParams]);
+  }, [replace, searchParams]);
 
   return (
     <ContentPage title={'Back to home page'} backHref={PATH.MAIN}>

@@ -3,7 +3,7 @@ import { PublicUserProfileByIdResponse } from '@/features/profile/model/publicPr
 
 export const publicProfileApi = inctagramApi.injectEndpoints({
   endpoints: (build) => ({
-    getPublicUserProfileById: build.query<PublicUserProfileByIdResponse, string>({
+    getPublicUserProfileById: build.query<PublicUserProfileByIdResponse, number>({
       query: (profileId) => ({
         url: `/v1/public-user/profile/${profileId}`,
         method: 'GET'

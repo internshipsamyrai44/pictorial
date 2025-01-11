@@ -37,18 +37,23 @@ type SideNavBar = {
   className?: string;
 };
 
-const options = [
-  { icon: HomeIcon, iconActive: HomeActiveIcon, title: 'Home', url: PATH.MAIN },
-  { icon: CreateIcon, iconActive: CreateActiveIcon, title: 'Create', url: '#' },
-  { icon: MyProfileIcon, iconActive: MyProfileActiveIcon, title: 'My Profile', url: PATH.PROFILE.PROFILE_USERID },
-  { icon: MessengerIcon, iconActive: MessengerActiveIcon, title: 'Messenger', url: '#' },
-  { icon: SearchIcon, iconActive: SearchActiveIcon, title: 'Search', url: '#' },
-  { icon: StatisticsIcon, iconActive: StatisticsActiveIcon, title: 'Statistics', url: '#' },
-  { icon: FavoritesIcon, iconActive: FavoritesActiveIcon, title: 'Favorites', url: '#' },
-  { icon: LogOutIcon, iconActive: LogOutActiveIcon, title: 'Log Out', url: PATH.AUTH.LOGIN }
-];
-
 export const SideNavPanel = ({ className }: SideNavBar) => {
+  const options = [
+    { icon: HomeIcon, iconActive: HomeActiveIcon, title: 'Home', url: PATH.MAIN },
+    { icon: CreateIcon, iconActive: CreateActiveIcon, title: 'Create', url: '#' },
+    {
+      icon: MyProfileIcon,
+      iconActive: MyProfileActiveIcon,
+      title: 'My Profile',
+      url: PATH.PROFILE.PROFILE_USERID
+    },
+    { icon: MessengerIcon, iconActive: MessengerActiveIcon, title: 'Messenger', url: '#' },
+    { icon: SearchIcon, iconActive: SearchActiveIcon, title: 'Search', url: '#' },
+    { icon: StatisticsIcon, iconActive: StatisticsActiveIcon, title: 'Statistics', url: '#' },
+    { icon: FavoritesIcon, iconActive: FavoritesActiveIcon, title: 'Favorites', url: '#' },
+    { icon: LogOutIcon, iconActive: LogOutActiveIcon, title: 'Log Out', url: PATH.AUTH.LOGIN }
+  ];
+
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isModalActive, setIsModalActive] = useState(false);
 

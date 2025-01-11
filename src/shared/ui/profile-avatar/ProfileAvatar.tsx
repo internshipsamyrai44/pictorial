@@ -14,6 +14,7 @@ export const ProfileAvatar = ({ height = 36, src, width = 36 }: Props) => {
       height={height}
       src={src || emptyAvatar}
       width={width}
+      priority
     />
   );
 };
