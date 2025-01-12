@@ -1,23 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { authApi } from '@/features/auth/api/authApi';
-import { signUpApi } from '@/features/signup/api/signUpApi';
-import { confirmRegistrationApi, registrationEmailResendingApi } from '@/features/signup/';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { inctagramApi } from '@/app/services/inctagram.api';
+import { useDispatch } from 'react-redux';
+
+export type AppStore = ReturnType<typeof store.getState>;
 
 export const store = configureStore({
   reducer: {
-    [authApi.reducerPath]: authApi.reducer,
-    [signUpApi.reducerPath]: signUpApi.reducer,
-    [confirmRegistrationApi.reducerPath]: confirmRegistrationApi.reducer,
-    [registrationEmailResendingApi.reducerPath]: registrationEmailResendingApi.reducer
+    [inctagramApi.reducerPath]: inctagramApi.reducer
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      authApi.middleware,
-      signUpApi.middleware,
-      confirmRegistrationApi.middleware,
-      registrationEmailResendingApi.middleware
-    )
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(inctagramApi.middleware)
 });
+
+export type AppDispatch = typeof store.dispatch;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 setupListeners(store.dispatch);
