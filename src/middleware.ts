@@ -20,9 +20,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const token = request.cookies.get('accessToken');
+  const encryptedToken = request.cookies.get('refreshToken')?.value || '';
 
-  if (!token) {
+  if (!encryptedToken) {
     return NextResponse.redirect(new URL(PATH.LOGIN, request.url));
   }
 
