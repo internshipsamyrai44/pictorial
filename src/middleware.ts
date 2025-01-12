@@ -4,15 +4,15 @@ import { PATH } from './shared/const/PATH';
 
 export function middleware(request: NextRequest) {
   const publicPaths = [
-    PATH.LOGIN,
-    PATH.FORGOT_PASSWORD,
-    PATH.REGISTRATION_CONFIRMATION,
-    PATH.TERMS_OF_SERVICE,
-    PATH.PRIVACY_POLICY,
-    PATH.RECOVERY,
+    PATH.AUTH.LOGIN,
+    PATH.AUTH.FORGOT_PASSWORD,
+    PATH.AUTH.REGISTRATION_CONFIRMATION,
+    PATH.AUTH.TERMS_OF_SERVICE,
+    PATH.AUTH.PRIVACY_POLICY,
+    PATH.AUTH.RECOVERY,
     PATH.MAIN,
-    PATH.SIGNUP,
-    PATH.VERIFICATION_LINK_EXPIRED
+    PATH.AUTH.SIGNUP,
+    PATH.AUTH.VERIFICATION_LINK_EXPIRED
   ];
   const { pathname } = request.nextUrl;
 
@@ -23,7 +23,7 @@ export function middleware(request: NextRequest) {
   const encryptedToken = request.cookies.get('refreshToken')?.value || '';
 
   if (!encryptedToken) {
-    return NextResponse.redirect(new URL(PATH.LOGIN, request.url));
+    return NextResponse.redirect(new URL(PATH.AUTH.LOGIN, request.url));
   }
 
   return NextResponse.next();
