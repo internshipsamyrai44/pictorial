@@ -6,7 +6,7 @@ import { ContentPage } from '@/widgets/content-page/ContentPage';
 
 export default function TermsOfService() {
   return (
-    <ContentPage title={'Back to Sign Up'} backHref={PATH.SIGNUP}>
+    <ContentPage title={'Back to Sign Up'} backHref={PATH.AUTH.SIGNUP}>
       <Terms />
     </ContentPage>
   );

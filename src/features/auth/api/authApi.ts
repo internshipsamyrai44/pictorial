@@ -1,30 +1,42 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl } from '@/shared/api/baseApi';
 import {
   createNewPasswordRequest,
-  GoogleOAuthArgs,
+  GoogleOAuthRequest,
   GoogleOAuthResponse,
   LoginRequest,
   LoginResponse,
-  RecoveryPasswordRequest
+  MeResponse,
+  RecoveryPasswordRequest,
+  SignUpRequest,
+  SignUpResponse
 } from '@/features/auth/model/authApi.types';
+import { inctagramApi } from '@/app/services/inctagram.api';
 
-export const authApi = createApi({
-  reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl }),
+export const authApi = inctagramApi.injectEndpoints({
   endpoints: (build) => ({
     sendEmailToRecoveryPassword: build.mutation<string, RecoveryPasswordRequest>({
       query: (email) => ({
-        url: `auth/password-recovery`,
+        url: `v1/auth/password-recovery`,
         method: 'POST',
         body: email
       })
     }),
     createNewPassword: build.mutation<string, createNewPasswordRequest>({
       query: (newPassword) => ({
-        url: `auth/new-password`,
+        url: `v1/auth/new-password`,
         method: 'POST',
         body: newPassword
+      })
+    }),
+    signUp: build.mutation<SignUpResponse, SignUpRequest>({
+      query: (body) => ({
+        url: `v1/auth/registration`,
+        method: 'POST',
+        body
+      })
+    }),
+    me: build.query<MeResponse, void>({
+      query: () => ({
+        url: `v1/auth/me`
       })
     }),
     login: build.mutation<LoginResponse, LoginRequest>({
@@ -37,23 +49,12 @@ export const authApi = createApi({
         localStorage.setItem('accessToken', data.accessToken.trim());
       },
       query: (body) => ({
-        url: `auth/login`,
+        url: `v1/auth/login`,
         method: 'POST',
         body
       })
     }),
-    logout: build.mutation<void, void>({
-      async onQueryStarted(_, { queryFulfilled }) {
-        await queryFulfilled;
-      },
-      query: (args) => ({
-        body: args,
-        credentials: 'include',
-        method: 'POST',
-        url: `v1/auth/logout`
-      })
-    }),
-    googleOAuth: build.mutation<GoogleOAuthResponse, GoogleOAuthArgs>({
+    googleOAuth: build.mutation<GoogleOAuthResponse, GoogleOAuthRequest>({
       async onQueryStarted(_, { queryFulfilled }) {
         const { data } = await queryFulfilled;
 
@@ -67,7 +68,26 @@ export const authApi = createApi({
       query: (args) => ({
         body: args,
         method: 'POST',
-        url: `auth/google/login`
+        url: `v1/auth/google/login`
+      })
+    }),
+    updateTokens: build.mutation<void, void>({
+      query: (args) => ({
+        body: args,
+        method: 'POST',
+        url: `v1/auth/update-tokens`
+      })
+    }),
+    logout: build.mutation<void, void>({
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        localStorage.removeItem('accessToken');
+        dispatch(authApi.util.resetApiState());
+      },
+      query: (body) => ({
+        body,
+        method: 'POST',
+        url: 'v1/auth/logout'
       })
     })
   })
@@ -76,6 +96,11 @@ export const authApi = createApi({
 export const {
   useSendEmailToRecoveryPasswordMutation,
   useCreateNewPasswordMutation,
+  useSignUpMutation,
   useLoginMutation,
-  useLogoutMutation
+  useLogoutMutation,
+  useGoogleOAuthMutation,
+  useMeQuery,
+  useLazyMeQuery,
+  useUpdateTokensMutation
 } = authApi;

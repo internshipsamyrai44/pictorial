@@ -1,0 +1,28 @@
+.logout {
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.modal {
+  max-width: 438px;
+  width: 100%;
+  max-height: 240px;
+  height: 100%;
+
+  .text {
+    padding-top: 30px;
+  }
+
+  .buttons-block {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    padding: 30px 0 16px;
+
+    .modal-button {
+      width: 96px;
+    }
+  }
+}

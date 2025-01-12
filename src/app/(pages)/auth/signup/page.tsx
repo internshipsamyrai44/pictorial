@@ -1,6 +1,6 @@
 'use client';
 
-import { SignupForm } from '@/features/signup/ui/SignupForm';
+import { SignupForm } from '@/features/auth/ui/signupForm/SignupForm';
 
 export default function SignUp() {
   const style = {

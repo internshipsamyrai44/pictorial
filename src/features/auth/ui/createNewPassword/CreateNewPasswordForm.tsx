@@ -44,7 +44,7 @@ export const CreateNewPasswordForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      push(PATH.LOGIN);
+      push(PATH.AUTH.LOGIN);
     }
   }, [isSuccess]);
 
