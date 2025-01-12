@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl } from '@/shared/api/baseApi';
-import { ConfirmRegistrationRequest } from '../model/confirmRegistrationApi.types';
+import { baseUrl } from '@/shared/const/baseApi';
+import { ConfirmRegistrationRequest } from '@/features/auth/model/confirmRegistrationApi.types';
 
 export const confirmRegistrationApi = createApi({
   reducerPath: 'confirmRegistrationApi',

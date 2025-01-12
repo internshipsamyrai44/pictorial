@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl } from '@/shared/api/baseApi';
-import { RegistrationEmailResendingRequest } from '../model/registrationEmailResendingApi.types';
+import { baseUrl } from '@/shared/const/baseApi';
+import { RegistrationEmailResendingRequest } from '@/features/auth/model/registrationEmailResendingApi.types';
 
 export const registrationEmailResendingApi = createApi({
   reducerPath: 'registrationEmailResending',

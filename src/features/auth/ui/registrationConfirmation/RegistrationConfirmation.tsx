@@ -11,10 +11,11 @@ import { getBaseUrl } from '@/shared/utils';
 
 import s from './RegistrationConfirmation.module.scss';
 import { useRequestError } from '@/shared/hooks/useRequestError';
-import { useConfirmRegistrationMutation, useRegistrationEmailResendingMutation } from '../../../signup';
 import { FormRegistrationEmailResend, registrationEmailResendSchema } from '../../model/validationScheme';
 import RegistrationConfirmationExpiredSvg from '../../../../../public/images/RegistrationConfirmationExpiredSvg';
 import RegistrationConfirmationSuccessSvg from '../../../../../public/images/RegistrationConfirmationSuccessSvg';
+import { useConfirmRegistrationMutation } from '../../../signup/api/confirmRegistrationApi';
+import { useRegistrationEmailResendingMutation } from '../../../signup/api/registrationEmailResendingApi';
 
 interface Props {
   token: string | null;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { RegistrationConfirmation } from '../../../../features/signup';
+import { RegistrationConfirmation } from '../../../../features/auth/ui/registrationConfirmation/RegistrationConfirmation';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -9,15 +9,15 @@ export default function Page() {
   const code = searchParams.get('code');
   const email = searchParams.get('email');
 
-  const style = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  };
-
   return (
     <div style={style}>
       <RegistrationConfirmation token={code} email={email} />
     </div>
   );
 }
+
+const style = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center'
+};
