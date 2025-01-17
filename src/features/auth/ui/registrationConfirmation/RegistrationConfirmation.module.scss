@@ -7,25 +7,60 @@
   padding: 35px;
 }
 
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 294px;
+}
+
 .title {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-l);
+  text-align: center;
 }
 
 .description {
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-m);
   margin-top: 19px;
+  text-align: center;
 }
 
-.button {
+.form {
+  width: 229px;
+}
+
+.input {
+  margin-top: 30px;
+}
+
+.button-sign-in {
   margin-top: 54px;
   width: 182px;
-  justify-content: center;
+  font-weight: var(--font-weight-semi-bold);
+}
+
+.button-resend {
+  margin-top: 24px;
   font-weight: var(--font-weight-semi-bold);
 }
 
 .img {
   margin-top: 72px;
+}
+
+.modal {
+  width: 330px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 30px;
+
+  .button {
+    align-self: flex-end;
+    width: 96px;
+    justify-content: center;
+  }
 }

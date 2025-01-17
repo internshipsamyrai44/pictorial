@@ -21,4 +21,10 @@ export const signUpSchema = yup
   })
   .required();
 
+export const registrationEmailResendSchema = yup.object({
+  email: getEmailValidationSchema().required('Email is required')
+});
+
+export type FormRegistrationEmailResend = yup.InferType<typeof registrationEmailResendSchema>;
+
 export type FormSignUp = yup.InferType<typeof signUpSchema>;
