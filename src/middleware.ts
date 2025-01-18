@@ -20,11 +20,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const encryptedToken = request.cookies.get('refreshToken')?.value || '';
+  // const encryptedToken = request.cookies.get('refreshToken')?.value || '';
 
-  if (!encryptedToken) {
+  /*if (!encryptedToken) {
     return NextResponse.redirect(new URL(PATH.AUTH.LOGIN, request.url));
-  }
+  }*/
 
   return NextResponse.next();
 }

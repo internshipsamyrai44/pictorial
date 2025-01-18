@@ -2,7 +2,6 @@
 
 import * as yup from 'yup';
 import { Alertpopup, Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
-import s from './CreateNewPasswordForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { getPasswordValidationSchema } from '@/shared/utils/PasswordValidationSchema';
@@ -11,6 +10,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useRequestError } from '@/shared/hooks/useRequestError';
 import { useEffect } from 'react';
 import { PATH } from '@/shared/const/PATH';
+import s from './CreateNewPasswordForm.module.scss';
 
 type FormInput = {
   new_password: string;

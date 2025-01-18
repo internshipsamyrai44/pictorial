@@ -11,7 +11,6 @@ import s from './GeneralInfoForm.module.scss';
 
 type Props = {
   disabled: boolean;
-  // eslint-disable-next-line no-unused-vars
   onSubmitProfileForm: (data: ProfileFormValues) => Promise<void>;
   defaultValues: ProfileFormValues;
 };
@@ -20,6 +19,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, defaultValues }
   const {
     register,
     handleSubmit,
+    setValue,
     trigger,
     formState: { errors, isValid }
   } = useForm<ProfileFormValidationScheme>({
@@ -66,7 +66,12 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, defaultValues }
         }}
         errorMessage={errors.lastName && `${errors.lastName}`}
       />
-      <DatePicker label={'Date of Birth'} date={defaultValues.dateOfBirth} />
+
+      <DatePicker
+        label={'Date of Birth'}
+        date={defaultValues.dateOfBirth}
+        onChange={(date) => setValue('dateOfBirth', date)} // Устанавливаем значение даты в форму
+      />
 
       <Select placeholder={'Country'} />
       <Select placeholder={'City'} />

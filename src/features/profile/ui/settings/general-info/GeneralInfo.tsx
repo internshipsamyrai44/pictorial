@@ -7,17 +7,16 @@ import { ProfileFormValues } from '@/features/profile/model/profileApi.types';
 import s from './GeneralInfo.module.scss';
 
 export const GeneralInfo = () => {
-  const { data: profileData, isLoading } = useGetProfileQuery();
-  const [updateProfile, { isLoading: updateProfileIsLoading, error }] = useUpdateProfileMutation();
+  const { data: profileData, isLoading, error } = useGetProfileQuery();
+  const [updateProfile, { isLoading: updateProfileIsLoading }] = useUpdateProfileMutation();
   const errorMessage = useRequestError(error);
 
   const onSubmitProfileFormHandler = async (data: ProfileFormValues) => {
     const formattedData = {
       ...data,
       dateOfBirth: data.dateOfBirth ? data.dateOfBirth.toISOString() : undefined
-    } as ProfileFormValues;
-
-    await updateProfile(formattedData).unwrap();
+    };
+    await updateProfile(formattedData);
   };
 
   if (isLoading) return <LoaderLinear />;

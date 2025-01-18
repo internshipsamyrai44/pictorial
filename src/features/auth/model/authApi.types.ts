@@ -52,7 +52,7 @@ export type GoogleOAuthResponse = {
 };
 
 export type MeResponse = {
-  userId: string;
+  userId: number;
   userName: string;
   email: string;
   isBlocked: boolean;

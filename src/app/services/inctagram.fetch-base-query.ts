@@ -5,8 +5,8 @@ import { inctagramApi } from '@/app/services/inctagram.api';
 import { PATH } from '@/shared/const/PATH';
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Mutex } from 'async-mutex';
-import Router from 'next/router';
 import { UpdateTokenResponse } from '@/app/services/inctagram.types';
+import { useRouter } from 'next/navigation';
 
 const mutex = new Mutex();
 
@@ -56,9 +56,9 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
           inctagramApi.util.resetApiState();
 
           localStorage.removeItem('accessToken');
-          if (!result?.meta?.request.url.includes(PATH.AUTH.ME)) {
-            await Router.push(PATH.AUTH.LOGIN);
-          }
+          /*if (!result?.meta?.request.url.includes(PATH.AUTH.ME)) {
+            useRouter().push(PATH.AUTH.LOGIN);
+          }*/
         }
       } finally {
         release();

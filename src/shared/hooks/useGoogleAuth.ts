@@ -6,7 +6,7 @@ import { getDecodedToken } from '@/shared/utils/getDecodedToken';
 
 export const useGoogleAuth = () => {
   const [authMeGoogle] = useGoogleOAuthMutation();
-  const { replace } = useRouter();
+  const { push } = useRouter();
 
   const login = useGoogleLogin({
     flow: 'auth-code',
@@ -21,10 +21,10 @@ export const useGoogleAuth = () => {
         localStorage.setItem('accessToken', JSON.stringify(accessToken));
         const userId = getDecodedToken(accessToken);
         if (userId) {
-          replace(`/profile/${userId}`);
+          push(`/profile/${userId}`);
         } else {
           console.error('Ошибка: userId не найден');
-          replace(PATH.AUTH.LOGIN);
+          push(PATH.AUTH.LOGIN);
         }
       } catch (error) {
         console.log('auth me Error', error);
