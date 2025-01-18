@@ -13,6 +13,7 @@ export type createNewPasswordRequest = {
 
 export type SignUpRequest = Omit<FormSignUp, 'confirmPassword' | 'terms'> & { baseUrl: string };
 
+// TODO it's error response
 export type SignUpResponse = {
   statusCode: number;
   messages: Array<{
@@ -20,6 +21,15 @@ export type SignUpResponse = {
     field: string;
   }>;
   error: string;
+};
+
+export type ConfirmRegistrationRequest = {
+  confirmationCode: string;
+};
+
+export type RegistrationEmailResendingRequest = {
+  email: string;
+  baseUrl: string;
 };
 
 export type LoginRequest = {

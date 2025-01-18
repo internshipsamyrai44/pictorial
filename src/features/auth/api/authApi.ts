@@ -1,4 +1,5 @@
 import {
+  ConfirmRegistrationRequest,
   createNewPasswordRequest,
   GoogleOAuthRequest,
   GoogleOAuthResponse,
@@ -6,6 +7,7 @@ import {
   LoginResponse,
   MeResponse,
   RecoveryPasswordRequest,
+  RegistrationEmailResendingRequest,
   SignUpRequest,
   SignUpResponse
 } from '@/features/auth/model/authApi.types';
@@ -34,7 +36,22 @@ export const authApi = inctagramApi.injectEndpoints({
         body
       })
     }),
+    confirmRegistration: build.mutation<{}, ConfirmRegistrationRequest>({
+      query: (body) => ({
+        url: `v1/auth/registration-confirmation`,
+        method: 'POST',
+        body
+      })
+    }),
+    registrationEmailResending: build.mutation<{}, RegistrationEmailResendingRequest>({
+      query: (body) => ({
+        url: `v1/auth/registration-email-resending`,
+        method: 'POST',
+        body
+      })
+    }),
     me: build.query<MeResponse, void>({
+      providesTags: ['Me'],
       query: () => ({
         url: `v1/auth/me`
       })
@@ -65,6 +82,7 @@ export const authApi = inctagramApi.injectEndpoints({
         localStorage.setItem('accessToken', data.accessToken.trim());
       },
 
+      invalidatesTags: ['Me'],
       query: (args) => ({
         body: args,
         method: 'POST',
@@ -97,6 +115,8 @@ export const {
   useSendEmailToRecoveryPasswordMutation,
   useCreateNewPasswordMutation,
   useSignUpMutation,
+  useConfirmRegistrationMutation,
+  useRegistrationEmailResendingMutation,
   useLoginMutation,
   useLogoutMutation,
   useGoogleOAuthMutation,

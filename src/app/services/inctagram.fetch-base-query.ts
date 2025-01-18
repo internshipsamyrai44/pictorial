@@ -43,7 +43,7 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
         const refreshResult = (await baseQuery(
           {
             method: 'POST',
-            url: PATH.UPDATE_TOKENS
+            url: PATH.AUTH.UPDATE_TOKENS
           },
           api,
           extraOptions
@@ -56,8 +56,8 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
           inctagramApi.util.resetApiState();
 
           localStorage.removeItem('accessToken');
-          if (!result?.meta?.request.url.includes(PATH.ME)) {
-            await Router.push(PATH.LOGIN);
+          if (!result?.meta?.request.url.includes(PATH.AUTH.ME)) {
+            await Router.push(PATH.AUTH.LOGIN);
           }
         }
       } finally {

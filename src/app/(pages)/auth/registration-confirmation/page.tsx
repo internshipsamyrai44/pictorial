@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { RegistrationConfirmation } from '../../../../features/auth/ui/registrationConfirmation/RegistrationConfirmation';
+import { RegistrationConfirmation } from '@/features/auth/ui/registrationConfirmation/RegistrationConfirmation';
 
 export default function Page() {
   const searchParams = useSearchParams();
