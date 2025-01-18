@@ -1,16 +1,22 @@
 'use client';
+
 import * as React from 'react';
 import { useGetUserByUserNameQuery } from '@/features/profile/api/profileApi';
 import { ProfileDashboard } from '@/widgets/profile-dashboard/ProfileDashboard';
 import { LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useGetPublicUserProfileByIdQuery } from '@/features/profile/api/publicProfileApi ';
+import { useParams } from 'next/navigation';
 
-type Props = {
-  userId: string;
-};
+export default function Profile() {
+  const { id } = useParams();
+  const profileId = id ? +id : undefined;
+  const { data: profileData, isLoading: isProfileLoading } = useGetPublicUserProfileByIdQuery(
+    profileId !== undefined ? profileId : 0,
+    {
+      skip: profileId === undefined
+    }
+  );
 
-export default function Profile({ userId }: Props) {
-  const { data: profileData, isLoading: isProfileLoading } = useGetPublicUserProfileByIdQuery(+userId);
   const { data: userData, isLoading: isUserDataLoading } = useGetUserByUserNameQuery(profileData?.userName ?? '', {
     skip: !profileData
   });
@@ -18,6 +24,7 @@ export default function Profile({ userId }: Props) {
   if (isProfileLoading || isUserDataLoading) {
     return <LoaderLinear />;
   }
+
   return (
     <ProfileDashboard
       isSettings

@@ -28,9 +28,9 @@ import {
   Typography
 } from '@internshipsamyrai44-ui-kit/components-lib';
 import { PATH } from '@/shared/const/PATH';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useLogoutMutation } from '@/features/auth/api/authApi';
+import { useLogoutMutation, useMeQuery } from '@/features/auth/api/authApi';
 import s from './SideNavPanel.module.scss';
 
 type SideNavBar = {
@@ -38,33 +38,42 @@ type SideNavBar = {
 };
 
 export const SideNavPanel = ({ className }: SideNavBar) => {
+  const [logout] = useLogoutMutation();
+  const { data: me } = useMeQuery();
+  const router = useRouter();
+  const [activeIcon, setActiveIcon] = useState<string>('');
+  const [isModalActive, setIsModalActive] = useState(false);
+  const [profileUrl, setProfileUrl] = useState<string>('');
+
+  useEffect(() => {
+    if (me) {
+      setProfileUrl(`profile/${me.userId}`);
+    }
+  }, [me]);
+
   const options = [
-    { icon: HomeIcon, iconActive: HomeActiveIcon, title: 'Home', url: PATH.MAIN },
-    { icon: CreateIcon, iconActive: CreateActiveIcon, title: 'Create', url: '#' },
+    { icon: HomeIcon, iconActive: HomeActiveIcon, title: 'Home', url: PATH.MAIN, value: 'home' },
+    { icon: CreateIcon, iconActive: CreateActiveIcon, title: 'Create', url: '#', value: 'create' },
     {
       icon: MyProfileIcon,
       iconActive: MyProfileActiveIcon,
       title: 'My Profile',
-      url: PATH.PROFILE.PROFILE_USERID
+      url: profileUrl,
+      value: 'profile'
     },
-    { icon: MessengerIcon, iconActive: MessengerActiveIcon, title: 'Messenger', url: '#' },
-    { icon: SearchIcon, iconActive: SearchActiveIcon, title: 'Search', url: '#' },
-    { icon: StatisticsIcon, iconActive: StatisticsActiveIcon, title: 'Statistics', url: '#' },
-    { icon: FavoritesIcon, iconActive: FavoritesActiveIcon, title: 'Favorites', url: '#' },
-    { icon: LogOutIcon, iconActive: LogOutActiveIcon, title: 'Log Out', url: PATH.AUTH.LOGIN }
+    { icon: MessengerIcon, iconActive: MessengerActiveIcon, title: 'Messenger', url: '#', value: 'message' },
+    { icon: SearchIcon, iconActive: SearchActiveIcon, title: 'Search', url: '#', value: 'search' },
+    { icon: StatisticsIcon, iconActive: StatisticsActiveIcon, title: 'Statistics', url: '#', value: 'statistics' },
+    { icon: FavoritesIcon, iconActive: FavoritesActiveIcon, title: 'Favorites', url: '#', value: 'favorites' },
+    { icon: LogOutIcon, iconActive: LogOutActiveIcon, title: 'Log Out', url: PATH.AUTH.LOGIN, value: 'logout' }
   ];
 
-  const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [isModalActive, setIsModalActive] = useState(false);
-
-  const router = useRouter();
-  const [logout] = useLogoutMutation();
-
-  const handleLinkClick = async (index: number, url: string) => {
-    if (index === 7) {
+  const handleLinkClick = async (value: string, url: string) => {
+    if (value === 'logout') {
+      setActiveIcon(value);
       setIsModalActive(true);
     } else {
-      setActiveIndex(index);
+      setActiveIcon(value);
       router.push(url);
     }
   };
@@ -75,41 +84,37 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupContent>
-              {options.slice(0, 5).map((item, index) => (
-                <SidebarLink href={item.url} key={item.title} onClick={() => handleLinkClick(index, item.url)}>
+              {options.slice(0, 5).map((item) => (
+                <SidebarLink href={item.url} key={item.value} onClick={() => handleLinkClick(item.value, item.url)}>
                   <SidebarItem
                     icon={item.icon}
                     title={item.title}
                     iconActive={item.iconActive}
-                    isActive={activeIndex === index}
+                    isActive={activeIcon === item.value}
                   />
                 </SidebarLink>
               ))}
             </SidebarGroupContent>
             <SidebarGroupContent style={{ gap: '24px' }}>
-              {options.slice(5, 7).map((item, index) => (
-                <SidebarLink href={item.url} key={item.title} onClick={() => handleLinkClick(index + 5, item.url)}>
+              {options.slice(5, 7).map((item) => (
+                <SidebarLink href={item.url} key={item.value} onClick={() => handleLinkClick(item.value, item.url)}>
                   <SidebarItem
                     icon={item.icon}
                     title={item.title}
                     iconActive={item.iconActive}
-                    isActive={activeIndex === index + 5}
+                    isActive={activeIcon === item.value}
                   />
                 </SidebarLink>
               ))}
             </SidebarGroupContent>
           </SidebarGroup>
-          {options.slice(-1).map((item, index) => (
-            <div
-              className={s.logout}
-              key={item.title}
-              onClick={() => handleLinkClick(index + options.length - 1, item.url)}
-            >
+          {options.slice(-1).map((item) => (
+            <div className={s.logout} key={item.value} onClick={() => handleLinkClick(item.value, item.url)}>
               <SidebarItem
                 icon={item.icon}
                 title={item.title}
                 iconActive={item.iconActive}
-                isActive={activeIndex === index + options.length - 1}
+                isActive={activeIcon === item.value}
               />
             </div>
           ))}
