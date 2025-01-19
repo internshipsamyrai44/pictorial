@@ -6,6 +6,7 @@ import { ContentPage } from '@/widgets/content-page/ContentPage';
 import { PATH } from '@/shared/const/PATH';
 import { getDecodedToken } from '@/shared/utils/getDecodedToken';
 import { LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
+import { setCookie } from '@/shared/utils/cookieUtils';
 
 export default function GithubPage() {
   const { replace } = useRouter();
@@ -15,7 +16,7 @@ export default function GithubPage() {
     const accessToken = searchParams.get('accessToken');
     if (accessToken) {
       try {
-        localStorage.setItem('accessToken', accessToken);
+        setCookie('accessToken', accessToken, 7);
         const userId = getDecodedToken(accessToken);
         if (userId) {
           replace(`/profile/${userId}`);
