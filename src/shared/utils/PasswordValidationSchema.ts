@@ -7,11 +7,10 @@ export const getPasswordValidationSchema = (): yup.StringSchema =>
   yup
     .string()
     .required('Password is required')
-    .matches(/^[A-Za-z\d!#/+*$]+$/, 'Use Latin letters only')
-    .matches(/^.{6,999}$/, `Minimum number of characters ${MIN_COUNT_PASSWORD}`)
-    .matches(/^.{1,20}$/, `Maximum number of characters ${MAX_COUNT_PASSWORD}`)
+    .min(MIN_COUNT_PASSWORD, `Minimum number of characters is ${MIN_COUNT_PASSWORD}`)
+    .max(MAX_COUNT_PASSWORD, `Maximum number of characters is ${MAX_COUNT_PASSWORD}`)
     .matches(
-      // eslint-disable-next-line
-      /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~])[A-Za-z0-9!"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]+$/,
-      'The password contains invalid characters'
-    );
+      /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-.:;<=>?@[\]^_`{|}~]).+$/,
+      'Password must contain at least one digit, one uppercase letter, one lowercase letter, and one special character.'
+    )
+    .matches(/^[A-Za-z0-9!"#$%&'()*+,-.:;<=>?@[\]^_`{|}~]+$/, 'The password contains invalid characters');

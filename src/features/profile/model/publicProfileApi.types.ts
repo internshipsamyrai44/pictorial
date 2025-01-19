@@ -1,4 +1,6 @@
-export type PublicUserProfile = {
+export type PublicUserProfileByIdResponse = {
+  aboutMe: string;
+  avatars: PublicUserProfileAvatar[];
   id: number;
   userName: string;
   aboutMe: any;
@@ -7,11 +9,11 @@ export type PublicUserProfile = {
 };
 
 type PublicUserProfileAvatar = {
+  createdAt: string;
+  fileSize: number;
+  height: number;
   url: string;
   width: number;
-  height: number;
-  fileSize: number;
-  createdAt: string;
 };
 
 type PublicUserMetadata = {

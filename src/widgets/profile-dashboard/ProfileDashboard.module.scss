@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 38px;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 50px;
+
+  .container-block {
+    display: flex;
+    flex-flow: column nowrap;
+    flex-grow: 1;
+    row-gap: 20px;
+
+    .header-block {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .stats-block {
+      display: flex;
+      flex-flow: row nowrap;
+      column-gap: 100px;
+    }
+  }
+}

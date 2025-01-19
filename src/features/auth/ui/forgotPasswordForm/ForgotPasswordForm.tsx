@@ -4,17 +4,16 @@ import Link from 'next/link';
 import { useState } from 'react';
 import ReCAPTCHAComponent from 'react-google-recaptcha';
 import { Alertpopup, Button, Card, Input, LoaderLinear, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
-import s from './ForgotPasswordForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { getEmailValidationSchema } from '@/shared/utils/EmailValidationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { useSendEmailToRecoveryPasswordMutation } from '@/features/auth/api/authApi';
 import * as yup from 'yup';
 import { PATH } from '@/shared/const/PATH';
 import { getBaseUrl } from '@/shared/utils';
 import { useRequestError } from '@/shared/hooks/useRequestError';
 import { useRouter } from 'next/navigation';
+import s from './ForgotPasswordForm.module.scss';
 
 type FormInput = {
   email: string;
@@ -63,7 +62,7 @@ export const ForgotPasswordForm = () => {
 
   const onModalClose = () => {
     setIsModalActive(false);
-    push(PATH.LOGIN);
+    push(PATH.AUTH.LOGIN);
   };
 
   return (
@@ -78,7 +77,7 @@ export const ForgotPasswordForm = () => {
           <Button className={s.button} disabled={!captchaToken || !isValid}>
             Send Link
           </Button>
-          <Link className={s.link} href={PATH.LOGIN}>
+          <Link className={s.link} href={PATH.AUTH.LOGIN}>
             Back to Sign In
           </Link>
           {!isSendEmailSuccess ? (
