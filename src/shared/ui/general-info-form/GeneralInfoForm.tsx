@@ -1,35 +1,43 @@
+'use client';
+
 import React from 'react';
 import { Button, DatePicker, Input, Select, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ProfileFormValues } from '@/features/profile/model/profileApi.types';
+
 import {
   ProfileFormValidationScheme,
   profileFormValidationScheme
 } from '@/features/profile/model/profileFormValidationScheme';
 import s from './GeneralInfoForm.module.scss';
+import { ProfileBase } from '@/features/profile/model/profileApi.types';
 
 type Props = {
   disabled: boolean;
-  onSubmitProfileForm: (data: ProfileFormValues) => Promise<void>;
-  defaultValues: ProfileFormValues;
+  // eslint-disable-next-line no-unused-vars
+  onSubmitProfileForm: (data: Omit<ProfileBase, 'id' | 'createdAt'>) => Promise<void>;
+  profileData: Partial<ProfileFormValidationScheme>;
 };
 
-export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, defaultValues }: Props) => {
+export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: Props) => {
   const {
     register,
     handleSubmit,
     setValue,
+    getValues,
     trigger,
-    formState: { errors, isValid }
+    formState: { errors }
   } = useForm<ProfileFormValidationScheme>({
-    defaultValues,
+    defaultValues: profileData,
     resolver: yupResolver(profileFormValidationScheme),
     mode: 'onTouched'
   });
 
-  const onSubmitFormHandler = async (data: ProfileFormValues) => {
-    await onSubmitProfileForm(data);
+  const onSubmitFormHandler = (data: ProfileFormValidationScheme) => {
+    onSubmitProfileForm({
+      ...data,
+      dateOfBirth: data.dateOfBirth?.toISOString() ?? ''
+    });
   };
 
   return (
@@ -69,15 +77,17 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, defaultValues }
 
       <DatePicker
         label={'Date of Birth'}
-        date={defaultValues.dateOfBirth}
-        onChange={(date) => setValue('dateOfBirth', date)} // Устанавливаем значение даты в форму
+        date={getValues('dateOfBirth')}
+        onChange={(date) => {
+          setValue('dateOfBirth', new Date(date.currentTarget.value));
+        }}
       />
 
       <Select placeholder={'Country'} />
       <Select placeholder={'City'} />
       <Textarea placeholder={'About Me'} {...register('aboutMe')} label={'About Me'} />
 
-      <Button variant="primary" type="submit" disabled={disabled || !isValid} className={s['submit-button']}>
+      <Button variant="primary" type="submit" className={s['submit-button']}>
         Save Changes
       </Button>
     </form>
