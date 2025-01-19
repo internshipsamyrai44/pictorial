@@ -11,6 +11,7 @@ import s from './GeneralInfoForm.module.scss';
 
 type Props = {
   disabled: boolean;
+  // eslint-disable-next-line no-unused-vars
   onSubmitProfileForm: (data: ProfileFormValues) => Promise<void>;
   defaultValues: ProfileFormValues;
 };
@@ -70,7 +71,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, defaultValues }
       <DatePicker
         label={'Date of Birth'}
         date={defaultValues.dateOfBirth}
-        onChange={(date) => setValue('dateOfBirth', date)} // Устанавливаем значение даты в форму
+        onChange={(date) => setValue('dateOfBirth', new Date(date.currentTarget.value))}
       />
 
       <Select placeholder={'Country'} />
