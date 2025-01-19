@@ -14,7 +14,7 @@ export const GeneralInfo = () => {
   const onSubmitProfileFormHandler = async (data: ProfileFormValues) => {
     const formattedData = {
       ...data,
-      dateOfBirth: data.dateOfBirth ? data.dateOfBirth.toISOString() : undefined
+      dateOfBirth: new Date(data.dateOfBirth).toISOString()
     };
     await updateProfile(formattedData);
   };
@@ -37,7 +37,7 @@ export const GeneralInfo = () => {
             aboutMe: profileData?.aboutMe || '',
             city: profileData?.city || '',
             country: profileData?.country || '',
-            dateOfBirth: profileData?.dateOfBirth ? new Date(profileData.dateOfBirth) : undefined
+            dateOfBirth: profileData?.dateOfBirth
           }}
         />
       </div>
