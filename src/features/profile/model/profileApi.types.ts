@@ -31,10 +31,6 @@ export type AvatarResponse = {
   avatars: Avatar[];
 };
 
-export type ProfileFormValues = Omit<ProfileBase, 'id' | 'createdAt'> & {
-  dateOfBirth?: Date;
-};
-
 export type UserProfileResponse = ProfileBase & {
   followersCount: number;
   followingCount: number;

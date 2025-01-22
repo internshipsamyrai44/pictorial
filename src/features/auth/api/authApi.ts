@@ -12,6 +12,7 @@ import {
   SignUpResponse
 } from '@/features/auth/model/authApi.types';
 import { inctagramApi } from '@/app/services/inctagram.api';
+import { deleteCookie, setCookie } from '@/shared/utils/cookieUtils';
 
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: (build) => ({
@@ -63,7 +64,7 @@ export const authApi = inctagramApi.injectEndpoints({
         if (!data) {
           return;
         }
-        localStorage.setItem('accessToken', data.accessToken.trim());
+        setCookie('accessToken', data.accessToken.trim(), 7);
       },
       query: (body) => ({
         url: `v1/auth/login`,
@@ -79,7 +80,7 @@ export const authApi = inctagramApi.injectEndpoints({
           return;
         }
 
-        localStorage.setItem('accessToken', data.accessToken.trim());
+        setCookie('accessToken', data.accessToken.trim(), 7);
       },
 
       invalidatesTags: ['Me'],
@@ -99,7 +100,7 @@ export const authApi = inctagramApi.injectEndpoints({
     logout: build.mutation<void, void>({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled;
-        localStorage.removeItem('accessToken');
+        deleteCookie('accessToken');
         dispatch(authApi.util.resetApiState());
       },
       query: (body) => ({

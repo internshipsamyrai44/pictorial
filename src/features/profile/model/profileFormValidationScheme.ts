@@ -26,16 +26,11 @@ export const profileFormValidationScheme = yup.object({
     .string()
     .trim()
     .max(200, 'About Me must be at most 200 characters')
-    .matches(/^[a-zA-Zа-яА-Я0-9!#$%&'()*+,\-./:;<=>?@[\\\]^_`{|} ]*$/g, `About Me must contain valid characters`),
-  city: yup.string(),
-  country: yup.string(),
-  dateOfBirth: yup
-    .date()
-    .optional()
-    .transform((originalValue) => {
-      const date = new Date(originalValue);
-      return !isNaN(date.getTime()) ? date : undefined;
-    })
+    .matches(/^[a-zA-Zа-яА-Я0-9!#$%&'()*+,\-./:;<=>?@[\\\]^_`{|} ]*$/g, `About Me must contain valid characters`)
+    .transform((value) => (value === null ? '' : value)),
+  city: yup.string().transform((value) => (value === null ? '' : value)),
+  country: yup.string().transform((value) => (value === null ? '' : value)),
+  dateOfBirth: yup.date().optional()
 });
 
 export type ProfileFormValidationScheme = yup.InferType<typeof profileFormValidationScheme>;

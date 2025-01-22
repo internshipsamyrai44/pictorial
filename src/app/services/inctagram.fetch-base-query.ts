@@ -3,10 +3,10 @@
 import { baseUrl } from '@/shared/const/baseApi';
 import { inctagramApi } from '@/app/services/inctagram.api';
 import { PATH } from '@/shared/const/PATH';
-import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { Mutex } from 'async-mutex';
 import { UpdateTokenResponse } from '@/app/services/inctagram.types';
-import { useRouter } from 'next/navigation';
+import { deleteCookie, getCookie, setCookie } from '@/shared/utils/cookieUtils';
 
 const mutex = new Mutex();
 
@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
   credentials: 'include',
 
   prepareHeaders: (headers) => {
-    const token = localStorage.getItem('accessToken');
+    const token = getCookie('accessToken');
 
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
@@ -50,12 +50,12 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
         )) as UpdateTokenResponse;
 
         if (refreshResult.data) {
-          localStorage.setItem('accessToken', refreshResult.data.accessToken.trim());
+          setCookie('accessToken', refreshResult.data.accessToken.trim(), 7);
           result = await baseQuery(args, api, extraOptions);
         } else {
           inctagramApi.util.resetApiState();
 
-          localStorage.removeItem('accessToken');
+          deleteCookie('accessToken');
           /*if (!result?.meta?.request.url.includes(PATH.AUTH.ME)) {
             useRouter().push(PATH.AUTH.LOGIN);
           }*/

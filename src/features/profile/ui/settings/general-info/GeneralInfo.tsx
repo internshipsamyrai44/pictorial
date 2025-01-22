@@ -3,20 +3,19 @@ import { AvatarActions } from '@/features/profile/ui/settings/general-info/avata
 import { Alertpopup, LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useRequestError } from '@/shared/hooks/useRequestError';
 import { useGetProfileQuery, useUpdateProfileMutation } from '@/features/profile/api/profileApi';
-import { ProfileFormValues } from '@/features/profile/model/profileApi.types';
+
 import s from './GeneralInfo.module.scss';
+import { ProfileBase } from '@/features/profile/model/profileApi.types';
 
 export const GeneralInfo = () => {
   const { data: profileData, isLoading, error } = useGetProfileQuery();
+
   const [updateProfile, { isLoading: updateProfileIsLoading }] = useUpdateProfileMutation();
+
   const errorMessage = useRequestError(error);
 
-  const onSubmitProfileFormHandler = async (data: ProfileFormValues) => {
-    const formattedData = {
-      ...data,
-      dateOfBirth: new Date(data.dateOfBirth).toISOString()
-    };
-    await updateProfile(formattedData);
+  const onSubmitProfileFormHandler = async (data: Omit<ProfileBase, 'id' | 'createdAt'>) => {
+    updateProfile(data);
   };
 
   if (isLoading) return <LoaderLinear />;
@@ -30,14 +29,9 @@ export const GeneralInfo = () => {
         <GeneralInfoForm
           disabled={updateProfileIsLoading}
           onSubmitProfileForm={onSubmitProfileFormHandler}
-          defaultValues={{
-            userName: profileData?.userName || '',
-            firstName: profileData?.firstName || '',
-            lastName: profileData?.lastName || '',
-            aboutMe: profileData?.aboutMe || '',
-            city: profileData?.city || '',
-            country: profileData?.country || '',
-            dateOfBirth: profileData?.dateOfBirth
+          profileData={{
+            ...profileData,
+            dateOfBirth: profileData?.dateOfBirth ? new Date(profileData.dateOfBirth) : undefined
           }}
         />
       </div>
