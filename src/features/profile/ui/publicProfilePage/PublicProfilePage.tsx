@@ -10,12 +10,10 @@ import { useRequestError } from '@/shared/hooks/useRequestError';
 
 export const PublicProfilePage = () => {
   const { id } = useParams<{ id: string }>();
-  const { data, isLoading, error } = useGetPublicUserProfileQuery(+id);
+  const { data, error, isFetching } = useGetPublicUserProfileQuery(+id);
   const errorMessage = useRequestError(error);
 
-  if (!data) return <LoaderLinear />;
-
-  console.log(isLoading);
+  if (isFetching) return <LoaderLinear />;
 
   return (
     <>

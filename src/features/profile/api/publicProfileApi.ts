@@ -8,7 +8,7 @@ export const publicProfileApi = createApi({
   endpoints: (build) => ({
     getPublicUserProfile: build.query<PublicUserProfileByIdResponse, number>({
       query: (profileId) => ({
-        url: `public-user/profile/${profileId}`,
+        url: `v1/public-user/profile/${profileId}`,
         method: 'GET'
       })
     })
