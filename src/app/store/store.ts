@@ -8,13 +8,11 @@ import { publicProfileApi } from '@/features/profile/api/publicProfileApi';
 
 export const store = configureStore({
   reducer: {
-    [authApi.reducerPath]: authApi.reducer,
-    [signUpApi.reducerPath]: signUpApi.reducer,
     [publicProfileApi.reducerPath]: publicProfileApi.reducer,
     [inctagramApi.reducerPath]: inctagramApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, signUpApi.middleware, publicProfileApi.middleware, inctagramApi.middleware)
+    getDefaultMiddleware().concat(publicProfileApi.middleware, inctagramApi.middleware)
 });
 
 export type AppDispatch = typeof store.dispatch;

@@ -1,6 +1,4 @@
 export type PublicUserProfileByIdResponse = {
-  aboutMe: string;
-  avatars: PublicUserProfileAvatar[];
   id: number;
   userName: string;
   aboutMe: any;

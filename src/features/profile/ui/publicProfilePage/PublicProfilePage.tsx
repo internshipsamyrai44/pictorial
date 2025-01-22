@@ -4,7 +4,7 @@ import s from './PublicProfilePage.module.scss';
 import { Alertpopup, Button, LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 import Image from 'next/image';
 import { useGetPublicUserProfileQuery } from '@/features/profile/api/publicProfileApi';
-import emptyAvatar from '@/public/images/emptyAvatar.jpg';
+import noAvatar from '../../../../../public/images/noAvatar.png';
 import { useParams } from 'next/navigation';
 import { useRequestError } from '@/shared/hooks/useRequestError';
 
@@ -25,7 +25,7 @@ export const PublicProfilePage = () => {
           <Image
             className={s.avatar}
             loader={() => data?.avatars[0].url || ''}
-            src={data?.avatars[0]?.url || emptyAvatar}
+            src={data?.avatars[0]?.url || noAvatar}
             priority={true}
             width={0}
             height={0}
