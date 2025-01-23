@@ -5,14 +5,16 @@ import { useDispatch } from 'react-redux';
 
 export type AppStore = ReturnType<typeof store.getState>;
 import { publicProfileApi } from '@/features/profile/api/publicProfileApi';
+import { publicUserPostApi } from '@/features/public-posts/api/publicPostApi';
 
 export const store = configureStore({
   reducer: {
     [publicProfileApi.reducerPath]: publicProfileApi.reducer,
-    [inctagramApi.reducerPath]: inctagramApi.reducer
+    [inctagramApi.reducerPath]: inctagramApi.reducer,
+    [publicUserPostApi.reducerPath]: publicUserPostApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(publicProfileApi.middleware, inctagramApi.middleware)
+    getDefaultMiddleware().concat(publicProfileApi.middleware, inctagramApi.middleware, publicUserPostApi.middleware)
 });
 
 export type AppDispatch = typeof store.dispatch;
