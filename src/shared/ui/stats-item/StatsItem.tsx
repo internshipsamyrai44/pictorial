@@ -6,9 +6,9 @@ type Props = {
 };
 export const StatsItem = ({ value, title }: Props) => {
   return (
-    <>
+    <div>
       <Typography variant={'bold-text-14'}>{value}</Typography>
       <Typography variant={'bold-text-14'}>{title}</Typography>
-    </>
+    </div>
   );
 };
