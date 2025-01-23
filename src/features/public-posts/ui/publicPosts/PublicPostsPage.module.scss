@@ -1,0 +1,32 @@
+
+.container {
+
+}
+
+.section {
+
+}
+
+.userStats {
+
+}
+
+.postList {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.postItem {
+  width: 30%;
+}
+
+.imageWrapper {
+
+}
+
+.image {
+  object-fit: cover;
+  width: 240px;
+  height: 240px;
+}
