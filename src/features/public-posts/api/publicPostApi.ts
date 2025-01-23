@@ -6,7 +6,7 @@ export const publicUserPostApi = createApi({
   reducerPath: 'publicUserPostApi',
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (build) => ({
-    getPublicUserPost: build.query<GetPublicPostsResponse, number>({
+    getPublicUserPost: build.query<GetPublicPostsResponse, void>({
       query: () => ({
         url: `v1/public-posts/all/`,
         method: 'GET'
