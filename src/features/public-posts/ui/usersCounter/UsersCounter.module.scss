@@ -1,0 +1,42 @@
+
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 972px;
+  padding: 12px 24px;
+}
+
+.userStats {
+
+}
+
+.totalUserContainer {
+  display: flex;
+  padding: 8px 12px 10px;
+  background-color: var(--dark-700);
+}
+
+.unitContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 3px 2px 0;
+}
+
+.unitContainer + .unitContainer {
+  padding-left: 3px;
+  border-left: 1px solid var(--dark-300);
+}
+
+.unit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+}

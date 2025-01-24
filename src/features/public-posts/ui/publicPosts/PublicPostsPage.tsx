@@ -3,7 +3,7 @@
 import TimeAgo from 'react-timeago';
 import s from './PublicPostsPage.module.scss';
 import { useGetPublicUserPostQuery } from '@/features/public-posts/api/publicPostApi';
-import { Card } from '@internshipsamyrai44-ui-kit/components-lib';
+import UsersCounter from '@/features/public-posts/ui/usersCounter/UsersCounter';
 
 export default function PublicPostsPage() {
   const { data, isLoading, isError } = useGetPublicUserPostQuery({ pageSize: 4 });
@@ -20,25 +20,10 @@ export default function PublicPostsPage() {
     return null;
   }
 
-  const totalUsersArr = data.totalUsers.toString().padStart(6, '0').split('');
-
   return (
     <div className={s.container}>
       <section className={s.section}>
-        <Card className={s.card}>
-          <span className={s.userStats}>
-            Registered users:
-            <Card className={s.unitContainer}>
-              {totalUsersArr.map((unit, index) => {
-                return (
-                  <div className={s.unitContainer} key={index}>
-                    <span className={s.unit}>{unit}</span>
-                  </div>
-                );
-              })}
-            </Card>
-          </span>
-        </Card>
+        <UsersCounter totalUsers={data.totalUsers} />
       </section>
       <section>
         <ul className={s.postList}>
@@ -52,7 +37,6 @@ export default function PublicPostsPage() {
           ))}
         </ul>
       </section>
-      ;
     </div>
   );
 }
