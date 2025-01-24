@@ -1,3 +1,10 @@
+export type GetPublicPostsParams = {
+  pageSize?: number;
+  sortBy?: string;
+  sortDirection?: 'asc' | 'desc';
+  endCursorPostId?: number;
+};
+
 export type GetPublicPostsResponse = {
   items: PublicPostResponse[];
   pageSize: number;
