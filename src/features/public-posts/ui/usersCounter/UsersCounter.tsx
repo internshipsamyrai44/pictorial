@@ -10,18 +10,16 @@ export default function UsersCounter({ totalUsers }: Props) {
 
   return (
     <Card className={s.container}>
-      <div className={s.userStats}>
-        Registered users:
-        <Card className={s.totalUserContainer}>
-          {totalUsersArr.map((unit, index) => {
-            return (
-              <div className={s.unitContainer} key={index}>
-                <span className={s.unit}>{unit}</span>
-              </div>
-            );
-          })}
-        </Card>
-      </div>
+      <span className={s.userStats}>Registered users:</span>
+      <Card className={s.totalUserContainer}>
+        {totalUsersArr.map((unit, index) => {
+          return (
+            <div className={s.unitContainer} key={index}>
+              <span className={s.unit}>{unit}</span>
+            </div>
+          );
+        })}
+      </Card>
     </Card>
   );
 }
