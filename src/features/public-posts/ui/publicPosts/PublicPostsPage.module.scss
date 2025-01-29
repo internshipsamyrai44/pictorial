@@ -21,7 +21,18 @@
   width: 23%;
 }
 
+.button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.description {
+  margin-top: 10px;
+}
+
 .imageWrapper {
+  display: flex;
+  flex-direction: column;
 
 }
 

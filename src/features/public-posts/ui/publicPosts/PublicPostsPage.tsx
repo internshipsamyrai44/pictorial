@@ -4,6 +4,7 @@ import TimeAgo from 'react-timeago';
 import s from './PublicPostsPage.module.scss';
 import { useGetPublicUserPostQuery } from '@/features/public-posts/api/publicPostApi';
 import UsersCounter from '@/features/public-posts/ui/usersCounter/UsersCounter';
+import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 
 export default function PublicPostsPage() {
   const { data, isLoading, isError } = useGetPublicUserPostQuery({ pageSize: 4 });
@@ -31,7 +32,9 @@ export default function PublicPostsPage() {
             <li key={item.id} className={s.postItem}>
               <div className={s.imageWrapper}>
                 <img className={s.image} src={item.images[0]?.url} alt={item.description} />
+                <Button className={s.button}>{item.userName}</Button>
                 <TimeAgo date={item.createdAt} />
+                <p className={s.description}>{item.description}</p>
               </div>
             </li>
           ))}
