@@ -4,7 +4,8 @@ import TimeAgo from 'react-timeago';
 import s from './PublicPostsPage.module.scss';
 import { useGetPublicUserPostQuery } from '@/features/public-posts/api/publicPostApi';
 import UsersCounter from '@/features/public-posts/ui/usersCounter/UsersCounter';
-import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
+import { ShowMoreButton } from '@/features/public-posts/ui/ShowMoreButton';
+import Link from 'next/link';
 
 export default function PublicPostsPage() {
   const { data, isLoading, isError } = useGetPublicUserPostQuery({ pageSize: 4 });
@@ -32,9 +33,17 @@ export default function PublicPostsPage() {
             <li key={item.id} className={s.postItem}>
               <div className={s.imageWrapper}>
                 <img className={s.image} src={item.images[0]?.url} alt={item.description} />
-                <Button className={s.button}>{item.userName}</Button>
-                <TimeAgo date={item.createdAt} />
-                <p className={s.description}>{item.description}</p>
+                {/*ДОПИСАТЬ РОУТЫ В ЛИНКУ*/}
+                <Link className={s.userLink} href={`${'/' + item.ownerId}`}>
+                  <div className={s.userAvatarLink}>
+                    <img src={item.avatarOwner ?? '/images/noAvatar.png'} alt={'avatar'} className={s.userAvatar} />
+                    <h3 className={s.userName}>{item.userName} </h3>
+                  </div>
+                </Link>
+                <TimeAgo className={s.time} date={item.createdAt} />
+                <div className={s.description}>
+                  <ShowMoreButton maxLength={70} text={item.description} />
+                </div>
               </div>
             </li>
           ))}
