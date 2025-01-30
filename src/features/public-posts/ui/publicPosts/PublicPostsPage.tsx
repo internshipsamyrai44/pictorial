@@ -6,6 +6,7 @@ import { useGetPublicUserPostQuery } from '@/features/public-posts/api/publicPos
 import UsersCounter from '@/features/public-posts/ui/usersCounter/UsersCounter';
 import { ShowMoreButton } from '@/features/public-posts/ui/ShowMoreButton';
 import Link from 'next/link';
+import { PostItemProps } from '@/features/public-posts/model/publicPostApi.types';
 
 export default function PublicPostsPage() {
   const { data, isLoading, isError } = useGetPublicUserPostQuery({ pageSize: 4 });
@@ -30,25 +31,34 @@ export default function PublicPostsPage() {
       <section>
         <ul className={s.postList}>
           {data.items.map((item) => (
-            <li key={item.id} className={s.postItem}>
-              <div className={s.imageWrapper}>
-                <img className={s.image} src={item.images[0]?.url} alt={item.description} />
-                {/*ДОПИСАТЬ РОУТЫ В ЛИНКУ*/}
-                <Link className={s.userLink} href={`${'/' + item.ownerId}`}>
-                  <div className={s.userAvatarLink}>
-                    <img src={item.avatarOwner ?? '/images/noAvatar.png'} alt={'avatar'} className={s.userAvatar} />
-                    <h3 className={s.userName}>{item.userName} </h3>
-                  </div>
-                </Link>
-                <TimeAgo className={s.time} date={item.createdAt} />
-                <div className={s.description}>
-                  <ShowMoreButton maxLength={70} text={item.description} />
-                </div>
-              </div>
-            </li>
+            <PostItem key={item.id} item={item} />
           ))}
         </ul>
       </section>
     </div>
+  );
+}
+
+function PostItem({ item }: PostItemProps) {
+  return (
+    <li className={s.postItem}>
+      <div className={s.imageWrapper}>
+        {item.images[0]?.url && (
+          <img className={s.image} src={item.images[0].url} alt={item.description || 'Post image'} />
+        )}
+
+        <Link className={s.userLink} href={`/${item.ownerId}`}>
+          <div className={s.userAvatarLink}>
+            <img src={item.avatarOwner ?? '/images/noAvatar.png'} alt="avatar" className={s.userAvatar} />
+            <h3 className={s.userName}>{item.userName}</h3>
+          </div>
+        </Link>
+
+        <TimeAgo className={s.time} date={item.createdAt} />
+        <div className={s.description}>
+          <ShowMoreButton maxLength={70} text={item.description} />
+        </div>
+      </div>
+    </li>
   );
 }

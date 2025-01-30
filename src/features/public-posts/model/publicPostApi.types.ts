@@ -42,34 +42,6 @@ export type UserImage = {
   width: number;
 };
 
-export type CommentsResponse = {
-  items: Comment[];
-  notReadCount: number;
-  pageSize: number;
-  totalCount: number;
-};
-
-export type Comment = {
-  answerCount: number;
-  content: string;
-  createdAt: string;
-  from: From;
-  id: number;
-  isLiked: boolean;
-  likeCount: number;
-  postId: number;
-};
-
-export type From = {
-  avatars: Avatar[];
-  id: number;
-  username: string;
-};
-
-export type Avatar = {
-  createdAt: string;
-  fileSize: number;
-  height: number;
-  url: string;
-  width: number;
+export type PostItemProps = {
+  item: PublicPostResponse;
 };
