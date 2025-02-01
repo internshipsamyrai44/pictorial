@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 import { PATH } from './shared/const/PATH';
 
 export function middleware(request: NextRequest) {
+  // publicPaths can be a string or a regex
   const publicPaths = [
     PATH.AUTH.LOGIN,
     PATH.AUTH.FORGOT_PASSWORD,
@@ -12,19 +13,20 @@ export function middleware(request: NextRequest) {
     PATH.AUTH.RECOVERY,
     PATH.MAIN,
     PATH.AUTH.SIGNUP,
-    PATH.AUTH.VERIFICATION_LINK_EXPIRED
+    PATH.AUTH.VERIFICATION_LINK_EXPIRED,
+    PATH.PROFILE.PROFILE_USERID
   ];
   const { pathname } = request.nextUrl;
 
-  if (publicPaths.includes(pathname)) {
+  if (publicPaths.some((path) => (typeof path === 'string' ? path === pathname : path.test(pathname)))) {
     return NextResponse.next();
   }
 
-  // const encryptedToken = request.cookies.get('refreshToken')?.value || '';
+  const encryptedToken = request.cookies.get('accesssToken')?.value;
 
-  /*if (!encryptedToken) {
+  if (!encryptedToken) {
     return NextResponse.redirect(new URL(PATH.AUTH.LOGIN, request.url));
-  }*/
+  }
 
   return NextResponse.next();
 }
