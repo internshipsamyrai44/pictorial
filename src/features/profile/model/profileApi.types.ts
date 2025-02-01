@@ -23,6 +23,17 @@ export type Profile = ProfileBase & {
   avatars: Avatar[];
 };
 
+export type ProfileFormValues = {
+  userName: string;
+  firstName: string;
+  lastName: string;
+  city: string;
+  country: string;
+  region: string;
+  dateOfBirth: string;
+  aboutMe: string;
+};
+
 export type AvatarRequest = {
   file: File;
 };

@@ -27,9 +27,13 @@ export const useRequestError = (error: FetchBaseQueryError | SerializedError | u
     errorMessage = 'No internet connection';
   } else if (+err.status >= 500) {
     errorMessage = 'Internal Server Error. Please try again later.';
+  } else if (+err.status === 404) {
+    errorMessage = err.data.error;
   } else {
     errorMessage = err.data.messages[0].message;
   }
 
   return errorMessage;
 };
+
+// example: const errorMessage = useRequestError(error);

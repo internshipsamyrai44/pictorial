@@ -64,7 +64,7 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
       '@types/react-google-recaptcha':
-        specifier: ^2.1.9
+        specifier: 2.1.9
         version: 2.1.9
       '@typescript-eslint/eslint-plugin':
         specifier: 8.14.0

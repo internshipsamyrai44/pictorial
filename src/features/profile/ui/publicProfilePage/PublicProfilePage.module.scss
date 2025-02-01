@@ -1,0 +1,18 @@
+.buttons {
+  button {
+    margin-left: 12px;
+  }
+}
+
+.images {
+  width: 100%;
+  display: flex;
+  padding: 35px 65px 35px 25px;
+  flex-wrap: nowrap;
+  gap: 15px;
+}
+
+.image {
+  height: 235px;
+  width: 230px;
+}
