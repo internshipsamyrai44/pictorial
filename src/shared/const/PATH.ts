@@ -14,7 +14,7 @@ export const PATH = {
   },
   PROFILE: {
     PROFILE: '/profile',
-    PROFILE_USERID: '/profile/[userId]',
+    PROFILE_USERID: /^\/profile\/[^/]+$/,
     SETTINGS: '/profile/settings'
   }
 };
