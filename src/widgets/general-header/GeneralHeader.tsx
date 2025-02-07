@@ -6,6 +6,7 @@ import s from './GeneralHeader.module.scss';
 export const GeneralHeader = () => {
   return (
     <div className={s.wrapper}>
+      {/* СДЕЛАТЬ ТОГИКУ ДЛЯ ХЕДЕРА */}
       <Header />
     </div>
   );
