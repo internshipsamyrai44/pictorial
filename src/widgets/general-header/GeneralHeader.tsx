@@ -1,13 +1,24 @@
 'use client';
 
-import { Header } from '@internshipsamyrai44-ui-kit/components-lib';
+import Link from 'next/link';
 import s from './GeneralHeader.module.scss';
+import { HeaderButton } from '@/widgets/general-header/headerButton/HeaderButton';
+import { SelectTranslate } from '@/widgets/general-header/selectTranslate/SelectTranslate';
 
-export const GeneralHeader = () => {
-  return (
-    <div className={s.wrapper}>
-      {/* СДЕЛАТЬ ТОГИКУ ДЛЯ ХЕДЕРА */}
-      <Header />
-    </div>
-  );
+type GeneralHeaderProps = {
+  isAuth: boolean;
 };
+
+export const GeneralHeader = ({ isAuth = false }: GeneralHeaderProps) => (
+  <header className={s.wrapper}>
+    <div className={s.container}>
+      <Link href="/" className={s.logo}>
+        Inctagram
+      </Link>
+      <div className={s.notificationContainer}>
+        <SelectTranslate />
+        {!isAuth && <HeaderButton />}
+      </div>
+    </div>
+  </header>
+);
