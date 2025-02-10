@@ -15,7 +15,7 @@ export const GeneralHeader = ({ isAuth = false }: GeneralHeaderProps) => (
       <Link href="/" className={s.logo}>
         Inctagram
       </Link>
-      <div className={s.notificationContainer}>
+      <div className={s.headerActions}>
         <SelectTranslate />
         {!isAuth && <HeaderButton />}
       </div>
