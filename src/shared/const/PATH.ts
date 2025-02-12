@@ -12,6 +12,7 @@ export const PATH = {
     UPDATE_TOKENS: '/auth/update-tokens',
     ME: '/auth/me'
   },
+  GITHUB: '/github',
   PROFILE: {
     PROFILE: '/profile',
     PROFILE_USERID: /^\/profile\/[^/]+$/,
