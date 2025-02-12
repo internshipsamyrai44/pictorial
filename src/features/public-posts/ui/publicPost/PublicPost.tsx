@@ -14,7 +14,7 @@ export default function PostItem({ item }: PostItemProps) {
         )}
         <Link className={s.userLink} href={`/${item.ownerId}` /* ТУТ ДОПИСАТЬ ЛОГИКУ ПЕРЕХОДА НА ПОСТ ЮЗЕРА */}>
           <div className={s.userAvatarLink}>
-            <ProfileAvatar src={item.avatarOwner} />
+            <ProfileAvatar src={item.avatarOwner} userName={item.userName} />
             <h3 className={s.userName}>{item.userName}</h3>
           </div>
         </Link>
