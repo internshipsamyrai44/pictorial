@@ -7,6 +7,7 @@
 
   .content {
     display: flex;
+    justify-content: center;
 
     .sidebar-height {
       position: fixed;
@@ -18,9 +19,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      margin: 85px 0 0 220px;
-      max-width: 1060px;
+      //align-items: center;
+      //margin: 85px 0 0 220px;
+      //max-width: 1060px;
       width: 100%;
     }
   }
