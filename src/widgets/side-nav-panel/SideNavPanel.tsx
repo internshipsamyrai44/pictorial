@@ -138,7 +138,7 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
                   .unwrap()
                   .then(() => {
                     setIsModalActive(false);
-                    router.push(PATH.AUTH.LOGIN);
+                    router.push(PATH.MAIN);
                   })
                   .catch((error) => {
                     console.error('Logout failed: ', error);
