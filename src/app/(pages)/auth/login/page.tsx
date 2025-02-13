@@ -33,7 +33,7 @@ export default function SignIn() {
   return (
     <>
       {errorMessage && <Alertpopup alertType={'error'} message={errorMessage} />}
-      <div style={{ marginTop: '24px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
         <Card className={s.card}>
           <Typography as="h1" variant="h1">
             Sign In

@@ -40,9 +40,7 @@ export default function PublicPostsPage() {
 
   return (
     <div className={s.container}>
-      <section className={s.section}>
-        <UsersCounter totalUsers={data.totalUsers} />
-      </section>
+      <UsersCounter totalUsers={data.totalUsers} />
       <section>
         <ul className={s.postList}>
           {data.items.map((item) => (
