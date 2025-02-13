@@ -4,12 +4,13 @@ type Props = {
   height?: number;
   src: string | undefined;
   width?: number;
+  userName: string;
 };
 
-export const ProfileAvatar = ({ height = 36, src, width = 36 }: Props) => {
+export const ProfileAvatar = ({ height = 36, src, width = 36, userName }: Props) => {
   return (
     <Image
-      alt={'Profile avatar'}
+      alt={`${userName} profile picture`}
       style={{ borderRadius: '50%' }}
       height={height}
       loader={() => src || ''}
