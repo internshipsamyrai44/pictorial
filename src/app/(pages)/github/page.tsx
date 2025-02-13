@@ -21,7 +21,8 @@ export default function GithubPage() {
         setCookie('accessToken', accessToken, 7);
         const userId = getDecodedToken(accessToken);
         if (userId) {
-          replace(`/profile/${userId}`);
+          // replace(`/profile/${userId}`);
+          replace(`/home`);
         } else {
           console.error('Ошибка: userId не найден');
           replace(PATH.AUTH.LOGIN);
