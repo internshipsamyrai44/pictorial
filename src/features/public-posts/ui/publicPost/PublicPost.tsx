@@ -3,6 +3,7 @@ import s from '@/features/public-posts/ui/publicPost/PublicPost.module.scss';
 import Link from 'next/link';
 import TimeAgo from 'react-timeago';
 import { ShowMoreButton } from '@/features/public-posts/ui/showMoreButton/ShowMoreButton';
+import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 
 export default function PostItem({ item }: PostItemProps) {
   return (
@@ -13,10 +14,11 @@ export default function PostItem({ item }: PostItemProps) {
         )}
         <Link className={s.userLink} href={`/${item.ownerId}` /* ТУТ ДОПИСАТЬ ЛОГИКУ ПЕРЕХОДА НА ПОСТ ЮЗЕРА */}>
           <div className={s.userAvatarLink}>
-            <img src={item.avatarOwner ?? '/images/noAvatar.png'} alt="avatar" className={s.userAvatar} />
+            <ProfileAvatar src={item.avatarOwner} userName={item.userName} />
             <h3 className={s.userName}>{item.userName}</h3>
           </div>
         </Link>
+
         <TimeAgo className={s.time} date={item.createdAt} />
         <div className={s.description}>
           <ShowMoreButton maxLength={70} text={item.description} />
