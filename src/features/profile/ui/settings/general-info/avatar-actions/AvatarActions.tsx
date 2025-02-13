@@ -16,7 +16,7 @@ export const AvatarActions = () => {
       <div className={s.pic} onClick={handleButtonClick}>
         <Image src={defaultPic} alt={'User profile pic'} />
       </div>
-      <input type="file" id="avatar-input" accept="image/*" ref={fileInputRef} className={'hidden'} />
+      <input type="file" id="avatar-input" accept="image/*" ref={fileInputRef} className={s.input} />
       <Button variant={'outlined'} onClick={handleButtonClick}>
         Add a Profile Photo
       </Button>
