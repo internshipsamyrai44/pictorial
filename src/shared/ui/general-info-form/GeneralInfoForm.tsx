@@ -83,8 +83,10 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         }}
       />
 
-      <Select placeholder={'Country'} />
-      <Select placeholder={'City'} />
+      <div className={s.location}>
+        <Select placeholder={'Country'} />
+        <Select placeholder={'City'} />
+      </div>
       <Textarea placeholder={'About Me'} {...register('aboutMe')} label={'About Me'} />
 
       <Button variant="primary" type="submit" className={s['submit-button']}>
