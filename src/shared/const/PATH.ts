@@ -12,9 +12,14 @@ export const PATH = {
     UPDATE_TOKENS: '/auth/update-tokens',
     ME: '/auth/me'
   },
+  GITHUB: '/github',
   PROFILE: {
     PROFILE: '/profile',
     PROFILE_USERID: /^\/profile\/[^/]+$/,
     SETTINGS: '/profile/settings'
-  }
+  },
+  PUBLIC: {
+    PUBLIC_PAGE: '/public-page'
+  },
+  HOME: '/home'
 };

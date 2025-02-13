@@ -1,6 +1,26 @@
-import React from 'react';
-import PublicPosts from '@/app/(pages)/public-page/public-posts/page';
+'use client';
 
-export default function Home() {
-  return <PublicPosts />;
+import { useEffect } from 'react';
+import { PATH } from '@/shared/const/PATH';
+import { useMeQuery } from '@/features/auth/api/authApi';
+import { useRouter } from 'next/navigation';
+
+export default function IndexPage() {
+  const { data: me, error, isLoading } = useMeQuery();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    // Если произошла ошибка или пользователь не аутентифицирован
+    if (error || !me?.userId) {
+      router.push(PATH.PUBLIC.PUBLIC_PAGE);
+      return;
+    }
+
+    // Если пользователь аутентифицирован, перенаправляем на домашнюю страницу
+    router.push(PATH.HOME);
+  }, [isLoading, error, me, router]);
+
+  return <div>Loading...</div>;
 }

@@ -4,11 +4,29 @@ import s from './PublicPostsPage.module.scss';
 import { useGetPublicUserPostQuery } from '@/features/public-posts/api/publicPostApi';
 import UsersCounter from '@/features/public-posts/ui/usersCounter/UsersCounter';
 import PostItem from '@/features/public-posts/ui/publicPost/PublicPost';
+import { useEffect } from 'react';
+import { useMeQuery } from '@/features/auth/api/authApi';
+import { useRouter } from 'next/navigation';
+import { PATH } from '@/shared/const/PATH';
 
 export default function PublicPostsPage() {
+  const router = useRouter();
+
+  // Запрос информации о пользователе
+  const { data: me, isLoading: meLoading } = useMeQuery();
+
+  // Запрос публичных постов
   const { data, isLoading, isError } = useGetPublicUserPostQuery({ pageSize: 4 });
 
-  if (isLoading) {
+  useEffect(() => {
+    // Если запрос me завершился и пользователь аутентифицирован, редиректим на HOME
+    if (!meLoading && me?.userId) {
+      router.push(PATH.HOME);
+    }
+  }, [me, meLoading, router]);
+
+  // Показываем загрузку, пока идет загрузка данных пользователя или постов
+  if (meLoading || isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -22,9 +40,7 @@ export default function PublicPostsPage() {
 
   return (
     <div className={s.container}>
-      <section className={s.section}>
-        <UsersCounter totalUsers={data.totalUsers} />
-      </section>
+      <UsersCounter totalUsers={data.totalUsers} />
       <section>
         <ul className={s.postList}>
           {data.items.map((item) => (

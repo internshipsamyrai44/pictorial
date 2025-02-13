@@ -32,11 +32,12 @@ body {
   line-height: var(--line-height-m);
   color: var(--light-100);
   background-color: var(--dark-700);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  overflow-x: hidden;
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+  //margin: 0 auto;
+  //overflow-x: hidden;
+  min-height: 100vh;
 }
 
 ::-webkit-scrollbar {
