@@ -79,7 +79,9 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         label={'Date of Birth'}
         date={getValues('dateOfBirth')}
         onChange={(date) => {
-          setValue('dateOfBirth', new Date(date.currentTarget.value));
+          if (date) {
+            setValue('dateOfBirth', new Date(date.toLocaleString()));
+          }
         }}
       />
 

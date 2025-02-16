@@ -6,9 +6,19 @@ import { getDecodedToken } from '@/shared/utils/getDecodedToken';
 import { ContentPage } from '@/widgets/content-page/ContentPage';
 import { LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 
 export default function GithubPage() {
+  return (
+    <ContentPage title={'Back to home page'} backHref={PATH.MAIN}>
+      <Suspense fallback={<LoaderLinear />}>
+        <GithubPageContent />
+      </Suspense>
+    </ContentPage>
+  );
+}
+
+const GithubPageContent = () => {
   const { replace } = useRouter();
   const searchParams = useSearchParams();
 
@@ -35,9 +45,9 @@ export default function GithubPage() {
   }, [replace, searchParams]);
 
   return (
-    <ContentPage title={'Back to home page'} backHref={PATH.MAIN}>
+    <>
       <LoaderLinear />
       Processing GitHub authorization...
-    </ContentPage>
+    </>
   );
-}
+};
