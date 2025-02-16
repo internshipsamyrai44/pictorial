@@ -12,7 +12,7 @@ export default function PostItem({ item }: PostItemProps) {
         {item.images[0]?.url && (
           <img className={s.image} src={item.images[0].url} alt={item.description || 'Post image'} />
         )}
-        <Link className={s.userLink} href={`/profile/${item.ownerId}` /* ТУТ ДОПИСАТЬ ЛОГИКУ ПЕРЕХОДА НА ПОСТ ЮЗЕРА */}>
+        <Link className={s.userLink} href={`/public-user/profile/${item.ownerId}`}>
           <div className={s.userAvatarLink}>
             <ProfileAvatar src={item.avatarOwner} userName={item.userName} />
             <h3 className={s.userName}>{item.userName}</h3>
