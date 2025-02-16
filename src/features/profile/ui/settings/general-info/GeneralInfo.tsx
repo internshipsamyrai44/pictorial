@@ -15,7 +15,14 @@ export const GeneralInfo = () => {
   const errorMessage = useRequestError(error);
 
   const onSubmitProfileFormHandler = async (data: Omit<ProfileBase, 'id' | 'createdAt'>) => {
-    updateProfile(data);
+    updateProfile({
+      ...data,
+      city: data.city ?? '',
+      country: data.country ?? '',
+      region: data.region ?? '',
+      dateOfBirth: data.dateOfBirth ?? '',
+      aboutMe: data.aboutMe ?? ''
+    });
   };
 
   if (isLoading) return <LoaderLinear />;
