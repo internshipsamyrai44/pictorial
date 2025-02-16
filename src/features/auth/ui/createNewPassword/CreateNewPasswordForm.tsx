@@ -1,14 +1,14 @@
 'use client';
 
 import * as yup from 'yup';
-import { Alertpopup, Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Alertpopup, Button, Card, Input, LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { getPasswordValidationSchema } from '@/shared/utils/PasswordValidationSchema';
 import { useCreateNewPasswordMutation } from '@/features/auth/api/authApi';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRequestError } from '@/shared/hooks/useRequestError';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { PATH } from '@/shared/const/PATH';
 import s from './CreateNewPasswordForm.module.scss';
 
@@ -16,7 +16,8 @@ type FormInput = {
   new_password: string;
   password_confirmation: string;
 };
-export const CreateNewPasswordForm = () => {
+
+const CreateNewPasswordFormContent = () => {
   const [createNewPassword, { error, isSuccess }] = useCreateNewPasswordMutation();
   const searchParams = useSearchParams();
   const errorMessage = useRequestError(error);
@@ -46,7 +47,7 @@ export const CreateNewPasswordForm = () => {
     if (isSuccess) {
       push(PATH.AUTH.LOGIN);
     }
-  }, [isSuccess]);
+  }, [isSuccess, push]);
 
   return (
     <>
@@ -73,5 +74,13 @@ export const CreateNewPasswordForm = () => {
         </form>
       </Card>
     </>
+  );
+};
+
+export const CreateNewPasswordForm = () => {
+  return (
+    <Suspense fallback={<LoaderLinear />}>
+      <CreateNewPasswordFormContent />
+    </Suspense>
   );
 };
