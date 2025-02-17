@@ -3,6 +3,9 @@ import type { NextConfig } from 'next';
 import { webpack } from 'next/dist/compiled/webpack/webpack';
 import Configuration = webpack.Configuration;
 
+const createNextIntlPlugin = require('next-intl/plugin');
+const withNextIntl = createNextIntlPlugin();
+
 const regexEqual = (x: RegExp, y: RegExp): boolean => {
   return (
     x instanceof RegExp &&
@@ -40,4 +43,15 @@ const nextConfig: NextConfig = {
   }
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
+
+// Now, set up the plugin which creates an alias to provide a request-specific i18n configuration to Server Components (specified in the next step).
+
+// const createNextIntlPlugin = require('next-intl/plugin');
+
+// const withNextIntl = createNextIntlPlugin();
+
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {};
+
+// module.exports = withNextIntl(nextConfig);
