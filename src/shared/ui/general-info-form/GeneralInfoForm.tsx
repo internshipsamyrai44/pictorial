@@ -1,16 +1,15 @@
 'use client';
 
-import React from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, DatePicker, Input, Select, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 
+import { ProfileBase } from '@/features/profile/model/profileApi.types';
 import {
   ProfileFormValidationScheme,
   profileFormValidationScheme
 } from '@/features/profile/model/profileFormValidationScheme';
 import s from './GeneralInfoForm.module.scss';
-import { ProfileBase } from '@/features/profile/model/profileApi.types';
 
 type Props = {
   disabled: boolean;
@@ -79,10 +78,11 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         label={'Date of Birth'}
         date={getValues('dateOfBirth')}
         onChange={(date) => {
-          if (date) {
+        if (date) {
             setValue('dateOfBirth', new Date(date.toLocaleString()));
           }
         }}
+        disabled
       />
 
       <div className={s.location}>

@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
 import { GeneralHeader } from '@/widgets/general-header/GeneralHeader';
+import { ReactNode } from 'react';
 import s from './BaseLayout.module.scss';
 
 type Props = {

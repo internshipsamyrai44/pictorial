@@ -1,5 +1,7 @@
 'use client';
 
+import { useLogoutMutation, useMeQuery } from '@/features/auth/api/authApi';
+import { PATH } from '@/shared/const/PATH';
 import {
   Button,
   CreateActiveIcon,
@@ -27,10 +29,8 @@ import {
   StatisticsIcon,
   Typography
 } from '@internshipsamyrai44-ui-kit/components-lib';
-import { PATH } from '@/shared/const/PATH';
-import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useLogoutMutation, useMeQuery } from '@/features/auth/api/authApi';
+import { useEffect, useState } from 'react';
 import s from './SideNavPanel.module.scss';
 
 type SideNavBar = {
