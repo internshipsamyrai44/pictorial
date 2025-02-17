@@ -1,9 +1,9 @@
 'use client';
 
-import Link from 'next/link';
-import s from './GeneralHeader.module.scss';
 import { HeaderButton } from '@/widgets/general-header/headerButton/HeaderButton';
 import { SelectTranslate } from '@/widgets/general-header/selectTranslate/SelectTranslate';
+import Link from 'next/link';
+import s from './GeneralHeader.module.scss';
 
 type GeneralHeaderProps = {
   isAuth: boolean;
