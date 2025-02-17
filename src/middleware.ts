@@ -26,7 +26,7 @@ export function middleware(request: NextRequest) {
 
   const encryptedToken = request.cookies.get('accessToken')?.value;
 
-  if (!encryptedToken) {
+  if (!encryptedToken && !pathname.startsWith('/public-user/profile/')) {
     return NextResponse.redirect(new URL(PATH.AUTH.LOGIN, request.url));
   }
 
