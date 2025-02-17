@@ -77,12 +77,12 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
       <DatePicker
         label={'Date of Birth'}
         date={getValues('dateOfBirth')}
+        disabledDates={{ after: new Date(), before: new Date('1900-01-01') }}
         onChange={(date) => {
-        if (date) {
+          if (date) {
             setValue('dateOfBirth', new Date(date.toLocaleString()));
           }
         }}
-        disabled
       />
 
       <div className={s.location}>
