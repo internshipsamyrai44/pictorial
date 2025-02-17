@@ -1,7 +1,14 @@
 import { useSelector } from 'react-redux';
-import { AppStore } from '@/app/store/store';
+import { AppStore, useAppDispatch } from '@/app/store/store';
+import { setAuth } from '@/redux/authSlice';
 
-export const useAuth = (): boolean => {
+export const useAuth = () => {
   const isAuth = useSelector((state: AppStore) => state.auth.isAuth);
-  return isAuth;
+  const dispatch = useAppDispatch();
+
+  const setAuthState = (value: boolean) => {
+    dispatch(setAuth(value));
+  };
+
+  return { isAuth, setAuth: setAuthState };
 };
