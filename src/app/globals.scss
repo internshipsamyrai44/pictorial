@@ -55,10 +55,6 @@ body {
   }
 }
 
-button {
-  all: unset;
-
-  &:disabled {
-    cursor: default;
-  }
+button:disabled {
+  cursor: default;
 }

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { PATH } from '@/shared/const/PATH';
 import { useMeQuery } from '@/features/auth/api/authApi';
 import { useRouter } from 'next/navigation';
+import { LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 
 export default function IndexPage() {
   const { data: me, error, isLoading } = useMeQuery();
@@ -22,5 +23,5 @@ export default function IndexPage() {
     router.push(PATH.HOME);
   }, [isLoading, error, me, router]);
 
-  return <div>Loading...</div>;
+  return <LoaderLinear />;
 }

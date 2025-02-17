@@ -25,7 +25,7 @@ export const ProfileDashboard = ({
 }: iProps) => {
   return (
     <div className={s.wrapper}>
-      <ProfileAvatar height={204} src={avatar} width={204} />
+      <ProfileAvatar height={204} src={avatar} width={204} userName={userName} />
       <div className={s['container-block']}>
         <div className={s['header-block']}>
           <Typography as={'h1'} variant={'h1'}>

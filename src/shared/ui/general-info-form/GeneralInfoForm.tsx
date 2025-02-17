@@ -78,13 +78,17 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         label={'Date of Birth'}
         date={getValues('dateOfBirth')}
         onChange={(date) => {
-          setValue('dateOfBirth', date as Date);
+        if (date) {
+            setValue('dateOfBirth', new Date(date.toLocaleString()));
+          }
         }}
         disabled
       />
 
-      <Select placeholder={'Country'} />
-      <Select placeholder={'City'} />
+      <div className={s.location}>
+        <Select placeholder={'Country'} />
+        <Select placeholder={'City'} />
+      </div>
       <Textarea placeholder={'About Me'} {...register('aboutMe')} label={'About Me'} />
 
       <Button variant="primary" type="submit" className={s['submit-button']}>

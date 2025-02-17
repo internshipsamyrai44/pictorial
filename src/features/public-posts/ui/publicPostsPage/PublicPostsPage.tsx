@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useMeQuery } from '@/features/auth/api/authApi';
 import { useRouter } from 'next/navigation';
 import { PATH } from '@/shared/const/PATH';
+import { LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 
 export default function PublicPostsPage() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function PublicPostsPage() {
 
   // Показываем загрузку, пока идет загрузка данных пользователя или постов
   if (meLoading || isLoading) {
-    return <div>Loading...</div>;
+    return <LoaderLinear />;
   }
 
   if (isError) {
