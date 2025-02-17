@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '@/app/store/store';
 
 interface AuthState {
   isAuth: boolean;
@@ -12,7 +13,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setAuth: (state, action: { payload: boolean }) => {
+    setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
     }
   }
@@ -20,3 +21,6 @@ export const authSlice = createSlice({
 
 export const { setAuth } = authSlice.actions;
 export const authReducer = authSlice.reducer;
+
+// Селектор для получения isAuth из стейта
+export const selectIsAuth = (state: RootState) => state.auth.isAuth;
