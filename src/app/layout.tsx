@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import ClientProvider from '@/app/store/ClientProvider';
 import './globals.scss';
 import s from './layout.module.scss';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 
 export const metadata: Metadata = {
   title: 'Pictorial',
@@ -12,12 +14,17 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body>
         <div className={s.wrapper}>
-          <ClientProvider>{children}</ClientProvider>
+          <ClientProvider>
+            <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+          </ClientProvider>
         </div>
       </body>
     </html>
