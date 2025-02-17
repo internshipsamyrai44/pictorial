@@ -50,6 +50,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
           await trigger('userName');
         }}
         errorMessage={errors.userName && `${errors.userName}`}
+        required={true}
       />
 
       <Input
@@ -61,6 +62,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
           await trigger('firstName');
         }}
         errorMessage={errors.firstName && `${errors.firstName}`}
+        required={true}
       />
 
       <Input
@@ -71,7 +73,9 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         onBlur={async () => {
           await trigger('lastName');
         }}
+        className="flex"
         errorMessage={errors.lastName && `${errors.lastName}`}
+        required={true}
       />
 
       <DatePicker
