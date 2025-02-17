@@ -16,7 +16,8 @@ export function middleware(request: NextRequest) {
     PATH.AUTH.SIGNUP,
     PATH.AUTH.VERIFICATION_LINK_EXPIRED,
     PATH.PROFILE.PROFILE_USERID,
-    PATH.PUBLIC.PUBLIC_PAGE
+    PATH.PUBLIC.PUBLIC_PAGE,
+    PATH.PUBLIC.PROFILE
   ];
   const { pathname } = request.nextUrl;
 
@@ -26,7 +27,7 @@ export function middleware(request: NextRequest) {
 
   const encryptedToken = request.cookies.get('accessToken')?.value;
 
-  if (!encryptedToken && !pathname.startsWith('/public-user/profile/')) {
+  if (!encryptedToken) {
     return NextResponse.redirect(new URL(PATH.AUTH.LOGIN, request.url));
   }
 

@@ -19,7 +19,8 @@ export const PATH = {
     SETTINGS: '/profile/settings'
   },
   PUBLIC: {
-    PUBLIC_PAGE: '/public-page'
+    PUBLIC_PAGE: '/public-page',
+    PROFILE: /^\/public-user\/profile\/\d+$/
   },
   HOME: '/home'
 };
