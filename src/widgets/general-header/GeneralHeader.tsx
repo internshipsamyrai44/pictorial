@@ -6,10 +6,10 @@ import Link from 'next/link';
 import s from './GeneralHeader.module.scss';
 
 type GeneralHeaderProps = {
-  isPublic: boolean;
+  isAuth: boolean;
 };
 
-export const GeneralHeader = ({ isPublic = false }: GeneralHeaderProps) => (
+export const GeneralHeader = ({ isAuth = false }: GeneralHeaderProps) => (
   <header className={s.wrapper}>
     <div className={s.container}>
       <Link href="/" className={s.logo}>
@@ -17,7 +17,7 @@ export const GeneralHeader = ({ isPublic = false }: GeneralHeaderProps) => (
       </Link>
       <div className={s.headerActions}>
         <SelectTranslate />
-        {!isPublic && <HeaderButton />}
+        {!isAuth && <HeaderButton />}
       </div>
     </div>
   </header>
