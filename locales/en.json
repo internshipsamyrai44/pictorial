@@ -1,5 +1,10 @@
 {
   "HomePage": {
     "title": "HOME PAGE"
+  },
+  "Auth": {
+    "signIn": "Sign In",
+    "signUn": "Sign Up",
+    "accountText": "Don’t have an account?"
   }
 }
