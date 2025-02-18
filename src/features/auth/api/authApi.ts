@@ -13,6 +13,7 @@ import {
 } from '@/features/auth/model/authApi.types';
 import { inctagramApi } from '@/app/services/inctagram.api';
 import { deleteCookie, setCookie } from '@/shared/utils/cookieUtils';
+import { setAuth } from '@/redux/authSlice';
 
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: (build) => ({
@@ -55,16 +56,25 @@ export const authApi = inctagramApi.injectEndpoints({
       providesTags: ['Me'],
       query: () => ({
         url: `v1/auth/me`
-      })
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setAuth(!!data));
+        } catch (error) {
+          dispatch(setAuth(false));
+        }
+      }
     }),
     login: build.mutation<LoginResponse, LoginRequest>({
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const { data } = await queryFulfilled;
 
         if (!data) {
           return;
         }
         setCookie('accessToken', data.accessToken.trim(), 7);
+        dispatch(setAuth(true));
       },
       query: (body) => ({
         url: `v1/auth/login`,
@@ -73,7 +83,7 @@ export const authApi = inctagramApi.injectEndpoints({
       })
     }),
     googleOAuth: build.mutation<GoogleOAuthResponse, GoogleOAuthRequest>({
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const { data } = await queryFulfilled;
 
         if (!data) {
@@ -81,6 +91,7 @@ export const authApi = inctagramApi.injectEndpoints({
         }
 
         setCookie('accessToken', data.accessToken.trim(), 7);
+        dispatch(setAuth(true));
       },
 
       invalidatesTags: ['Me'],
@@ -101,6 +112,7 @@ export const authApi = inctagramApi.injectEndpoints({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled;
         deleteCookie('accessToken');
+        dispatch(setAuth(false));
         dispatch(authApi.util.resetApiState());
       },
       query: (body) => ({

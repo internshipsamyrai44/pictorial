@@ -10,7 +10,7 @@ type Props = {
 export const AuthorizedLayout = ({ children }: Props) => {
   return (
     <div className={s.layoutContainer}>
-      <GeneralHeader isAuth />
+      <GeneralHeader isPublic />
       <main className={s.contentContainer}>
         <SideNavPanel className={s.sidebar} />
         <div className={s.content}>{children}</div>
