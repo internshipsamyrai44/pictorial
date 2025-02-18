@@ -8,7 +8,8 @@
     "build": "next build",
     "build:production": "pnpm run build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint . --ext ts,tsx,js,jsx",
+    "type-check": "tsc --noEmit",
     "format": "prettier --write .",
     "stylelint": "stylelint '**/*.{css,scss}'",
     "prepare": "husky install"
@@ -62,9 +63,7 @@
     "typescript": "5.6.3"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+    "*.{css,scss,sass}": ["prettier --write"]
   }
 }
