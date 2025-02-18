@@ -1,6 +1,6 @@
 @forward './../shared/styles/index';
 
-@import "tailwindcss";
+@import 'tailwindcss';
 
 *,
 *::before,
@@ -59,4 +59,8 @@ body {
 
 button:disabled {
   cursor: default;
+}
+
+.test {
+  background-color: #fff;
 }
