@@ -23,4 +23,4 @@ export const { setAuth } = authSlice.actions;
 export const authReducer = authSlice.reducer;
 
 // Селектор для получения isAuth из стейта
-export const selectIsAuth = (state: RootState) => state.auth.isAuth;
+export const getIsAuth = (state: RootState) => state.auth.isAuth;
