@@ -32,6 +32,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import s from './SideNavPanel.module.scss';
+import { CreatePost } from '@/widgets/create-post/CreatePost';
 
 type SideNavBar = {
   className?: string;
@@ -43,6 +44,7 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
   const router = useRouter();
   const [activeIcon, setActiveIcon] = useState<string>('');
   const [isModalActive, setIsModalActive] = useState(false);
+  const [isCreatePostActive, setCreatePostActive] = useState(false);
   const [profileUrl, setProfileUrl] = useState<string>('');
 
   useEffect(() => {
@@ -69,6 +71,10 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
   ];
 
   const handleLinkClick = async (value: string, url: string) => {
+    if (value === 'create') {
+      setCreatePostActive(true);
+    }
+
     if (value === 'logout') {
       setActiveIcon(value);
       setIsModalActive(true);
@@ -127,7 +133,7 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
             <Typography as={'span'} variant={'bold-text-16'}>
               “Epam@epam.com”
             </Typography>
-            ?
+            ?`
           </Typography>
           <div className={s['buttons-block']}>
             <Button
@@ -153,6 +159,8 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
           </div>
         </Modal>
       )}
+
+      {isCreatePostActive && <CreatePost setCreatePostActive={setCreatePostActive} />}
     </>
   );
 };
