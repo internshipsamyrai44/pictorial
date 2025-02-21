@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  width: 972px;
+  gap: 2rem;
+  height: 564px;
+  padding: 0;
+  flex-basis: calc(50% - 1rem);
+}
+
+.image {
+  flex: 1;
+  min-width: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

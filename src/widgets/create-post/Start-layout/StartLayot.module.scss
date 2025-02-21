@@ -1,0 +1,35 @@
+.wrapper {
+  width: 492px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 222px;
+  height: 228px;
+  background: var(--dark-500);
+  margin: 3rem 0;
+  cursor: pointer;
+}
+
+.input {
+  display: none;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 50px;
+}
+
+.hidden {
+  display: none;
+}
