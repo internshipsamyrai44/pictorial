@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .buttons {
@@ -16,7 +17,25 @@
   display: none;
 }
 
+.hidden {
+  display: none;
+}
+
+.btn {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 150px;
+  right: 0;
+  background: url('../../../../public/icons/PicIcon.svg') no-repeat center;
+}
+
+.thumblist {
+  position: relative;
+}
+
 .thumbnails {
+  position: relative;
   display: flex;
   flex-wrap: nowrap;
   gap: 1rem;
@@ -29,5 +48,15 @@
     height: 80px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    cursor: pointer;
   }
+}
+
+.add {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  background: url('../../../../public/icons/plus-circle.svg') no-repeat center;
 }

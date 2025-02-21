@@ -16,6 +16,7 @@ type PropsType = {
 export const Cropping = (props: PropsType) => {
   const { userPhotos, setUserPhotos, setPage } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [showThumbs, setShowTumbs] = React.useState(false);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -37,6 +38,10 @@ export const Cropping = (props: PropsType) => {
     }
   };
 
+  const toggleThumbs = () => {
+    showThumbs ? setShowTumbs(false) : setShowTumbs(true);
+  };
+
   return (
     <div className={s.wrapper}>
       <div className={s.buttons}>
@@ -47,7 +52,14 @@ export const Cropping = (props: PropsType) => {
           {'Next'}
         </Button>
       </div>
-      <Image src={userPhotos[0] || placeholder} alt={'User Photo'} layout="responsive" width={100} height={100} />
+      <Image
+        src={userPhotos[0] || placeholder}
+        className={s.image}
+        alt={'User Photo'}
+        layout="responsive"
+        width={100}
+        height={100}
+      />
 
       <input
         type="file"
@@ -57,14 +69,20 @@ export const Cropping = (props: PropsType) => {
         className={s.input}
         onChange={uploadUserPhotoHandler}
       />
-      <div className={s.thumbnails}>
-        {userPhotos.map((photo, i) => (
-          <Image key={`photo-${i}`} src={photo || placeholder} alt={'User Photo'} width={100} height={100} />
-        ))}
+      <Button variant={'ghost'} onClick={toggleThumbs} className={s.btn}></Button>
+      <div className={`${s.thumblist} ${showThumbs ? '' : s.hidden}`}>
+        <div className={s.thumbnails}>
+          {userPhotos.map((photo, i) => (
+            <Image key={`photo-${i}`} src={photo || placeholder} alt={'User Photo'} width={100} height={100} />
+          ))}
+        </div>
+        <Button
+          variant={'ghost'}
+          onClick={handleButtonClick}
+          disabled={userPhotos.length >= 10}
+          className={s.add}
+        ></Button>
       </div>
-      <Button variant={'ghost'} onClick={handleButtonClick} disabled={userPhotos.length >= 10}>
-        {'add photo'}
-      </Button>
     </div>
   );
 };
