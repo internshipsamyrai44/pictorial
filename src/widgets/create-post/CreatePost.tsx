@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Startlayout } from '@/widgets/create-post/Start-layout/Startlayout';
 import { Cropping } from '@/widgets/create-post/Cropping/Cropping';
 import { Filters } from '@/widgets/create-post/Filters/Filters';
+import { Publication } from '@/widgets/create-post/Publication/Publication';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
@@ -39,6 +40,9 @@ export const CreatePost = (props: PropsType) => {
       }
       case 1: {
         return <Filters userPhoto={userPhoto} setPage={setPage} />;
+      }
+      case 2: {
+        return <Publication userPhoto={userPhoto} setPage={setPage} />;
       }
       default: {
         return <Startlayout userPhoto={userPhoto} setUserPhoto={setUserPhoto} setPage={setPage} />;

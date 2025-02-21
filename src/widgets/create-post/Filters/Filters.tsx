@@ -17,7 +17,7 @@ export const Filters = (props: PropsType) => {
         <Button variant={'ghost'} onClick={() => setPage(1)}>
           {'<'}
         </Button>{' '}
-        <Button variant={'ghost'} onClick={() => setPage(3)}>
+        <Button variant={'ghost'} onClick={() => setPage(2)}>
           {'Next'}
         </Button>
       </div>
