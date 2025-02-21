@@ -36,7 +36,7 @@ export const Startlayout = (props: PropsType) => {
     }
   };
   return (
-    <>
+    <div className={s.wrapper}>
       <div className={s.image} onClick={handleButtonClick}>
         <Image src={defaultPic} alt={'Default Photo'} />
       </div>
@@ -54,6 +54,6 @@ export const Startlayout = (props: PropsType) => {
         </Button>
         <Button variant={'outlined'}>Open Draft</Button>
       </div>
-    </>
+    </div>
   );
 };

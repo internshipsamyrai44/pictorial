@@ -12,7 +12,7 @@ type PropsType = {
 export const Cropping = (props: PropsType) => {
   const { userPhoto, setPage } = props;
   return (
-    <>
+    <div className={s.wrapper}>
       <div className={s.buttons}>
         <Button variant={'ghost'} onClick={() => setPage(null)}>
           {'<'}
@@ -22,6 +22,6 @@ export const Cropping = (props: PropsType) => {
         </Button>
       </div>
       <Image src={userPhoto as string} alt={'User Photo'} layout="responsive" width={100} height={100} />
-    </>
+    </div>
   );
 };
