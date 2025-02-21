@@ -1,16 +1,15 @@
 'use client';
 
-import React from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, DatePicker, Input, Select, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 
+import { ProfileBase } from '@/features/profile/model/profileApi.types';
 import {
   ProfileFormValidationScheme,
   profileFormValidationScheme
 } from '@/features/profile/model/profileFormValidationScheme';
 import s from './GeneralInfoForm.module.scss';
-import { ProfileBase } from '@/features/profile/model/profileApi.types';
 
 type Props = {
   disabled: boolean;
@@ -51,6 +50,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
           await trigger('userName');
         }}
         errorMessage={errors.userName && `${errors.userName}`}
+        required={true}
       />
 
       <Input
@@ -62,6 +62,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
           await trigger('firstName');
         }}
         errorMessage={errors.firstName && `${errors.firstName}`}
+        required={true}
       />
 
       <Input
@@ -72,12 +73,15 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         onBlur={async () => {
           await trigger('lastName');
         }}
+        className="flex"
         errorMessage={errors.lastName && `${errors.lastName}`}
+        required={true}
       />
 
       <DatePicker
         label={'Date of Birth'}
         date={getValues('dateOfBirth')}
+        disabledDates={{ after: new Date(), before: new Date('1900-01-01') }}
         onChange={(date) => {
           if (date) {
             setValue('dateOfBirth', new Date(date.toLocaleString()));

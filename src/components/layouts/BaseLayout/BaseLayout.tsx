@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
 import { GeneralHeader } from '@/widgets/general-header/GeneralHeader';
+import { ReactNode } from 'react';
 import s from './BaseLayout.module.scss';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 export const BaseLayout = ({ children }: Props) => {
   return (
     <div>
-      <GeneralHeader isAuth={false} />
+      <GeneralHeader isPublic={false} />
       <main className={s.container}>
         <div className={s.content}>{children}</div>
       </main>

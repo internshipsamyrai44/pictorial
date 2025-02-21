@@ -1,15 +1,15 @@
 'use client';
 
-import Link from 'next/link';
-import s from './GeneralHeader.module.scss';
 import { HeaderButton } from '@/widgets/general-header/headerButton/HeaderButton';
 import { SelectTranslate } from '@/widgets/general-header/selectTranslate/SelectTranslate';
+import Link from 'next/link';
+import s from './GeneralHeader.module.scss';
 
 type GeneralHeaderProps = {
-  isAuth: boolean;
+  isPublic: boolean;
 };
 
-export const GeneralHeader = ({ isAuth = false }: GeneralHeaderProps) => (
+export const GeneralHeader = ({ isPublic = false }: GeneralHeaderProps) => (
   <header className={s.wrapper}>
     <div className={s.container}>
       <Link href="/" className={s.logo}>
@@ -17,7 +17,7 @@ export const GeneralHeader = ({ isAuth = false }: GeneralHeaderProps) => (
       </Link>
       <div className={s.headerActions}>
         <SelectTranslate />
-        {!isAuth && <HeaderButton />}
+        {!isPublic && <HeaderButton />}
       </div>
     </div>
   </header>
