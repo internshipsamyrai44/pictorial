@@ -13,29 +13,28 @@ type PropsType = {
   // eslint-disable-next-line no-unused-vars
   setPage: (page: number | null) => void;
 };
+const MAX_SIZE = 5 * 1024 * 1024;
+export const isImageCorrect = (image: File) => {
+  if (!image) {
+    return false;
+  }
+  if (image.size > MAX_SIZE) {
+    alert('Please upload a file smaller than 20MB!');
+    return false;
+  }
+  if (!image.type.startsWith('image/jpeg') && !image.type.startsWith('image/png')) {
+    alert('Please upload JPEG or PNG image format!');
+    return false;
+  }
+  return true;
+};
 
 export const Startlayout = (props: PropsType) => {
   const { setUserPhotos, setPage } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const MAX_SIZE = 5 * 1024 * 1024;
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
-  };
-
-  const isImageCorrect = (image: File) => {
-    if (!image) {
-      return false;
-    }
-    if (image.size > MAX_SIZE) {
-      alert('Please upload a file smaller than 20MB!');
-      return false;
-    }
-    if (!image.type.startsWith('image/jpeg') && !image.type.startsWith('image/png')) {
-      alert('Please upload JPEG or PNG image format!');
-      return false;
-    }
-    return true;
   };
 
   const uploadUserPhotoHandler = (e: any) => {
@@ -54,6 +53,7 @@ export const Startlayout = (props: PropsType) => {
       setPage(null);
     }
   };
+
   return (
     <div className={s.wrapper}>
       <div className={s.image} onClick={handleButtonClick}>

@@ -36,7 +36,7 @@ export const CreatePost = (props: PropsType) => {
   const renderStep = () => {
     switch (page) {
       case 0: {
-        return <Cropping userPhotos={userPhotos} setPage={setPage} />;
+        return <Cropping userPhotos={userPhotos} setUserPhotos={setUserPhotos} setPage={setPage} />;
       }
       case 1: {
         return <Filters userPhotos={userPhotos} setPage={setPage} />;
