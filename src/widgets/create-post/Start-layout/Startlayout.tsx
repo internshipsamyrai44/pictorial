@@ -10,10 +10,12 @@ type PropsType = {
   // eslint-disable-next-line no-unused-vars
   setUserPhoto: (photo: string | null) => void;
   userPhoto: string | null;
+  // eslint-disable-next-line no-unused-vars
+  setPage: (page: number) => void;
 };
 
 export const Startlayout = (props: PropsType) => {
-  const { setUserPhoto } = props;
+  const { setUserPhoto, setPage } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleButtonClick = () => {
@@ -24,7 +26,7 @@ export const Startlayout = (props: PropsType) => {
     const userPhotoFile = e.target.files?.[0];
     if (userPhotoFile) {
       const reader = new FileReader();
-
+      setPage(0);
       reader.onloadend = () => {
         if (reader.result) {
           setUserPhoto(reader.result as string);
@@ -33,7 +35,6 @@ export const Startlayout = (props: PropsType) => {
       reader.readAsDataURL(userPhotoFile);
     }
   };
-  ``;
   return (
     <>
       <div className={s.image} onClick={handleButtonClick}>
