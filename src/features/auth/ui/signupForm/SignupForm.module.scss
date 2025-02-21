@@ -14,10 +14,12 @@
   line-height: var(--line-height-l);
 }
 
-.input {
+.input + .input {
+  margin-top: 24px;
 }
 
 .terms {
+  margin-top: 12px;
   align-self: flex-start;
 }
 
