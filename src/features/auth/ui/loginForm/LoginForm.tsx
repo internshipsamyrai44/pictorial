@@ -1,11 +1,10 @@
-import React from 'react';
+import { PATH } from '@/shared/const/PATH';
+import { getEmailValidationSchema, getPasswordValidationSchema } from '@/shared/utils';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import Link from 'next/link';
-import { PATH } from '@/shared/const/PATH';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { getEmailValidationSchema, getPasswordValidationSchema } from '@/shared/utils';
 import s from './LoginForm.module.scss';
 
 const formValidationSchema = yup.object().shape({
@@ -50,6 +49,7 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
 
       {/* Input for password */}
       <Input
+        className={s.password}
         type="password"
         label="Password"
         placeholder="********"
