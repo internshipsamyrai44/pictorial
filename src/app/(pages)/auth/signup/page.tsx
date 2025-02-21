@@ -1,17 +1,12 @@
 'use client';
 
+import { BaseLayout } from '@/components/layouts/BaseLayout/BaseLayout';
 import { SignupForm } from '@/features/auth/ui/signupForm/SignupForm';
 
 export default function SignUp() {
-  const style = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  };
-
   return (
-    <div style={style}>
+    <BaseLayout>
       <SignupForm />
-    </div>
+    </BaseLayout>
   );
 }

@@ -1,17 +1,17 @@
-import { Alertpopup, Button, Card, Input, Modal, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useEffect, useState } from 'react';
+import { Alertpopup, Button, Card, Input, Modal, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { cn, getBaseUrl } from '@/shared/utils';
 import { PATH } from '@/shared/const/PATH';
+import { cn, getBaseUrl } from '@/shared/utils';
 
 import { useRequestError } from '@/shared/hooks/useRequestError';
 
-import { CheckboxControl } from '@/shared/ui/сontrolled';
-import { FormSignUp, signUpSchema } from '@/features/auth/model/validationScheme';
 import { useSignUpMutation } from '@/features/auth/api/authApi';
+import { FormSignUp, signUpSchema } from '@/features/auth/model/validationScheme';
+import { CheckboxControl } from '@/shared/ui/сontrolled';
 import { OAuthBlock } from '@/widgets/oAuth-block/oAuthBlock';
 import s from './SignupForm.module.scss';
 
@@ -97,14 +97,14 @@ export const SignupForm = ({ className }: Props) => {
             name="terms"
             disabled={isLoading}
           />
-          <p className={s['terms-error']}>{errors.terms?.message}</p>
+          {errors.terms?.message && <p className={s['terms-error']}>{errors.terms?.message}</p>}
 
           <Button variant={'primary'} fullWidth className={s['signup-button']} type="submit" disabled={isLoading}>
             Sign Up
           </Button>
 
           <p className={s['have-account']}>Have an account?</p>
-          <Button asChild variant={'ghost'} className={s['login-button']} disabled={isLoading}>
+          <Button asChild variant={'ghost'} className={s['login-button']} disabled={isLoading} fullWidth>
             <Link href={PATH.AUTH.LOGIN}>Sign In</Link>
           </Button>
         </Card>
