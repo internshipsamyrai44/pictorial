@@ -6,6 +6,10 @@
   padding: 24px;
   width: 380px;
 
+  .sign-in-text {
+    margin-block: 0;
+  }
+
   .form {
     width: 100%;
     display: flex;
@@ -13,9 +17,13 @@
     justify-content: center;
     align-items: center;
 
+    .password {
+      margin-top: 24px;
+    }
+
     .forgot-password-wrapper {
       align-self: flex-end;
-      margin-bottom: 24px;
+      margin: 36px 0 24px;
       width: 100%;
 
       .forgot-password {
@@ -26,6 +34,6 @@
   }
 
   .account-text {
-    margin: 24px 0 6px;
+    margin: 18px 0 6px;
   }
 }
