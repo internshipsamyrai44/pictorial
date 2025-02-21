@@ -1,19 +1,12 @@
 'use client';
 
+import { BaseLayout } from '@/components/layouts/BaseLayout/BaseLayout';
 import { SignupForm } from '@/features/auth/ui/signupForm/SignupForm';
-import { CSSProperties } from 'react';
 
 export default function SignUp() {
-  const style: CSSProperties = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: '24px'
-  };
-
   return (
-    <div style={style}>
+    <BaseLayout>
       <SignupForm />
-    </div>
+    </BaseLayout>
   );
 }
