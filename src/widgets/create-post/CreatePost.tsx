@@ -9,12 +9,11 @@ type PropsType = {
   // eslint-disable-next-line no-unused-vars
   setCreatePostActive: (value: boolean) => void;
 };
-``;
 export const CreatePost = (props: PropsType) => {
   const { setCreatePostActive } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [userPhoto, setUserPhoto] = useState<string | null>(null);
-  const MAX_SIZE = 5 * 1024 * 1024;
+  const MAX_SIZE = 20 * 1024 * 1024;
 
   const imageCheck = (file: File) => {
     if (file.size > MAX_SIZE) {
