@@ -8,14 +8,14 @@ import { useRef } from 'react';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
-  setUserPhoto: (photo: string) => void;
-  userPhoto: string | null;
+  setUserPhotos: React.Dispatch<React.SetStateAction<string[]>>;
+  userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
   setPage: (page: number | null) => void;
 };
 
 export const Startlayout = (props: PropsType) => {
-  const { setUserPhoto, setPage } = props;
+  const { setUserPhotos, setPage } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const MAX_SIZE = 5 * 1024 * 1024;
 
@@ -45,7 +45,7 @@ export const Startlayout = (props: PropsType) => {
       setPage(0);
       reader.onloadend = () => {
         if (reader.result) {
-          setUserPhoto(reader.result as string);
+          setUserPhotos((prevPhotos) => [...prevPhotos, reader.result as string]);
         }
       };
       reader.readAsDataURL(userPhotoFile);

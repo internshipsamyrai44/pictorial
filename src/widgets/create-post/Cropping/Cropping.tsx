@@ -5,13 +5,13 @@ import s from './Cropping.module.scss';
 import placeholder from '../../../../public/images/photo-placeholder.png';
 
 type PropsType = {
-  userPhoto: string;
+  userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
   setPage: (page: number | null) => void;
 };
 
 export const Cropping = (props: PropsType) => {
-  const { userPhoto, setPage } = props;
+  const { userPhotos, setPage } = props;
   return (
     <div className={s.wrapper}>
       <div className={s.buttons}>
@@ -22,7 +22,7 @@ export const Cropping = (props: PropsType) => {
           {'Next'}
         </Button>
       </div>
-      <Image src={userPhoto || placeholder} alt={'User Photo'} layout="responsive" width={100} height={100} />
+      <Image src={userPhotos[0] || placeholder} alt={'User Photo'} layout="responsive" width={100} height={100} />
     </div>
   );
 };

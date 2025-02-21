@@ -5,17 +5,17 @@ import s from './Filters.module.scss';
 import placeholder from '../../../../public/images/photo-placeholder.png';
 
 type PropsType = {
-  userPhoto: string;
+  userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
-  setPage: (page: number | null) => void;
+  setPage: (page: number) => void;
 };
 
 export const Filters = (props: PropsType) => {
-  const { userPhoto, setPage } = props;
+  const { userPhotos, setPage } = props;
   return (
     <>
       <div className={s.buttons}>
-        <Button variant={'ghost'} onClick={() => setPage(1)}>
+        <Button variant={'ghost'} onClick={() => setPage(0)}>
           {'<'}
         </Button>{' '}
         <Button variant={'ghost'} onClick={() => setPage(2)}>
@@ -24,7 +24,7 @@ export const Filters = (props: PropsType) => {
       </div>
       <div className={s.wrapper}>
         <Image
-          src={userPhoto || placeholder}
+          src={userPhotos[0] || placeholder}
           className={s.image}
           alt={'User Photo'}
           layout="responsive"

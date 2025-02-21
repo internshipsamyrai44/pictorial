@@ -17,7 +17,7 @@ type PropsType = {
 export const CreatePost = (props: PropsType) => {
   const { setCreatePostActive } = props;
 
-  const [userPhoto, setUserPhoto] = useState<string>('');
+  const [userPhotos, setUserPhotos] = useState<string[]>([]);
   const [page, setPage] = useState<number | null>(null);
 
   const stepTitle = (): string => {
@@ -36,16 +36,16 @@ export const CreatePost = (props: PropsType) => {
   const renderStep = () => {
     switch (page) {
       case 0: {
-        return <Cropping userPhoto={userPhoto} setPage={setPage} />;
+        return <Cropping userPhotos={userPhotos} setPage={setPage} />;
       }
       case 1: {
-        return <Filters userPhoto={userPhoto} setPage={setPage} />;
+        return <Filters userPhotos={userPhotos} setPage={setPage} />;
       }
       case 2: {
-        return <Publication userPhoto={userPhoto} setPage={setPage} />;
+        return <Publication userPhotos={userPhotos} setPage={setPage} />;
       }
       default: {
-        return <Startlayout userPhoto={userPhoto} setUserPhoto={setUserPhoto} setPage={setPage} />;
+        return <Startlayout userPhotos={userPhotos} setUserPhotos={setUserPhotos} setPage={setPage} />;
       }
     }
   };
