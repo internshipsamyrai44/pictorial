@@ -30,12 +30,17 @@
   background: url('../../../../public/icons/PicIcon.svg') no-repeat center;
 }
 
+.back {
+  width: 36px;
+  height: 36px;
+  background: url('../../../../public/icons/arrow-ios-back.svg') no-repeat center;
+}
+
 .thumblist {
   position: relative;
 }
 
 .thumbnails {
-  position: relative;
   display: flex;
   flex-wrap: nowrap;
   gap: 1rem;

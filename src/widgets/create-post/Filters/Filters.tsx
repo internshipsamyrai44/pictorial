@@ -15,9 +15,7 @@ export const Filters = (props: PropsType) => {
   return (
     <>
       <div className={s.buttons}>
-        <Button variant={'ghost'} onClick={() => setPage(0)}>
-          {'<'}
-        </Button>{' '}
+        <Button variant={'ghost'} onClick={() => setPage(0)} className={s.back} aria-label={'Previous step'}></Button>
         <Button variant={'ghost'} onClick={() => setPage(2)}>
           {'Next'}
         </Button>

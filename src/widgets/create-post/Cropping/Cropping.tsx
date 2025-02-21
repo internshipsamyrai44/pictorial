@@ -45,9 +45,12 @@ export const Cropping = (props: PropsType) => {
   return (
     <div className={s.wrapper}>
       <div className={s.buttons}>
-        <Button variant={'ghost'} onClick={() => setPage(null)}>
-          {'<'}
-        </Button>{' '}
+        <Button
+          variant={'ghost'}
+          onClick={() => setPage(null)}
+          className={s.back}
+          aria-label={'Previous step'}
+        ></Button>
         <Button variant={'ghost'} onClick={() => setPage(1)}>
           {'Next'}
         </Button>

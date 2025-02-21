@@ -17,9 +17,7 @@ export const Publication = (props: PropsType) => {
   return (
     <>
       <div className={s.buttons}>
-        <Button variant={'ghost'} onClick={() => setPage(1)}>
-          {'<'}
-        </Button>{' '}
+        <Button variant={'ghost'} onClick={() => setPage(1)} className={s.back} aria-label={'Previous step'}></Button>
         <Button variant={'ghost'} onClick={() => alert('Post is Publish')}>
           {'Publish'}
         </Button>
