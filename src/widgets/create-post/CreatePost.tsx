@@ -37,6 +37,9 @@ export const CreatePost = (props: PropsType) => {
       imageCheck(userPhotoFile as File);
 
       const reader = new FileReader();
+      reader.onerror = () => {
+        alert(`Uploading file Error! ${reader.error}`);
+      };
 
       reader.onloadend = () => {
         if (reader.result) {
