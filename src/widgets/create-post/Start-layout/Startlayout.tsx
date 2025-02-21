@@ -17,14 +17,27 @@ type PropsType = {
 export const Startlayout = (props: PropsType) => {
   const { setUserPhoto, setPage } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const MAX_SIZE = 5 * 1024 * 1024;
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
   };
 
+  const imageCheck = (file: File) => {
+    if (file.size > MAX_SIZE) {
+      alert('Please upload a file smaller than 20MB!');
+      return;
+    }
+    if (!file.type.startsWith('image/jpeg') && !file.type.startsWith('image/png')) {
+      alert('Please upload JPEG or PNG image format!');
+      return;
+    }
+  };
+
   const uploadUserPhotoHandler = (e: any) => {
     const userPhotoFile = e.target.files?.[0];
     if (userPhotoFile) {
+      imageCheck(userPhotoFile);
       const reader = new FileReader();
       setPage(0);
       reader.onloadend = () => {
