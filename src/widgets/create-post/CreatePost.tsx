@@ -17,7 +17,7 @@ type PropsType = {
 export const CreatePost = (props: PropsType) => {
   const { setCreatePostActive } = props;
 
-  const [userPhoto, setUserPhoto] = useState<string | null>(null);
+  const [userPhoto, setUserPhoto] = useState<string>('');
   const [page, setPage] = useState<number | null>(null);
 
   const stepTitle = (): string => {

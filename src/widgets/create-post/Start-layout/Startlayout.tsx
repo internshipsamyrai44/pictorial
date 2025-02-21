@@ -8,7 +8,7 @@ import { useRef } from 'react';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
-  setUserPhoto: (photo: string | null) => void;
+  setUserPhoto: (photo: string) => void;
   userPhoto: string | null;
   // eslint-disable-next-line no-unused-vars
   setPage: (page: number | null) => void;
