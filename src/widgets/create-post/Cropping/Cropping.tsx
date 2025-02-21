@@ -2,9 +2,10 @@ import Image from 'next/image';
 import * as React from 'react';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Cropping.module.scss';
+import placeholder from '../../../../public/images/photo-placeholder.png';
 
 type PropsType = {
-  userPhoto: string | null;
+  userPhoto: string;
   // eslint-disable-next-line no-unused-vars
   setPage: (page: number | null) => void;
 };
@@ -21,7 +22,7 @@ export const Cropping = (props: PropsType) => {
           {'Next'}
         </Button>
       </div>
-      <Image src={userPhoto as string} alt={'User Photo'} layout="responsive" width={100} height={100} />
+      <Image src={userPhoto || placeholder} alt={'User Photo'} layout="responsive" width={100} height={100} />
     </div>
   );
 };

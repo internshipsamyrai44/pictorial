@@ -2,9 +2,10 @@ import Image from 'next/image';
 import * as React from 'react';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Filters.module.scss';
+import placeholder from '../../../../public/images/photo-placeholder.png';
 
 type PropsType = {
-  userPhoto: string | null;
+  userPhoto: string;
   // eslint-disable-next-line no-unused-vars
   setPage: (page: number | null) => void;
 };
@@ -23,7 +24,7 @@ export const Filters = (props: PropsType) => {
       </div>
       <div className={s.wrapper}>
         <Image
-          src={userPhoto as string}
+          src={userPhoto || placeholder}
           className={s.image}
           alt={'User Photo'}
           layout="responsive"
