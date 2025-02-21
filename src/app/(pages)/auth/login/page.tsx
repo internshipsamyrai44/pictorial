@@ -13,6 +13,7 @@ import { SubmitHandler } from 'react-hook-form';
 import s from '@/features/auth/ui/loginForm/LoginForm.module.scss';
 import { useRequestError } from '@/shared/hooks/useRequestError';
 import { useTranslations } from 'next-intl';
+import { BaseLayout } from '@/components/layouts/BaseLayout/BaseLayout';
 
 export default function SignIn() {
   const [login, { isError, isLoading, error }] = useLoginMutation();
@@ -37,9 +38,9 @@ export default function SignIn() {
   return (
     <>
       {errorMessage && <Alertpopup alertType={'error'} message={errorMessage} />}
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
+      <BaseLayout>
         <Card className={s.card}>
-          <Typography as="h1" variant="h1">
+          <Typography as="h1" variant="h1" className={s['sign-in-text']}>
             {t('signIn')}
           </Typography>
 
@@ -50,11 +51,11 @@ export default function SignIn() {
           <Typography variant="regular-text-16" className={s['account-text']}>
             {t('accountText')}
           </Typography>
-          <Button asChild variant="ghost">
+          <Button asChild variant="ghost" fullWidth>
             <Link href={PATH.AUTH.SIGNUP}>{t('signUn')}</Link>
           </Button>
         </Card>
-      </div>
+      </BaseLayout>
     </>
   );
 }
