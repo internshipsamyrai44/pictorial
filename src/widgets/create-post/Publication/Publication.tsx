@@ -4,28 +4,27 @@ import { Button, Input, Textarea } from '@internshipsamyrai44-ui-kit/components-
 import s from './Publication.module.scss';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import Link from 'next/link';
+import placeholder from '../../../../public/images/photo-placeholder.png';
 
 type PropsType = {
-  userPhoto: string | null;
+  userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
   setPage: (page: number | null) => void;
 };
 
 export const Publication = (props: PropsType) => {
-  const { userPhoto, setPage } = props;
+  const { userPhotos, setPage } = props;
   return (
     <>
       <div className={s.buttons}>
-        <Button variant={'ghost'} onClick={() => setPage(1)}>
-          {'<'}
-        </Button>{' '}
+        <Button variant={'ghost'} onClick={() => setPage(1)} className={s.back} aria-label={'Previous step'}></Button>
         <Button variant={'ghost'} onClick={() => alert('Post is Publish')}>
           {'Publish'}
         </Button>
       </div>
       <div className={s.wrapper}>
         <Image
-          src={userPhoto as string}
+          src={userPhotos[0] || placeholder}
           className={s.image}
           alt={'User Photo'}
           layout="responsive"

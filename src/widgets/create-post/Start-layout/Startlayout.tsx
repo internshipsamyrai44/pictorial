@@ -8,14 +8,29 @@ import { useRef } from 'react';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
-  setUserPhoto: (photo: string | null) => void;
-  userPhoto: string | null;
+  setUserPhotos: React.Dispatch<React.SetStateAction<string[]>>;
+  userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
-  setPage: (page: number) => void;
+  setPage: (page: number | null) => void;
+};
+const MAX_SIZE = 5 * 1024 * 1024;
+export const isImageCorrect = (image: File) => {
+  if (!image) {
+    return false;
+  }
+  if (image.size > MAX_SIZE) {
+    alert('Please upload a file smaller than 20MB!');
+    return false;
+  }
+  if (!image.type.startsWith('image/jpeg') && !image.type.startsWith('image/png')) {
+    alert('Please upload JPEG or PNG image format!');
+    return false;
+  }
+  return true;
 };
 
 export const Startlayout = (props: PropsType) => {
-  const { setUserPhoto, setPage } = props;
+  const { setUserPhotos, setPage } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleButtonClick = () => {
@@ -24,17 +39,21 @@ export const Startlayout = (props: PropsType) => {
 
   const uploadUserPhotoHandler = (e: any) => {
     const userPhotoFile = e.target.files?.[0];
-    if (userPhotoFile) {
+    if (isImageCorrect(userPhotoFile)) {
       const reader = new FileReader();
       setPage(0);
       reader.onloadend = () => {
         if (reader.result) {
-          setUserPhoto(reader.result as string);
+          setUserPhotos((prevPhotos) => [...prevPhotos, reader.result as string]);
         }
       };
       reader.readAsDataURL(userPhotoFile);
+    } else {
+      isImageCorrect(userPhotoFile);
+      setPage(null);
     }
   };
+
   return (
     <div className={s.wrapper}>
       <div className={s.image} onClick={handleButtonClick}>
