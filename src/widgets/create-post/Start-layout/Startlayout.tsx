@@ -11,7 +11,7 @@ type PropsType = {
   setUserPhoto: (photo: string | null) => void;
   userPhoto: string | null;
   // eslint-disable-next-line no-unused-vars
-  setPage: (page: number) => void;
+  setPage: (page: number | null) => void;
 };
 
 export const Startlayout = (props: PropsType) => {
@@ -23,21 +23,24 @@ export const Startlayout = (props: PropsType) => {
     fileInputRef.current?.click();
   };
 
-  const imageCheck = (file: File) => {
-    if (file.size > MAX_SIZE) {
+  const isImageCorrect = (image: File) => {
+    if (!image) {
+      return false;
+    }
+    if (image.size > MAX_SIZE) {
       alert('Please upload a file smaller than 20MB!');
-      return;
+      return false;
     }
-    if (!file.type.startsWith('image/jpeg') && !file.type.startsWith('image/png')) {
+    if (!image.type.startsWith('image/jpeg') && !image.type.startsWith('image/png')) {
       alert('Please upload JPEG or PNG image format!');
-      return;
+      return false;
     }
+    return true;
   };
 
   const uploadUserPhotoHandler = (e: any) => {
     const userPhotoFile = e.target.files?.[0];
-    if (userPhotoFile) {
-      imageCheck(userPhotoFile);
+    if (isImageCorrect(userPhotoFile)) {
       const reader = new FileReader();
       setPage(0);
       reader.onloadend = () => {
@@ -46,6 +49,9 @@ export const Startlayout = (props: PropsType) => {
         }
       };
       reader.readAsDataURL(userPhotoFile);
+    } else {
+      isImageCorrect(userPhotoFile);
+      setPage(null);
     }
   };
   return (
