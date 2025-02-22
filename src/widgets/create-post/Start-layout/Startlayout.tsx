@@ -71,7 +71,9 @@ export const Startlayout = (props: PropsType) => {
         <Button variant={'primary'} onClick={handleButtonClick}>
           Select from Computer
         </Button>
-        <Button variant={'outlined'}>Open Draft</Button>
+        <Button variant={'outlined'} fullWidth={true}>
+          Open Draft
+        </Button>
       </div>
     </div>
   );

@@ -10,6 +10,8 @@
 .image {
   flex: 1;
   min-width: 0;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 .filters {

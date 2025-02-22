@@ -38,7 +38,11 @@ export const Publication = (props: PropsType) => {
               <h3 className={s.userName}>{'userName'}</h3>
             </div>
           </Link>
-          <Textarea label={'Add publication descriptions'} placeholder={'Add publication descriptions'} />
+          <Textarea
+            label={'Add publication descriptions'}
+            placeholder={'Add publication descriptions'}
+            className={s.text}
+          />
 
           <Input label={'Add location'} placeholder={'New-York'} />
         </div>

@@ -1,13 +1,14 @@
 'use client';
 
 import s from './CreatePost.module.scss';
-import { Modal } from '@internshipsamyrai44-ui-kit/components-lib';
+
 import * as React from 'react';
-import { useState } from 'react';
+import { KeyboardEventHandler, useState } from 'react';
 import { Startlayout } from '@/widgets/create-post/Start-layout/Startlayout';
 import { Cropping } from '@/widgets/create-post/Cropping/Cropping';
 import { Filters } from '@/widgets/create-post/Filters/Filters';
 import { Publication } from '@/widgets/create-post/Publication/Publication';
+import { Button, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
@@ -50,9 +51,26 @@ export const CreatePost = (props: PropsType) => {
     }
   };
 
+  const onKeyDownHandler: KeyboardEventHandler<HTMLDivElement> = (e) => {
+    if (e.key === 'Escape') {
+      setCreatePostActive(false);
+    }
+  };
+
   return (
-    <Modal title={stepTitle()} className={s.wrapper} onClose={() => setCreatePostActive(false)}>
-      {renderStep()}
-    </Modal>
+    <div className={s.wrapper} onKeyDown={onKeyDownHandler} tabIndex={0}>
+      <div className={s.steps}>
+        <div className={s.header}>
+          <Typography variant={'h3'}>{stepTitle()}</Typography>
+          <Button
+            variant={'ghost'}
+            className={s.btn}
+            aria-label={'Close window'}
+            onClick={() => setCreatePostActive(false)}
+          ></Button>
+        </div>
+        {renderStep()}
+      </div>
+    </div>
   );
 };
