@@ -9,12 +9,11 @@ import { isImageCorrect } from '@/widgets/create-post/Start-layout/Startlayout';
 type PropsType = {
   userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
-  setPage: (page: number | null) => void;
   setUserPhotos: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 export const Cropping = (props: PropsType) => {
-  const { userPhotos, setUserPhotos, setPage } = props;
+  const { userPhotos, setUserPhotos } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [showThumbs, setShowTumbs] = React.useState(false);
 
@@ -34,7 +33,6 @@ export const Cropping = (props: PropsType) => {
       reader.readAsDataURL(userPhotoFile);
     } else {
       isImageCorrect(userPhotoFile);
-      setPage(0);
     }
   };
 
@@ -44,17 +42,6 @@ export const Cropping = (props: PropsType) => {
 
   return (
     <div className={s.wrapper}>
-      <div className={s.buttons}>
-        <Button
-          variant={'ghost'}
-          onClick={() => setPage(null)}
-          className={s.back}
-          aria-label={'Previous step'}
-        ></Button>
-        <Button variant={'ghost'} onClick={() => setPage(1)}>
-          {'Next'}
-        </Button>
-      </div>
       <Image
         src={userPhotos[0] || placeholder}
         className={s.image}

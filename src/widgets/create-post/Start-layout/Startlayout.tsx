@@ -7,11 +7,10 @@ import * as React from 'react';
 import { useRef } from 'react';
 
 type PropsType = {
-  // eslint-disable-next-line no-unused-vars
   setUserPhotos: React.Dispatch<React.SetStateAction<string[]>>;
   userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
-  setPage: (page: number | null) => void;
+  handlePaginate: (action: 'next' | 'prev' | 'close') => void;
 };
 const MAX_SIZE = 5 * 1024 * 1024;
 export const isImageCorrect = (image: File) => {
@@ -30,7 +29,7 @@ export const isImageCorrect = (image: File) => {
 };
 
 export const Startlayout = (props: PropsType) => {
-  const { setUserPhotos, setPage } = props;
+  const { setUserPhotos, handlePaginate } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleButtonClick = () => {
@@ -41,7 +40,7 @@ export const Startlayout = (props: PropsType) => {
     const userPhotoFile = e.target.files?.[0];
     if (isImageCorrect(userPhotoFile)) {
       const reader = new FileReader();
-      setPage(0);
+      handlePaginate('next');
       reader.onloadend = () => {
         if (reader.result) {
           setUserPhotos((prevPhotos) => [...prevPhotos, reader.result as string]);
@@ -50,7 +49,7 @@ export const Startlayout = (props: PropsType) => {
       reader.readAsDataURL(userPhotoFile);
     } else {
       isImageCorrect(userPhotoFile);
-      setPage(null);
+      handlePaginate('prev');
     }
   };
 
@@ -71,7 +70,9 @@ export const Startlayout = (props: PropsType) => {
         <Button variant={'primary'} onClick={handleButtonClick}>
           Select from Computer
         </Button>
-        <Button variant={'outlined'}>Open Draft</Button>
+        <Button variant={'outlined'} fullWidth={true}>
+          Open Draft
+        </Button>
       </div>
     </div>
   );

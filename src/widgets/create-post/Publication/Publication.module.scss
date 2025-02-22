@@ -10,30 +10,20 @@
 .image {
   flex: 1;
   min-width: 0;
+  aspect-ratio: 1 /1;
+  object-fit: cover;
 }
 
 .info {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  flex: 1;
-  min-width: 0;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+  width: 400px;
+  padding-right: 30px;
 }
 
 .avatar {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.back {
-  width: 36px;
-  height: 36px;
-  background: url('../../../../public/icons/arrow-ios-back.svg') no-repeat center;
 }

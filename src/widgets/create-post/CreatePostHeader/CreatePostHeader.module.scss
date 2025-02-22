@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  padding: 10px 5px 10px 15px;
+  border-bottom: 1px solid var(--dark-100);
+}
+
+.back {
+  width: 36px;
+  height: 36px;
+  background: url('../../../../public/icons/arrow-ios-back.svg') no-repeat center;
+}
+
+.btn {
+  background: url('../../../../public/icons/smallCross.svg') no-repeat center;
+}
