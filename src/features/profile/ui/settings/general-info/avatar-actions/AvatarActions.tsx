@@ -4,8 +4,10 @@ import Image from 'next/image';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import defaultPic from '././../../../../../../../public/icons/PicIcon.svg';
 import { useRef } from 'react';
+import { useTranslations } from 'next-intl';
 
 export const AvatarActions = () => {
+  const t = useTranslations('Profile');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleButtonClick = () => {
@@ -18,7 +20,7 @@ export const AvatarActions = () => {
       </div>
       <input type="file" id="avatar-input" accept="image/*" ref={fileInputRef} className={s.input} />
       <Button variant={'outlined'} onClick={handleButtonClick}>
-        Add a Profile Photo
+        {t('AddAProfilePhoto')}
       </Button>
     </div>
   );

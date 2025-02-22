@@ -11,6 +11,7 @@ import { useRequestError } from '@/shared/hooks/useRequestError';
 import { Suspense, useEffect } from 'react';
 import { PATH } from '@/shared/const/PATH';
 import s from './CreateNewPasswordForm.module.scss';
+import { useTranslations } from 'next-intl';
 
 type FormInput = {
   new_password: string;
@@ -22,6 +23,7 @@ const CreateNewPasswordFormContent = () => {
   const searchParams = useSearchParams();
   const errorMessage = useRequestError(error);
   const { push } = useRouter();
+  const t = useTranslations('Auth');
 
   const formValidationSchema = yup.object({
     new_password: getPasswordValidationSchema(),
@@ -54,7 +56,7 @@ const CreateNewPasswordFormContent = () => {
       {errorMessage && <Alertpopup alertType={'error'} message={errorMessage} />}
       <Card className={s.card}>
         <form onSubmit={handleSubmit(sendNewPassword)} className={s.form}>
-          <p className={s.header}>Forgot Password</p>
+          <p className={s.header}>{t('ForgotPassword')}</p>
           <Input
             {...register('new_password')}
             type="password"
@@ -67,9 +69,9 @@ const CreateNewPasswordFormContent = () => {
             label={'Password confirmation'}
             errorMessage={errors.password_confirmation?.message}
           />
-          <span className={s.description}>Your password must be between 6 and 20 characters</span>
+          <span className={s.description}>{t('PasswordVerification')}</span>
           <Button className={s.button} disabled={!isValid}>
-            Create new password
+            {t('CreateNewPassword')}
           </Button>
         </form>
       </Card>

@@ -14,6 +14,7 @@ import { FormSignUp, signUpSchema } from '@/features/auth/model/validationScheme
 import { CheckboxControl } from '@/shared/ui/сontrolled';
 import { OAuthBlock } from '@/widgets/oAuth-block/oAuthBlock';
 import s from './SignupForm.module.scss';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   className?: string;
@@ -21,8 +22,8 @@ type Props = {
 
 export const SignupForm = ({ className }: Props) => {
   const baseUrl = getBaseUrl();
-
   const [isModalActive, setIsModalActive] = useState(false);
+  const t = useTranslations('Auth');
 
   const {
     register,
@@ -51,12 +52,12 @@ export const SignupForm = ({ className }: Props) => {
       <form onSubmit={handleSubmit(onSubmit)} className={cn(s.form, className)}>
         <Card className={s.card}>
           <Typography as={'h1'} variant={'h1'}>
-            Sign Up
+            {t('signUn')}
           </Typography>
           <OAuthBlock />
 
           <Input
-            label="Username"
+            label={t('Username')}
             placeholder="Epam11"
             className={s.input}
             {...register('userName')}
@@ -74,7 +75,7 @@ export const SignupForm = ({ className }: Props) => {
           />
           <Input
             type="password"
-            label="Password"
+            label={t('Password')}
             placeholder="********"
             className={s.input}
             {...register('password')}
@@ -83,7 +84,7 @@ export const SignupForm = ({ className }: Props) => {
           />
           <Input
             type="password"
-            label="Confirm Password"
+            label={t('ConfirmPassword')}
             placeholder="********"
             className={s.input}
             {...register('confirmPassword')}
@@ -91,7 +92,7 @@ export const SignupForm = ({ className }: Props) => {
             disabled={isLoading}
           />
           <CheckboxControl
-            label="Agree to terms and conditions"
+            label={t('TermsAndConditions')}
             className={s.terms}
             control={control}
             name="terms"
@@ -100,17 +101,20 @@ export const SignupForm = ({ className }: Props) => {
           {errors.terms?.message && <p className={s['terms-error']}>{errors.terms?.message}</p>}
 
           <Button variant={'primary'} fullWidth className={s['signup-button']} type="submit" disabled={isLoading}>
-            Sign Up
+            {t('signUn')}
           </Button>
 
-          <p className={s['have-account']}>Have an account?</p>
+          <p className={s['have-account']}>{t('HaveAnAccount')}</p>
           <Button asChild variant={'ghost'} className={s['login-button']} disabled={isLoading} fullWidth>
-            <Link href={PATH.AUTH.LOGIN}>Sign In</Link>
+            <Link href={PATH.AUTH.LOGIN}>{t('signIn')}</Link>
           </Button>
         </Card>
         {isModalActive && (
           <Modal title={'Email Sent'} className={s.modal} onClose={() => setIsModalActive(false)}>
-            <p>We have sent a link to confirm your email to {getValues('email')}</p>
+            <p>
+              {t('EmailConfirmationLinkSent')}
+              {getValues('email')}
+            </p>
             <Button variant={'primary'} onClick={() => setIsModalActive(false)} className={s.button}>
               OK
             </Button>

@@ -1,3 +1,6 @@
+import { useTranslations } from 'next-intl';
+
 export const AccountManagement = () => {
-  return <div>Account Management Content</div>;
+  const t = useTranslations('Profile');
+  return <div>{t('AccountManagementContent')}</div>;
 };

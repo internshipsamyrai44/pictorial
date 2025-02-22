@@ -10,6 +10,7 @@ import {
   profileFormValidationScheme
 } from '@/features/profile/model/profileFormValidationScheme';
 import s from './GeneralInfoForm.module.scss';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   disabled: boolean;
@@ -19,6 +20,8 @@ type Props = {
 };
 
 export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: Props) => {
+  const t = useTranslations('Auth');
+  const tProfile = useTranslations('Profile');
   const {
     register,
     handleSubmit,
@@ -42,7 +45,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
   return (
     <form onSubmit={handleSubmit(onSubmitFormHandler)} noValidate className={s.form}>
       <Input
-        label="Username"
+        label={t('Username')}
         placeholder="Usertest"
         disabled={disabled}
         {...register('userName')}
@@ -54,7 +57,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
       />
 
       <Input
-        label="First Name"
+        label={tProfile('FirstName')}
         placeholder=""
         disabled={disabled}
         {...register('firstName')}
@@ -66,7 +69,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
       />
 
       <Input
-        label="Last Name"
+        label={tProfile('LastName')}
         placeholder=""
         disabled={disabled}
         {...register('lastName')}
@@ -79,7 +82,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
       />
 
       <DatePicker
-        label={'Date of Birth'}
+        label={tProfile('DateOfBirth')}
         date={getValues('dateOfBirth')}
         disabledDates={{ after: new Date(), before: new Date('1900-01-01') }}
         onChange={(date) => {
@@ -90,13 +93,13 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
       />
 
       <div className={s.location}>
-        <Select placeholder={'Country'} />
-        <Select placeholder={'City'} />
+        <Select placeholder={tProfile('Country')} />
+        <Select placeholder={tProfile('City')} />
       </div>
-      <Textarea placeholder={'About Me'} {...register('aboutMe')} label={'About Me'} />
+      <Textarea placeholder={tProfile('AboutMe')} {...register('aboutMe')} label={tProfile('AboutMe')} />
 
       <Button variant="primary" type="submit" className={s['submit-button']}>
-        Save Changes
+        {tProfile('SaveChanges')}
       </Button>
     </form>
   );

@@ -15,6 +15,7 @@ import { FormRegistrationEmailResend, registrationEmailResendSchema } from '../.
 import RegistrationConfirmationExpiredSvg from '../../../../../public/images/RegistrationConfirmationExpiredSvg';
 import RegistrationConfirmationSuccessSvg from '../../../../../public/images/RegistrationConfirmationSuccessSvg';
 import { useConfirmRegistrationMutation, useRegistrationEmailResendingMutation } from '@/features/auth/api/authApi';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   token: string | null;
@@ -25,6 +26,7 @@ interface Props {
 export const RegistrationConfirmation = ({ className, token, email }: Props) => {
   const baseUrl = getBaseUrl();
   const [isModalActive, setIsModalActive] = useState(false);
+  const t = useTranslations('Auth');
 
   const [confirmRegistration, { isSuccess: isConfirmSuccess, error: isConfirmErrorMessage }] =
     useConfirmRegistrationMutation();
@@ -82,10 +84,8 @@ export const RegistrationConfirmation = ({ className, token, email }: Props) => 
         )}
         <div className={`${s.wrapper} ${className}`}>
           <div className={s['text-wrapper']}>
-            <h1 className={s.title}>Email verification link expired</h1>
-            <p className={s.description}>
-              Looks like the verification link has expired. Not to worry, we can send the link again
-            </p>
+            <h1 className={s.title}>{t('LinkExpired')}</h1>
+            <p className={s.description}>{t('LinkExpiredDescription')}</p>
             <form onSubmit={handleSubmit(handleSubmitForm)} className={s.form}>
               <Input
                 placeholder="Enter your email"
@@ -96,7 +96,7 @@ export const RegistrationConfirmation = ({ className, token, email }: Props) => 
                 errorMessage={errors.email?.message}
               />
               <Button className={s['button-resend']} fullWidth disabled={isLoading} type="submit">
-                Resend verification link
+                {t('ResendLink')}
               </Button>
             </form>
           </div>
@@ -105,7 +105,10 @@ export const RegistrationConfirmation = ({ className, token, email }: Props) => 
         </div>
         {isModalActive && (isResendSuccess || isResendError) && (
           <Modal title={'Email Sent'} className={s.modal} onClose={() => setIsModalActive(false)}>
-            <p>We have sent a link to confirm your email to {getValues('email')}</p>
+            <p>
+              {t('EmailConfirmationLinkSent')}
+              {getValues('email')}
+            </p>
             <Button variant={'primary'} onClick={() => setIsModalActive(false)} className={s.button}>
               OK
             </Button>
@@ -117,10 +120,10 @@ export const RegistrationConfirmation = ({ className, token, email }: Props) => 
   if (isConfirmSuccess)
     return (
       <div className={`${s.wrapper} ${className}`}>
-        <h1 className={s.title}>Congratulations!</h1>
-        <p className={s.description}>Your email has been confirmed</p>
+        <h1 className={s.title}>{t('Congratulations')}</h1>
+        <p className={s.description}>{t('EmailConfirmed')}</p>
         <Button asChild className={s['button-sign-in']}>
-          <Link href={PATH.AUTH.LOGIN}>Sign In</Link>
+          <Link href={PATH.AUTH.LOGIN}>{t('signIn')}</Link>
         </Button>
         <RegistrationConfirmationSuccessSvg className={s.img} />
       </div>

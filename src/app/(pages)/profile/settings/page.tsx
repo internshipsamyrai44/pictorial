@@ -7,17 +7,20 @@ import { Tabs, TabsContent, TabType } from '@internshipsamyrai44-ui-kit/componen
 import { Devices } from '@/features/profile/ui/settings/devices/Devices';
 import { Payments } from '@/features/profile/ui/settings/payments/Payments';
 import { AccountManagement } from '@/features/profile/ui/settings/account-management/AccountManagement';
+import { useTranslations } from 'next-intl';
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState<string>('general-information');
+  const t = useTranslations('Profile');
+
   const tabs = useMemo<TabType[]>(
     () => [
-      { title: 'General information', value: 'general-information' },
-      { title: 'Devices', value: 'devices' },
-      { title: 'Account Management', value: 'account-management' },
-      { title: 'My payments', value: 'my-payments' }
+      { title: t('GeneralInformation'), value: 'general-information' },
+      { title: t('Devices'), value: 'devices' },
+      { title: t('AccountManagement'), value: 'account-management' },
+      { title: t('MyPayments'), value: 'my-payments' }
     ],
-    []
+    [t]
   );
   const renderActiveSection = () => {
     switch (activeTab) {

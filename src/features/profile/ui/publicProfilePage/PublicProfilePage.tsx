@@ -7,11 +7,13 @@ import { useGetPublicUserProfileQuery } from '@/features/profile/api/publicProfi
 import { useParams } from 'next/navigation';
 import { useRequestError } from '@/shared/hooks/useRequestError';
 import { ProfileDashboard } from '@/widgets/profile-dashboard/ProfileDashboard';
+import { useTranslations } from 'next-intl';
 
 export const PublicProfilePage = () => {
   const { id } = useParams<{ id: string }>();
   const { data, error, isFetching } = useGetPublicUserProfileQuery(+id);
   const errorMessage = useRequestError(error);
+  const t = useTranslations('Profile');
 
   if (isFetching) return <LoaderLinear />;
 
@@ -26,8 +28,8 @@ export const PublicProfilePage = () => {
         userPublications={data?.userMetadata.publications || 0}
       >
         <div className={s.buttons}>
-          <Button>Follow</Button> {/*TODO follow logic*/}
-          <Button variant={'secondary'}>Send Message</Button> {/*TODO send message logic*/}
+          <Button>{t('Follow')}</Button> {/*TODO follow logic*/}
+          <Button variant={'secondary'}>{t('SendMessage')}</Button> {/*TODO send message logic*/}
         </div>
       </ProfileDashboard>
       <div className={s.images}>

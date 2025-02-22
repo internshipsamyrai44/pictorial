@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import s from './LoginForm.module.scss';
+import { useTranslations } from 'next-intl';
 
 const formValidationSchema = yup.object().shape({
   email: getEmailValidationSchema(),
@@ -31,6 +32,7 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
     resolver: yupResolver(formValidationSchema),
     mode: 'onTouched'
   });
+  const t = useTranslations('Auth');
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -51,28 +53,26 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
       <Input
         className={s.password}
         type="password"
-        label="Password"
+        label={t('Password')}
         placeholder="********"
         disabled={disabled}
         {...register('password')}
         onBlur={async () => {
           await trigger('password');
         }}
-        errorMessage={
-          (isError || errors.password || errors.email) && 'The email or password are incorrect. Try again please'
-        }
+        errorMessage={(isError || errors.password || errors.email) && t('PasswordValidation')}
       />
 
       {/* Forgot password link */}
       <div className={s['forgot-password-wrapper']}>
         <Link href={PATH.AUTH.FORGOT_PASSWORD}>
-          <Typography className={s['forgot-password']}>Forgot Password</Typography>
+          <Typography className={s['forgot-password']}>{t('ForgotPassword')}</Typography>
         </Link>
       </div>
 
       {/* Submit button */}
       <Button variant="primary" fullWidth type="submit" disabled={disabled || !isValid}>
-        Sign In
+        {t('signIn')}
       </Button>
     </form>
   );

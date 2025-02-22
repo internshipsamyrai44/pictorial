@@ -8,10 +8,13 @@ import { useGetPublicUserProfileByIdQuery } from '@/features/profile/api/publicP
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { PATH } from '@/shared/const/PATH';
+import { useTranslations } from 'next-intl';
 
 export default function Profile() {
   const { id } = useParams();
+  const t = useTranslations('Profile');
   const profileId = id ? +id : undefined;
+
   const { data: profileData, isLoading: isProfileLoading } = useGetPublicUserProfileByIdQuery(
     profileId !== undefined ? profileId : 0,
     {
@@ -37,7 +40,7 @@ export default function Profile() {
       userPublications={userData?.publicationsCount || 0}
     >
       <Button variant={'secondary'}>
-        <Link href={PATH.PROFILE.SETTINGS}>Profile Settings</Link>
+        <Link href={PATH.PROFILE.SETTINGS}>{t('ProfileSettings')}</Link>
       </Button>
     </ProfileDashboard>
   );

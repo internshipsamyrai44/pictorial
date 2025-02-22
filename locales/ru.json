@@ -5,6 +5,78 @@
   "Auth": {
     "signIn": "Войти",
     "signUn": "Зарегистрироваться",
-    "accountText": "У вас нет учетной записи?"
+    "BackToSignUp": "Вернуться к регистрации",
+    "Username": "Имя пользователя",
+    "Password": "Пароль",
+    "ConfirmPassword": "Подтвердите пароль",
+    "ForgotPassword": "Забыли пароль",
+    "accountText": "У вас нет учетной записи?",
+    "PasswordVerification": "Ваш пароль должен содержать от 6 до 20 символов",
+    "PasswordValidation": "Электронная почта или пароль неверны. Попробуйте еще раз, пожалуйста",
+    "CreateNewPassword": "Создать новый пароль",
+    "ForgotPasswordFormDescription": "Введите свой адрес электронной почты, и мы отправим вам дальнейшие инструкции ",
+    "SendLink": "Отправить ссылку",
+    "BackToSignIn": "Вернуться к входу",
+    "LinkSentByEmail": "Ссылка отправлена по электронной почте. Если вы не получили письмо, отправьте ссылку еще раз",
+    "EmailConfirmationLinkSent": "Мы отправили ссылку для подтверждения вашего адреса электронной почты на ",
+    "LinkExpired": "Ссылка на подтверждение электронной почты устарела",
+    "LinkExpiredDescription": "Похоже, что срок действия ссылки для подтверждения истек. Не волнуйтесь, мы можем отправить ссылку еще раз",
+    "ResendLink": "Отправить ссылку повторно",
+    "Congratulations": "Поздравляем!",
+    "EmailConfirmed": "Ваш адрес электронной почты подтвержден.",
+    "TermsAndConditions": "Согласен с условиями и положениями",
+    "HaveAnAccount": "Есть учетная запись?"
+  },
+  "GithubPage": {
+    "BackHomePage": "Вернуться на главную страницу",
+    "ProcessingAuthorization": "Обработка авторизации GitHub..."
+  },
+  "Profile": {
+    "FirstName": "Имя",
+    "LastName": "Фамилия",
+    "DateOfBirth": "Дата рождения",
+    "Country": "Страна",
+    "City": "Город",
+    "AboutMe": "Обо мне",
+    "SaveChanges": "Сохранить изменения",
+    "ProfileSettings": "Настройки профиля",
+    "GeneralInformation": "Общая информация",
+    "Devices": "Устройства",
+    "AccountManagement": "Управление учетной записью",
+    "MyPayments": "Мои платежи",
+    "SendMessage": "Отправить сообщение",
+    "Follow": "Подписаться",
+    "AddAProfilePhoto": "Добавить фото",
+    "AccountManagementContent": "Содержание управления учетной записью",
+    "DevicesContent": "Содержание устройств",
+    "PaymentsContent": "Содержание платежей"
+  },
+  "Errors": {
+    "404": "Извините! Страница не найдена!",
+    "500": "Внутренняя ошибка сервера",
+    "ErrorUserIdNotFound": "Ошибка: userId не найден",
+    "ErrorDecodingToken": "Ошибка при декодировании токена:"
+  },
+  "PublicPosts": {
+    "RegisteredUsers": "Зарегистрированные пользователи:"
+  },
+  "Terms": {
+    "PrivacyPolicy": "Политика конфиденциальности",
+    "PrivacyPolicyContentLanguage": "Ru",
+    "TermsOfService": "Terms of Service",
+    "TermsOfServiceContentLanguage": "En"
+  },
+  "SideNavPanel": {
+    "Home": "Главная",
+    "Create": "Создать",
+    "Profile": "Мой профиль",
+    "Messenger": "сообщения",
+    "Search": "Поиск",
+    "Statistics": "Статистика",
+    "Favorites": "Избранное",
+    "LogOut": "Выйти",
+    "LogOutConfirmation": "Вы действительно хотите выйти из своей учетной записи",
+    "Yes": "Да",
+    "No": "Нет"
   }
 }

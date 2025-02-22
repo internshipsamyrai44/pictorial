@@ -5,6 +5,78 @@
   "Auth": {
     "signIn": "Sign In",
     "signUn": "Sign Up",
-    "accountText": "Don’t have an account?"
+    "BackToSignUp": "Back to Sign Up",
+    "Username": "Username",
+    "Password": "Password",
+    "ConfirmPassword": "Confirm Password",
+    "ForgotPassword": "Forgot Password",
+    "accountText": "Don’t have an account?",
+    "PasswordVerification": "Your password must be between 6 and 20 characters",
+    "PasswordValidation": "The email or password are incorrect. Try again please",
+    "CreateNewPassword": "Create new password",
+    "ForgotPasswordFormDescription": "Enter your email address and we will send you further instructions ",
+    "SendLink": "Send Link",
+    "BackToSignIn": "Back to Sign In",
+    "LinkSentByEmail": "The link has been sent by email. If you don’t receive an email send link again",
+    "EmailConfirmationLinkSent": "We have sent a link to confirm your email to ",
+    "LinkExpired": "Email verification link expired",
+    "LinkExpiredDescription": "Looks like the verification link has expired. Not to worry, we can send the link again",
+    "ResendLink": "Resend Link",
+    "Congratulations": "Congratulations!",
+    "EmailConfirmed": "Your email has been confirmed.",
+    "TermsAndConditions": "Agree to terms and conditions",
+    "HaveAnAccount": "Have an account?"
+  },
+  "GithubPage": {
+    "BackHomePage": "Back to home page",
+    "ProcessingAuthorization": "Processing GitHub authorization..."
+  },
+  "Profile": {
+    "FirstName": "First Name",
+    "LastName": "Last Name",
+    "DateOfBirth": "Date of Birth",
+    "Country": "Country",
+    "City": "City",
+    "AboutMe": "About Me",
+    "SaveChanges": "Save Changes",
+    "ProfileSettings": "Profile settings",
+    "GeneralInformation": "General information",
+    "Devices": "Devices",
+    "AccountManagement": "Account Management",
+    "MyPayments": "My payments",
+    "SendMessage": "Send Message",
+    "Follow": "Follow",
+    "AddAProfilePhoto": "Add a Profile Photo",
+    "AccountManagementContent": "Account Management Content",
+    "DevicesContent": "Devices Content",
+    "PaymentsContent": "Payments Content"
+  },
+  "Errors": {
+    "404": "Sorry! Page not found!",
+    "500": "Internal server error",
+    "ErrorUserIdNotFound": "Error: userId not found",
+    "ErrorDecodingToken": "Error decoding token:"
+  },
+  "PublicPosts": {
+    "RegisteredUsers": "Registered users:"
+  },
+  "Terms": {
+    "PrivacyPolicy": "Privacy Policy",
+    "PrivacyPolicyContentLanguage": "En",
+    "TermsOfService": "Terms of Service",
+    "TermsOfServiceContentLanguage": "En"
+  },
+  "SideNavPanel": {
+    "Home": "Home",
+    "Create": "Create",
+    "Profile": "My Profile",
+    "Messenger": "Messenger",
+    "Search": "Search",
+    "Statistics": "Statistics",
+    "Favorites": "Favorites",
+    "LogOut": "Log Out",
+    "LogOutConfirmation": "Are you really want to log out of your account",
+    "Yes": "Yes",
+    "No": "No"
   }
 }

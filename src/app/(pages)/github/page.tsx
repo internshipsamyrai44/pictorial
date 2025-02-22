@@ -5,12 +5,14 @@ import { setCookie } from '@/shared/utils/cookieUtils';
 import { getDecodedToken } from '@/shared/utils/getDecodedToken';
 import { ContentPage } from '@/widgets/content-page/ContentPage';
 import { LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
+import { useTranslations } from 'next-intl';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect } from 'react';
 
 export default function GithubPage() {
+  const t = useTranslations('GithubPage');
   return (
-    <ContentPage title={'Back to home page'} backHref={PATH.MAIN}>
+    <ContentPage title={t('BackHomePage')} backHref={PATH.MAIN}>
       <Suspense fallback={<LoaderLinear />}>
         <GithubPageContent />
       </Suspense>
@@ -21,6 +23,8 @@ export default function GithubPage() {
 const GithubPageContent = () => {
   const { replace } = useRouter();
   const searchParams = useSearchParams();
+  const t = useTranslations('GithubPage');
+  const tError = useTranslations('Errors');
 
   useEffect(() => {
     const accessToken = searchParams.get('accessToken');
@@ -34,20 +38,20 @@ const GithubPageContent = () => {
           // replace(`/profile/${userId}`);
           replace(`/home`);
         } else {
-          console.error('Ошибка: userId не найден');
+          console.error(tError('ErrorUserIdNotFound'));
           replace(PATH.AUTH.LOGIN);
         }
       } catch (error) {
-        console.error('Ошибка при декодировании токена:', error);
+        console.error(tError('ErrorDecodingToken'), error);
         replace(PATH.AUTH.LOGIN);
       }
     }
-  }, [replace, searchParams]);
+  }, [replace, searchParams, tError]);
 
   return (
     <>
       <LoaderLinear />
-      Processing GitHub authorization...
+      {t('ProcessingAuthorization')}
     </>
   );
 };
