@@ -92,8 +92,8 @@ export const CreatePost = (props: PropsType) => {
   };
 
   return (
-    <div className={s.wrapper} onKeyDown={onKeyDownHandler} tabIndex={0}>
-      <div className={s.steps}>
+    <div className={s.wrapper} onKeyDown={onKeyDownHandler} onClick={() => handlePaginate('close')} tabIndex={0}>
+      <div className={s.steps} onClick={(e) => e.stopPropagation()}>
         <CreatePostHeader page={page} totalPages={TOTAL_PAGES} stepTitle={stepTitle} handlePaginate={handlePaginate} />
         {renderStep()}
       </div>
