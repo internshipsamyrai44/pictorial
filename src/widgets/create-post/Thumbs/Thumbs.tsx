@@ -14,7 +14,10 @@ export const Thumbs = (props: PropsType) => {
     <div className={`${s.thumblist}`}>
       <div className={s.thumbnails}>
         {userPhotos.map((photo, i) => (
-          <Image key={`photo-${i}`} src={photo || placeholder} alt={`User Photo ${i}`} width={100} height={100} />
+          <div className={s.thumb} key={`thumb-${i}`}>
+            <Image src={photo || placeholder} alt={`User photo thumb ${i}`} width={100} height={100} />
+            <Button variant={'ghost'} className={s.remove} aria-label={'Remove photo'}></Button>
+          </div>
         ))}
       </div>
       <Button
