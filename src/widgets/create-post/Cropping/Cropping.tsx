@@ -37,6 +37,10 @@ export const Cropping = (props: PropsType) => {
     }
   };
 
+  const removeUserPhotoHandler = (photoIndex: number) => {
+    setUserPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== photoIndex));
+  };
+
   const toggleThumbs = () => {
     showThumbs ? setShowTumbs(false) : setShowTumbs(true);
   };
@@ -61,7 +65,13 @@ export const Cropping = (props: PropsType) => {
         onChange={uploadUserPhotoHandler}
       />
       <Button variant={'ghost'} onClick={toggleThumbs} className={s.btn}></Button>
-      {showThumbs && <Thumbs userPhotos={userPhotos} handleButtonClick={handleButtonClick} />}
+      {showThumbs && (
+        <Thumbs
+          userPhotos={userPhotos}
+          handleButtonClick={handleButtonClick}
+          removeUserPhotoHandler={removeUserPhotoHandler}
+        />
+      )}
     </div>
   );
 };
