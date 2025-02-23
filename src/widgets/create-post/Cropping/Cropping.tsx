@@ -5,6 +5,7 @@ import s from './Cropping.module.scss';
 import placeholder from '../../../../public/images/photo-placeholder.png';
 import { useRef } from 'react';
 import { isImageCorrect } from '@/widgets/create-post/Start-layout/Startlayout';
+import { Thumbs } from '@/widgets/create-post/Thumbs/Thumbs';
 
 type PropsType = {
   userPhotos: string[];
@@ -60,19 +61,7 @@ export const Cropping = (props: PropsType) => {
         onChange={uploadUserPhotoHandler}
       />
       <Button variant={'ghost'} onClick={toggleThumbs} className={s.btn}></Button>
-      <div className={`${s.thumblist} ${showThumbs ? '' : s.hidden}`}>
-        <div className={s.thumbnails}>
-          {userPhotos.map((photo, i) => (
-            <Image key={`photo-${i}`} src={photo || placeholder} alt={'User Photo'} width={100} height={100} />
-          ))}
-        </div>
-        <Button
-          variant={'ghost'}
-          onClick={handleButtonClick}
-          disabled={userPhotos.length >= 10}
-          className={s.add}
-        ></Button>
-      </div>
+      {showThumbs && <Thumbs userPhotos={userPhotos} handleButtonClick={handleButtonClick} />}
     </div>
   );
 };

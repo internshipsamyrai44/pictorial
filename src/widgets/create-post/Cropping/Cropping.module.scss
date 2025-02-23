@@ -22,51 +22,12 @@
   display: none;
 }
 
-.hidden {
-  display: none;
-}
-
 .btn {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   position: absolute;
-  bottom: 150px;
-  right: 0;
-  background: url('../../../../public/icons/PicIcon.svg') no-repeat center;
-}
-
-.back {
-  width: 36px;
-  height: 36px;
-  background: url('../../../../public/icons/arrow-ios-back.svg') no-repeat center;
-}
-
-.thumblist {
-  position: relative;
-}
-
-.thumbnails {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 1rem;
-  margin-top: 1rem;
-  overflow: hidden;
-  width: calc((80px + 0.8rem) * 5);
-
-  img {
-    width: 80px;
-    height: 80px;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    cursor: pointer;
-  }
-}
-
-.add {
-  position: absolute;
-  top: 10px;
-  right: 0;
-  width: 36px;
-  height: 36px;
-  background: url('../../../../public/icons/plus-circle.svg') no-repeat center;
+  bottom: 7px;
+  right: 10px;
+  background: var(--dark-100) url('../../../../public/icons/PicIcon.svg') no-repeat center / 30px 30px;
+  cursor: pointer;
 }
