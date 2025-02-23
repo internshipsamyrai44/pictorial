@@ -3,11 +3,10 @@ import Image from 'next/image';
 // eslint-disable-next-line import/no-unresolved
 import defaultPic from '../../../../public/icons/PicIcon.svg';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
-import * as React from 'react';
-import { useRef } from 'react';
+import { Dispatch, SetStateAction, useRef } from 'react';
 
 type PropsType = {
-  setUserPhotos: React.Dispatch<React.SetStateAction<string[]>>;
+  setUserPhotos: Dispatch<SetStateAction<string[]>>;
   userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
   handlePaginate: (action: 'next' | 'prev' | 'close') => void;

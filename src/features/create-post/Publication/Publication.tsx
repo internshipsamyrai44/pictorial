@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import * as React from 'react';
 import { Input, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Publication.module.scss';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';

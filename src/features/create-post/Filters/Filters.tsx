@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import * as React from 'react';
 import s from './Filters.module.scss';
 import placeholder from '../../../../public/images/photo-placeholder.png';
 

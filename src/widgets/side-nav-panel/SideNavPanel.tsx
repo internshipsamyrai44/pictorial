@@ -32,8 +32,8 @@ import {
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import s from './SideNavPanel.module.scss';
-import { CreatePost } from '@/widgets/create-post/CreatePost';
 import { useTranslations } from 'next-intl';
+import { CreatePost } from '@/features/create-post/CreatePost';
 
 type SideNavBar = {
   className?: string;

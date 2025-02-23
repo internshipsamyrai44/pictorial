@@ -1,22 +1,21 @@
 import Image from 'next/image';
-import * as React from 'react';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Cropping.module.scss';
 import placeholder from '../../../../public/images/photo-placeholder.png';
-import { useRef } from 'react';
-import { isImageCorrect } from '@/widgets/create-post/Start-layout/Startlayout';
-import { Thumbs } from '@/widgets/create-post/Thumbs/Thumbs';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { isImageCorrect } from '@/features/create-post/Start-layout/Startlayout';
+import { Thumbs } from '@/features/create-post/Thumbs/Thumbs';
 
 type PropsType = {
   userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
-  setUserPhotos: React.Dispatch<React.SetStateAction<string[]>>;
+  setUserPhotos: Dispatch<SetStateAction<string[]>>;
 };
 
 export const Cropping = (props: PropsType) => {
   const { userPhotos, setUserPhotos } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [showThumbs, setShowTumbs] = React.useState(false);
+  const [showThumbs, setShowTumbs] = useState(false);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();

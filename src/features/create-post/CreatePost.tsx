@@ -3,11 +3,11 @@
 import s from './CreatePost.module.scss';
 
 import { KeyboardEventHandler, useState } from 'react';
-import { Startlayout } from '@/widgets/create-post/Start-layout/Startlayout';
-import { Cropping } from '@/widgets/create-post/Cropping/Cropping';
-import { Filters } from '@/widgets/create-post/Filters/Filters';
-import { Publication } from '@/widgets/create-post/Publication/Publication';
-import { CreatePostHeader } from '@/widgets/create-post/CreatePostHeader/CreatePostHeader';
+import { Startlayout } from '@/features/create-post/Start-layout/Startlayout';
+import { Cropping } from '@/features/create-post/Cropping/Cropping';
+import { Filters } from '@/features/create-post/Filters/Filters';
+import { Publication } from '@/features/create-post/Publication/Publication';
+import { CreatePostHeader } from '@/features/create-post/CreatePostHeader/CreatePostHeader';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
