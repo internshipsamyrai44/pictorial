@@ -52,7 +52,7 @@ export const SignupForm = ({ className }: Props) => {
       <form onSubmit={handleSubmit(onSubmit)} className={cn(s.form, className)}>
         <Card className={s.card}>
           <Typography as={'h1'} variant={'h1'}>
-            {t('signUn')}
+            {t('signUp')}
           </Typography>
           <OAuthBlock />
 
@@ -101,7 +101,7 @@ export const SignupForm = ({ className }: Props) => {
           {errors.terms?.message && <p className={s['terms-error']}>{errors.terms?.message}</p>}
 
           <Button variant={'primary'} fullWidth className={s['signup-button']} type="submit" disabled={isLoading}>
-            {t('signUn')}
+            {t('signUp')}
           </Button>
 
           <p className={s['have-account']}>{t('HaveAnAccount')}</p>
