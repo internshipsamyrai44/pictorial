@@ -1,0 +1,46 @@
+.thumblist {
+  display: flex;
+  position: absolute;
+  bottom: 50px;
+  right: 10px;
+  background: rgb(23 23 23 / 90%);
+  padding: 0.6rem;
+  padding-right: 0;
+  width: auto;
+}
+
+.thumbnails {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  overflow: hidden;
+  width: auto;
+}
+
+.add {
+  width: 36px;
+  height: 36px;
+  background: url('../../../../public/icons/plus-circle.svg') no-repeat center;
+}
+
+.thumb {
+  position: relative;
+
+  img {
+    width: 80px;
+    height: 80px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    cursor: pointer;
+  }
+}
+
+.remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  padding: 0 !important;
+  background: url('../../../../public/icons/smallCross.svg') no-repeat center;
+}
