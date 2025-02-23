@@ -4,7 +4,7 @@
   column-gap: 38px;
   justify-content: center;
   width: 100%;
-  margin-bottom: 50px;
+  padding: 35px 25px;
 
   .container-block {
     display: flex;
@@ -21,6 +21,8 @@
       display: flex;
       flex-flow: row nowrap;
       column-gap: 100px;
+
+      text-transform: capitalize;
     }
   }
 }

@@ -1,15 +1,14 @@
 .buttons {
-  button {
-    margin-left: 12px;
-  }
+  display: flex;
+  gap: 12px;
 }
 
 .images {
   width: 100%;
   display: flex;
-  padding: 35px 65px 35px 25px;
+  padding: 15px 25px;
   flex-wrap: nowrap;
-  gap: 15px;
+  gap: 12px;
 }
 
 .image {

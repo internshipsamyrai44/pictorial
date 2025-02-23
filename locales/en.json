@@ -4,7 +4,8 @@
   },
   "Auth": {
     "signIn": "Sign In",
-    "signUn": "Sign Up",
+    "signUp": "Sign Up",
+    "LogIn": "Log in",
     "BackToSignUp": "Back to Sign Up",
     "Username": "Username",
     "Password": "Password",
