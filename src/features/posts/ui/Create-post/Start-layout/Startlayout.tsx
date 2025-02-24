@@ -1,7 +1,7 @@
 import s from './StartLayot.module.scss';
 import Image from 'next/image';
 // eslint-disable-next-line import/no-unresolved
-import defaultPic from '../../../../public/icons/PicIcon.svg';
+import defaultPic from '../../../../../../public/icons/PicIcon.svg';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import { Dispatch, SetStateAction, useRef } from 'react';
 

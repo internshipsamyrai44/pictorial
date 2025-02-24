@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Cropping.module.scss';
-import placeholder from '../../../../public/images/photo-placeholder.png';
+import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
-import { isImageCorrect } from '@/features/create-post/Start-layout/Startlayout';
-import { Thumbs } from '@/features/create-post/Thumbs/Thumbs';
+import { isImageCorrect } from '@/features/posts/ui/Create-post/Start-layout/Startlayout';
+import { Thumbs } from '@/features/posts/ui/Create-post/Thumbs/Thumbs';
 
 type PropsType = {
   userPhotos: string[];

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import s from './Filters.module.scss';
-import placeholder from '../../../../public/images/photo-placeholder.png';
+import placeholder from '../../../../../../public/images/photo-placeholder.png';
 
 type PropsType = {
   userPhotos: string[];

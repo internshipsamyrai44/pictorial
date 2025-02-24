@@ -1,6 +1,6 @@
 import s from './Thumbs.module.scss';
 import Image from 'next/image';
-import placeholder from '../../../../public/images/photo-placeholder.png';
+import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 
 type PropsType = {
