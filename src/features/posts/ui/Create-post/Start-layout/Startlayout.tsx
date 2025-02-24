@@ -9,7 +9,7 @@ type PropsType = {
   setUserPhotos: Dispatch<SetStateAction<string[]>>;
   userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
-  handlePaginate: (action: 'next' | 'prev' | 'close') => void;
+  paginate: (action: 'next' | 'prev' | 'close') => void;
 };
 
 const MAX_SIZE = 5 * 1024 * 1024;
@@ -29,7 +29,7 @@ export const isImageCorrect = (image: File) => {
 };
 
 export const Startlayout = (props: PropsType) => {
-  const { setUserPhotos, handlePaginate } = props;
+  const { setUserPhotos, paginate } = props;
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -41,11 +41,10 @@ export const Startlayout = (props: PropsType) => {
     const userPhotoFile = e.target.files?.[0];
 
     if (!isImageCorrect(userPhotoFile)) {
-      handlePaginate('prev');
+      paginate('prev');
     }
-
     const reader = new FileReader();
-    handlePaginate('next');
+    paginate('next');
     reader.onloadend = () => {
       if (reader.result) {
         setUserPhotos((prevPhotos) => [...prevPhotos, reader.result as string]);
