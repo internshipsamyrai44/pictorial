@@ -13,15 +13,50 @@ export default function IndexPage() {
   useEffect(() => {
     if (isLoading) return;
 
-    // Если произошла ошибка или пользователь не аутентифицирован
-    if (error || !me?.userId) {
-      router.push(PATH.PUBLIC.PUBLIC_PAGE);
+    if (error) return;
+
+    if (!me?.userId) {
+      router.replace(PATH.PUBLIC.PUBLIC_PAGE);
       return;
     }
 
-    // Если пользователь аутентифицирован, перенаправляем на домашнюю страницу
-    router.push(PATH.HOME);
+    router.replace(PATH.HOME);
   }, [isLoading, error, me, router]);
+
+  if (isLoading) {
+    return <LoaderLinear />;
+  }
+
+  if (error) {
+    const errorMessage = 'message' in error && error.message ? error.message : JSON.stringify(error);
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+          padding: '1rem',
+          textAlign: 'center'
+        }}
+      >
+        <h2>Произошла ошибка</h2>
+        <p>{errorMessage || 'Не удалось загрузить данные пользователя.'}</p>
+        <button
+          onClick={() => router.replace(PATH.PUBLIC.PUBLIC_PAGE)}
+          style={{
+            marginTop: '1rem',
+            padding: '0.5rem 1rem',
+            fontSize: '1rem',
+            cursor: 'pointer'
+          }}
+        >
+          Перейти на публичную страницу
+        </button>
+      </div>
+    );
+  }
 
   return <LoaderLinear />;
 }
