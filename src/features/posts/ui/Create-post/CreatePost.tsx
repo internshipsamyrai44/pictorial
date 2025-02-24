@@ -3,11 +3,13 @@
 import s from './CreatePost.module.scss';
 
 import { KeyboardEventHandler, useState } from 'react';
-import { Startlayout } from '@/widgets/create-post/Start-layout/Startlayout';
-import { Cropping } from '@/widgets/create-post/Cropping/Cropping';
-import { Filters } from '@/widgets/create-post/Filters/Filters';
-import { Publication } from '@/widgets/create-post/Publication/Publication';
-import { CreatePostHeader } from '@/widgets/create-post/CreatePostHeader/CreatePostHeader';
+import { Startlayout } from '@/features/posts/ui/Create-post/Start-layout/Startlayout';
+import { Cropping } from '@/features/posts/ui/Create-post/Cropping/Cropping';
+import { Filters } from '@/features/posts/ui/Create-post/Filters/Filters';
+import { Publication } from '@/features/posts/ui/Create-post/Publication/Publication';
+import { CreatePostHeader } from '@/features/posts/ui/Create-post/CreatePostHeader/CreatePostHeader';
+import { useCreatePostMutation } from '@/features/posts/api/postsApi';
+import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
@@ -19,6 +21,7 @@ export const CreatePost = (props: PropsType) => {
   const TOTAL_PAGES = 4;
   const [userPhotos, setUserPhotos] = useState<string[]>([]);
   const [page, setPage] = useState<number>(0);
+  const [createPost] = useCreatePostMutation();
 
   const stepTitle = (): string => {
     switch (page) {
@@ -43,7 +46,7 @@ export const CreatePost = (props: PropsType) => {
   const renderStep = () => {
     switch (page) {
       case 0: {
-        return <Startlayout userPhotos={userPhotos} setUserPhotos={setUserPhotos} handlePaginate={handlePaginate} />;
+        return <Startlayout userPhotos={userPhotos} setUserPhotos={setUserPhotos} paginate={paginate} />;
       }
       case 1: {
         return <Cropping userPhotos={userPhotos} setUserPhotos={setUserPhotos} />;
@@ -55,7 +58,7 @@ export const CreatePost = (props: PropsType) => {
         return <Publication userPhotos={userPhotos} />;
       }
       default: {
-        return <Startlayout userPhotos={userPhotos} setUserPhotos={setUserPhotos} handlePaginate={handlePaginate} />;
+        return <Startlayout userPhotos={userPhotos} setUserPhotos={setUserPhotos} paginate={paginate} />;
       }
     }
   };
@@ -66,7 +69,7 @@ export const CreatePost = (props: PropsType) => {
     }
   };
 
-  const handlePaginate = (action: 'next' | 'prev' | 'close') => {
+  const paginate = (action: 'next' | 'prev' | 'close') => {
     switch (action) {
       case 'next': {
         if (page < TOTAL_PAGES - 1) {
@@ -91,10 +94,32 @@ export const CreatePost = (props: PropsType) => {
     }
   };
 
+  const formData = new FormData();
+
+  const handleUploadPhotos = async () => {
+    userPhotos.forEach((file) => {
+      formData.append(`file`, dataURLtoFile(file));
+    });
+
+    try {
+      await createPost(formData);
+      alert('Successfully created!');
+      paginate('close');
+    } catch (error) {
+      alert('Error creating post');
+    }
+  };
+
   return (
-    <div className={s.wrapper} onKeyDown={onKeyDownHandler} tabIndex={0}>
-      <div className={s.steps}>
-        <CreatePostHeader page={page} totalPages={TOTAL_PAGES} stepTitle={stepTitle} handlePaginate={handlePaginate} />
+    <div className={s.wrapper} onKeyDown={onKeyDownHandler} onClick={() => paginate('close')} tabIndex={0}>
+      <div className={s.steps} onClick={(e) => e.stopPropagation()}>
+        <CreatePostHeader
+          page={page}
+          totalPages={TOTAL_PAGES}
+          stepTitle={stepTitle}
+          paginate={paginate}
+          handleUploadPhotos={handleUploadPhotos}
+        />
         {renderStep()}
       </div>
     </div>

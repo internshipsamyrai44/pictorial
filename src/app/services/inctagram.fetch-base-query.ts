@@ -42,7 +42,7 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
       try {
         const refreshResult = (await baseQuery(
           {
-            method: 'POST',
+            method: 'posts',
             url: PATH.AUTH.UPDATE_TOKENS
           },
           api,

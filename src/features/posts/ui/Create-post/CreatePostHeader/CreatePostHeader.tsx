@@ -6,34 +6,12 @@ type PropsType = {
   stepTitle: () => string;
   totalPages: number;
   // eslint-disable-next-line no-unused-vars
-  handlePaginate: (action: 'next' | 'prev' | 'close') => void;
+  paginate: (action: 'next' | 'prev' | 'close') => void;
+  handleUploadPhotos: () => void;
 };
 
 export const CreatePostHeader = (props: PropsType) => {
-  const { stepTitle, page, handlePaginate, totalPages } = props;
-
-  const paginate = (action: 'next' | 'prev' | 'close') => {
-    switch (action) {
-      case 'next': {
-        if (page < totalPages - 1) {
-          handlePaginate('next');
-        }
-        break;
-      }
-
-      case 'prev': {
-        if (page > 0) {
-          handlePaginate('prev');
-        }
-        break;
-      }
-
-      case 'close': {
-        handlePaginate('close');
-        break;
-      }
-    }
-  };
+  const { stepTitle, page, paginate, totalPages, handleUploadPhotos } = props;
 
   return (
     <div className={s.header}>
@@ -51,7 +29,7 @@ export const CreatePostHeader = (props: PropsType) => {
           variant={'ghost'}
           className={s.btn}
           aria-label={'Close window'}
-          onClick={() => handlePaginate('close')}
+          onClick={() => paginate('close')}
         ></Button>
       )}
 
@@ -62,7 +40,7 @@ export const CreatePostHeader = (props: PropsType) => {
       )}
 
       {page === 3 && (
-        <Button variant={'ghost'} onClick={() => alert('Publish')}>
+        <Button variant={'ghost'} onClick={handleUploadPhotos}>
           {'Publish'}
         </Button>
       )}

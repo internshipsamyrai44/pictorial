@@ -1,22 +1,21 @@
 import Image from 'next/image';
-import * as React from 'react';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Cropping.module.scss';
-import placeholder from '../../../../public/images/photo-placeholder.png';
-import { useRef } from 'react';
-import { isImageCorrect } from '@/widgets/create-post/Start-layout/Startlayout';
-import { Thumbs } from '@/widgets/create-post/Thumbs/Thumbs';
+import placeholder from '../../../../../../public/images/photo-placeholder.png';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { isImageCorrect } from '@/features/posts/ui/Create-post/Start-layout/Startlayout';
+import { Thumbs } from '@/features/posts/ui/Create-post/Thumbs/Thumbs';
 
 type PropsType = {
   userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
-  setUserPhotos: React.Dispatch<React.SetStateAction<string[]>>;
+  setUserPhotos: Dispatch<SetStateAction<string[]>>;
 };
 
 export const Cropping = (props: PropsType) => {
   const { userPhotos, setUserPhotos } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [showThumbs, setShowTumbs] = React.useState(false);
+  const [showThumbs, setShowTumbs] = useState(false);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -24,17 +23,19 @@ export const Cropping = (props: PropsType) => {
 
   const uploadUserPhotoHandler = (e: any) => {
     const userPhotoFile = e.target.files?.[0];
-    if (isImageCorrect(userPhotoFile)) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (reader.result) {
-          setUserPhotos((prevPhotos) => [...prevPhotos, reader.result as string]);
-        }
-      };
-      reader.readAsDataURL(userPhotoFile);
-    } else {
+
+    if (!isImageCorrect(userPhotoFile)) {
       isImageCorrect(userPhotoFile);
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      if (reader.result) {
+        setUserPhotos((prevPhotos) => [...prevPhotos, reader.result as string]);
+      }
+    };
+    reader.readAsDataURL(userPhotoFile);
   };
 
   const removeUserPhotoHandler = (photoIndex: number) => {
