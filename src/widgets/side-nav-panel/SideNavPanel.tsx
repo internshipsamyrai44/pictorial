@@ -54,6 +54,7 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
       setProfileUrl(`${PATH.PROFILE.PROFILE}/${me?.userId}`);
     }
   }, [me]);
+  console.log(me);
 
   const options = [
     { icon: HomeIcon, iconActive: HomeActiveIcon, title: t('Home'), url: PATH.MAIN, value: 'home' },
@@ -133,9 +134,9 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
           <Typography variant={'regular-text-16'} className={s.text}>
             {t('LogOutConfirmation')}
             <Typography as={'span'} variant={'bold-text-16'}>
-              “Epam@epam.com”
+              {` “${me?.email}” `}
             </Typography>
-            ?`
+            ?
           </Typography>
           <div className={s['buttons-block']}>
             <Button
