@@ -76,7 +76,7 @@ export const SignupForm = ({ className }: Props) => {
           <Input
             type="password"
             label={t('Password')}
-            placeholder="********"
+            placeholder="✶✶✶✶✶✶✶✶✶"
             className={s.input}
             {...register('password')}
             errorMessage={errors.password?.message}
@@ -85,7 +85,7 @@ export const SignupForm = ({ className }: Props) => {
           <Input
             type="password"
             label={t('ConfirmPassword')}
-            placeholder="********"
+            placeholder="✶✶✶✶✶✶✶✶✶"
             className={s.input}
             {...register('confirmPassword')}
             errorMessage={errors.confirmPassword?.message}

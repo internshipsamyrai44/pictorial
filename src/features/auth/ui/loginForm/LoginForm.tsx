@@ -54,7 +54,7 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
         className={s.password}
         type="password"
         label={t('Password')}
-        placeholder="********"
+        placeholder="✶✶✶✶✶✶✶✶✶"
         disabled={disabled}
         {...register('password')}
         onBlur={async () => {
