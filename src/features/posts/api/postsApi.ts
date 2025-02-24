@@ -38,6 +38,13 @@ type PublishedPostResponse = {
   avatarWhoLikes: boolean;
 };
 
+type PostResponse = {
+  pageSize: number;
+  totalCount: number;
+  notReadCount: number;
+  items: PublishedPostResponse[];
+};
+
 type UserName = {
   firstName: string;
   lastName: string;
@@ -58,8 +65,14 @@ export const postsApi = inctagramApi.injectEndpoints({
         method: 'POST',
         body: postData
       })
+    }),
+    getPostsByUsername: build.query<PostResponse, string>({
+      query: (userName) => ({
+        url: `v1/posts/${userName}`,
+        method: 'GET'
+      })
     })
   })
 });
 
-export const { useUploadImagesMutation, useCreatePostMutation } = postsApi;
+export const { useUploadImagesMutation, useCreatePostMutation, useGetPostsByUsernameQuery } = postsApi;
