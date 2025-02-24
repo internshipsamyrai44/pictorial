@@ -40,7 +40,7 @@ type SideNavBar = {
 };
 
 export const SideNavPanel = ({ className }: SideNavBar) => {
-  const [logout] = useLogoutMutation();
+  const [logout, { isLoading }] = useLogoutMutation();
   const { data: me } = useMeQuery();
   const router = useRouter();
   const [activeIcon, setActiveIcon] = useState<string>('');
@@ -152,6 +152,7 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
                     console.error('Logout failed: ', error);
                   });
               }}
+              disabled={isLoading}
             >
               {t('Yes')}
             </Button>
