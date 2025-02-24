@@ -50,7 +50,11 @@
     "AddAProfilePhoto": "Add a Profile Photo",
     "AccountManagementContent": "Account Management Content",
     "DevicesContent": "Devices Content",
-    "PaymentsContent": "Payments Content"
+    "PaymentsContent": "Payments Content",
+    "NoInfo": "no info",
+    "Following": "Following",
+    "Followers": "Followers",
+    "Publications": "Publications"
   },
   "Errors": {
     "404": "Sorry! Page not found!",
@@ -59,7 +63,9 @@
     "ErrorDecodingToken": "Error decoding token:"
   },
   "PublicPosts": {
-    "RegisteredUsers": "Registered users:"
+    "RegisteredUsers": "Registered users:",
+    "ShowMore": "Show more",
+    "Hide": "Hide"
   },
   "Terms": {
     "PrivacyPolicy": "Privacy Policy",
@@ -79,5 +85,8 @@
     "LogOutConfirmation": "Are you really want to log out of your account",
     "Yes": "Yes",
     "No": "No"
+  },
+  "NotFound": {
+    "BacktoHomePage": "Back to home page"
   }
 }
