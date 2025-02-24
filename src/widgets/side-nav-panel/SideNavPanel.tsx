@@ -51,7 +51,7 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
 
   useEffect(() => {
     if (me) {
-      setProfileUrl(`profile/${me.userId}`);
+      setProfileUrl(`${PATH.PROFILE.PROFILE}/${me?.userId}`);
     }
   }, [me]);
 
