@@ -13,16 +13,53 @@ type UploadedImageViewModel = {
   images: PostImageViewModel[];
 };
 
+type PostRequestData = {
+  description: string;
+  childrenMetadata: uploadId[];
+};
+
+type uploadId = {
+  uploadId: string | undefined;
+};
+
+type PublishedPostResponse = {
+  id: number;
+  userName: string;
+  description: string;
+  location: string;
+  images: PostImageViewModel[];
+  createdAt: string;
+  updatedAt: string;
+  ownerId: number;
+  avatarOwner: string;
+  owner: UserName;
+  likesCount: number;
+  isLiked: boolean;
+  avatarWhoLikes: boolean;
+};
+
+type UserName = {
+  firstName: string;
+  lastName: string;
+};
+
 export const postsApi = inctagramApi.injectEndpoints({
   endpoints: (build) => ({
-    createPost: build.mutation<UploadedImageViewModel, FormData>({
+    uploadImages: build.mutation<UploadedImageViewModel, FormData>({
       query: (formData) => ({
         url: 'v1/posts/image',
         method: 'POST',
         body: formData
       })
+    }),
+    createPost: build.mutation<PublishedPostResponse, PostRequestData>({
+      query: (postData) => ({
+        url: 'v1/posts',
+        method: 'POST',
+        body: postData
+      })
     })
   })
 });
 
-export const { useCreatePostMutation } = postsApi;
+export const { useUploadImagesMutation, useCreatePostMutation } = postsApi;

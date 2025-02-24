@@ -8,7 +8,7 @@ import { Cropping } from '@/features/posts/ui/Create-post/Cropping/Cropping';
 import { Filters } from '@/features/posts/ui/Create-post/Filters/Filters';
 import { Publication } from '@/features/posts/ui/Create-post/Publication/Publication';
 import { CreatePostHeader } from '@/features/posts/ui/Create-post/CreatePostHeader/CreatePostHeader';
-import { useCreatePostMutation } from '@/features/posts/api/postsApi';
+import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts/api/postsApi';
 import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
 
 type PropsType = {
@@ -21,6 +21,7 @@ export const CreatePost = (props: PropsType) => {
   const TOTAL_PAGES = 4;
   const [userPhotos, setUserPhotos] = useState<string[]>([]);
   const [page, setPage] = useState<number>(0);
+  const [uploadImages] = useUploadImagesMutation();
   const [createPost] = useCreatePostMutation();
 
   const stepTitle = (): string => {
@@ -94,15 +95,20 @@ export const CreatePost = (props: PropsType) => {
     }
   };
 
-  const formData = new FormData();
-
   const handleUploadPhotos = async () => {
+    const formData = new FormData();
+
     userPhotos.forEach((file) => {
       formData.append(`file`, dataURLtoFile(file));
     });
 
     try {
-      await createPost(formData);
+      const res = await uploadImages(formData);
+
+      await createPost({
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+        childrenMetadata: [{ uploadId: res.data?.images[0].uploadId }]
+      });
       alert('Successfully created!');
       paginate('close');
     } catch (error) {
