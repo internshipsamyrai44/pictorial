@@ -1,28 +1,34 @@
 import { inctagramApi } from '@/app/services/inctagram.api';
-
-type PostImageViewModel = {
-  url: string;
-  width: number;
-  height: number;
-  fileSize: number;
-  createdAt: string;
-  uploadId: string;
-};
-
-type UploadedImageViewModel = {
-  images: PostImageViewModel[];
-};
+import {
+  PostRequestData,
+  PostResponse,
+  PublishedPostResponse,
+  UploadedImageViewModel
+} from '@/features/posts/model/postsApi.types';
 
 export const postsApi = inctagramApi.injectEndpoints({
   endpoints: (build) => ({
-    createPost: build.mutation<UploadedImageViewModel, FormData>({
+    uploadImages: build.mutation<UploadedImageViewModel, FormData>({
       query: (formData) => ({
         url: 'v1/posts/image',
         method: 'POST',
         body: formData
       })
+    }),
+    createPost: build.mutation<PublishedPostResponse, PostRequestData>({
+      query: (postData) => ({
+        url: 'v1/posts',
+        method: 'POST',
+        body: postData
+      })
+    }),
+    getPostsByUsername: build.query<PostResponse, string>({
+      query: (userName) => ({
+        url: `v1/posts/${userName}`,
+        method: 'GET'
+      })
     })
   })
 });
 
-export const { useCreatePostMutation } = postsApi;
+export const { useUploadImagesMutation, useCreatePostMutation, useGetPostsByUsernameQuery } = postsApi;
