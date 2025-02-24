@@ -20,7 +20,8 @@ export default function IndexPage() {
       return;
     }
 
-    router.replace(PATH.HOME);
+    // Если пользователь аутентифицирован, перенаправляем на домашнюю страницу
+    router.push(PATH.HOME);
   }, [isLoading, error, me, router]);
 
   if (isLoading) {
