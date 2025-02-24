@@ -46,14 +46,14 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
   const [activeIcon, setActiveIcon] = useState<string>('');
   const [isModalActive, setIsModalActive] = useState(false);
   const [isCreatePostActive, setCreatePostActive] = useState(false);
-  const [profileUrl] = useState<string>('');
+  const [profileUrl, setProfileUrl] = useState<string>('');
   const t = useTranslations('SideNavPanel');
 
   useEffect(() => {
     if (me) {
-      router.push(`${PATH.PROFILE.PROFILE}/${me?.userId}`);
+      setProfileUrl(`profile/${me.userId}`);
     }
-  }, [me, router]);
+  }, [me]);
 
   const options = [
     { icon: HomeIcon, iconActive: HomeActiveIcon, title: t('Home'), url: PATH.MAIN, value: 'home' },
