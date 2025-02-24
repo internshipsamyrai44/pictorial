@@ -10,7 +10,7 @@
     "Username": "Имя пользователя",
     "Password": "Пароль",
     "ConfirmPassword": "Подтвердите пароль",
-    "ForgotPassword": "Забыли пароль",
+    "ForgotPassword": "Забыли пароль?",
     "accountText": "У вас нет учетной записи?",
     "PasswordVerification": "Ваш пароль должен содержать от 6 до 20 символов",
     "PasswordValidation": "Электронная почта или пароль неверны. Попробуйте еще раз, пожалуйста",
@@ -50,7 +50,11 @@
     "AddAProfilePhoto": "Добавить фото",
     "AccountManagementContent": "Содержание управления учетной записью",
     "DevicesContent": "Содержание устройств",
-    "PaymentsContent": "Содержание платежей"
+    "PaymentsContent": "Содержание платежей",
+    "NoInfo": "нет информации",
+    "Following": "Подписки",
+    "Followers": "Подписчики",
+    "Publications": "Публикации"
   },
   "Errors": {
     "404": "Извините! Страница не найдена!",
@@ -59,7 +63,9 @@
     "ErrorDecodingToken": "Ошибка при декодировании токена:"
   },
   "PublicPosts": {
-    "RegisteredUsers": "Зарегистрированные пользователи:"
+    "RegisteredUsers": "Зарегистрированные пользователи:",
+    "ShowMore": "Показать больше",
+    "Hide": "Скрыть"
   },
   "Terms": {
     "PrivacyPolicy": "Политика конфиденциальности",
@@ -71,7 +77,7 @@
     "Home": "Главная",
     "Create": "Создать",
     "Profile": "Мой профиль",
-    "Messenger": "сообщения",
+    "Messenger": "Сообщения",
     "Search": "Поиск",
     "Statistics": "Статистика",
     "Favorites": "Избранное",
@@ -79,5 +85,8 @@
     "LogOutConfirmation": "Вы действительно хотите выйти из своей учетной записи",
     "Yes": "Да",
     "No": "Нет"
+  },
+  "NotFound": {
+    "BacktoHomePage": "Вернуться на главную страницу"
   }
 }

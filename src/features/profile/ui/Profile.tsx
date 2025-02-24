@@ -32,11 +32,11 @@ export default function Profile() {
 
   return (
     <ProfileDashboard
-      about={profileData?.aboutMe || 'no info'}
+      about={profileData?.aboutMe || t('NoInfo')}
       avatar={profileData?.avatars[0]?.url}
       userFollowers={userData?.followersCount || 0}
       userFollowing={userData?.followingCount || 0}
-      userName={profileData?.userName || 'no info'}
+      userName={profileData?.userName || t('NoInfo')}
       userPublications={userData?.publicationsCount || 0}
     >
       <Button variant={'secondary'}>
