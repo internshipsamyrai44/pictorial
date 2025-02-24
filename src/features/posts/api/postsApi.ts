@@ -1,6 +1,6 @@
 import { inctagramApi } from '@/app/services/inctagram.api';
 
-type UploadImage = {
+type PostImageViewModel = {
   url: string;
   width: number;
   height: number;
@@ -9,16 +9,16 @@ type UploadImage = {
   uploadId: string;
 };
 
-type UploadImageResponse = {
-  images: UploadImage[];
+type UploadedImageViewModel = {
+  images: PostImageViewModel[];
 };
 
 export const postsApi = inctagramApi.injectEndpoints({
   endpoints: (build) => ({
-    createPost: build.mutation<UploadImageResponse, FormData>({
+    createPost: build.mutation<UploadedImageViewModel, FormData>({
       query: (formData) => ({
         url: 'v1/posts/image',
-        method: 'posts',
+        method: 'POST',
         body: formData
       })
     })
