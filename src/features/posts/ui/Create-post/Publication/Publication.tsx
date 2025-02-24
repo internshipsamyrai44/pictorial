@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import { Button, Input, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Input, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Publication.module.scss';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import Link from 'next/link';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
-import { useCreatePostMutation } from '@/features/posts/api/postsApi';
 
 type PropsType = {
   userPhotos: string[];
@@ -12,16 +11,6 @@ type PropsType = {
 
 export const Publication = (props: PropsType) => {
   const { userPhotos } = props;
-  const formData = new FormData();
-
-  const [createPost] = useCreatePostMutation();
-
-  const uploadPhotos = () => {
-    userPhotos.forEach((file, index) => {
-      formData.append(`photo[${index}]`, file);
-    });
-    createPost(formData);
-  };
 
   return (
     <>
@@ -48,7 +37,6 @@ export const Publication = (props: PropsType) => {
           />
 
           <Input label={'Add location'} placeholder={'New-York'} />
-          <Button onClick={uploadPhotos}>Publish</Button>
         </div>
       </div>
     </>
