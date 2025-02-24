@@ -25,9 +25,9 @@ const GithubPageContent = () => {
   const searchParams = useSearchParams();
   const t = useTranslations('GithubPage');
   const tError = useTranslations('Errors');
+  const accessToken = searchParams.get('accessToken');
 
   useEffect(() => {
-    const accessToken = searchParams.get('accessToken');
     if (!accessToken) {
       window.location.assign('https://inctagram.work/api/v1/auth/github/login');
     } else {
@@ -35,8 +35,7 @@ const GithubPageContent = () => {
         setCookie('accessToken', accessToken, 7);
         const userId = getDecodedToken(accessToken);
         if (userId) {
-          // replace(`/profile/${userId}`);
-          replace(`/home`);
+          replace(PATH.HOME);
         } else {
           console.error(tError('ErrorUserIdNotFound'));
           replace(PATH.AUTH.LOGIN);
@@ -46,7 +45,7 @@ const GithubPageContent = () => {
         replace(PATH.AUTH.LOGIN);
       }
     }
-  }, [replace, searchParams, tError]);
+  }, [accessToken, replace, tError]);
 
   return (
     <>
