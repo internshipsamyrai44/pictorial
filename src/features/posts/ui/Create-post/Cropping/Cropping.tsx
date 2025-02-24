@@ -23,17 +23,19 @@ export const Cropping = (props: PropsType) => {
 
   const uploadUserPhotoHandler = (e: any) => {
     const userPhotoFile = e.target.files?.[0];
-    if (isImageCorrect(userPhotoFile)) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (reader.result) {
-          setUserPhotos((prevPhotos) => [...prevPhotos, reader.result as string]);
-        }
-      };
-      reader.readAsDataURL(userPhotoFile);
-    } else {
+
+    if (!isImageCorrect(userPhotoFile)) {
       isImageCorrect(userPhotoFile);
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      if (reader.result) {
+        setUserPhotos((prevPhotos) => [...prevPhotos, reader.result as string]);
+      }
+    };
+    reader.readAsDataURL(userPhotoFile);
   };
 
   const removeUserPhotoHandler = (photoIndex: number) => {
