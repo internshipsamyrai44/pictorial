@@ -1,26 +1,27 @@
 .thumblist {
   display: flex;
+  gap: 0.6rem;
   position: absolute;
   bottom: 43px;
   right: 8px;
   background: rgb(23 23 23 / 90%);
   padding: 0.6rem;
-  padding-right: 0;
   width: auto;
+
+  .add {
+    width: 36px;
+    height: 36px;
+    background: url('../../../../../../public/icons/plus-circle.svg') no-repeat center;
+    padding: 0;
+  }
 }
 
 .thumbnails {
   display: flex;
   flex-wrap: nowrap;
-  gap: 1rem;
+  gap: 0.6rem;
   overflow: hidden;
   width: auto;
-}
-
-.add {
-  width: 36px;
-  height: 36px;
-  background: url('../../../../../../public/icons/plus-circle.svg') no-repeat center;
 }
 
 .thumb {

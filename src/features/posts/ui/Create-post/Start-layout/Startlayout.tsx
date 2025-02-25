@@ -1,6 +1,5 @@
 import s from './StartLayot.module.scss';
 import Image from 'next/image';
-// eslint-disable-next-line import/no-unresolved
 import defaultPic from '../../../../../../public/icons/PicIcon.svg';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import { Dispatch, SetStateAction, useRef } from 'react';
@@ -66,7 +65,7 @@ export const Startlayout = (props: PropsType) => {
         className={s.input}
         onChange={uploadUserPhotoHandler}
       />
-      <div className={`${s.buttons}`}>
+      <div className={s.buttons}>
         <Button variant={'primary'} onClick={handleButtonClick}>
           Select from Computer
         </Button>
