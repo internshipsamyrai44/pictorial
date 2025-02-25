@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { isImageCorrect } from '@/features/posts/ui/Create-post/Start-layout/Startlayout';
 import { Thumbs } from '@/features/posts/ui/Create-post/Thumbs/Thumbs';
 import { ResizePhoto } from '@/features/posts/ui/Create-post/ResizePhoto/ResizePhoto';
+import { ZoomPhoto } from '@/features/posts/ui/Create-post/ZoomPhoto/ZoomPhoto';
 
 type PropsType = {
   userPhotos: string[];
@@ -18,6 +19,7 @@ export const Cropping = (props: PropsType) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [showThumbs, setShowTumbs] = useState(false);
   const [showResizer, setShowResizer] = useState(false);
+  const [showZoom, setShowZoom] = useState(false);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -50,6 +52,9 @@ export const Cropping = (props: PropsType) => {
   const toggleResize = () => {
     showResizer ? setShowResizer(false) : setShowResizer(true);
   };
+  const toggleZoom = () => {
+    showZoom ? setShowZoom(false) : setShowZoom(true);
+  };
 
   return (
     <div className={s.wrapper}>
@@ -73,6 +78,8 @@ export const Cropping = (props: PropsType) => {
       <div className={s.btns}>
         <Button variant={'ghost'} onClick={toggleResize} className={s.resize}></Button>
         {showResizer && <ResizePhoto />}
+        <Button variant={'ghost'} onClick={toggleZoom} className={s.zoom}></Button>
+        {showZoom && <ZoomPhoto />}
         <Button variant={'ghost'} onClick={toggleThumbs} className={s.file}></Button>
         {showThumbs && (
           <Thumbs

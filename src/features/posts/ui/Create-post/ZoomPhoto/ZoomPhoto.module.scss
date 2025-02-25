@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50px;
+  bottom: 50px;
+  width: 124px;
+  height: 36px;
+  background: rgb(23 23 23 / 90%);
+  padding: 0.5rem;
+
+  input[type='range'] {
+    appearance: none;
+    cursor: pointer;
+    width: 100px;
+    background: #fff;
+    height: 2px;
+  }
+}

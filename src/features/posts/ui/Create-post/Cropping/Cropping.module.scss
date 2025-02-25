@@ -43,3 +43,11 @@
   background: var(--dark-100) url('../../../../../../public/icons/resizeIcon.svg') no-repeat center / 30px 30px;
   cursor: pointer;
 }
+
+.zoom {
+  width: 40px;
+  height: 40px;
+  background: var(--dark-100) url('../../../../../../public/icons/zoomLens.svg') no-repeat center / 30px 30px;
+  cursor: pointer;
+  margin-right: auto;
+}
