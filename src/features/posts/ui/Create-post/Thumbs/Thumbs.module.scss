@@ -1,8 +1,8 @@
 .thumblist {
   display: flex;
   position: absolute;
-  bottom: 50px;
-  right: 10px;
+  bottom: 43px;
+  right: 8px;
   background: rgb(23 23 23 / 90%);
   padding: 0.6rem;
   padding-right: 0;
@@ -33,14 +33,14 @@
     object-fit: cover;
     cursor: pointer;
   }
-}
 
-.remove {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  width: 10px;
-  height: 10px;
-  padding: 0 !important;
-  background: url('../../../../../../public/icons/smallCross.svg') no-repeat center;
+  .remove {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    background: url('../../../../../../public/icons/smallCross.svg') no-repeat center;
+  }
 }

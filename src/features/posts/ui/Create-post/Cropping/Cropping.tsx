@@ -72,11 +72,26 @@ export const Cropping = (props: PropsType) => {
         onChange={uploadUserPhotoHandler}
       />
       <div className={s.btns}>
-        <Button variant={'ghost'} onClick={() => toggleOption('resizer')} className={s.resize}></Button>
+        <Button
+          variant={'ghost'}
+          onClick={() => toggleOption('resizer')}
+          className={s.resize}
+          aria-label={'Open photo resizer'}
+        ></Button>
         {isActive('resizer') && <ResizePhoto />}
-        <Button variant={'ghost'} onClick={() => toggleOption('zoom')} className={s.zoom}></Button>
+        <Button
+          variant={'ghost'}
+          onClick={() => toggleOption('zoom')}
+          className={s.zoom}
+          aria-label={'Open photo zoom'}
+        ></Button>
         {isActive('zoom') && <ZoomPhoto />}
-        <Button variant={'ghost'} onClick={() => toggleOption('thumbs')} className={s.file}></Button>
+        <Button
+          variant={'ghost'}
+          onClick={() => toggleOption('thumbs')}
+          className={s.file}
+          aria-label={'Open photos thumbs list'}
+        ></Button>
         {isActive('thumbs') && (
           <Thumbs
             userPhotos={userPhotos}
