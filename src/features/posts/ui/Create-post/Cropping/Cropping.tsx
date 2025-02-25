@@ -5,6 +5,8 @@ import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { isImageCorrect } from '@/features/posts/ui/Create-post/Start-layout/Startlayout';
 import { Thumbs } from '@/features/posts/ui/Create-post/Thumbs/Thumbs';
+import { ResizePhoto } from '@/features/posts/ui/Create-post/ResizePhoto/ResizePhoto';
+import { ZoomPhoto } from '@/features/posts/ui/Create-post/ZoomPhoto/ZoomPhoto';
 
 type PropsType = {
   userPhotos: string[];
@@ -12,10 +14,12 @@ type PropsType = {
   setUserPhotos: Dispatch<SetStateAction<string[]>>;
 };
 
+type optionType = 'thumbs' | 'resizer' | 'zoom' | null;
+
 export const Cropping = (props: PropsType) => {
   const { userPhotos, setUserPhotos } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [showThumbs, setShowTumbs] = useState(false);
+  const [activeOption, setActiveOption] = useState<optionType>(null);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -42,9 +46,11 @@ export const Cropping = (props: PropsType) => {
     setUserPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== photoIndex));
   };
 
-  const toggleThumbs = () => {
-    showThumbs ? setShowTumbs(false) : setShowTumbs(true);
+  const toggleOption = (option: optionType) => {
+    setActiveOption((prevBlock: optionType) => (prevBlock === option ? null : option));
   };
+
+  const isActive = (option: optionType) => activeOption === option;
 
   return (
     <div className={s.wrapper}>
@@ -65,14 +71,35 @@ export const Cropping = (props: PropsType) => {
         className={s.input}
         onChange={uploadUserPhotoHandler}
       />
-      <Button variant={'ghost'} onClick={toggleThumbs} className={s.btn}></Button>
-      {showThumbs && (
-        <Thumbs
-          userPhotos={userPhotos}
-          handleButtonClick={handleButtonClick}
-          removeUserPhotoHandler={removeUserPhotoHandler}
-        />
-      )}
+      <div className={s.btns}>
+        <Button
+          variant={'ghost'}
+          onClick={() => toggleOption('resizer')}
+          className={s.resize}
+          aria-label={'Open photo resizer'}
+        ></Button>
+        {isActive('resizer') && <ResizePhoto />}
+        <Button
+          variant={'ghost'}
+          onClick={() => toggleOption('zoom')}
+          className={s.zoom}
+          aria-label={'Open photo zoom'}
+        ></Button>
+        {isActive('zoom') && <ZoomPhoto />}
+        <Button
+          variant={'ghost'}
+          onClick={() => toggleOption('thumbs')}
+          className={s.file}
+          aria-label={'Open photos thumbs list'}
+        ></Button>
+        {isActive('thumbs') && (
+          <Thumbs
+            userPhotos={userPhotos}
+            handleButtonClick={handleButtonClick}
+            removeUserPhotoHandler={removeUserPhotoHandler}
+          />
+        )}
+      </div>
     </div>
   );
 };

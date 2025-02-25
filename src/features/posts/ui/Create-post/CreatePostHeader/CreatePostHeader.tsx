@@ -35,13 +35,13 @@ export const CreatePostHeader = (props: PropsType) => {
 
       {page != 0 && page < totalPages - 1 && (
         <Button variant={'ghost'} onClick={() => paginate('next')}>
-          {'Next'}
+          Next
         </Button>
       )}
 
       {page === 3 && (
         <Button variant={'ghost'} onClick={handleUploadPhotos}>
-          {'Publish'}
+          Publish
         </Button>
       )}
     </div>
