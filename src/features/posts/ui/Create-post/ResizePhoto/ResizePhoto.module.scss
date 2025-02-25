@@ -8,10 +8,64 @@
   width: 156px;
   height: 152px;
   background: rgb(23 23 23 / 90%);
-  padding: 0.5rem;
+  padding: 0.8rem;
+}
+
+.label {
+  font-weight: 500;
+  color: var(--light-900);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  stroke: var(--light-900);
+}
+
+.original {
+  fill: var(--light-900);
+}
+
+.square {
+  width: 18px;
+  height: 18px;
+  margin-right: 2px;
+}
+
+.vertical {
+  width: 18px;
+  height: 26px;
+  margin-right: 2px;
+}
+
+.horizontal {
+  width: 26px;
+  height: 20px;
+  margin-right: 2px;
 }
 
 .item {
-  display: flex;
-  justify-content: space-between;
+  input {
+    display: none;
+  }
+
+  label {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+
+    &:hover {
+      .label {
+        color: var(--light-100);
+      }
+
+      .icon {
+        stroke: var(--light-100);
+      }
+
+      .original {
+        fill: var(--light-100);
+      }
+    }
+  }
 }

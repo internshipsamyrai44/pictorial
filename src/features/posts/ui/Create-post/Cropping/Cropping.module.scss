@@ -5,11 +5,8 @@
   align-items: center;
   position: relative;
   width: 492px;
-}
-
-.image {
-  aspect-ratio: 1/1;
-  object-fit: cover;
+  max-height: 503px;
+  overflow: hidden;
 }
 
 .buttons {
