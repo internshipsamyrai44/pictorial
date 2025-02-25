@@ -1,0 +1,17 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  position: absolute;
+  left: 10px;
+  bottom: 50px;
+  width: 156px;
+  height: 152px;
+  background: rgb(23 23 23 / 90%);
+  padding: 0.5rem;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+}

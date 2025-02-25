@@ -5,6 +5,7 @@ import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { isImageCorrect } from '@/features/posts/ui/Create-post/Start-layout/Startlayout';
 import { Thumbs } from '@/features/posts/ui/Create-post/Thumbs/Thumbs';
+import { ResizePhoto } from '@/features/posts/ui/Create-post/ResizePhoto/ResizePhoto';
 
 type PropsType = {
   userPhotos: string[];
@@ -16,6 +17,7 @@ export const Cropping = (props: PropsType) => {
   const { userPhotos, setUserPhotos } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [showThumbs, setShowTumbs] = useState(false);
+  const [showResizer, setShowResizer] = useState(false);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -45,6 +47,9 @@ export const Cropping = (props: PropsType) => {
   const toggleThumbs = () => {
     showThumbs ? setShowTumbs(false) : setShowTumbs(true);
   };
+  const toggleResize = () => {
+    showResizer ? setShowResizer(false) : setShowResizer(true);
+  };
 
   return (
     <div className={s.wrapper}>
@@ -65,14 +70,18 @@ export const Cropping = (props: PropsType) => {
         className={s.input}
         onChange={uploadUserPhotoHandler}
       />
-      <Button variant={'ghost'} onClick={toggleThumbs} className={s.btn}></Button>
-      {showThumbs && (
-        <Thumbs
-          userPhotos={userPhotos}
-          handleButtonClick={handleButtonClick}
-          removeUserPhotoHandler={removeUserPhotoHandler}
-        />
-      )}
+      <div className={s.btns}>
+        <Button variant={'ghost'} onClick={toggleResize} className={s.resize}></Button>
+        {showResizer && <ResizePhoto />}
+        <Button variant={'ghost'} onClick={toggleThumbs} className={s.file}></Button>
+        {showThumbs && (
+          <Thumbs
+            userPhotos={userPhotos}
+            handleButtonClick={handleButtonClick}
+            removeUserPhotoHandler={removeUserPhotoHandler}
+          />
+        )}
+      </div>
     </div>
   );
 };
