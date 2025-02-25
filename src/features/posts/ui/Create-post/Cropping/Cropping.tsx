@@ -14,12 +14,12 @@ type PropsType = {
   setUserPhotos: Dispatch<SetStateAction<string[]>>;
 };
 
+type optionType = 'thumbs' | 'resizer' | 'zoom' | null;
+
 export const Cropping = (props: PropsType) => {
   const { userPhotos, setUserPhotos } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [showThumbs, setShowTumbs] = useState(false);
-  const [showResizer, setShowResizer] = useState(false);
-  const [showZoom, setShowZoom] = useState(false);
+  const [activeOption, setActiveOption] = useState<optionType>(null);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -46,15 +46,11 @@ export const Cropping = (props: PropsType) => {
     setUserPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== photoIndex));
   };
 
-  const toggleThumbs = () => {
-    showThumbs ? setShowTumbs(false) : setShowTumbs(true);
+  const toggleOption = (option: optionType) => {
+    setActiveOption((prevBlock: optionType) => (prevBlock === option ? null : option));
   };
-  const toggleResize = () => {
-    showResizer ? setShowResizer(false) : setShowResizer(true);
-  };
-  const toggleZoom = () => {
-    showZoom ? setShowZoom(false) : setShowZoom(true);
-  };
+
+  const isActive = (option: optionType) => activeOption === option;
 
   return (
     <div className={s.wrapper}>
@@ -76,12 +72,12 @@ export const Cropping = (props: PropsType) => {
         onChange={uploadUserPhotoHandler}
       />
       <div className={s.btns}>
-        <Button variant={'ghost'} onClick={toggleResize} className={s.resize}></Button>
-        {showResizer && <ResizePhoto />}
-        <Button variant={'ghost'} onClick={toggleZoom} className={s.zoom}></Button>
-        {showZoom && <ZoomPhoto />}
-        <Button variant={'ghost'} onClick={toggleThumbs} className={s.file}></Button>
-        {showThumbs && (
+        <Button variant={'ghost'} onClick={() => toggleOption('resizer')} className={s.resize}></Button>
+        {isActive('resizer') && <ResizePhoto />}
+        <Button variant={'ghost'} onClick={() => toggleOption('zoom')} className={s.zoom}></Button>
+        {isActive('zoom') && <ZoomPhoto />}
+        <Button variant={'ghost'} onClick={() => toggleOption('thumbs')} className={s.file}></Button>
+        {isActive('thumbs') && (
           <Thumbs
             userPhotos={userPhotos}
             handleButtonClick={handleButtonClick}
