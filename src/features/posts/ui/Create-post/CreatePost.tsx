@@ -21,6 +21,7 @@ export const CreatePost = (props: PropsType) => {
   const TOTAL_PAGES = 4;
   const [userPhotos, setUserPhotos] = useState<string[]>([]);
   const [page, setPage] = useState<number>(0);
+  const [textAreaValue, setTextAreaValue] = useState<string>('');
   const [uploadImages] = useUploadImagesMutation();
   const [createPost] = useCreatePostMutation();
 
@@ -56,7 +57,9 @@ export const CreatePost = (props: PropsType) => {
         return <Filters userPhotos={userPhotos} />;
       }
       case 3: {
-        return <Publication userPhotos={userPhotos} />;
+        return (
+          <Publication userPhotos={userPhotos} textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue} />
+        );
       }
       default: {
         return <Startlayout userPhotos={userPhotos} setUserPhotos={setUserPhotos} paginate={paginate} />;
@@ -106,7 +109,7 @@ export const CreatePost = (props: PropsType) => {
       const res = await uploadImages(formData);
 
       await createPost({
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+        description: textAreaValue,
         childrenMetadata: [{ uploadId: res.data?.images[0].uploadId }]
       });
       alert('Successfully created!');

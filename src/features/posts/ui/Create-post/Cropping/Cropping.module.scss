@@ -52,6 +52,7 @@
 
 .original {
   aspect-ratio: auto;
+  object-fit: cover;
 }
 
 .square {
@@ -61,7 +62,7 @@
 
 .vertical {
   aspect-ratio: 4 / 5;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .horizontal {
