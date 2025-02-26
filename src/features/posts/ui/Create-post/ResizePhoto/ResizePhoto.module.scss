@@ -23,7 +23,7 @@
 }
 
 .original {
-  fill: var(--light-900);
+  opacity: 0.6;
 }
 
 .square {
@@ -60,6 +60,13 @@
 
     .original {
       fill: var(--light-100);
+      opacity: 1;
     }
   }
+}
+
+.active {
+  color: var(--light-100);
+  stroke: var(--light-100);
+  opacity: 1;
 }
