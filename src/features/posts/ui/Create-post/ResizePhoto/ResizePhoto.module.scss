@@ -45,27 +45,21 @@
 }
 
 .item {
-  input {
-    display: none;
-  }
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
 
-  label {
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
+  &:hover {
+    .label {
+      color: var(--light-100);
+    }
 
-    &:hover {
-      .label {
-        color: var(--light-100);
-      }
+    .icon {
+      stroke: var(--light-100);
+    }
 
-      .icon {
-        stroke: var(--light-100);
-      }
-
-      .original {
-        fill: var(--light-100);
-      }
+    .original {
+      fill: var(--light-100);
     }
   }
 }
