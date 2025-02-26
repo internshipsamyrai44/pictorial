@@ -21,6 +21,7 @@ export const Cropping = (props: PropsType) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [activeOption, setActiveOption] = useState<optionType>(null);
   const [aspectRatio, setAspectRatio] = useState<aspectRatioType>('square');
+  const [zoomValue, setZoomValue] = useState('1');
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -62,6 +63,11 @@ export const Cropping = (props: PropsType) => {
         layout="responsive"
         width={100}
         height={100}
+        style={{
+          transform: `scale(${zoomValue})`,
+          transformOrigin: 'center center',
+          transition: 'transform 0.2s ease-in-out'
+        }}
       />
 
       <input
@@ -84,9 +90,9 @@ export const Cropping = (props: PropsType) => {
           variant={'ghost'}
           onClick={() => toggleOption('zoom')}
           className={s.zoom}
-          aria-label={'Open photo zoom'}
+          aria-label={'Open photo zoomValue'}
         ></Button>
-        {isActive('zoom') && <ZoomPhoto />}
+        {isActive('zoom') && <ZoomPhoto setZoomValue={setZoomValue} zoomValue={zoomValue} />}
         <Button
           variant={'ghost'}
           onClick={() => toggleOption('thumbs')}
