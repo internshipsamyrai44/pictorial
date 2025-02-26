@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import s from './Filters.module.scss';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
+import { useState } from 'react';
 
 type PropsType = {
   userPhotos: string[];
@@ -18,6 +19,7 @@ type FiltersType =
   | 'brooklyn';
 
 export const Filters = (props: PropsType) => {
+  const [photoFilter, setPhotoFilter] = useState<FiltersType>('normal');
   const filters: FiltersType[] = [
     'normal',
     'clarendon',
@@ -41,7 +43,7 @@ export const Filters = (props: PropsType) => {
         <div className={s.photo}>
           <Image
             src={userPhotos[0] || placeholder}
-            className={s.image}
+            className={`${s.image} ${s[photoFilter]}`}
             alt={'User Photo'}
             layout="responsive"
             width={100}
@@ -51,7 +53,7 @@ export const Filters = (props: PropsType) => {
 
         <div className={s.filters}>
           {filters.map((filter) => (
-            <div className={s.item} key={filter}>
+            <div className={s.item} key={filter} onClick={() => setPhotoFilter(filter)}>
               <Image
                 src={userPhotos[0]}
                 className={`${s.img} ${s[filter]}`}
