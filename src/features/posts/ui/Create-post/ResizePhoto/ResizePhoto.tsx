@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import s from './ResizePhoto.module.scss';
 
-type SizeFormatType = 'original' | 'square' | 'horizontal' | 'vertical';
+type PropsType = {
+  // eslint-disable-next-line no-unused-vars
+  setAspectRatio: (aspectRatio: aspectRatioType) => void;
+};
 
-export const ResizePhoto = () => {
-  const [selectedFormat, setSelectedFormat] = useState<SizeFormatType>('original');
+export type aspectRatioType = 'original' | 'square' | 'horizontal' | 'vertical';
 
-  const handleFormatClick = (format: SizeFormatType) => {
+export const ResizePhoto = (props: PropsType) => {
+  const { setAspectRatio } = props;
+  const [selectedFormat, setSelectedFormat] = useState<aspectRatioType>('square');
+
+  const handleFormatClick = (format: aspectRatioType) => {
     setSelectedFormat(format);
+    setAspectRatio(format);
   };
 
   return (
