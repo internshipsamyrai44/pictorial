@@ -5,7 +5,7 @@ import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { isImageCorrect } from '@/features/posts/ui/Create-post/Start-layout/Startlayout';
 import { Thumbs } from '@/features/posts/ui/Create-post/Thumbs/Thumbs';
-import { ResizePhoto } from '@/features/posts/ui/Create-post/ResizePhoto/ResizePhoto';
+import { aspectRatioType, ResizePhoto } from '@/features/posts/ui/Create-post/ResizePhoto/ResizePhoto';
 import { ZoomPhoto } from '@/features/posts/ui/Create-post/ZoomPhoto/ZoomPhoto';
 
 type PropsType = {
@@ -20,6 +20,7 @@ export const Cropping = (props: PropsType) => {
   const { userPhotos, setUserPhotos } = props;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [activeOption, setActiveOption] = useState<optionType>(null);
+  const [aspectRatio, setAspectRatio] = useState<aspectRatioType>('square');
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -56,7 +57,7 @@ export const Cropping = (props: PropsType) => {
     <div className={s.wrapper}>
       <Image
         src={userPhotos[0] || placeholder}
-        className={s.image}
+        className={s[aspectRatio]}
         alt={'User Photo'}
         layout="responsive"
         width={100}
@@ -78,7 +79,7 @@ export const Cropping = (props: PropsType) => {
           className={s.resize}
           aria-label={'Open photo resizer'}
         ></Button>
-        {isActive('resizer') && <ResizePhoto />}
+        {isActive('resizer') && <ResizePhoto setAspectRatio={setAspectRatio} />}
         <Button
           variant={'ghost'}
           onClick={() => toggleOption('zoom')}

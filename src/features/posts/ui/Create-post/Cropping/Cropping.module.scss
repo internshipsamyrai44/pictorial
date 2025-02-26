@@ -5,11 +5,8 @@
   align-items: center;
   position: relative;
   width: 492px;
-}
-
-.image {
-  aspect-ratio: 1/1;
-  object-fit: cover;
+  height: 504px;
+  overflow: hidden;
 }
 
 .buttons {
@@ -51,4 +48,23 @@
     background: rgb(23 23 23 / 90%) url('../../../../../../public/icons/zoomLens.svg') no-repeat center / 30px 30px;
     margin-right: auto;
   }
+}
+
+.original {
+  aspect-ratio: auto;
+}
+
+.square {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.vertical {
+  aspect-ratio: 4 / 5;
+  object-fit: contain;
+}
+
+.horizontal {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
