@@ -2,24 +2,21 @@
   display: flex;
   width: 972px;
   gap: 2rem;
-  height: 564px;
   padding: 0;
-  flex-basis: calc(50% - 1rem);
 }
 
 .image {
-  flex: 1;
+  width: 490px;
   min-width: 0;
-  aspect-ratio: 1 /1;
-  object-fit: cover;
+  aspect-ratio: 1 / 1;
 }
 
 .info {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   gap: 2rem;
-  width: 400px;
   padding-right: 30px;
+  width: 490px;
 }
 
 .avatar {
