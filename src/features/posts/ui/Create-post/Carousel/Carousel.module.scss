@@ -1,0 +1,75 @@
+.container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.item {
+  width: 100%;
+  transition: opacity 0.3s ease;
+
+  &.active {
+    display: block;
+    opacity: 1;
+  }
+
+  &.inactive {
+    display: none;
+    opacity: 0;
+  }
+}
+
+.container > button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--light-100);
+  border: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 0;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.container > .prev {
+  left: 10px;
+  background: rgb(23 23 23 / 90%) url('../../../../../../public/icons/arrow-ios-back.svg') no-repeat center / 30px 30px;
+}
+
+.container > .next {
+  right: 10px;
+  background: rgb(23 23 23 / 90%) url('../../../../../../public/icons/arrow-ios-next.svg') no-repeat center / 30px 30px;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  z-index: 1;
+}
+
+.links > .small {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--light-900);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  &.active {
+    background: var(--accent-500);
+  }
+}

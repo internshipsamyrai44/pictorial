@@ -2,6 +2,7 @@ import Image from 'next/image';
 import s from './Filters.module.scss';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import { useState } from 'react';
+import { Carousel } from '@/features/posts/ui/Create-post/Carousel/Carousel';
 
 type PropsType = {
   userPhotos: string[];
@@ -41,14 +42,19 @@ export const Filters = (props: PropsType) => {
     <>
       <div className={s.wrapper}>
         <div className={s.photo}>
-          <Image
-            src={userPhotos[0] || placeholder}
-            className={`${s.image} ${s[photoFilter]}`}
-            alt={'User Photo'}
-            layout="responsive"
-            width={100}
-            height={100}
-          />
+          <Carousel>
+            {userPhotos.map((photo, index) => (
+              <Image
+                src={photo || placeholder}
+                className={`${s.image} ${s[photoFilter]}`}
+                alt={'User Photo'}
+                layout="responsive"
+                width={100}
+                height={100}
+                key={`user-photo-${index}`}
+              />
+            ))}
+          </Carousel>
         </div>
 
         <div className={s.filters}>

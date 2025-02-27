@@ -7,6 +7,7 @@ import { isImageCorrect } from '@/features/posts/ui/Create-post/Start-layout/Sta
 import { Thumbs } from '@/features/posts/ui/Create-post/Thumbs/Thumbs';
 import { aspectRatioType, ResizePhoto } from '@/features/posts/ui/Create-post/ResizePhoto/ResizePhoto';
 import { ZoomPhoto } from '@/features/posts/ui/Create-post/ZoomPhoto/ZoomPhoto';
+import { Carousel } from '@/features/posts/ui/Create-post/Carousel/Carousel';
 
 type PropsType = {
   userPhotos: string[];
@@ -56,19 +57,24 @@ export const Cropping = (props: PropsType) => {
 
   return (
     <div className={s.wrapper}>
-      <Image
-        src={userPhotos[0] || placeholder}
-        className={s[aspectRatio]}
-        alt={'User Photo'}
-        layout="responsive"
-        width={100}
-        height={100}
-        style={{
-          transform: `scale(${zoomValue})`,
-          transformOrigin: 'center center',
-          transition: 'transform 0.2s ease-in-out'
-        }}
-      />
+      <Carousel>
+        {userPhotos.map((photo, index) => (
+          <Image
+            src={photo || placeholder}
+            className={s[aspectRatio]}
+            alt={'User Photo'}
+            layout="responsive"
+            width={100}
+            height={100}
+            style={{
+              transform: `scale(${zoomValue})`,
+              transformOrigin: 'center center',
+              transition: 'transform 0.2s ease-in-out'
+            }}
+            key={`user-photo-${index}`}
+          />
+        ))}
+      </Carousel>
 
       <input
         type="file"

@@ -5,6 +5,7 @@ import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import Link from 'next/link';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import { useMeQuery } from '@/features/auth/api/authApi';
+import { Carousel } from '@/features/posts/ui/Create-post/Carousel/Carousel';
 
 type PropsType = {
   userPhotos: string[];
@@ -24,14 +25,20 @@ export const Publication = (props: PropsType) => {
   return (
     <>
       <div className={s.wrapper}>
-        <Image
-          src={userPhotos[0] || placeholder}
-          className={s.image}
-          alt={'User Photo'}
-          layout="responsive"
-          width={100}
-          height={100}
-        />
+        <Carousel>
+          {userPhotos.map((photo, index) => (
+            <Image
+              src={photo || placeholder}
+              className={s.image}
+              alt={'User Photo'}
+              layout="responsive"
+              width={100}
+              height={100}
+              key={`user-photo-${index}`}
+            />
+          ))}
+        </Carousel>
+
         <div className={s.info}>
           <Link href={`/public-user/profile/${me?.userId}`}>
             <div className={s.avatar}>
