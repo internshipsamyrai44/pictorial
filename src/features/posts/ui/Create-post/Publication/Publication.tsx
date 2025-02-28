@@ -56,7 +56,9 @@ export const Publication = (props: PropsType) => {
             onChange={textAreaHandler}
           />
 
-          <Input label={'Add location'} placeholder={'New-York'} />
+          <div className={s.location}>
+            <Input label={'Add location'} placeholder={'New-York'} className={s.input} />
+          </div>
         </div>
       </div>
     </>
