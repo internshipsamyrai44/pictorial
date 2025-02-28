@@ -10,6 +10,7 @@ import { Publication } from '@/features/posts/ui/Create-post/Publication/Publica
 import { CreatePostHeader } from '@/features/posts/ui/Create-post/CreatePostHeader/CreatePostHeader';
 import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts/api/postsApi';
 import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
+import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
@@ -22,6 +23,7 @@ export const CreatePost = (props: PropsType) => {
   const [userPhotos, setUserPhotos] = useState<string[]>([]);
   const [page, setPage] = useState<number>(0);
   const [textAreaValue, setTextAreaValue] = useState<string>('');
+  const [modalCloseActive, setModalCloseActive] = useState(false);
   const [uploadImages] = useUploadImagesMutation();
   const [createPost] = useCreatePostMutation();
 
@@ -69,7 +71,7 @@ export const CreatePost = (props: PropsType) => {
 
   const onKeyDownHandler: KeyboardEventHandler<HTMLDivElement> = (e) => {
     if (e.key === 'Escape') {
-      setCreatePostActive(false);
+      setModalCloseActive(true);
     }
   };
 
@@ -92,7 +94,7 @@ export const CreatePost = (props: PropsType) => {
       }
 
       case 'close': {
-        setCreatePostActive(false);
+        setModalCloseActive(true);
         break;
       }
     }
@@ -120,17 +122,37 @@ export const CreatePost = (props: PropsType) => {
   };
 
   return (
-    <div className={s.wrapper} onKeyDown={onKeyDownHandler} onClick={() => paginate('close')} tabIndex={0}>
-      <div className={s.steps} onClick={(e) => e.stopPropagation()}>
-        <CreatePostHeader
-          page={page}
-          totalPages={TOTAL_PAGES}
-          stepTitle={stepTitle}
-          paginate={paginate}
-          handleUploadPhotos={handleUploadPhotos}
-        />
-        {renderStep()}
+    <>
+      <div className={s.wrapper} onKeyDown={onKeyDownHandler} onClick={() => setModalCloseActive(true)} tabIndex={0}>
+        <div className={s.steps} onClick={(e) => e.stopPropagation()}>
+          <CreatePostHeader
+            page={page}
+            totalPages={TOTAL_PAGES}
+            stepTitle={stepTitle}
+            paginate={paginate}
+            handleUploadPhotos={handleUploadPhotos}
+          />
+          {renderStep()}
+        </div>
       </div>
-    </div>
+      {modalCloseActive && (
+        <Modal title={'Close'} className={s.modal} onClose={() => setModalCloseActive(false)}>
+          <p>Do you really want to close the creation of a publication? If you close everything will be deleted</p>
+          <div className={s.btns}>
+            <Button variant={'primary'} onClick={() => setModalCloseActive(false)}>
+              Discard
+            </Button>
+            <Button
+              variant={'outlined'}
+              onClick={() => {
+                setCreatePostActive(false);
+              }}
+            >
+              Save Draft
+            </Button>
+          </div>
+        </Modal>
+      )}
+    </>
   );
 };
