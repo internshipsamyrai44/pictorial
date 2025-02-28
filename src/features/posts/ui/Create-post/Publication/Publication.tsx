@@ -25,19 +25,21 @@ export const Publication = (props: PropsType) => {
   return (
     <>
       <div className={s.wrapper}>
-        <Carousel>
-          {userPhotos.map((photo, index) => (
-            <Image
-              src={photo || placeholder}
-              className={s.image}
-              alt={'User Photo'}
-              layout="responsive"
-              width={100}
-              height={100}
-              key={`user-photo-${index}`}
-            />
-          ))}
-        </Carousel>
+        <div className={s.image}>
+          <Carousel>
+            {userPhotos.map((photo, index) => (
+              <Image
+                src={photo || placeholder}
+                className={s.image}
+                alt={'User Photo'}
+                layout="responsive"
+                width={100}
+                height={100}
+                key={`user-photo-${index}`}
+              />
+            ))}
+          </Carousel>
+        </div>
 
         <div className={s.info}>
           <Link href={`/public-user/profile/${me?.userId}`}>
