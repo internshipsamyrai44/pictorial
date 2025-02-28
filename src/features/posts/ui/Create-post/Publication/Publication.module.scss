@@ -28,3 +28,40 @@
   align-items: center;
   gap: 1rem;
 }
+
+.location {
+  position: relative;
+}
+
+.location::after {
+  content: '';
+  position: absolute;
+  top: 37px;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: url('../../../../../../public/icons/mapPin.svg') no-repeat center / cover;
+}
+
+.textarea {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: -31px;
+    width: 486px;
+    height: 1px;
+    background: var(--dark-100);
+  }
+}
+
+.textarea > span {
+  color: var(--light-900);
+  text-align: right;
+  font-size: var(--font-size-s);
+}
