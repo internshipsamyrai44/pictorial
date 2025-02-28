@@ -6,9 +6,10 @@
 }
 
 .image {
-  width: 490px;
+  max-width: 490px;
   min-width: 0;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 .info {
@@ -16,7 +17,10 @@
   flex-flow: column wrap;
   gap: 2rem;
   padding-right: 30px;
-  width: 490px;
+  margin-top: 1rem;
+  width: 460px;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .avatar {

@@ -56,7 +56,6 @@ export const Filters = (props: PropsType) => {
             ))}
           </Carousel>
         </div>
-
         <div className={s.filters}>
           {filters.map((filter) => (
             <div className={s.item} key={filter} onClick={() => setPhotoFilter(filter)}>
