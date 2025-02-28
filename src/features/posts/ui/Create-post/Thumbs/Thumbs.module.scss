@@ -7,10 +7,11 @@
   background: rgb(23 23 23 / 90%);
   padding: 0.6rem;
   width: auto;
+  border-radius: 3px;
 
   .add {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     background: url('../../../../../../public/icons/plus-circle.svg') no-repeat center;
     padding: 0;
   }
@@ -33,15 +34,20 @@
     aspect-ratio: 1 / 1;
     object-fit: cover;
     cursor: pointer;
+    border-radius: 2px;
   }
 
   .remove {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 2px;
     right: 2px;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 13px;
     padding: 0;
-    background: url('../../../../../../public/icons/smallCross.svg') no-repeat center;
+    border-radius: 1px;
+    background: rgb(23 23 23 / 90%) url('../../../../../../public/icons/smallCross.svg') no-repeat center / 8px 8px;
   }
 }

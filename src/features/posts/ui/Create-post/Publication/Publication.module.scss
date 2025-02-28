@@ -47,6 +47,17 @@
 .textarea {
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: -31px;
+    width: 486px;
+    height: 1px;
+    background: var(--dark-100);
+  }
 }
 
 .textarea > span {
