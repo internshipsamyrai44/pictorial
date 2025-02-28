@@ -1,8 +1,9 @@
 import s from './StartLayot.module.scss';
 import Image from 'next/image';
 import defaultPic from '../../../../../../public/icons/PicIcon.svg';
-import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 import { Dispatch, SetStateAction, useRef } from 'react';
+import { useCheckUploadedImage } from '@/shared/hooks/useCheckUploadedImage';
 
 type PropsType = {
   setUserPhotos: Dispatch<SetStateAction<string[]>>;
@@ -11,24 +12,9 @@ type PropsType = {
   paginate: (action: 'next' | 'prev' | 'close') => void;
 };
 
-const MAX_SIZE = 5 * 1024 * 1024;
-export const isImageCorrect = (image: File) => {
-  if (!image) {
-    return false;
-  }
-  if (image.size > MAX_SIZE) {
-    alert('Please upload a file smaller than 20MB!');
-    return false;
-  }
-  if (!image.type.startsWith('image/jpeg') && !image.type.startsWith('image/png')) {
-    alert('Please upload JPEG or PNG image format!');
-    return false;
-  }
-  return true;
-};
-
 export const Startlayout = (props: PropsType) => {
   const { setUserPhotos, paginate } = props;
+  const { isImageCorrect, errorUploadModal, setErrorUploadModal } = useCheckUploadedImage();
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -40,7 +26,8 @@ export const Startlayout = (props: PropsType) => {
     const userPhotoFile = e.target.files?.[0];
 
     if (!isImageCorrect(userPhotoFile)) {
-      paginate('prev');
+      setErrorUploadModal(true);
+      return;
     }
     const reader = new FileReader();
     paginate('next');
@@ -53,26 +40,39 @@ export const Startlayout = (props: PropsType) => {
   };
 
   return (
-    <div className={s.wrapper}>
-      <div className={s.image} onClick={handleButtonClick}>
-        <Image src={defaultPic} alt={'Default Photo'} />
+    <>
+      <div className={s.wrapper}>
+        <div className={s.image} onClick={handleButtonClick}>
+          <Image src={defaultPic} alt={'Default Photo'} />
+        </div>
+        <input
+          type="file"
+          accept="image/jpeg, image/png"
+          id="photo-loading"
+          ref={fileInputRef}
+          className={s.input}
+          onChange={uploadUserPhotoHandler}
+        />
+        <div className={s.buttons}>
+          <Button variant={'primary'} onClick={handleButtonClick}>
+            Select from Computer
+          </Button>
+          <Button variant={'outlined'} fullWidth={true}>
+            Open Draft
+          </Button>
+        </div>
       </div>
-      <input
-        type="file"
-        accept="image/jpeg, image/png"
-        id="photo-loading"
-        ref={fileInputRef}
-        className={s.input}
-        onChange={uploadUserPhotoHandler}
-      />
-      <div className={s.buttons}>
-        <Button variant={'primary'} onClick={handleButtonClick}>
-          Select from Computer
-        </Button>
-        <Button variant={'outlined'} fullWidth={true}>
-          Open Draft
-        </Button>
-      </div>
-    </div>
+      {errorUploadModal && (
+        <Modal title={'Error upload'} className={s.modal} onClose={() => setErrorUploadModal(false)}>
+          <p> Please upload JPEG or PNG image format!</p>
+          <p> Upload a file smaller than 20MB!</p>
+          <div className={s.btn}>
+            <Button variant={'primary'} onClick={() => setErrorUploadModal(false)}>
+              Try again
+            </Button>
+          </div>
+        </Modal>
+      )}
+    </>
   );
 };
