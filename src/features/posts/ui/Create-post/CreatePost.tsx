@@ -11,6 +11,7 @@ import { CreatePostHeader } from '@/features/posts/ui/Create-post/CreatePostHead
 import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts/api/postsApi';
 import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
 import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
+import { useTranslations } from 'next-intl';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
@@ -26,23 +27,24 @@ export const CreatePost = (props: PropsType) => {
   const [modalCloseActive, setModalCloseActive] = useState(false);
   const [uploadImages] = useUploadImagesMutation();
   const [createPost] = useCreatePostMutation();
+  const t = useTranslations('Post');
 
   const stepTitle = (): string => {
     switch (page) {
       case 0: {
-        return 'Add Photo' as string;
+        return t('CreatePost.AddPhoto') as string;
       }
       case 1: {
-        return 'Cropping' as string;
+        return t('CreatePost.Cropping') as string;
       }
       case 2: {
-        return 'Filters' as string;
+        return t('CreatePost.Filters') as string;
       }
       case 3: {
-        return 'Publications' as string;
+        return t('CreatePost.Publications') as string;
       }
       default: {
-        return 'Add Photo' as string;
+        return t('CreatePost.AddPhoto') as string;
       }
     }
   };
@@ -136,11 +138,11 @@ export const CreatePost = (props: PropsType) => {
         </div>
       </div>
       {modalCloseActive && (
-        <Modal title={'Close'} className={s.modal} onClose={() => setModalCloseActive(false)}>
-          <p>Do you really want to close the creation of a publication? If you close everything will be deleted</p>
+        <Modal title={t('CreatePost.Close')} className={s.modal} onClose={() => setModalCloseActive(false)}>
+          <p>{t('CreatePost.CloseDescription')} </p>
           <div className={s.btns}>
             <Button variant={'primary'} onClick={() => setModalCloseActive(false)}>
-              Discard
+              {t('CreatePost.Discard')}
             </Button>
             <Button
               variant={'outlined'}
@@ -148,7 +150,7 @@ export const CreatePost = (props: PropsType) => {
                 setCreatePostActive(false);
               }}
             >
-              Save Draft
+              {t('CreatePost.SaveDraft')}
             </Button>
           </div>
         </Modal>

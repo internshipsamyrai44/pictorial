@@ -6,6 +6,7 @@ import Link from 'next/link';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import { useMeQuery } from '@/features/auth/api/authApi';
 import { Carousel } from '@/features/posts/ui/Create-post/Carousel/Carousel';
+import { useTranslations } from 'next-intl';
 
 type PropsType = {
   userPhotos: string[];
@@ -17,6 +18,7 @@ type PropsType = {
 export const Publication = (props: PropsType) => {
   const { userPhotos, setTextAreaValue, textAreaValue } = props;
   const { data: me } = useMeQuery();
+  const t = useTranslations('Post');
 
   const textAreaHandler = (e: any) => {
     setTextAreaValue(e.target.value);
@@ -50,8 +52,8 @@ export const Publication = (props: PropsType) => {
           </Link>
           <div className={s.textarea}>
             <Textarea
-              label={'Add publication descriptions'}
-              placeholder={'Add publication descriptions'}
+              label={t('CreatePost.AddDescriptions')}
+              placeholder={t('CreatePost.AddDescriptions')}
               className={s.text}
               value={textAreaValue}
               onChange={textAreaHandler}
@@ -61,7 +63,7 @@ export const Publication = (props: PropsType) => {
           </div>
 
           <div className={s.location}>
-            <Input label={'Add location'} placeholder={'New-York'} className={s.input} />
+            <Input label={t('CreatePost.AddLocation')} placeholder={'New-York'} className={s.input} />
           </div>
         </div>
       </div>

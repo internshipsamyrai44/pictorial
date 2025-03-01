@@ -13,14 +13,16 @@ export const postsApi = inctagramApi.injectEndpoints({
         url: 'v1/posts/image',
         method: 'POST',
         body: formData
-      })
+      }),
+      invalidatesTags: ['Posts']
     }),
     createPost: build.mutation<PublishedPostResponse, PostRequestData>({
       query: (postData) => ({
         url: 'v1/posts',
         method: 'POST',
         body: postData
-      })
+      }),
+      invalidatesTags: ['Posts']
     }),
     deletePost: build.mutation<void, number>({
       query: (postId: number) => ({

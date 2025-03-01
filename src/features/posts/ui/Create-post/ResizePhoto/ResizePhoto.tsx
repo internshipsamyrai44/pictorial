@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import s from './ResizePhoto.module.scss';
+import { useTranslations } from 'next-intl';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
@@ -11,6 +12,7 @@ export type aspectRatioType = 'original' | 'square' | 'horizontal' | 'vertical';
 export const ResizePhoto = (props: PropsType) => {
   const { setAspectRatio } = props;
   const [selectedFormat, setSelectedFormat] = useState<aspectRatioType>('square');
+  const t = useTranslations('Post');
 
   const handleFormatClick = (format: aspectRatioType) => {
     setSelectedFormat(format);
@@ -20,7 +22,9 @@ export const ResizePhoto = (props: PropsType) => {
   return (
     <div className={s.wrapper}>
       <div className={s.item} onClick={() => handleFormatClick('original')}>
-        <span className={`${s.label} ${selectedFormat === 'original' ? s.active : ''}`}>Original</span>
+        <span className={`${s.label} ${selectedFormat === 'original' ? s.active : ''}`}>
+          {t('CreatePost.Original')}
+        </span>
         <div className={s.svg}>
           <svg
             className={`${s.icon} ${s.original} ${selectedFormat === 'original' ? s.active : ''}`}

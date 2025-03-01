@@ -4,6 +4,7 @@ import defaultPic from '../../../../../../public/icons/PicIcon.svg';
 import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 import { Dispatch, SetStateAction, useRef } from 'react';
 import { useCheckUploadedImage } from '@/shared/hooks/useCheckUploadedImage';
+import { useTranslations } from 'next-intl';
 
 type PropsType = {
   setUserPhotos: Dispatch<SetStateAction<string[]>>;
@@ -15,7 +16,7 @@ type PropsType = {
 export const Startlayout = (props: PropsType) => {
   const { setUserPhotos, paginate } = props;
   const { isImageCorrect, errorUploadModal, setErrorUploadModal } = useCheckUploadedImage();
-
+  const t = useTranslations('Post');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleButtonClick = () => {
@@ -55,20 +56,19 @@ export const Startlayout = (props: PropsType) => {
         />
         <div className={s.buttons}>
           <Button variant={'primary'} onClick={handleButtonClick}>
-            Select from Computer
+            {t('CreatePost.SelectFromComputer')}
           </Button>
           <Button variant={'outlined'} fullWidth={true}>
-            Open Draft
+            {t('CreatePost.OpenDraft')}
           </Button>
         </div>
       </div>
       {errorUploadModal && (
-        <Modal title={'Error upload'} className={s.modal} onClose={() => setErrorUploadModal(false)}>
-          <p> Please upload JPEG or PNG image format!</p>
-          <p> Upload a file smaller than 20MB!</p>
+        <Modal title={t('CreatePost.ErrorUpload')} className={s.modal} onClose={() => setErrorUploadModal(false)}>
+          {t('CreatePost.ErrorUploadDescription')}
           <div className={s.btn}>
             <Button variant={'primary'} onClick={() => setErrorUploadModal(false)}>
-              Try again
+              {t('CreatePost.TryAgain')}
             </Button>
           </div>
         </Modal>

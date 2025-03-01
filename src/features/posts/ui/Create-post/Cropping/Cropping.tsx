@@ -8,6 +8,7 @@ import { aspectRatioType, ResizePhoto } from '@/features/posts/ui/Create-post/Re
 import { ZoomPhoto } from '@/features/posts/ui/Create-post/ZoomPhoto/ZoomPhoto';
 import { Carousel } from '@/features/posts/ui/Create-post/Carousel/Carousel';
 import { useCheckUploadedImage } from '@/shared/hooks/useCheckUploadedImage';
+import { useTranslations } from 'next-intl';
 
 type PropsType = {
   userPhotos: string[];
@@ -24,6 +25,7 @@ export const Cropping = (props: PropsType) => {
   const [aspectRatio, setAspectRatio] = useState<aspectRatioType>('square');
   const [zoomValue, setZoomValue] = useState('1');
   const { isImageCorrect, errorUploadModal, setErrorUploadModal } = useCheckUploadedImage();
+  const t = useTranslations('Post');
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -117,12 +119,11 @@ export const Cropping = (props: PropsType) => {
         </div>
       </div>
       {errorUploadModal && (
-        <Modal title={'Error upload'} className={s.modal} onClose={() => setErrorUploadModal(false)}>
-          <p> Please upload JPEG or PNG image format!</p>
-          <p> Upload a file smaller than 20MB!</p>
+        <Modal title={t('CreatePost.ErrorUpload')} className={s.modal} onClose={() => setErrorUploadModal(false)}>
+          {t('CreatePost.ErrorUploadDescription')}
           <div className={s.btn}>
             <Button variant={'primary'} onClick={() => setErrorUploadModal(false)}>
-              Try again
+              {t('CreatePost.TryAgain')}
             </Button>
           </div>
         </Modal>

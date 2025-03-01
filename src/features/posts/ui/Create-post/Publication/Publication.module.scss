@@ -49,6 +49,11 @@
   flex-direction: column;
   position: relative;
 
+  textarea {
+    field-sizing: content;
+    max-width: 426px;
+  }
+
   &::after {
     content: '';
     position: absolute;
