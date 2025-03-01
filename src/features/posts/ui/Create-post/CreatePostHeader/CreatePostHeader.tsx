@@ -1,5 +1,6 @@
 import s from './CreatePostHeader.module.scss';
 import { Button, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import { useTranslations } from 'next-intl';
 
 type PropsType = {
   page: number;
@@ -12,6 +13,7 @@ type PropsType = {
 
 export const CreatePostHeader = (props: PropsType) => {
   const { stepTitle, page, paginate, totalPages, handleUploadPhotos } = props;
+  const t = useTranslations('Post');
 
   return (
     <div className={s.header}>
@@ -35,13 +37,13 @@ export const CreatePostHeader = (props: PropsType) => {
 
       {page != 0 && page < totalPages - 1 && (
         <Button variant={'ghost'} onClick={() => paginate('next')}>
-          Next
+          {t('CreatePost.Next')}
         </Button>
       )}
 
       {page === 3 && (
         <Button variant={'ghost'} onClick={handleUploadPhotos}>
-          Publish
+          {t('CreatePost.Publish')}
         </Button>
       )}
     </div>

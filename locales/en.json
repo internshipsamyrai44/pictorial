@@ -37,6 +37,26 @@
       "Post": "Delete post",
       "Sure?": "Are you sure you want to delete this post?"
     },
+    "CreatePost": {
+      "AddPhoto": " Add Photo",
+      "Cropping": "Cropping",
+      "Filters": "Filters",
+      "Publications": "Publications",
+      "SelectFromComputer": "Select from Computer",
+      "OpenDraft": "Open Draft",
+      "Next": "NextT",
+      "Original": "Original",
+      "Publish": "Publish",
+      "AddDescriptions": "Add publication descriptions",
+      "AddLocation": "Add location",
+      "Close": "Close",
+      "CloseDescription": "Do you really want to close the creation of a publication? If you close everything will be deleted!",
+      "Discard": "Discard",
+      "SaveDraft": "Save Draft",
+      "ErrorUpload": "Error Upload",
+      "TryAgain": "Try Again",
+      "ErrorUploadDescription": "Please upload JPEG or PNG image format! >Upload a file smaller than 20MB!"
+    },
     "Yes": "Yes",
     "No": "No"
   },
