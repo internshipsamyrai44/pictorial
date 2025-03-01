@@ -32,6 +32,14 @@
     "BackHomePage": "Back to home page",
     "ProcessingAuthorization": "Processing GitHub authorization..."
   },
+  "Post": {
+    "Delete": {
+      "Post": "Delete post",
+      "Sure?": "Are you sure you want to delete this post?"
+    },
+    "Yes": "Yes",
+    "No": "No"
+  },
   "Profile": {
     "FirstName": "First Name",
     "LastName": "Last Name",

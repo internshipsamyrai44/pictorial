@@ -26,7 +26,8 @@ export const postsApi = inctagramApi.injectEndpoints({
       query: (postId: number) => ({
         url: `v1/posts/${postId}`,
         method: 'DELETE'
-      })
+      }),
+      invalidatesTags: ['Posts']
     }),
     getPostsByUsername: build.query<PostResponse, string>({
       query: (userName) => ({
@@ -37,4 +38,5 @@ export const postsApi = inctagramApi.injectEndpoints({
   })
 });
 
-export const { useUploadImagesMutation, useCreatePostMutation, useGetPostsByUsernameQuery } = postsApi;
+export const { useUploadImagesMutation, useCreatePostMutation, useGetPostsByUsernameQuery, useDeletePostMutation } =
+  postsApi;
