@@ -8,6 +8,7 @@ import { LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useTranslations } from 'next-intl';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect } from 'react';
+import { Loader } from '@/shared/ui/loader/Loader';
 
 export default function GithubPage() {
   const t = useTranslations('GithubPage');
@@ -48,10 +49,5 @@ const GithubPageContent = () => {
     }
   }, [replace, searchParams, tError]);
 
-  return (
-    <>
-      <LoaderLinear />
-      {t('ProcessingAuthorization')}
-    </>
-  );
+  return <Loader text={t('ProcessingAuthorization')} />;
 };

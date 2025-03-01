@@ -1,7 +1,7 @@
 'use client';
 
 import * as yup from 'yup';
-import { Alertpopup, Button, Card, Input, LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Alertpopup, Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { getPasswordValidationSchema } from '@/shared/utils/PasswordValidationSchema';
@@ -12,6 +12,7 @@ import { Suspense, useEffect } from 'react';
 import { PATH } from '@/shared/const/PATH';
 import s from './CreateNewPasswordForm.module.scss';
 import { useTranslations } from 'next-intl';
+import { Loader } from '@/shared/ui/loader/Loader';
 
 type FormInput = {
   new_password: string;
@@ -81,7 +82,7 @@ const CreateNewPasswordFormContent = () => {
 
 export const CreateNewPasswordForm = () => {
   return (
-    <Suspense fallback={<LoaderLinear />}>
+    <Suspense fallback={<Loader />}>
       <CreateNewPasswordFormContent />
     </Suspense>
   );
