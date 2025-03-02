@@ -12,8 +12,13 @@
   .add {
     width: 30px;
     height: 30px;
-    background: url('../../../../../../public/icons/plus-circle.svg') no-repeat center;
+    background-color: transparent;
     padding: 0;
+
+    &:hover {
+      background-color: transparent;
+      opacity: 0.6;
+    }
   }
 }
 
@@ -48,6 +53,11 @@
     height: 13px;
     padding: 0;
     border-radius: 1px;
-    background: rgb(23 23 23 / 90%) url('../../../../../../public/icons/smallCross.svg') no-repeat center / 8px 8px;
+    background: rgb(23 23 23 / 90%);
+    color: var(--light-100);
+
+    &:hover {
+      color: var(--light-900);
+    }
   }
 }

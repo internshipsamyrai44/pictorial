@@ -28,28 +28,16 @@
   bottom: 8px;
   padding: 0 0.5rem;
 
-  button {
+  .button {
     width: 40px;
     height: 40px;
     border-radius: 3px;
     cursor: pointer;
     padding: 0;
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-
-  .file {
-    background: rgb(23 23 23 / 90%) url('../../../../../../public/icons/PicIcon.svg') no-repeat center / 30px 30px;
-  }
-
-  .resize {
-    background: rgb(23 23 23 / 90%) url('../../../../../../public/icons/resizeIcon.svg') no-repeat center / 30px 30px;
+    background: rgb(23 23 23 / 90%);
   }
 
   .zoom {
-    background: rgb(23 23 23 / 90%) url('../../../../../../public/icons/zoomLens.svg') no-repeat center / 30px 30px;
     margin-right: auto;
   }
 }
@@ -82,4 +70,14 @@
 
 .modal {
   width: 400px;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  color: var(--light-100);
+
+  &:hover {
+    color: var(--accent-500);
+  }
 }

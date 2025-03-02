@@ -1,6 +1,5 @@
 import s from './StartLayot.module.scss';
-import Image from 'next/image';
-import defaultPic from '../../../../../../public/icons/PicIcon.svg';
+import FileIcon from '../../../../../../public/icons/PicIcon.svg';
 import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 import { Dispatch, SetStateAction, useRef } from 'react';
 import { useCheckUploadedImage } from '@/shared/hooks/useCheckUploadedImage';
@@ -44,7 +43,7 @@ export const Startlayout = (props: PropsType) => {
     <>
       <div className={s.wrapper}>
         <div className={s.image} onClick={handleButtonClick}>
-          <Image src={defaultPic} alt={'Default Photo'} />
+          <FileIcon width={48} height={48} />
         </div>
         <input
           type="file"

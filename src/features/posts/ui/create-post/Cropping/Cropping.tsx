@@ -2,11 +2,14 @@ import Image from 'next/image';
 import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Cropping.module.scss';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
+import ResizeIcon from '../../../../../../public/icons/resizeIcon.svg';
+import FileIcon from '../../../../../../public/icons/PicIcon.svg';
+import ZoomLensIcon from '../../../../../../public/icons/zoomLens.svg';
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
-import { Thumbs } from '@/features/posts/ui/Create-post/Thumbs/Thumbs';
-import { aspectRatioType, ResizePhoto } from '@/features/posts/ui/Create-post/ResizePhoto/ResizePhoto';
-import { ZoomPhoto } from '@/features/posts/ui/Create-post/ZoomPhoto/ZoomPhoto';
-import { Carousel } from '@/features/posts/ui/Create-post/Carousel/Carousel';
+import { Thumbs } from '@/features/posts/ui/create-post/Thumbs/Thumbs';
+import { aspectRatioType, ResizePhoto } from '@/features/posts/ui/create-post/ResizePhoto/ResizePhoto';
+import { ZoomPhoto } from '@/features/posts/ui/create-post/ZoomPhoto/ZoomPhoto';
+import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
 import { useCheckUploadedImage } from '@/shared/hooks/useCheckUploadedImage';
 import { useTranslations } from 'next-intl';
 
@@ -92,23 +95,29 @@ export const Cropping = (props: PropsType) => {
           <Button
             variant={'ghost'}
             onClick={() => toggleOption('resizer')}
-            className={s.resize}
+            className={`${s.button} ${s.resize}`}
             aria-label={'Open photo resizer'}
-          ></Button>
+          >
+            <ResizeIcon className={s.icon} />
+          </Button>
           {isActive('resizer') && <ResizePhoto setAspectRatio={setAspectRatio} />}
           <Button
             variant={'ghost'}
             onClick={() => toggleOption('zoom')}
-            className={s.zoom}
+            className={`${s.button} ${s.zoom}`}
             aria-label={'Open photo zoomValue'}
-          ></Button>
+          >
+            <ZoomLensIcon className={s.icon} />
+          </Button>
           {isActive('zoom') && <ZoomPhoto setZoomValue={setZoomValue} zoomValue={zoomValue} />}
           <Button
             variant={'ghost'}
             onClick={() => toggleOption('thumbs')}
-            className={s.file}
+            className={`${s.button} ${s.file}`}
             aria-label={'Open photos thumbs list'}
-          ></Button>
+          >
+            <FileIcon className={s.icon} />
+          </Button>
           {isActive('thumbs') && (
             <Thumbs
               userPhotos={userPhotos}
