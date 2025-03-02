@@ -3,6 +3,7 @@ import {
   PostRequestData,
   PostResponse,
   PublishedPostResponse,
+  UpdatePostRequest,
   UploadedImageViewModel
 } from '@/features/posts/model/postsApi.types';
 
@@ -24,6 +25,16 @@ export const postsApi = inctagramApi.injectEndpoints({
       }),
       invalidatesTags: ['Posts']
     }),
+    updatePost: build.mutation<void, UpdatePostRequest>({
+      query: (postData) => ({
+        url: `v1/posts/${postData.postId}`,
+        method: 'PUT',
+        body: {
+          description: postData.description
+        }
+      }),
+      invalidatesTags: ['Posts']
+    }),
     deletePost: build.mutation<void, number>({
       query: (postId: number) => ({
         url: `v1/posts/${postId}`,
@@ -40,5 +51,10 @@ export const postsApi = inctagramApi.injectEndpoints({
   })
 });
 
-export const { useUploadImagesMutation, useCreatePostMutation, useGetPostsByUsernameQuery, useDeletePostMutation } =
-  postsApi;
+export const {
+  useUploadImagesMutation,
+  useCreatePostMutation,
+  useGetPostsByUsernameQuery,
+  useDeletePostMutation,
+  useUpdatePostMutation
+} = postsApi;

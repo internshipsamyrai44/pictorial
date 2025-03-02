@@ -47,3 +47,8 @@ export type UserName = {
   firstName: string;
   lastName: string;
 };
+
+export type UpdatePostRequest = {
+  postId: number;
+  description: string;
+};
