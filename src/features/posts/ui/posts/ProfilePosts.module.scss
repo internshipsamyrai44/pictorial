@@ -1,0 +1,11 @@
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(234px, 1fr));
+  padding: 0 25px;
+  gap: 12px;
+}
+
+.post {
+  width: 235px;
+  height: 230px;
+}
