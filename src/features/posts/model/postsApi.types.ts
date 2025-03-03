@@ -13,7 +13,7 @@ export type UploadedImageViewModel = {
 
 export type PostRequestData = {
   description: string;
-  childrenMetadata: uploadId[];
+  childrenMetadata: uploadId[] | undefined;
 };
 
 export type uploadId = {

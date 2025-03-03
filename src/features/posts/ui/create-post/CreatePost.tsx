@@ -113,10 +113,13 @@ export const CreatePost = (props: PropsType) => {
 
     try {
       const res = await uploadImages(formData);
+      const uploadIdObjects = res.data?.images.map((image) => ({
+        uploadId: image.uploadId
+      }));
 
       await createPost({
         description: textAreaValue,
-        childrenMetadata: [{ uploadId: res.data?.images[0].uploadId }]
+        childrenMetadata: uploadIdObjects
       });
       alert('Successfully created!');
       paginate('close');
