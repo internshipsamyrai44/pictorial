@@ -3,6 +3,8 @@
 import s from './CreatePost.module.scss';
 
 import { KeyboardEventHandler, useState } from 'react';
+import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
+
 import { Startlayout } from '@/features/posts/ui/create-post/Start-layout/Startlayout';
 import { Cropping } from '@/features/posts/ui/create-post/Cropping/Cropping';
 import { Filters } from '@/features/posts/ui/create-post/Filters/Filters';
@@ -10,7 +12,6 @@ import { Publication } from '@/features/posts/ui/create-post/Publication/Publica
 import { CreatePostHeader } from '@/features/posts/ui/create-post/CreatePostHeader/CreatePostHeader';
 import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts/api/postsApi';
 import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
-import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useTranslations } from 'next-intl';
 
 type PropsType = {
@@ -20,11 +21,12 @@ type PropsType = {
 
 export const CreatePost = (props: PropsType) => {
   const { setCreatePostActive } = props;
+
   const TOTAL_PAGES = 4;
   const [userPhotos, setUserPhotos] = useState<string[]>([]);
   const [page, setPage] = useState<number>(0);
   const [textAreaValue, setTextAreaValue] = useState<string>('');
-  const [modalCloseActive, setModalCloseActive] = useState(false);
+  const [modalCloseActive, setModalCloseActive] = useState<boolean>(false);
   const [uploadImages] = useUploadImagesMutation();
   const [createPost] = useCreatePostMutation();
   const t = useTranslations('Post');
