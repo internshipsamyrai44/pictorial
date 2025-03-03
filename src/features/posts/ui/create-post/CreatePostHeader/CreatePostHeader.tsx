@@ -1,5 +1,6 @@
 import s from './CreatePostHeader.module.scss';
 import { Button, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import CrossIcon from '../../../../../../public/icons/smallCross.svg';
 import { useTranslations } from 'next-intl';
 
 type PropsType = {
@@ -27,12 +28,9 @@ export const CreatePostHeader = (props: PropsType) => {
       )}
       <Typography variant={'h2'}>{stepTitle()}</Typography>
       {page === 0 && (
-        <Button
-          variant={'ghost'}
-          className={s.btn}
-          aria-label={'Close window'}
-          onClick={() => paginate('close')}
-        ></Button>
+        <Button className={s.btn} aria-label={'Close window'} onClick={() => paginate('close')}>
+          <CrossIcon clasName={s.icon} />
+        </Button>
       )}
 
       {page != 0 && page < totalPages - 1 && (

@@ -4,16 +4,37 @@
   align-items: center;
   width: 100%;
   height: 50px;
-  padding: 10px 5px 10px 15px;
+  padding: 10px 20px;
   border-bottom: 1px solid var(--dark-100);
+
+  .btn {
+    color: #fff;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  button {
+    padding: 0;
+  }
 }
 
 .back {
-  width: 36px;
+  width: 14px;
   height: 36px;
   background: url('../../../../../../public/icons/arrow-ios-back.svg') no-repeat center;
 }
 
-.btn {
-  background: url('../../../../../../public/icons/smallCross.svg') no-repeat center;
+.icon {
+  color: #fff;
+  width: 20px;
+  height: 20px;
 }
