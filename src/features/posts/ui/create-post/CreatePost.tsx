@@ -141,7 +141,13 @@ export const CreatePost = (props: PropsType) => {
         <Modal title={t('CreatePost.Close')} className={s.modal} onClose={() => setModalCloseActive(false)}>
           <p>{t('CreatePost.CloseDescription')} </p>
           <div className={s.btns}>
-            <Button variant={'primary'} onClick={() => setModalCloseActive(false)}>
+            <Button
+              variant={'primary'}
+              onClick={() => {
+                setModalCloseActive(false);
+                setCreatePostActive(false);
+              }}
+            >
               {t('CreatePost.Discard')}
             </Button>
             <Button
