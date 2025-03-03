@@ -1,19 +1,17 @@
 'use client';
 
 import s from './PublicProfilePage.module.scss';
-import { Alertpopup, Button, LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Alertpopup, LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 import Image from 'next/image';
 import { useGetPublicUserProfileQuery } from '@/features/profile/api/publicProfileApi';
 import { useParams } from 'next/navigation';
 import { useRequestError } from '@/shared/hooks/useRequestError';
 import { ProfileDashboard } from '@/widgets/profile-dashboard/ProfileDashboard';
-import { useTranslations } from 'next-intl';
 
 export const PublicProfilePage = () => {
   const { id } = useParams<{ id: string }>();
   const { data, error, isFetching } = useGetPublicUserProfileQuery(+id);
   const errorMessage = useRequestError(error);
-  const t = useTranslations('Profile');
 
   if (isFetching) return <LoaderLinear />;
 
@@ -26,12 +24,7 @@ export const PublicProfilePage = () => {
         userFollowing={data?.userMetadata.following || 0}
         userName={data?.userName || 'no info'}
         userPublications={data?.userMetadata.publications || 0}
-      >
-        <div className={s.buttons}>
-          <Button>{t('Follow')}</Button> {/*TODO follow logic*/}
-          <Button variant={'secondary'}>{t('SendMessage')}</Button> {/*TODO send message logic*/}
-        </div>
-      </ProfileDashboard>
+      ></ProfileDashboard>
       <div className={s.images}>
         {data?.avatars.map((el, index) => (
           <Image
