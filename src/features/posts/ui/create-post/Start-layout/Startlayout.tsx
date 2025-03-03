@@ -65,7 +65,7 @@ export const Startlayout = (props: PropsType) => {
       {errorUploadModal && (
         <Modal title={t('CreatePost.ErrorUpload')} className={s.modal} onClose={() => setErrorUploadModal(false)}>
           {t('CreatePost.ErrorUploadDescription')}
-          <div className={s.btn}>
+          <div className={s.modalBtn}>
             <Button variant={'primary'} onClick={() => setErrorUploadModal(false)}>
               {t('CreatePost.TryAgain')}
             </Button>
