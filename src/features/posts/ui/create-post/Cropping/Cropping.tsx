@@ -58,6 +58,7 @@ export const Cropping = (props: PropsType) => {
   const toggleOption = (option: optionType) => {
     setActiveOption((prevBlock: optionType) => (prevBlock === option ? null : option));
   };
+  ``;
 
   const isActive = (option: optionType) => activeOption === option;
 
