@@ -2,7 +2,7 @@ import Image from 'next/image';
 import s from './Filters.module.scss';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import { useState } from 'react';
-import { Carousel } from '@/features/posts/ui/Create-post/Carousel/Carousel';
+import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
 
 type PropsType = {
   userPhotos: string[];

@@ -1,6 +1,8 @@
 import s from './Thumbs.module.scss';
 import Image from 'next/image';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
+import PlusIcon from '../../../../../../public/icons/plus-circle.svg';
+import SmallCrossIcon from '../../../../../../public/icons/smallCross.svg';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 
 type PropsType = {
@@ -23,16 +25,15 @@ export const Thumbs = (props: PropsType) => {
               className={s.remove}
               aria-label={'Remove photo'}
               onClick={() => removeUserPhotoHandler(i)}
-            ></Button>
+            >
+              <SmallCrossIcon clasName={`${s.icon} ${s.removeIcon}`} width={8} height={8} />
+            </Button>
           </div>
         ))}
       </div>
-      <Button
-        variant={'ghost'}
-        onClick={handleButtonClick}
-        disabled={userPhotos.length >= 10}
-        className={s.add}
-      ></Button>
+      <Button onClick={handleButtonClick} disabled={userPhotos.length >= 10} className={s.add}>
+        <PlusIcon clasName={`${s.icon} ${s.add}`} width={30} height={30} />
+      </Button>
     </div>
   );
 };

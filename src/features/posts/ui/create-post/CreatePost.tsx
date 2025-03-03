@@ -3,11 +3,11 @@
 import s from './CreatePost.module.scss';
 
 import { KeyboardEventHandler, useState } from 'react';
-import { Startlayout } from '@/features/posts/ui/Create-post/Start-layout/Startlayout';
-import { Cropping } from '@/features/posts/ui/Create-post/Cropping/Cropping';
-import { Filters } from '@/features/posts/ui/Create-post/Filters/Filters';
-import { Publication } from '@/features/posts/ui/Create-post/Publication/Publication';
-import { CreatePostHeader } from '@/features/posts/ui/Create-post/CreatePostHeader/CreatePostHeader';
+import { Startlayout } from '@/features/posts/ui/create-post/Start-layout/Startlayout';
+import { Cropping } from '@/features/posts/ui/create-post/Cropping/Cropping';
+import { Filters } from '@/features/posts/ui/create-post/Filters/Filters';
+import { Publication } from '@/features/posts/ui/create-post/Publication/Publication';
+import { CreatePostHeader } from '@/features/posts/ui/create-post/CreatePostHeader/CreatePostHeader';
 import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts/api/postsApi';
 import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
 import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
