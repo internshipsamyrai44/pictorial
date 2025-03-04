@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useGetPostsByUsernameQuery } from '../../api/postsApi';
 import s from './ProfilePosts.module.scss';
 import PostModal from './postModal/PostModal';
-import { Loader } from '@/shared/ui/loader/Loader';
+import PostsSkeleton from './postsSkeleton/PostsSkeleton';
 
 type Props = {
   userName: string;
@@ -19,16 +19,9 @@ export default function ProfilePosts({ userName }: Props) {
 
   if (isLoading) {
     return (
-      <div style={{ margin: '0 auto', padding: '80px' }}>
-        <Loader />
+      <div className={s.posts}>
+        <PostsSkeleton quantity={12} />
       </div>
-      // <div className={s.posts}>
-      //   {Array(8)
-      //     .fill(null)
-      //     .map((_, id) => (
-      //       <Loader className={s.post} key={id} />
-      //     ))}
-      // </div>
     );
   }
 
