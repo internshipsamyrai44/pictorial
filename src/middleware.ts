@@ -17,7 +17,7 @@ export function middleware(request: NextRequest) {
     PATH.AUTH.VERIFICATION_LINK_EXPIRED,
     PATH.PROFILE.PROFILE_USERID,
     PATH.PUBLIC.PUBLIC_PAGE,
-    PATH.PUBLIC.PROFILE
+    PATH.PUBLIC.PUBLIC_USER
   ];
   const { pathname } = request.nextUrl;
 
