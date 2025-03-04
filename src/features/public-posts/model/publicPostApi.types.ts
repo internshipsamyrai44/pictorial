@@ -1,7 +1,7 @@
 export type GetPublicPostsParams = {
   pageSize?: number;
   sortBy?: string;
-  sortDirection?: 'asc' | 'desc';
+  sortDirection?: string;
   endCursorPostId?: number;
 };
 
@@ -46,4 +46,4 @@ export type PostItemProps = {
   item: PublicPostResponse;
 };
 
-export type GetPublicPostsByUserIdParams = { userId: string } & GetPublicPostsParams;
+export type GetPublicPostsByUserIdParams = { userId: number } & GetPublicPostsParams;
