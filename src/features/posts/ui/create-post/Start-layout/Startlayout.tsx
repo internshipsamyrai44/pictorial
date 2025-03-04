@@ -6,15 +6,9 @@ import { useCheckUploadedImage } from '@/shared/hooks/useCheckUploadedImage';
 import { useTranslations } from 'next-intl';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 
-type PropsType = {
-  // eslint-disable-next-line no-unused-vars
-  paginate: (action: 'next' | 'prev' | 'close') => void;
-};
+export const Startlayout = () => {
+  const { setUserPhotos, paginate } = useCreatePostContext();
 
-export const Startlayout = (props: PropsType) => {
-  const { setUserPhotos } = useCreatePostContext();
-
-  const { paginate } = props;
   const { isImageCorrect, errorUploadModal, setErrorUploadModal } = useCheckUploadedImage();
   const t = useTranslations('Post');
   const fileInputRef = useRef<HTMLInputElement | null>(null);

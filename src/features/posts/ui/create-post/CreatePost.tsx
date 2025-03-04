@@ -1,7 +1,7 @@
 'use client';
 
 import s from './CreatePost.module.scss';
-import { KeyboardEventHandler } from 'react';
+import { KeyboardEventHandler, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { Startlayout } from '@/features/posts/ui/create-post/Start-layout/Startlayout';
@@ -22,8 +22,8 @@ type PropsType = {
 export const CreatePost = (props: PropsType) => {
   const t = useTranslations('Post');
   const { setCreatePostActive } = props;
-  const { userPhotos, textAreaValue, setTextAreaValue, paginate, page, setModalCloseActive, modalCloseActive } =
-    useCreatePostContext();
+  const { userPhotos, page, setModalCloseActive, modalCloseActive } = useCreatePostContext();
+  const [textAreaValue, setTextAreaValue] = useState<string>('');
 
   const [uploadImages] = useUploadImagesMutation();
   const [createPost] = useCreatePostMutation();
@@ -51,7 +51,7 @@ export const CreatePost = (props: PropsType) => {
   const renderStep = () => {
     switch (page) {
       case 0: {
-        return <Startlayout paginate={paginate} />;
+        return <Startlayout />;
       }
       case 1: {
         return <Cropping />;
@@ -63,7 +63,7 @@ export const CreatePost = (props: PropsType) => {
         return <Publication textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue} />;
       }
       default: {
-        return <Startlayout paginate={paginate} />;
+        return <Startlayout />;
       }
     }
   };
@@ -92,6 +92,7 @@ export const CreatePost = (props: PropsType) => {
         childrenMetadata: uploadIdObjects
       });
       alert('Successfully created!');
+      setCreatePostActive(false);
     } catch (error) {
       alert('Error creating post');
     }
