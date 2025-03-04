@@ -3,8 +3,6 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useState } from 're
 type CreatePostContextProps = {
   userPhotos: string[];
   setUserPhotos: Dispatch<SetStateAction<string[]>>;
-  textAreaValue: string;
-  setTextAreaValue: Dispatch<SetStateAction<string>>;
   modalCloseActive: boolean;
   setModalCloseActive: Dispatch<SetStateAction<boolean>>;
   // eslint-disable-next-line no-unused-vars
@@ -22,7 +20,6 @@ export const CreatePostContext = createContext<CreatePostContextProps | undefine
 export const CreatePostProvider = ({ children }: CreatePostProviderProps) => {
   const TOTAL_PAGES = 4;
   const [userPhotos, setUserPhotos] = useState<string[]>([]);
-  const [textAreaValue, setTextAreaValue] = useState<string>('');
   const [modalCloseActive, setModalCloseActive] = useState<boolean>(false);
   const [page, setPage] = useState<number>(0);
 
@@ -56,8 +53,6 @@ export const CreatePostProvider = ({ children }: CreatePostProviderProps) => {
       value={{
         userPhotos,
         setUserPhotos,
-        textAreaValue,
-        setTextAreaValue,
         modalCloseActive,
         setModalCloseActive,
         paginate,

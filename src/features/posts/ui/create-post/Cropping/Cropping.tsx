@@ -10,9 +10,9 @@ import { Thumbs } from '@/features/posts/ui/create-post/Thumbs/Thumbs';
 import { aspectRatioType, ResizePhoto } from '@/features/posts/ui/create-post/ResizePhoto/ResizePhoto';
 import { ZoomPhoto } from '@/features/posts/ui/create-post/ZoomPhoto/ZoomPhoto';
 import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
-import { useCheckUploadedImage } from '@/shared/hooks/useCheckUploadedImage';
 import { useTranslations } from 'next-intl';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
+import { useUploadUserPhotoPreview } from '@/shared/hooks/useUploadUserPhotoPreview';
 
 type optionType = 'thumbs' | 'resizer' | 'zoom' | null;
 
@@ -22,28 +22,11 @@ export const Cropping = () => {
   const [activeOption, setActiveOption] = useState<optionType>(null);
   const [aspectRatio, setAspectRatio] = useState<aspectRatioType>('square');
   const [zoomValue, setZoomValue] = useState('1');
-  const { isImageCorrect, errorUploadModal, setErrorUploadModal } = useCheckUploadedImage();
+  const { uploadUserPhotoPreview, errorUploadModal, setErrorUploadModal } = useUploadUserPhotoPreview();
   const t = useTranslations('Post');
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
-  };
-
-  const uploadUserPhotoHandler = (e: any) => {
-    const userPhotoFile = e.target.files?.[0];
-
-    if (!isImageCorrect(userPhotoFile)) {
-      setErrorUploadModal(true);
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      if (reader.result) {
-        setUserPhotos((prevPhotos) => [...prevPhotos, reader.result as string]);
-      }
-    };
-    reader.readAsDataURL(userPhotoFile);
   };
 
   const removeUserPhotoHandler = (photoIndex: number) => {
@@ -53,7 +36,6 @@ export const Cropping = () => {
   const toggleOption = (option: optionType) => {
     setActiveOption((prevBlock: optionType) => (prevBlock === option ? null : option));
   };
-  ``;
 
   const isActive = (option: optionType) => activeOption === option;
 
@@ -85,7 +67,7 @@ export const Cropping = () => {
           id="photo-loading"
           ref={fileInputRef}
           className={s.input}
-          onChange={uploadUserPhotoHandler}
+          onChange={uploadUserPhotoPreview}
         />
         <div className={s.btns}>
           <Button

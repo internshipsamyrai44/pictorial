@@ -2,36 +2,18 @@ import s from './StartLayot.module.scss';
 import FileIcon from '../../../../../../public/icons/PicIcon.svg';
 import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useRef } from 'react';
-import { useCheckUploadedImage } from '@/shared/hooks/useCheckUploadedImage';
+import { useUploadUserPhotoPreview } from '@/shared/hooks/useUploadUserPhotoPreview';
 import { useTranslations } from 'next-intl';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 
 export const Startlayout = () => {
-  const { setUserPhotos, paginate } = useCreatePostContext();
-
-  const { isImageCorrect, errorUploadModal, setErrorUploadModal } = useCheckUploadedImage();
+  const { uploadUserPhotoPreview, errorUploadModal, setErrorUploadModal } = useUploadUserPhotoPreview();
+  const { paginate } = useCreatePostContext();
   const t = useTranslations('Post');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
-  };
-
-  const uploadUserPhotoHandler = (e: any) => {
-    const userPhotoFile = e.target.files?.[0];
-
-    if (!isImageCorrect(userPhotoFile)) {
-      setErrorUploadModal(true);
-      return;
-    }
-    const reader = new FileReader();
-    paginate('next');
-    reader.onloadend = () => {
-      if (reader.result) {
-        setUserPhotos((prevPhotos: string[]) => [...prevPhotos, reader.result as string]);
-      }
-    };
-    reader.readAsDataURL(userPhotoFile);
   };
 
   return (
@@ -46,7 +28,10 @@ export const Startlayout = () => {
           id="photo-loading"
           ref={fileInputRef}
           className={s.input}
-          onChange={uploadUserPhotoHandler}
+          onChange={(e) => {
+            uploadUserPhotoPreview(e);
+            paginate('next');
+          }}
         />
         <div className={s.buttons}>
           <Button variant={'primary'} onClick={handleButtonClick}>
