@@ -1,0 +1,14 @@
+.header {
+  height: 60px;
+  border-bottom: 1px solid #4c4c4c;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.postOwner {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}

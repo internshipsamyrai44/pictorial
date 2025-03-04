@@ -56,10 +56,10 @@
       "ErrorUpload": "Ошибка загрузки",
       "TryAgain": "Попробовать еще",
       "ErrorUploadDescription": "Пожалуйста, загрузите изображение в формате JPEG или PNG! Загрузите файл размером менее 20 МБ!"
-
     },
     "Yes": "Да",
-    "No": "Нет"
+    "No": "Нет",
+    "dateFormat": "ru-RU"
   },
   "Profile": {
     "FirstName": "Имя",

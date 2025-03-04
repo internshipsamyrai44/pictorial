@@ -58,7 +58,8 @@
       "ErrorUploadDescription": "Please upload JPEG or PNG image format! >Upload a file smaller than 20MB!"
     },
     "Yes": "Yes",
-    "No": "No"
+    "No": "No",
+    "dateFormat": "en-US"
   },
   "Profile": {
     "FirstName": "First Name",

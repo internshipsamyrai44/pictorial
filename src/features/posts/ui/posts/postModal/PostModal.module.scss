@@ -19,7 +19,7 @@
 
 .postContainer {
   display: flex;
-  background-color: rgba(76, 76, 76, 1);
+  background-color: #333333;
 }
 
 .postImg {
@@ -31,6 +31,9 @@
   object-fit: contain;
 }
 
-.postInfo {
+.postContent {
   width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
