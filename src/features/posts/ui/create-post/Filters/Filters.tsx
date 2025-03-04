@@ -1,12 +1,9 @@
 import Image from 'next/image';
 import s from './Filters.module.scss';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
-import { useState } from 'react';
 import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
-
-type PropsType = {
-  userPhotos: string[];
-};
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
+import { useState } from 'react';
 
 type FiltersType =
   | 'normal'
@@ -19,7 +16,8 @@ type FiltersType =
   | 'toaster'
   | 'brooklyn';
 
-export const Filters = (props: PropsType) => {
+export const Filters = () => {
+  const { userPhotos } = useCreatePostContext();
   const [photoFilter, setPhotoFilter] = useState<FiltersType>('normal');
   const filters: FiltersType[] = [
     'normal',
@@ -37,13 +35,12 @@ export const Filters = (props: PropsType) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  const { userPhotos } = props;
   return (
     <>
       <div className={s.wrapper}>
         <div className={s.photo}>
           <Carousel>
-            {userPhotos.map((photo, index) => (
+            {userPhotos.map((photo: string, index: number) => (
               <Image
                 src={photo || placeholder}
                 className={`${s.image} ${s[photoFilter]}`}

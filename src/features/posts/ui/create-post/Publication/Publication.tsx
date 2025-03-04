@@ -8,15 +8,17 @@ import { useMeQuery } from '@/features/auth/api/authApi';
 import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
 import { useTranslations } from 'next-intl';
 
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
+
 type PropsType = {
-  userPhotos: string[];
   textAreaValue: string;
   // eslint-disable-next-line no-unused-vars
   setTextAreaValue: (textAreaValue: string) => void;
 };
 
 export const Publication = (props: PropsType) => {
-  const { userPhotos, setTextAreaValue, textAreaValue } = props;
+  const { userPhotos } = useCreatePostContext();
+  const { setTextAreaValue, textAreaValue } = props;
   const { data: me } = useMeQuery();
   const t = useTranslations('Post');
 
@@ -29,7 +31,7 @@ export const Publication = (props: PropsType) => {
       <div className={s.wrapper}>
         <div className={s.image}>
           <Carousel>
-            {userPhotos.map((photo, index) => (
+            {userPhotos.map((photo: string, index: number) => (
               <Image
                 src={photo || placeholder}
                 className={s.image}

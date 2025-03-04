@@ -1,9 +1,8 @@
 'use client';
 
 import s from './CreatePost.module.scss';
-
 import { KeyboardEventHandler, useState } from 'react';
-import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
+import { useTranslations } from 'next-intl';
 
 import { Startlayout } from '@/features/posts/ui/create-post/Start-layout/Startlayout';
 import { Cropping } from '@/features/posts/ui/create-post/Cropping/Cropping';
@@ -12,7 +11,8 @@ import { Publication } from '@/features/posts/ui/create-post/Publication/Publica
 import { CreatePostHeader } from '@/features/posts/ui/create-post/CreatePostHeader/CreatePostHeader';
 import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts/api/postsApi';
 import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
-import { useTranslations } from 'next-intl';
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
+import { ModalClose } from '@/features/posts/ui/create-post/Modal/ModalClose';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
@@ -20,16 +20,13 @@ type PropsType = {
 };
 
 export const CreatePost = (props: PropsType) => {
+  const t = useTranslations('Post');
   const { setCreatePostActive } = props;
-
-  const TOTAL_PAGES = 4;
-  const [userPhotos, setUserPhotos] = useState<string[]>([]);
-  const [page, setPage] = useState<number>(0);
+  const { userPhotos, page, setModalCloseActive, modalCloseActive } = useCreatePostContext();
   const [textAreaValue, setTextAreaValue] = useState<string>('');
-  const [modalCloseActive, setModalCloseActive] = useState<boolean>(false);
+
   const [uploadImages] = useUploadImagesMutation();
   const [createPost] = useCreatePostMutation();
-  const t = useTranslations('Post');
 
   const stepTitle = (): string => {
     switch (page) {
@@ -54,21 +51,19 @@ export const CreatePost = (props: PropsType) => {
   const renderStep = () => {
     switch (page) {
       case 0: {
-        return <Startlayout userPhotos={userPhotos} setUserPhotos={setUserPhotos} paginate={paginate} />;
+        return <Startlayout />;
       }
       case 1: {
-        return <Cropping userPhotos={userPhotos} setUserPhotos={setUserPhotos} />;
+        return <Cropping />;
       }
       case 2: {
-        return <Filters userPhotos={userPhotos} />;
+        return <Filters />;
       }
       case 3: {
-        return (
-          <Publication userPhotos={userPhotos} textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue} />
-        );
+        return <Publication textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue} />;
       }
       default: {
-        return <Startlayout userPhotos={userPhotos} setUserPhotos={setUserPhotos} paginate={paginate} />;
+        return <Startlayout />;
       }
     }
   };
@@ -79,35 +74,10 @@ export const CreatePost = (props: PropsType) => {
     }
   };
 
-  const paginate = (action: 'next' | 'prev' | 'close') => {
-    switch (action) {
-      case 'next': {
-        if (page < TOTAL_PAGES - 1) {
-          setPage((prev) => prev + 1);
-        }
-        break;
-      }
-
-      case 'prev': {
-        if (page > 0) {
-          setPage((prev) => prev - 1);
-        } else {
-          setPage(0);
-        }
-        break;
-      }
-
-      case 'close': {
-        setModalCloseActive(true);
-        break;
-      }
-    }
-  };
-
   const handleUploadPhotos = async () => {
     const formData = new FormData();
 
-    userPhotos.forEach((file) => {
+    userPhotos.forEach((file: string) => {
       formData.append(`file`, dataURLtoFile(file));
     });
 
@@ -122,7 +92,7 @@ export const CreatePost = (props: PropsType) => {
         childrenMetadata: uploadIdObjects
       });
       alert('Successfully created!');
-      paginate('close');
+      setCreatePostActive(false);
     } catch (error) {
       alert('Error creating post');
     }
@@ -132,40 +102,11 @@ export const CreatePost = (props: PropsType) => {
     <>
       <div className={s.wrapper} onKeyDown={onKeyDownHandler} onClick={() => setModalCloseActive(true)} tabIndex={0}>
         <div className={s.steps} onClick={(e) => e.stopPropagation()}>
-          <CreatePostHeader
-            page={page}
-            totalPages={TOTAL_PAGES}
-            stepTitle={stepTitle}
-            paginate={paginate}
-            handleUploadPhotos={handleUploadPhotos}
-          />
+          <CreatePostHeader stepTitle={stepTitle} handleUploadPhotos={handleUploadPhotos} />
           {renderStep()}
         </div>
       </div>
-      {modalCloseActive && (
-        <Modal title={t('CreatePost.Close')} className={s.modal} onClose={() => setModalCloseActive(false)}>
-          <p>{t('CreatePost.CloseDescription')} </p>
-          <div className={s.btns}>
-            <Button
-              variant={'primary'}
-              onClick={() => {
-                setModalCloseActive(false);
-                setCreatePostActive(false);
-              }}
-            >
-              {t('CreatePost.Discard')}
-            </Button>
-            <Button
-              variant={'outlined'}
-              onClick={() => {
-                setCreatePostActive(false);
-              }}
-            >
-              {t('CreatePost.SaveDraft')}
-            </Button>
-          </div>
-        </Modal>
-      )}
+      {modalCloseActive && <ModalClose setCreatePostActive={setCreatePostActive} />}
     </>
   );
 };

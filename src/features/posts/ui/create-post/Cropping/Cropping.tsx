@@ -5,50 +5,28 @@ import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import ResizeIcon from '../../../../../../public/icons/resizeIcon.svg';
 import FileIcon from '../../../../../../public/icons/PicIcon.svg';
 import ZoomLensIcon from '../../../../../../public/icons/zoomLens.svg';
-import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Thumbs } from '@/features/posts/ui/create-post/Thumbs/Thumbs';
 import { aspectRatioType, ResizePhoto } from '@/features/posts/ui/create-post/ResizePhoto/ResizePhoto';
 import { ZoomPhoto } from '@/features/posts/ui/create-post/ZoomPhoto/ZoomPhoto';
 import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
-import { useCheckUploadedImage } from '@/shared/hooks/useCheckUploadedImage';
 import { useTranslations } from 'next-intl';
-
-type PropsType = {
-  userPhotos: string[];
-  // eslint-disable-next-line no-unused-vars
-  setUserPhotos: Dispatch<SetStateAction<string[]>>;
-};
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
+import { useUploadUserPhotoPreview } from '@/shared/hooks/useUploadUserPhotoPreview';
 
 type optionType = 'thumbs' | 'resizer' | 'zoom' | null;
 
-export const Cropping = (props: PropsType) => {
-  const { userPhotos, setUserPhotos } = props;
+export const Cropping = () => {
+  const { userPhotos, setUserPhotos } = useCreatePostContext();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [activeOption, setActiveOption] = useState<optionType>(null);
   const [aspectRatio, setAspectRatio] = useState<aspectRatioType>('square');
   const [zoomValue, setZoomValue] = useState('1');
-  const { isImageCorrect, errorUploadModal, setErrorUploadModal } = useCheckUploadedImage();
+  const { uploadUserPhotoPreview, errorUploadModal, setErrorUploadModal } = useUploadUserPhotoPreview();
   const t = useTranslations('Post');
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
-  };
-
-  const uploadUserPhotoHandler = (e: any) => {
-    const userPhotoFile = e.target.files?.[0];
-
-    if (!isImageCorrect(userPhotoFile)) {
-      setErrorUploadModal(true);
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      if (reader.result) {
-        setUserPhotos((prevPhotos) => [...prevPhotos, reader.result as string]);
-      }
-    };
-    reader.readAsDataURL(userPhotoFile);
   };
 
   const removeUserPhotoHandler = (photoIndex: number) => {
@@ -58,7 +36,6 @@ export const Cropping = (props: PropsType) => {
   const toggleOption = (option: optionType) => {
     setActiveOption((prevBlock: optionType) => (prevBlock === option ? null : option));
   };
-  ``;
 
   const isActive = (option: optionType) => activeOption === option;
 
@@ -90,7 +67,7 @@ export const Cropping = (props: PropsType) => {
           id="photo-loading"
           ref={fileInputRef}
           className={s.input}
-          onChange={uploadUserPhotoHandler}
+          onChange={uploadUserPhotoPreview}
         />
         <div className={s.btns}>
           <Button
