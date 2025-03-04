@@ -1,36 +1,41 @@
 'use client';
 
 import s from './PostModal.module.scss';
-import { PublishedPostResponse } from '@/features/posts/model/postsApi.types';
-import { Modal } from '@internshipsamyrai44-ui-kit/components-lib';
+import { useGetPostsByIdQuery } from '@/features/posts/api/postsApi';
+import { Loader } from '@/shared/ui/loader/Loader';
+import CloseButton from './closeButton/CloseButton';
+import { Carousel } from '../../create-post/Carousel/Carousel';
 
 type Props = {
-  post: PublishedPostResponse;
+  postID: number;
   closeModal?: () => void;
 };
 
-export default function PostModal({ post, closeModal }: Props) {
-  return (
-    <Modal className={s.postModal} onClose={closeModal}>
-      <div className={s.postImg}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={post.images[0].url} alt={post.description || 'Post image'} />
-      </div>
-      <div className={s.postInfo}> coments</div>
-    </Modal>
+export default function PostModal({ postID, closeModal }: Props) {
+  const { data: post, isLoading } = useGetPostsByIdQuery(postID);
+  console.log(post);
+  console.log(post?.images);
 
-    // <div className={s.modalContainer}>
-    //   <div className={s.wrap}>
-    //     <div className={s.closeBtn}>
-    //       <Button onClick={closeModal}>Close</Button>
-    //     </div>
-    //     <div className={s.container}>
-    //       <div className={s.postImg}>
-    //         <img src={post.images[0].url} alt={post.description || 'Post image'} />
-    //       </div>
-    //       <div className={s.postInfo}> coments</div>
-    //     </div>
-    //   </div>
-    // </div>
+  return (
+    <div className={s.wrap}>
+      <div className={s.modalContainer}>
+        <CloseButton onClick={closeModal} />
+        <div className={s.postContainer}>
+          <div className={s.postImg}>
+            {isLoading && <Loader />}
+            {post && (
+              <Carousel>
+                {post.images.map((photo, index) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={photo.url} alt={'Post image'} key={`post-photo-${index}`} />
+                ))}
+              </Carousel>
+            )}
+            {/* {post && <img src={post?.images[0].url} alt={post?.description || 'Post image'} />} */}
+          </div>
+          <div className={s.postInfo}> coments</div>
+        </div>
+      </div>
+    </div>
   );
 }
