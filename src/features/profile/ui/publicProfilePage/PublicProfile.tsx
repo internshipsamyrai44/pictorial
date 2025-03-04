@@ -9,7 +9,7 @@ import { useRequestError } from '@/shared/hooks/useRequestError';
 import { ProfileDashboard } from '@/widgets/profile-dashboard/ProfileDashboard';
 import { useTranslations } from 'next-intl';
 
-export const PublicProfilePage = () => {
+export const PublicProfile = () => {
   const { id } = useParams<{ id: string }>();
   const { data, error, isFetching } = useGetPublicUserProfileQuery(+id);
   const errorMessage = useRequestError(error);

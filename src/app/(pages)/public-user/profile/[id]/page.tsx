@@ -1,7 +1,7 @@
 'use client';
 
-import { PublicProfilePage } from '@/features/profile/ui/publicProfilePage/PublicProfilePage';
+import { PublicProfile } from '@/features/profile/ui/publicProfilePage/PublicProfile';
 
-export default function PublicProfile() {
-  return <PublicProfilePage />;
+export default function PublicProfilePage() {
+  return <PublicProfile />;
 }
