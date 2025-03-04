@@ -4,7 +4,9 @@ import s from './PostModal.module.scss';
 import { useGetPostsByIdQuery } from '@/features/posts/api/postsApi';
 import { Loader } from '@/shared/ui/loader/Loader';
 import CloseButton from './closeButton/CloseButton';
-import { Carousel } from '../../create-post/Carousel/Carousel';
+import PostImage from './postImage/PostImage';
+import PostContent from './postContent/PostContent';
+import PostContentSkeleton from './postContentSkeleton/PostContentSkeleton';
 
 type Props = {
   postID: number;
@@ -13,8 +15,8 @@ type Props = {
 
 export default function PostModal({ postID, closeModal }: Props) {
   const { data: post, isLoading } = useGetPostsByIdQuery(postID);
+
   console.log(post);
-  console.log(post?.images);
 
   return (
     <div className={s.wrap}>
@@ -23,17 +25,12 @@ export default function PostModal({ postID, closeModal }: Props) {
         <div className={s.postContainer}>
           <div className={s.postImg}>
             {isLoading && <Loader />}
-            {post && (
-              <Carousel>
-                {post.images.map((photo, index) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={photo.url} alt={'Post image'} key={`post-photo-${index}`} />
-                ))}
-              </Carousel>
-            )}
-            {/* {post && <img src={post?.images[0].url} alt={post?.description || 'Post image'} />} */}
+            {post && <PostImage images={post.images} />}
           </div>
-          <div className={s.postInfo}> coments</div>
+          <div className={s.postContent}>
+            {isLoading && <PostContentSkeleton />}
+            {post && <PostContent post={post} />}
+          </div>
         </div>
       </div>
     </div>
