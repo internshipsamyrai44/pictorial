@@ -13,6 +13,7 @@ import { CreatePostHeader } from '@/features/posts/ui/create-post/CreatePostHead
 import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts/api/postsApi';
 import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
 import { useTranslations } from 'next-intl';
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
@@ -22,8 +23,9 @@ type PropsType = {
 export const CreatePost = (props: PropsType) => {
   const { setCreatePostActive } = props;
 
+  const { userPhotos } = useCreatePostContext();
+
   const TOTAL_PAGES = 4;
-  const [userPhotos, setUserPhotos] = useState<string[]>([]);
   const [page, setPage] = useState<number>(0);
   const [textAreaValue, setTextAreaValue] = useState<string>('');
   const [modalCloseActive, setModalCloseActive] = useState<boolean>(false);
@@ -54,21 +56,19 @@ export const CreatePost = (props: PropsType) => {
   const renderStep = () => {
     switch (page) {
       case 0: {
-        return <Startlayout userPhotos={userPhotos} setUserPhotos={setUserPhotos} paginate={paginate} />;
+        return <Startlayout paginate={paginate} />;
       }
       case 1: {
-        return <Cropping userPhotos={userPhotos} setUserPhotos={setUserPhotos} />;
+        return <Cropping />;
       }
       case 2: {
-        return <Filters userPhotos={userPhotos} />;
+        return <Filters />;
       }
       case 3: {
-        return (
-          <Publication userPhotos={userPhotos} textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue} />
-        );
+        return <Publication textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue} />;
       }
       default: {
-        return <Startlayout userPhotos={userPhotos} setUserPhotos={setUserPhotos} paginate={paginate} />;
+        return <Startlayout paginate={paginate} />;
       }
     }
   };
@@ -107,7 +107,7 @@ export const CreatePost = (props: PropsType) => {
   const handleUploadPhotos = async () => {
     const formData = new FormData();
 
-    userPhotos.forEach((file) => {
+    userPhotos.forEach((file: string) => {
       formData.append(`file`, dataURLtoFile(file));
     });
 

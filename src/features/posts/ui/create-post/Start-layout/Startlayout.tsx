@@ -1,19 +1,20 @@
 import s from './StartLayot.module.scss';
 import FileIcon from '../../../../../../public/icons/PicIcon.svg';
 import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
-import { Dispatch, SetStateAction, useRef } from 'react';
+import { useRef } from 'react';
 import { useCheckUploadedImage } from '@/shared/hooks/useCheckUploadedImage';
 import { useTranslations } from 'next-intl';
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 
 type PropsType = {
-  setUserPhotos: Dispatch<SetStateAction<string[]>>;
-  userPhotos: string[];
   // eslint-disable-next-line no-unused-vars
   paginate: (action: 'next' | 'prev' | 'close') => void;
 };
 
 export const Startlayout = (props: PropsType) => {
-  const { setUserPhotos, paginate } = props;
+  const { setUserPhotos } = useCreatePostContext();
+
+  const { paginate } = props;
   const { isImageCorrect, errorUploadModal, setErrorUploadModal } = useCheckUploadedImage();
   const t = useTranslations('Post');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -33,7 +34,7 @@ export const Startlayout = (props: PropsType) => {
     paginate('next');
     reader.onloadend = () => {
       if (reader.result) {
-        setUserPhotos((prevPhotos) => [...prevPhotos, reader.result as string]);
+        setUserPhotos((prevPhotos: string[]) => [...prevPhotos, reader.result as string]);
       }
     };
     reader.readAsDataURL(userPhotoFile);

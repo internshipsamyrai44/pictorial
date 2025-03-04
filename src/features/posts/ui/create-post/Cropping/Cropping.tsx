@@ -5,24 +5,19 @@ import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import ResizeIcon from '../../../../../../public/icons/resizeIcon.svg';
 import FileIcon from '../../../../../../public/icons/PicIcon.svg';
 import ZoomLensIcon from '../../../../../../public/icons/zoomLens.svg';
-import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Thumbs } from '@/features/posts/ui/create-post/Thumbs/Thumbs';
 import { aspectRatioType, ResizePhoto } from '@/features/posts/ui/create-post/ResizePhoto/ResizePhoto';
 import { ZoomPhoto } from '@/features/posts/ui/create-post/ZoomPhoto/ZoomPhoto';
 import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
 import { useCheckUploadedImage } from '@/shared/hooks/useCheckUploadedImage';
 import { useTranslations } from 'next-intl';
-
-type PropsType = {
-  userPhotos: string[];
-  // eslint-disable-next-line no-unused-vars
-  setUserPhotos: Dispatch<SetStateAction<string[]>>;
-};
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 
 type optionType = 'thumbs' | 'resizer' | 'zoom' | null;
 
-export const Cropping = (props: PropsType) => {
-  const { userPhotos, setUserPhotos } = props;
+export const Cropping = () => {
+  const { userPhotos, setUserPhotos } = useCreatePostContext();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [activeOption, setActiveOption] = useState<optionType>(null);
   const [aspectRatio, setAspectRatio] = useState<aspectRatioType>('square');

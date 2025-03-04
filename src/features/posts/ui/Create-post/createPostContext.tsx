@@ -1,17 +1,18 @@
-import React, { createContext, useState } from 'react';
+import { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react';
 
-type FeatureProviderProps = {
-  children: React.ReactNode[];
+type CreatePostContextProps = {
+  userPhotos: string[];
+  setUserPhotos: Dispatch<SetStateAction<string[]>>;
 };
 
-export const CreatePostContext = createContext({});
+type CreatePostProviderProps = {
+  children: ReactNode;
+};
 
-export const FeatureProvider = ({ children }: FeatureProviderProps) => {
-  const [createPostData, setCreatePostData] = useState({});
+export const CreatePostContext = createContext<CreatePostContextProps | undefined>(undefined);
 
-  return (
-    <CreatePostContext.Provider value={{ CreatePostData: createPostData, setCreatePostData }}>
-      {children}
-    </CreatePostContext.Provider>
-  );
+export const CreatePostProvider = ({ children }: CreatePostProviderProps) => {
+  const [userPhotos, setUserPhotos] = useState<string[]>([]);
+
+  return <CreatePostContext.Provider value={{ userPhotos, setUserPhotos }}>{children}</CreatePostContext.Provider>;
 };

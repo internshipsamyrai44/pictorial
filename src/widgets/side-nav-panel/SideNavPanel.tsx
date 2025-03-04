@@ -34,6 +34,7 @@ import { useEffect, useState } from 'react';
 import s from './SideNavPanel.module.scss';
 import { useTranslations } from 'next-intl';
 import { CreatePost } from '@/features/posts/ui/create-post/CreatePost';
+import { CreatePostProvider } from '@/features/posts/ui/create-post/createPostContext';
 
 type SideNavBar = {
   className?: string;
@@ -152,7 +153,6 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
                   .catch((error) => {
                     console.error('Logout failed: ', error);
                   });
-                ``;
               }}
               disabled={isLoading}
             >
@@ -165,7 +165,11 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
         </Modal>
       )}
 
-      {isCreatePostActive && <CreatePost setCreatePostActive={setCreatePostActive} />}
+      {isCreatePostActive && (
+        <CreatePostProvider>
+          <CreatePost setCreatePostActive={setCreatePostActive} />{' '}
+        </CreatePostProvider>
+      )}
     </>
   );
 };
