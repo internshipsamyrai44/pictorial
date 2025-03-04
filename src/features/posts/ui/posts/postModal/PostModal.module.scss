@@ -1,4 +1,4 @@
-.modalContainer {
+.wrap {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,24 +7,30 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 100;
 }
-.wrap {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-.postModal {
-  max-width: 970px;
-  width: 100%;
+
+.modalContainer {
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
+
+.postContainer {
+  display: flex;
+  background-color: rgba(76, 76, 76, 1);
+}
+
 .postImg {
-  width: 490px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 565px;
+  height: 565px;
+  object-fit: contain;
 }
+
 .postInfo {
-  background-color: #4c4c4c;
   width: 480px;
 }
