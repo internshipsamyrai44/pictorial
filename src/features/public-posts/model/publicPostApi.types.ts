@@ -45,3 +45,5 @@ export type UserImage = {
 export type PostItemProps = {
   item: PublicPostResponse;
 };
+
+export type GetPublicPostsByUserIdParams = { userId: string } & GetPublicPostsParams;
