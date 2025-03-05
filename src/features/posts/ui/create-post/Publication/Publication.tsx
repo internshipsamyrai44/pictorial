@@ -31,15 +31,15 @@ export const Publication = (props: PropsType) => {
       <div className={s.wrapper}>
         <div className={s.image}>
           <Carousel>
-            {userPhotos.map((photo: string, index: number) => (
+            {userPhotos.map((photo) => (
               <Image
-                src={photo || placeholder}
+                src={photo.uri || placeholder}
                 className={s.image}
                 alt={'User Photo'}
                 layout="responsive"
                 width={100}
                 height={100}
-                key={`user-photo-${index}`}
+                key={`user-photo-${photo.id}`}
               />
             ))}
           </Carousel>
