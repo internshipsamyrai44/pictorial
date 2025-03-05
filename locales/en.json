@@ -61,7 +61,8 @@
     "No": "No",
     "dateFormat": "en-US",
     "EditPost": "Edit Post",
-    "DeletePost": "Delete Post"
+    "DeletePost": "Delete Post",
+    "AddComment": "Add a Comment..."
   },
   "Profile": {
     "FirstName": "First Name",

@@ -61,7 +61,8 @@
     "No": "Нет",
     "dateFormat": "ru-RU",
     "EditPost": "Редактировать",
-    "DeletePost": "Удалить"
+    "DeletePost": "Удалить",
+    "AddComment": "Добавить комментарий..."
   },
   "Profile": {
     "FirstName": "Имя",
