@@ -1,8 +1,10 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import { AspectRatioType } from '@/features/posts/ui/create-post/ResizePhoto/ResizePhoto';
+import { FiltersType } from '@/features/posts/ui/create-post/Filters/Filters';
 
 type CreatePostContextProps = {
-  userPhotos: string[];
-  setUserPhotos: Dispatch<SetStateAction<string[]>>;
+  userPhotos: UserPhotoType[];
+  setUserPhotos: Dispatch<SetStateAction<UserPhotoType[]>>;
   modalCloseActive: boolean;
   setModalCloseActive: Dispatch<SetStateAction<boolean>>;
   // eslint-disable-next-line no-unused-vars
@@ -13,13 +15,22 @@ type CreatePostContextProps = {
 
 type CreatePostProviderProps = {
   children: ReactNode;
+  // eslint-disable-next-line no-unused-vars
+};
+
+export type UserPhotoType = {
+  id: string;
+  uri: string;
+  filter: FiltersType;
+  aspectRatio: AspectRatioType;
+  zoom: string;
 };
 
 export const CreatePostContext = createContext<CreatePostContextProps | undefined>(undefined);
 
 export const CreatePostProvider = ({ children }: CreatePostProviderProps) => {
   const TOTAL_PAGES = 4;
-  const [userPhotos, setUserPhotos] = useState<string[]>([]);
+  const [userPhotos, setUserPhotos] = useState<UserPhotoType[]>([]);
   const [modalCloseActive, setModalCloseActive] = useState<boolean>(false);
   const [page, setPage] = useState<number>(0);
 

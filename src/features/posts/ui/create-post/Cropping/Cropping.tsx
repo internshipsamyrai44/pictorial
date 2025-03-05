@@ -44,6 +44,8 @@ export const Cropping = () => {
     }
   }, [activeSlideIndex, userPhotos]);
 
+  console.log(userPhotos);
+
   return (
     <>
       <div className={s.wrapper}>
