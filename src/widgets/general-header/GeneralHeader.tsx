@@ -17,7 +17,7 @@ export const GeneralHeader = ({ isPublic = false }: GeneralHeaderProps) => (
       </Link>
       <div className={s.headerActions}>
         <SelectTranslate />
-        {!isPublic && <HeaderButton />}
+        {isPublic && <HeaderButton />}
       </div>
     </div>
   </header>

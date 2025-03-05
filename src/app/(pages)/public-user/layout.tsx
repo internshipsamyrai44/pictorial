@@ -1,11 +1,10 @@
 import { ReactNode } from 'react';
-
-import { AuthorizedLayout } from '@/components/layouts/AuthorizedLayout/AuthorizedLayout';
+import { BaseLayout } from '@/components/layouts/BaseLayout/BaseLayout';
 
 type Props = {
   children: ReactNode;
 };
 
 export default function Layout({ children }: Props) {
-  return <AuthorizedLayout>{children}</AuthorizedLayout>;
+  return <BaseLayout>{children}</BaseLayout>;
 }
