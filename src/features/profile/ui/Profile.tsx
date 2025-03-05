@@ -12,39 +12,7 @@ import { useGetPublicUserProfileQuery } from '@/features/profile/api/publicProfi
 import { useParams } from 'next/navigation';
 import { RootState } from '@/app/store/store';
 import { useSelector } from 'react-redux';
-
-// export default function Profile() {
-//   const t = useTranslations('Profile');
-//   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
-//   const { data: profileData, isLoading: isProfileLoading } = useGetProfileQuery();
-//   const { data: userData, isLoading: isUserDataLoading } = useGetUserByUserNameQuery(profileData?.userName ?? '', {
-//     skip: !profileData
-//   });
-//   const { id } = useParams<{ id: string }>();
-//   const { data: publicProfileData, isLoading: isPublicProfileLoading } = useGetPublicUserProfileQuery(+id);
-//
-//   if (isProfileLoading || isUserDataLoading) {
-//     return <LoaderLinear />;
-//   }
-//
-//   return (
-//     <>
-//       <ProfileDashboard
-//         about={profileData?.aboutMe || t('NoInfo')}
-//         avatar={profileData?.avatars[0]?.url}
-//         userFollowers={userData?.followersCount || 0}
-//         userFollowing={userData?.followingCount || 0}
-//         userName={profileData?.userName || t('NoInfo')}
-//         userPublications={userData?.publicationsCount || 0}
-//       >
-//         <Button variant={'secondary'}>
-//           <Link href={PATH.PROFILE.SETTINGS}>{t('ProfileSettings')}</Link>
-//         </Button>
-//       </ProfileDashboard>
-//       {profileData && <ProfilePosts userName={profileData.userName} />}
-//     </>
-//   );
-// }
+import { PublicProfilePosts } from '@/features/public-posts/ui/publicProfilePosts/PublicProfilePosts';
 
 export default function Profile() {
   const t = useTranslations('Profile');
@@ -97,7 +65,7 @@ export default function Profile() {
           userName={publicProfileData?.userName || t('NoInfo')}
           userPublications={publicProfileData?.userMetadata?.publications || 0}
         />
-        {publicProfileData && <ProfilePosts userName={publicProfileData.userName} />}
+        {publicProfileData && <PublicProfilePosts id={publicProfileData?.id} />}
       </>
     );
   }
