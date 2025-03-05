@@ -59,7 +59,9 @@
     },
     "Yes": "Да",
     "No": "Нет",
-    "dateFormat": "ru-RU"
+    "dateFormat": "ru-RU",
+    "EditPost": "Редактировать",
+    "DeletePost": "Удалить"
   },
   "Profile": {
     "FirstName": "Имя",
