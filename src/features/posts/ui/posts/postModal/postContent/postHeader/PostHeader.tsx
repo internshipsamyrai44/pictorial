@@ -10,9 +10,10 @@ import { useState } from 'react';
 type Props = {
   avatarOwner: string;
   userName: string;
+  onDeletePost: () => void;
 };
 
-export default function PostHeader({ avatarOwner, userName }: Props) {
+export default function PostHeader({ avatarOwner, userName, onDeletePost }: Props) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const onMenuBtnClick = () => {
@@ -32,11 +33,7 @@ export default function PostHeader({ avatarOwner, userName }: Props) {
           <PostModalMenuIcon onClick={onMenuBtnClick} />
         </div>
         {menuIsOpen && (
-          <PostMenu
-            setMenuIsOpen={setMenuIsOpen}
-            onEditClick={() => alert('Edit')}
-            onDeleteClick={() => alert('Delete')}
-          />
+          <PostMenu setMenuIsOpen={setMenuIsOpen} onEditClick={() => alert('Edit')} onDeleteClick={onDeletePost} />
         )}
       </div>
     </div>

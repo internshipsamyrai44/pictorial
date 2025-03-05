@@ -6,15 +6,29 @@ import PostHeader from './postHeader/PostHeader';
 import AddComentForm from './addComentForm/AddComentForm';
 import InteractionBlock from './interactionBlock/InteractionBlock';
 import ComentItem from './comentItem/ComentItem';
+import { DeletePostModal } from '@/features/posts/ui/deletePostModal/DeletePostModal';
+import { useState } from 'react';
 
 type Props = {
   post: PublishedPostResponse;
+  closeModal?: () => void;
 };
 
-export default function PostContent({ post }: Props) {
+export default function PostContent({ post, closeModal }: Props) {
+  const [isOpenModalDeletePost, setIsOpenModalDeletePost] = useState(false);
+
+  const handleDeltePostClick = () => {
+    setIsOpenModalDeletePost(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpenModalDeletePost(false);
+    closeModal?.();
+  };
+
   return (
     <div className={s.wrapper}>
-      <PostHeader avatarOwner={post.avatarOwner} userName={post.userName} />
+      <PostHeader avatarOwner={post.avatarOwner} userName={post.userName} onDeletePost={handleDeltePostClick} />
       <div className={s.сonversation}>
         <div className={s.description}>
           <ComentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} descriptionPost />
@@ -28,6 +42,8 @@ export default function PostContent({ post }: Props) {
         <InteractionBlock post={post} />
         <AddComentForm />
       </div>
+
+      <DeletePostModal id={post.id} isOpen={isOpenModalDeletePost} onModalClose={handleCloseModal} />
     </div>
   );
 }

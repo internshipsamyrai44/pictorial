@@ -35,13 +35,15 @@ export const postsApi = inctagramApi.injectEndpoints({
       query: (userName) => ({
         url: `v1/posts/${userName}`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['Posts']
     }),
     getPostsById: build.query<PublishedPostResponse, number>({
       query: (postID) => ({
         url: `v1/posts/id/${postID}`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['Posts']
     })
   })
 });

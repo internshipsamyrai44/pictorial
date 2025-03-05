@@ -33,8 +33,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import s from './SideNavPanel.module.scss';
 import { useTranslations } from 'next-intl';
-import { CreatePost } from '@/features/posts/ui/create-post/CreatePost';
-import { CreatePostProvider } from '@/features/posts/ui/create-post/createPostContext';
+import { CreatePost } from '@/features/posts/ui/Create-post/CreatePost';
+import { CreatePostProvider } from '@/features/posts/ui/Create-post/createPostContext';
 
 type SideNavBar = {
   className?: string;
@@ -135,7 +135,7 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
           <Typography variant={'regular-text-16'} className={s.text}>
             {t('LogOutConfirmation')}
             <Typography as={'span'} variant={'bold-text-16'}>
-              {` “${me?.email}” `}
+              {` " ${me?.email} " `}
             </Typography>
             ?
           </Typography>
