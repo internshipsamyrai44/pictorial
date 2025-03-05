@@ -59,7 +59,9 @@
     },
     "Yes": "Yes",
     "No": "No",
-    "dateFormat": "en-US"
+    "dateFormat": "en-US",
+    "EditPost": "Edit Post",
+    "DeletePost": "Delete Post"
   },
   "Profile": {
     "FirstName": "First Name",
