@@ -40,15 +40,15 @@ export const Filters = () => {
       <div className={s.wrapper}>
         <div className={s.photo}>
           <Carousel>
-            {userPhotos.map((photo: string, index: number) => (
+            {userPhotos.map((photo) => (
               <Image
-                src={photo || placeholder}
+                src={photo.uri || placeholder}
                 className={`${s.image} ${s[photoFilter]}`}
                 alt={'User Photo'}
                 layout="responsive"
                 width={100}
                 height={100}
-                key={`user-photo-${index}`}
+                key={`user-photo-${photo.id}`}
               />
             ))}
           </Carousel>
@@ -57,7 +57,7 @@ export const Filters = () => {
           {filters.map((filter) => (
             <div className={s.item} key={filter} onClick={() => setPhotoFilter(filter)}>
               <Image
-                src={userPhotos[0]}
+                src={userPhotos[0].uri}
                 className={`${s.img} ${s[filter]}`}
                 alt={`User Photo ${filter}`}
                 width={108}
