@@ -5,7 +5,7 @@ import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import Link from 'next/link';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import { useMeQuery } from '@/features/auth/api/authApi';
-import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
+import { Carousel } from '@/features/posts/ui/Create-post/Carousel/Carousel';
 import { useTranslations } from 'next-intl';
 
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';

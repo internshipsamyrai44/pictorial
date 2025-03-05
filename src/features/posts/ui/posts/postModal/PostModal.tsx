@@ -29,7 +29,7 @@ export default function PostModal({ postID, closeModal }: Props) {
           </div>
           <div className={s.postContent}>
             {isLoading && <PostContentSkeleton />}
-            {post && <PostContent post={post} />}
+            {post && <PostContent post={post} closeModal={closeModal} />}
           </div>
         </div>
       </div>

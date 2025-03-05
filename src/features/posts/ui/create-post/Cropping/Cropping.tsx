@@ -1,18 +1,18 @@
 import Image from 'next/image';
 import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
-import s from './Cropping.module.scss';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import ResizeIcon from '../../../../../../public/icons/resizeIcon.svg';
 import FileIcon from '../../../../../../public/icons/PicIcon.svg';
 import ZoomLensIcon from '../../../../../../public/icons/zoomLens.svg';
 import { useRef, useState } from 'react';
-import { Thumbs } from '@/features/posts/ui/create-post/Thumbs/Thumbs';
-import { aspectRatioType, ResizePhoto } from '@/features/posts/ui/create-post/ResizePhoto/ResizePhoto';
-import { ZoomPhoto } from '@/features/posts/ui/create-post/ZoomPhoto/ZoomPhoto';
-import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
+import { Thumbs } from '@/features/posts/ui/Create-post/Thumbs/Thumbs';
+import { aspectRatioType, ResizePhoto } from '@/features/posts/ui/Create-post/ResizePhoto/ResizePhoto';
+import { ZoomPhoto } from '@/features/posts/ui/Create-post/ZoomPhoto/ZoomPhoto';
+import { Carousel } from '@/features/posts/ui/Create-post/Carousel/Carousel';
 import { useTranslations } from 'next-intl';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 import { useUploadUserPhotoPreview } from '@/shared/hooks/useUploadUserPhotoPreview';
+import s from './Cropping.module.scss';
 
 type optionType = 'thumbs' | 'resizer' | 'zoom' | null;
 
