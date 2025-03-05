@@ -4,22 +4,29 @@ import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import PlusIcon from '../../../../../../public/icons/plus-circle.svg';
 import SmallCrossIcon from '../../../../../../public/icons/smallCross.svg';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
+import { UserPhotoType } from '@/features/posts/ui/create-post/createPostContext';
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 
 type PropsType = {
-  userPhotos: string[];
+  userPhotos: UserPhotoType[];
   handleButtonClick: () => void;
   // eslint-disable-next-line no-unused-vars
-  removeUserPhotoHandler: (index: number) => void;
 };
 
 export const Thumbs = (props: PropsType) => {
-  const { userPhotos, handleButtonClick, removeUserPhotoHandler } = props;
+  const { setUserPhotos } = useCreatePostContext();
+  const { userPhotos, handleButtonClick } = props;
+
+  const removeUserPhotoHandler = (photoIndex: number) => {
+    setUserPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== photoIndex));
+  };
+
   return (
     <div className={`${s.thumblist}`}>
       <div className={s.thumbnails}>
         {userPhotos.map((photo, i) => (
           <div className={s.thumb} key={`thumb-${i}`}>
-            <Image src={photo || placeholder} alt={`User photo thumb ${i}`} width={100} height={100} />
+            <Image src={photo.uri || placeholder} alt={`User photo thumb ${i}`} width={100} height={100} />
             <Button
               variant={'ghost'}
               className={s.remove}
