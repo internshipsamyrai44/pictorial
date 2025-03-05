@@ -5,9 +5,9 @@ import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import ResizeIcon from '../../../../../../public/icons/resizeIcon.svg';
 import FileIcon from '../../../../../../public/icons/PicIcon.svg';
 import ZoomLensIcon from '../../../../../../public/icons/zoomLens.svg';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Thumbs } from '@/features/posts/ui/create-post/Thumbs/Thumbs';
-import { aspectRatioType, ResizePhoto } from '@/features/posts/ui/create-post/ResizePhoto/ResizePhoto';
+import { AspectRatioType, ResizePhoto } from '@/features/posts/ui/create-post/ResizePhoto/ResizePhoto';
 import { ZoomPhoto } from '@/features/posts/ui/create-post/ZoomPhoto/ZoomPhoto';
 import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
 import { useTranslations } from 'next-intl';
@@ -17,20 +17,19 @@ import { useUploadUserPhotoPreview } from '@/shared/hooks/useUploadUserPhotoPrev
 type optionType = 'thumbs' | 'resizer' | 'zoom' | null;
 
 export const Cropping = () => {
-  const { userPhotos, setUserPhotos } = useCreatePostContext();
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [activeOption, setActiveOption] = useState<optionType>(null);
-  const [aspectRatio, setAspectRatio] = useState<aspectRatioType>('square');
-  const [zoomValue, setZoomValue] = useState('1');
+  const { userPhotos } = useCreatePostContext();
   const { uploadUserPhotoPreview, errorUploadModal, setErrorUploadModal } = useUploadUserPhotoPreview();
   const t = useTranslations('Post');
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [activeOption, setActiveOption] = useState<optionType>(null);
+  const [aspectRatio, setAspectRatio] = useState<AspectRatioType>('square');
+  const [zoomValue, setZoomValue] = useState('1');
+  const [currentPhotoId, setCurrentPhotoId] = useState<string | undefined>(undefined);
+  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0);
+
   const handleButtonClick = () => {
     fileInputRef.current?.click();
-  };
-
-  const removeUserPhotoHandler = (photoIndex: number) => {
-    setUserPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== photoIndex));
   };
 
   const toggleOption = (option: optionType) => {
@@ -39,13 +38,19 @@ export const Cropping = () => {
 
   const isActive = (option: optionType) => activeOption === option;
 
+  useEffect(() => {
+    if (userPhotos.length > 0) {
+      setCurrentPhotoId(userPhotos[activeSlideIndex].id);
+    }
+  }, [activeSlideIndex, userPhotos]);
+
   return (
     <>
       <div className={s.wrapper}>
-        <Carousel>
+        <Carousel onSlideChange={setActiveSlideIndex}>
           {userPhotos.map((photo, index) => (
             <Image
-              src={photo || placeholder}
+              src={photo.uri || placeholder}
               className={s[aspectRatio]}
               alt={'User Photo'}
               layout="responsive"
@@ -87,7 +92,9 @@ export const Cropping = () => {
           >
             <ZoomLensIcon className={s.icon} />
           </Button>
-          {isActive('zoom') && <ZoomPhoto setZoomValue={setZoomValue} zoomValue={zoomValue} />}
+          {isActive('zoom') && (
+            <ZoomPhoto setZoomValue={setZoomValue} zoomValue={zoomValue} currentPhotoId={currentPhotoId} />
+          )}
           <Button
             variant={'ghost'}
             onClick={() => toggleOption('thumbs')}
@@ -96,13 +103,7 @@ export const Cropping = () => {
           >
             <FileIcon className={s.icon} />
           </Button>
-          {isActive('thumbs') && (
-            <Thumbs
-              userPhotos={userPhotos}
-              handleButtonClick={handleButtonClick}
-              removeUserPhotoHandler={removeUserPhotoHandler}
-            />
-          )}
+          {isActive('thumbs') && <Thumbs userPhotos={userPhotos} handleButtonClick={handleButtonClick} />}
         </div>
       </div>
       {errorUploadModal && (
