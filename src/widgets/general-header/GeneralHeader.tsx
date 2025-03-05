@@ -6,10 +6,10 @@ import Link from 'next/link';
 import s from './GeneralHeader.module.scss';
 
 type GeneralHeaderProps = {
-  isPublic: boolean;
+  isPublic?: boolean;
 };
 
-export const GeneralHeader = ({ isPublic = false }: GeneralHeaderProps) => (
+export const GeneralHeader = ({ isPublic }: GeneralHeaderProps) => (
   <header className={s.wrapper}>
     <div className={s.container}>
       <Link href="/" className={s.logo}>
