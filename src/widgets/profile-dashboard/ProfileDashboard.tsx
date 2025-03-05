@@ -41,7 +41,9 @@ export const ProfileDashboard = ({
           <StatsItem value={userFollowers} title={t('Followers')} />
           <StatsItem value={userPublications} title={t('Publications')} />
         </div>
-        <Typography variant={'regular-text-16'}>{about}</Typography>
+        <Typography variant={'regular-text-16'} style={{ width: '750px' }}>
+          {about}
+        </Typography>
       </div>
     </div>
   );
