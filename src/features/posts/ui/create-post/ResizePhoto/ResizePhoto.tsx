@@ -8,17 +8,17 @@ import Horizontal from '../../../../../../public/icons/horizontalIcon.svg';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
-  setAspectRatio: (aspectRatio: aspectRatioType) => void;
+  setAspectRatio: (aspectRatio: AspectRatioType) => void;
 };
 
-export type aspectRatioType = 'original' | 'square' | 'horizontal' | 'vertical';
+export type AspectRatioType = 'original' | 'square' | 'horizontal' | 'vertical';
 
 export const ResizePhoto = (props: PropsType) => {
   const { setAspectRatio } = props;
-  const [selectedFormat, setSelectedFormat] = useState<aspectRatioType>('square');
+  const [selectedFormat, setSelectedFormat] = useState<AspectRatioType>('square');
   const t = useTranslations('Post');
 
-  const handleFormatClick = (format: aspectRatioType) => {
+  const handleFormatClick = (format: AspectRatioType) => {
     setSelectedFormat(format);
     setAspectRatio(format);
   };
