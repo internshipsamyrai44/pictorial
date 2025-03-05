@@ -4,29 +4,23 @@ import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 
 type Props = {
   children: React.ReactNode[];
+  // eslint-disable-next-line no-unused-vars
+  onSlideChange?: (index: number) => void;
 };
 
-export const Carousel: React.FC<Props> = ({ children }) => {
+export const Carousel: React.FC<Props> = ({ children, onSlideChange }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const slideNext = () => {
-    setActiveIndex((val) => {
-      if (val >= children.length - 1) {
-        return 0;
-      } else {
-        return val + 1;
-      }
-    });
+    const newIndex = (activeIndex + 1) % children.length;
+    setActiveIndex(newIndex);
+    onSlideChange?.(newIndex);
   };
 
   const slidePrev = () => {
-    setActiveIndex((val) => {
-      if (val <= 0) {
-        return children.length - 1;
-      } else {
-        return val - 1;
-      }
-    });
+    const newIndex = (activeIndex - 1 + children.length) % children.length;
+    setActiveIndex(newIndex);
+    onSlideChange?.(newIndex);
   };
 
   return (
