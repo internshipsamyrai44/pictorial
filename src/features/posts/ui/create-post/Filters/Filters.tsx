@@ -5,7 +5,7 @@ import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 import { useState } from 'react';
 
-type FiltersType =
+export type FiltersType =
   | 'normal'
   | 'clarendon'
   | 'lark'
