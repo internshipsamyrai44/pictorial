@@ -35,7 +35,8 @@ export const postsApi = inctagramApi.injectEndpoints({
       query: (userName) => ({
         url: `v1/posts/${userName}`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['Posts']
     })
   })
 });
