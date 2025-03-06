@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { CreatePostContext } from '@/features/posts/ui/Create-post/createPostContext';
+import { CreatePostContext } from '@/features/posts/ui/create-post/createPostContext';
 
 export const useCreatePostContext = () => {
   const context = useContext(CreatePostContext);

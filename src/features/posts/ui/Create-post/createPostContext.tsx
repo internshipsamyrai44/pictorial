@@ -17,7 +17,6 @@ type CreatePostContextProps = {
 
 type CreatePostProviderProps = {
   children: ReactNode;
-  // eslint-disable-next-line no-unused-vars
 };
 
 export type UserPhotoType = {
