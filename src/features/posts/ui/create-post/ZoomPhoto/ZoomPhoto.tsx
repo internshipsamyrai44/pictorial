@@ -18,7 +18,7 @@ export const ZoomPhoto = (props: PropsType) => {
   };
 
   const setZoomScale = (zoomValue: string) => {
-    userPhotos.forEach((photo) => {
+    userPhotos.map((photo) => {
       if (photo.id === currentPhotoId) {
         photo.zoom = zoomValue;
       }
@@ -27,16 +27,7 @@ export const ZoomPhoto = (props: PropsType) => {
 
   return (
     <div className={s.wrapper}>
-      <input
-        type="range"
-        min="1"
-        max="2.5"
-        step={0.01}
-        value={zoomValue}
-        onChange={(e) => {
-          onChangeHandler(e);
-        }}
-      />
+      <input type="range" min="1" max="2.5" step={0.01} value={zoomValue} onChange={onChangeHandler} />
     </div>
   );
 };
