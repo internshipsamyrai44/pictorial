@@ -13,6 +13,8 @@ export const ZoomPhoto = (props: PropsType) => {
   const { zoomValue, setZoomValue } = props;
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setZoomValue(e.target.value);
+
+    setZoomScale(e.target.value);
   };
 
   const setZoomScale = (zoomValue: string) => {
@@ -33,7 +35,6 @@ export const ZoomPhoto = (props: PropsType) => {
         value={zoomValue}
         onChange={(e) => {
           onChangeHandler(e);
-          setZoomScale(zoomValue);
         }}
       />
     </div>
