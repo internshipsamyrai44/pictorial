@@ -8,8 +8,6 @@
 .image {
   max-width: 490px;
   min-width: 0;
-  aspect-ratio: 1/1;
-  object-fit: cover;
 }
 
 .info {
@@ -19,6 +17,7 @@
   padding-right: 30px;
   margin-top: 1rem;
   width: 460px;
+  min-height: 511px;
   min-width: 0;
   box-sizing: border-box;
 }
