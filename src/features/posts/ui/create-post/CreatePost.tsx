@@ -26,7 +26,7 @@ export const CreatePost = (props: PropsType) => {
   const { userPhotos, page, setModalCloseActive, modalCloseActive } = useCreatePostContext();
   const [textAreaValue, setTextAreaValue] = useState<string>('');
 
-  const [uploadImages] = useUploadImagesMutation();
+  const [uploadImages, { status }] = useUploadImagesMutation();
   const [createPost] = useCreatePostMutation();
   const { applyCanvasFilterZoomAspectRatio } = useApplyCanvasFilterZoomAspectRatio();
 
@@ -62,7 +62,7 @@ export const CreatePost = (props: PropsType) => {
         return <Filters />;
       }
       case 3: {
-        return <Publication textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue} />;
+        return <Publication textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue} status={status} />;
       }
       default: {
         return <Startlayout />;
@@ -98,18 +98,20 @@ export const CreatePost = (props: PropsType) => {
         description: textAreaValue,
         childrenMetadata: uploadIdObjects
       });
-      alert('Successfully created!');
-      setCreatePostActive(false);
     } catch (error) {
       alert('Error creating post');
     }
   };
 
+  if (status === 'fulfilled') {
+    setCreatePostActive(false);
+  }
+
   return (
     <>
       <div className={s.wrapper} onKeyDown={onKeyDownHandler} onClick={() => setModalCloseActive(true)} tabIndex={0}>
         <div className={s.steps} onClick={(e) => e.stopPropagation()}>
-          <CreatePostHeader stepTitle={stepTitle} handleUploadPhotos={handleUploadPhotos} />
+          <CreatePostHeader stepTitle={stepTitle} handleUploadPhotos={handleUploadPhotos} status={status} />
           {renderStep()}
         </div>
       </div>
