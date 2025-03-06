@@ -51,11 +51,16 @@ export const Filters = () => {
             {userPhotos.map((photo) => (
               <Image
                 src={photo.uri || placeholder}
-                className={`${s.image} ${s[photoFilter]}`}
+                className={`${s.image} ${s[photoFilter]} ${s[photo.aspectRatio]}`}
                 alt={'User Photo'}
                 layout="responsive"
                 width={100}
                 height={100}
+                style={{
+                  transform: `scale(${photo.zoom})`,
+                  transformOrigin: 'center center',
+                  transition: 'transform 0.2s ease-in-out'
+                }}
                 key={`user-photo-${photo.id}`}
               />
             ))}

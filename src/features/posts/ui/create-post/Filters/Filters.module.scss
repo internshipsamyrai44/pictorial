@@ -100,3 +100,23 @@
     mix-blend-mode: overlay;
   }
 }
+
+.original {
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.square {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.vertical {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.horizontal {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
