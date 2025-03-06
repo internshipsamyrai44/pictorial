@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "3.9.1",
-    "@internshipsamyrai44-ui-kit/components-lib": "^0.5.0",
+    "@internshipsamyrai44-ui-kit/components-lib": "^0.6.0",
     "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "2.3.0",
     "@tailwindcss/postcss": "^4.0.6",
