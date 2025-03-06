@@ -5,7 +5,7 @@ import { Carousel } from '@/features/posts/ui/Create-post/Carousel/Carousel';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 import { useState } from 'react';
 
-type FiltersType =
+export type FiltersType =
   | 'normal'
   | 'clarendon'
   | 'lark'
@@ -17,7 +17,7 @@ type FiltersType =
   | 'brooklyn';
 
 export const Filters = () => {
-  const { userPhotos } = useCreatePostContext();
+  const { userPhotos, currentPhotoId } = useCreatePostContext();
   const [photoFilter, setPhotoFilter] = useState<FiltersType>('normal');
   const filters: FiltersType[] = [
     'normal',
@@ -35,29 +35,49 @@ export const Filters = () => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
+  const setPhotoFilterHandler = (filter: FiltersType) => {
+    userPhotos.forEach((photo) => {
+      if (photo.id === currentPhotoId) {
+        photo.filter = filter;
+      }
+    });
+  };
+
   return (
     <>
       <div className={s.wrapper}>
         <div className={s.photo}>
           <Carousel>
-            {userPhotos.map((photo: string, index: number) => (
+            {userPhotos.map((photo) => (
               <Image
-                src={photo || placeholder}
-                className={`${s.image} ${s[photoFilter]}`}
+                src={photo.uri || placeholder}
+                className={`${s.image} ${s[photoFilter]} ${s[photo.aspectRatio]}`}
                 alt={'User Photo'}
                 layout="responsive"
                 width={100}
                 height={100}
-                key={`user-photo-${index}`}
+                style={{
+                  transform: `scale(${photo.zoom})`,
+                  transformOrigin: 'center center',
+                  transition: 'transform 0.2s ease-in-out'
+                }}
+                key={`user-photo-${photo.id}`}
               />
             ))}
           </Carousel>
         </div>
         <div className={s.filters}>
           {filters.map((filter) => (
-            <div className={s.item} key={filter} onClick={() => setPhotoFilter(filter)}>
+            <div
+              className={s.item}
+              key={filter}
+              onClick={() => {
+                setPhotoFilter(filter);
+                setPhotoFilterHandler(filter);
+              }}
+            >
               <Image
-                src={userPhotos[0]}
+                src={userPhotos[0].uri}
                 className={`${s.img} ${s[filter]}`}
                 alt={`User Photo ${filter}`}
                 width={108}

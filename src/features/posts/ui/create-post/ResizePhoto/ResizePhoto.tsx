@@ -5,22 +5,34 @@ import FileIcon from '../../../../../../public/icons/PicIcon.svg';
 import SquareIcon from '../../../../../../public/icons/squareIcon.svg';
 import Verticalcon from '../../../../../../public/icons/verticalIcon.svg';
 import Horizontal from '../../../../../../public/icons/horizontalIcon.svg';
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
-  setAspectRatio: (aspectRatio: aspectRatioType) => void;
+  setAspectRatio: (aspectRatio: AspectRatioType) => void;
 };
 
-export type aspectRatioType = 'original' | 'square' | 'horizontal' | 'vertical';
+export type AspectRatioType = 'original' | 'square' | 'horizontal' | 'vertical';
 
 export const ResizePhoto = (props: PropsType) => {
+  const { userPhotos, currentPhotoId } = useCreatePostContext();
   const { setAspectRatio } = props;
-  const [selectedFormat, setSelectedFormat] = useState<aspectRatioType>('square');
   const t = useTranslations('Post');
 
-  const handleFormatClick = (format: aspectRatioType) => {
+  const [selectedFormat, setSelectedFormat] = useState<AspectRatioType>('square');
+
+  const handleFormatClick = (format: AspectRatioType) => {
     setSelectedFormat(format);
     setAspectRatio(format);
+    setAspectRatioHandler(format);
+  };
+
+  const setAspectRatioHandler = (format: AspectRatioType) => {
+    userPhotos.forEach((photo) => {
+      if (photo.id === currentPhotoId) {
+        photo.aspectRatio = format;
+      }
+    });
   };
 
   return (

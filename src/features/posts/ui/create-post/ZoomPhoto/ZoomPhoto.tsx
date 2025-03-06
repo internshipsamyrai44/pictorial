@@ -1,5 +1,6 @@
 import s from './ZoomPhoto.module.scss';
 import { ChangeEvent } from 'react';
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 
 type PropsType = {
   zoomValue: string;
@@ -8,14 +9,34 @@ type PropsType = {
 };
 
 export const ZoomPhoto = (props: PropsType) => {
+  const { userPhotos, currentPhotoId } = useCreatePostContext();
   const { zoomValue, setZoomValue } = props;
-  const onChangeHanler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setZoomValue(e.target.value);
+
+    setZoomScale(e.target.value);
+  };
+
+  const setZoomScale = (zoomValue: string) => {
+    userPhotos.forEach((photo) => {
+      if (photo.id === currentPhotoId) {
+        photo.zoom = zoomValue;
+      }
+    });
   };
 
   return (
     <div className={s.wrapper}>
-      <input type="range" min="1" max="2.5" step={0.1} value={zoomValue} onChange={onChangeHanler} />
+      <input
+        type="range"
+        min="1"
+        max="2.5"
+        step={0.01}
+        value={zoomValue}
+        onChange={(e) => {
+          onChangeHandler(e);
+        }}
+      />
     </div>
   );
 };

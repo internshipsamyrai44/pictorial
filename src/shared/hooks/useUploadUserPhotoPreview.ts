@@ -27,7 +27,16 @@ export const useUploadUserPhotoPreview = () => {
 
     reader.onloadend = () => {
       if (reader.result) {
-        setUserPhotos((prevPhotos: string[]) => [...prevPhotos, reader.result as string]);
+        setUserPhotos((prevPhotos) => [
+          ...prevPhotos,
+          {
+            id: Date.now().toString(),
+            uri: reader.result as string,
+            zoom: '1',
+            aspectRatio: 'original',
+            filter: 'normal'
+          }
+        ]);
       }
     };
     reader.readAsDataURL(userPhotoFile);
