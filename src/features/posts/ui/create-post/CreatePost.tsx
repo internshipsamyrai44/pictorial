@@ -13,7 +13,7 @@ import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts
 import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 import { ModalClose } from '@/features/posts/ui/create-post/Modal/ModalClose';
-import { UserPhotoType } from '@/features/posts/ui/create-post/createPostContext';
+import { useApplyCanvasFilterZoomAspectRatio } from '@/shared/hooks/useApplyCanvasFilterZoomAspectRatio';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
@@ -28,6 +28,7 @@ export const CreatePost = (props: PropsType) => {
 
   const [uploadImages] = useUploadImagesMutation();
   const [createPost] = useCreatePostMutation();
+  const { applyCanvasFilterZoomAspectRatio } = useApplyCanvasFilterZoomAspectRatio();
 
   const stepTitle = (): string => {
     switch (page) {
@@ -78,9 +79,14 @@ export const CreatePost = (props: PropsType) => {
   const handleUploadPhotos = async () => {
     const formData = new FormData();
 
-    userPhotos.forEach((file: UserPhotoType) => {
-      formData.append(`file`, dataURLtoFile(file.uri));
-    });
+    for (const photo of userPhotos) {
+      try {
+        const editedPhoto = await applyCanvasFilterZoomAspectRatio(photo);
+        formData.append(`file`, dataURLtoFile(editedPhoto));
+      } catch (error) {
+        console.error('Error preparing photo:', error);
+      }
+    }
 
     try {
       const res = await uploadImages(formData);
