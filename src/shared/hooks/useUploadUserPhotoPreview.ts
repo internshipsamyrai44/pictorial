@@ -33,7 +33,7 @@ export const useUploadUserPhotoPreview = () => {
             id: Date.now().toString(),
             uri: reader.result as string,
             zoom: '1',
-            aspectRatio: 'original',
+            aspectRatio: 'square',
             filter: 'normal'
           }
         ]);

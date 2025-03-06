@@ -48,20 +48,20 @@ export const Cropping = () => {
     <>
       <div className={s.wrapper}>
         <Carousel onSlideChange={setActiveSlideIndex}>
-          {userPhotos.map((photo, index) => (
+          {userPhotos.map((photo) => (
             <Image
               src={photo.uri || placeholder}
-              className={s[aspectRatio]}
+              className={`${s.image} ${s[aspectRatio]}`}
               alt={'User Photo'}
               layout="responsive"
               width={100}
               height={100}
               style={{
-                transform: `scale(${zoomValue})`,
+                transform: `scale(${photo.zoom})`,
                 transformOrigin: 'center center',
                 transition: 'transform 0.2s ease-in-out'
               }}
-              key={`user-photo-${index}`}
+              key={`user-photo-${photo.id}`}
             />
           ))}
         </Carousel>

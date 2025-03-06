@@ -26,8 +26,6 @@ export const Publication = (props: PropsType) => {
     setTextAreaValue(e.target.value);
   };
 
-  console.log(userPhotos);
-
   return (
     <>
       <div className={s.wrapper}>
@@ -36,7 +34,7 @@ export const Publication = (props: PropsType) => {
             {userPhotos.map((photo) => (
               <Image
                 src={photo.uri || placeholder}
-                className={`${s.image} ${s[photo.filter]} ${s[photo.aspectRatio]}`}
+                className={`${s.image} ${s[photo.filter]}  ${s[photo.aspectRatio]}`}
                 alt={'User `Photo'}
                 layout="responsive"
                 width={100}

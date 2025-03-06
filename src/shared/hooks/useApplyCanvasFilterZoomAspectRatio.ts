@@ -5,8 +5,8 @@ export const useApplyCanvasFilterZoomAspectRatio = () => {
     normal: 'none',
     clarendon: 'sepia(0.15) contrast(1.25) brightness(1.25) hue-rotate(5deg)',
     lark: 'sepia(0.25) contrast(1.2) brightness(1.3) saturate(1.25)',
-    gingham: ' contrast(1.1) brightness(1.1);',
-    moon: ' brightness(1.4) contrast(0.95) saturate(0) sepia(0.35)',
+    gingham: 'contrast(1.1) brightness(1.1)',
+    moon: 'brightness(1.4) contrast(0.95) saturate(0) sepia(0.35)',
     inkwell: 'brightness(1.25) contrast(0.85) grayscale(1)',
     nashville: 'sepia(0.25) contrast(1.5) brightness(0.9) hue-rotate(-15deg)',
     toaster: ' sepia(0.25) contrast(1.5) brightness(0.95) hue-rotate(-15deg)',
@@ -14,7 +14,7 @@ export const useApplyCanvasFilterZoomAspectRatio = () => {
   };
 
   const aspectRatioMap = {
-    original: 0,
+    original: undefined,
     square: 1,
     horizontal: 16 / 9,
     vertical: 4 / 5
