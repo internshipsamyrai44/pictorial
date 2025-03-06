@@ -1,24 +1,22 @@
 .wrapper {
   display: flex;
   width: 972px;
+  height: 504px;
   gap: 2rem;
   padding: 0;
 }
 
 .image {
-  max-width: 490px;
-  min-width: 0;
+  width: 490px;
 }
 
 .info {
   display: flex;
   flex-flow: column wrap;
   gap: 2rem;
+  width: 440px;
   padding-right: 30px;
   margin-top: 1rem;
-  width: 460px;
-  min-height: 511px;
-  min-width: 0;
   box-sizing: border-box;
 }
 
@@ -150,4 +148,16 @@
 .horizontal {
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+.loaderWrapper {
+  position: fixed;
+  inset: 0;
+  background-color: rgb(0 0 0 / 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  animation: fadeIn 0.3s ease-in-out;
+  padding: 0;
 }

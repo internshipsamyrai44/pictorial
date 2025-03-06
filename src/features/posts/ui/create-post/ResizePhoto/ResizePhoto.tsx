@@ -3,7 +3,7 @@ import s from './ResizePhoto.module.scss';
 import { useTranslations } from 'next-intl';
 import FileIcon from '../../../../../../public/icons/PicIcon.svg';
 import SquareIcon from '../../../../../../public/icons/squareIcon.svg';
-import Verticalcon from '../../../../../../public/icons/verticalIcon.svg';
+import VerticalIcon from '../../../../../../public/icons/verticalIcon.svg';
 import Horizontal from '../../../../../../public/icons/horizontalIcon.svg';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 
@@ -52,13 +52,13 @@ export const ResizePhoto = (props: PropsType) => {
       <div className={s.item} onClick={() => handleFormatClick('square')}>
         <span className={`${s.label} ${selectedFormat === 'square' ? s.active : ''}`}>1:1</span>
         <div className={s.svg}>
-          <SquareIcon className={`${s.icon} ${s.square} ${selectedFormat === 'original' ? s.active : ''}`} />
+          <SquareIcon className={`${s.icon} ${s.square} ${selectedFormat === 'square' ? s.active : ''}`} />
         </div>
       </div>
       <div className={s.item} onClick={() => handleFormatClick('vertical')}>
         <span className={`${s.label} ${selectedFormat === 'vertical' ? s.active : ''}`}>4:5</span>
         <div className={s.svg}>
-          <Verticalcon className={`${s.icon} ${s.vertical} ${selectedFormat === 'vertical' ? s.active : ''}`} />
+          <VerticalIcon className={`${s.icon} ${s.vertical} ${selectedFormat === 'vertical' ? s.active : ''}`} />
         </div>
       </div>
       <div className={s.item} onClick={() => handleFormatClick('horizontal')}>
