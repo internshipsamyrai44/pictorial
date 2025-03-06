@@ -11,6 +11,8 @@ type CreatePostContextProps = {
   paginate: (action: 'next' | 'prev' | 'close') => void;
   page: number;
   TOTAL_PAGES: number;
+  currentPhotoId: string | undefined;
+  setCurrentPhotoId: Dispatch<SetStateAction<string | undefined>>;
 };
 
 type CreatePostProviderProps = {
@@ -33,6 +35,7 @@ export const CreatePostProvider = ({ children }: CreatePostProviderProps) => {
   const [userPhotos, setUserPhotos] = useState<UserPhotoType[]>([]);
   const [modalCloseActive, setModalCloseActive] = useState<boolean>(false);
   const [page, setPage] = useState<number>(0);
+  const [currentPhotoId, setCurrentPhotoId] = useState<string | undefined>(undefined);
 
   const paginate = (action: 'next' | 'prev' | 'close') => {
     switch (action) {
@@ -68,7 +71,9 @@ export const CreatePostProvider = ({ children }: CreatePostProviderProps) => {
         setModalCloseActive,
         paginate,
         page,
-        TOTAL_PAGES
+        TOTAL_PAGES,
+        currentPhotoId,
+        setCurrentPhotoId
       }}
     >
       {children}
