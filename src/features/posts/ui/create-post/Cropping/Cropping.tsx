@@ -85,7 +85,7 @@ export const Cropping = () => {
           >
             <ResizeIcon className={s.icon} />
           </Button>
-          {isActive('resizer') && <ResizePhoto setAspectRatio={setAspectRatio} />}
+          {isActive('resizer') && <ResizePhoto setAspectRatio={setAspectRatio} currentPhotoId={currentPhotoId} />}
           <Button
             variant={'ghost'}
             onClick={() => toggleOption('zoom')}

@@ -12,7 +12,7 @@ type PropsType = {
 export const ZoomPhoto = (props: PropsType) => {
   const { userPhotos } = useCreatePostContext();
   const { zoomValue, setZoomValue, currentPhotoId } = props;
-  const onChangeHanler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setZoomValue(e.target.value);
     setZoomScale();
   };
@@ -27,7 +27,7 @@ export const ZoomPhoto = (props: PropsType) => {
 
   return (
     <div className={s.wrapper}>
-      <input type="range" min="1" max="2.5" step={0.1} value={zoomValue} onChange={onChangeHanler} />
+      <input type="range" min="1" max="2.5" step={0.01} value={zoomValue} onChange={onChangeHandler} />
     </div>
   );
 };
