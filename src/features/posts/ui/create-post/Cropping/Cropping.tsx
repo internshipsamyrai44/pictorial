@@ -18,7 +18,7 @@ import s from './Cropping.module.scss';
 type optionType = 'thumbs' | 'resizer' | 'zoom' | null;
 
 export const Cropping = () => {
-  const { userPhotos, setCurrentPhotoId } = useCreatePostContext();
+  const { userPhotos, setCurrentPhotoId, currentPhotoId } = useCreatePostContext();
   const { uploadUserPhotoPreview, errorUploadModal, setErrorUploadModal } = useUploadUserPhotoPreview();
   const t = useTranslations('Post');
 
@@ -48,22 +48,26 @@ export const Cropping = () => {
     <>
       <div className={s.wrapper}>
         <Carousel onSlideChange={setActiveSlideIndex}>
-          {userPhotos.map((photo) => (
-            <Image
-              src={photo.uri || placeholder}
-              className={`${s.image} ${s[aspectRatio]}`}
-              alt={'User Photo'}
-              layout="responsive"
-              width={100}
-              height={100}
-              style={{
-                transform: `scale(${photo.zoom})`,
-                transformOrigin: 'center center',
-                transition: 'transform 0.2s ease-in-out'
-              }}
-              key={`user-photo-${photo.id}`}
-            />
-          ))}
+          {userPhotos.map((photo) => {
+            if (photo.id === currentPhotoId) {
+              return (
+                <Image
+                  src={photo.uri || placeholder}
+                  className={`${s.image} ${s[aspectRatio]}`}
+                  alt={'User Photo'}
+                  layout="responsive"
+                  width={100}
+                  height={100}
+                  style={{
+                    transform: `scale(${photo.zoom})`,
+                    transformOrigin: 'center center',
+                    transition: 'transform 0.2s ease-in-out'
+                  }}
+                  key={`user-photo-${photo.id}`}
+                />
+              );
+            }
+          })}
         </Carousel>
 
         <input
