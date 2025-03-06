@@ -27,7 +27,7 @@ export const CreatePostHeader = (props: PropsType) => {
       <Typography variant={'h2'}>{stepTitle()}</Typography>
       {page === 0 && (
         <Button className={s.btn} aria-label={'Close window'} onClick={() => paginate('close')}>
-          <CrossIcon clasName={s.icon} />
+          <CrossIcon className={s.icon} />
         </Button>
       )}
 

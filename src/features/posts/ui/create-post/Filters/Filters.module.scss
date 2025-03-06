@@ -41,12 +41,6 @@
 
 .clarendon {
   filter: sepia(0.15) contrast(1.25) brightness(1.25) hue-rotate(5deg);
-
-  &::before {
-    background: rgb(127 187 227 / 40%);
-    content: '';
-    mix-blend-mode: overlay;
-  }
 }
 
 .lark {
@@ -55,12 +49,6 @@
 
 .gingham {
   filter: contrast(1.1) brightness(1.1);
-
-  &::before {
-    background: rgb(230 230 230);
-    content: '';
-    mix-blend-mode: soft-light;
-  }
 }
 
 .moon {
@@ -73,32 +61,14 @@
 
 .nashville {
   filter: sepia(0.25) contrast(1.5) brightness(0.9) hue-rotate(-15deg);
-
-  &::before {
-    background: radial-gradient(circle closest-corner, rgb(128 78 15 / 50%) 0, rgb(128 78 15 / 65%) 100%);
-    content: '';
-    mix-blend-mode: screen;
-  }
 }
 
 .toaster {
   filter: sepia(0.25) contrast(1.5) brightness(0.95) hue-rotate(-15deg);
-
-  &::before {
-    background: radial-gradient(circle, rgb(128 78 15), rgb(0 0 0 / 25%));
-    content: '';
-    mix-blend-mode: screen;
-  }
 }
 
 .brooklyn {
   filter: sepia(0.25) contrast(1.25) brightness(1.25) hue-rotate(5deg);
-
-  &::before {
-    background: rgb(127 187 227 / 20%);
-    content: '';
-    mix-blend-mode: overlay;
-  }
 }
 
 .original {

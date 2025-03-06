@@ -33,13 +33,13 @@ export const Thumbs = (props: PropsType) => {
               aria-label={'Remove photo'}
               onClick={() => removeUserPhotoHandler(i)}
             >
-              <SmallCrossIcon clasName={`${s.icon} ${s.removeIcon}`} width={8} height={8} />
+              <SmallCrossIcon className={`${s.icon} ${s.removeIcon}`} width={8} height={8} />
             </Button>
           </div>
         ))}
       </div>
       <Button onClick={handleButtonClick} disabled={userPhotos.length >= 10} className={s.add}>
-        <PlusIcon clasName={`${s.icon} ${s.add}`} width={30} height={30} />
+        <PlusIcon className={`${s.icon} ${s.add}`} width={30} height={30} />
       </Button>
     </div>
   );
