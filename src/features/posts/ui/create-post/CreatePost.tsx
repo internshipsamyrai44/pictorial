@@ -26,8 +26,8 @@ export const CreatePost = (props: PropsType) => {
   const { userPhotos, page, setModalCloseActive, modalCloseActive } = useCreatePostContext();
   const [textAreaValue, setTextAreaValue] = useState<string>('');
 
-  const [uploadImages] = useUploadImagesMutation();
-  const [createPost, { status }] = useCreatePostMutation();
+  const [uploadImages, { status }] = useUploadImagesMutation();
+  const [createPost] = useCreatePostMutation();
   const { applyCanvasFilterZoomAspectRatio } = useApplyCanvasFilterZoomAspectRatio();
 
   const stepTitle = (): string => {

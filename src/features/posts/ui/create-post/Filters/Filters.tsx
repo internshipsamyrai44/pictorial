@@ -3,7 +3,7 @@ import s from './Filters.module.scss';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export type FiltersType =
   | 'normal'
@@ -17,8 +17,9 @@ export type FiltersType =
   | 'brooklyn';
 
 export const Filters = () => {
-  const { userPhotos, currentPhotoId } = useCreatePostContext();
+  const { userPhotos, setCurrentPhotoId, currentPhotoId } = useCreatePostContext();
   const [photoFilter, setPhotoFilter] = useState<FiltersType>('normal');
+  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0);
   const filters: FiltersType[] = [
     'normal',
     'clarendon',
@@ -43,27 +44,37 @@ export const Filters = () => {
     });
   };
 
+  useEffect(() => {
+    if (userPhotos.length > 0) {
+      setCurrentPhotoId(userPhotos[activeSlideIndex].id);
+    }
+  }, [activeSlideIndex, userPhotos]);
+
   return (
     <>
       <div className={s.wrapper}>
         <div className={s.photo}>
-          <Carousel>
-            {userPhotos.map((photo) => (
-              <Image
-                src={photo.uri || placeholder}
-                className={`${s.image} ${s[photoFilter]} ${s[photo.aspectRatio]}`}
-                alt={'User Photo'}
-                layout="responsive"
-                width={100}
-                height={100}
-                style={{
-                  transform: `scale(${photo.zoom})`,
-                  transformOrigin: 'center center',
-                  transition: 'transform 0.2s ease-in-out'
-                }}
-                key={`user-photo-${photo.id}`}
-              />
-            ))}
+          <Carousel onSlideChange={setActiveSlideIndex}>
+            {userPhotos.map((photo) => {
+              if (photo.id === currentPhotoId) {
+                return (
+                  <Image
+                    src={photo.uri || placeholder}
+                    className={`${s.image} ${s[photo.filter]} ${s[photoFilter]} ${s[photo.aspectRatio]}`}
+                    alt={'User Photo'}
+                    layout="responsive"
+                    width={100}
+                    height={100}
+                    style={{
+                      transform: `scale(${photo.zoom})`,
+                      transformOrigin: 'center center',
+                      transition: 'transform 0.2s ease-in-out'
+                    }}
+                    key={`user-photo-${photo.id}`}
+                  />
+                );
+              }
+            })}
           </Carousel>
         </div>
         <div className={s.filters}>
@@ -77,7 +88,7 @@ export const Filters = () => {
               }}
             >
               <Image
-                src={userPhotos[0].uri}
+                src={userPhotos[activeSlideIndex].uri}
                 className={`${s.img} ${s[filter]}`}
                 alt={`User Photo ${filter}`}
                 width={108}

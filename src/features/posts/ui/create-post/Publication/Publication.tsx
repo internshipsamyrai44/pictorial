@@ -1,16 +1,16 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Input, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Publication.module.scss';
+import { QueryStatus } from '@reduxjs/toolkit/query';
+import Link from 'next/link';
 
-import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 import { useMeQuery } from '@/features/auth/api/authApi';
-import placeholder from '../../../../../../public/images/photo-placeholder.png';
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import { Carousel } from '@/features/posts/ui/create-post//Carousel/Carousel';
 import { Loader } from '@/shared/ui/loader/Loader';
-import { QueryStatus } from '@reduxjs/toolkit/query';
+import placeholder from '../../../../../../public/images/photo-placeholder.png';
 
 type PropsType = {
   textAreaValue: string;
