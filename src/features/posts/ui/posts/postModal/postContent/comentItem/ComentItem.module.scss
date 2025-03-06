@@ -1,0 +1,22 @@
+.comentItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+}
+
+.coment {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.interaction {
+  display: flex;
+  gap: 12px;
+}
+
+.interaction span {
+  color: #8d9094 !important;
+}

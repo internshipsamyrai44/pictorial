@@ -1,13 +1,8 @@
-.buttons {
-  display: flex;
-  gap: 12px;
-}
-
 .images {
   width: 100%;
   display: flex;
   padding: 15px 25px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
