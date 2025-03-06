@@ -3,14 +3,16 @@ import { Button, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import CrossIcon from '../../../../../../public/icons/smallCross.svg';
 import { useTranslations } from 'next-intl';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
+import { QueryStatus } from '@reduxjs/toolkit/query';
 
 type PropsType = {
   stepTitle: () => string;
   handleUploadPhotos: () => void;
+  status: QueryStatus;
 };
 
 export const CreatePostHeader = (props: PropsType) => {
-  const { stepTitle, handleUploadPhotos } = props;
+  const { stepTitle, handleUploadPhotos, status } = props;
   const { page, paginate, TOTAL_PAGES } = useCreatePostContext();
   const t = useTranslations('Post');
 
@@ -38,7 +40,7 @@ export const CreatePostHeader = (props: PropsType) => {
       )}
 
       {page === 3 && (
-        <Button variant={'ghost'} onClick={handleUploadPhotos}>
+        <Button variant={'ghost'} onClick={handleUploadPhotos} disabled={status === 'pending'}>
           {t('CreatePost.Publish')}
         </Button>
       )}

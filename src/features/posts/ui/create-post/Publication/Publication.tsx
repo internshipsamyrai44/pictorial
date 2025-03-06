@@ -1,24 +1,27 @@
+import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { Input, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Publication.module.scss';
-import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
-import Link from 'next/link';
-import placeholder from '../../../../../../public/images/photo-placeholder.png';
-import { useMeQuery } from '@/features/auth/api/authApi';
-import { Carousel } from '@/features/posts/ui/create-post//Carousel/Carousel';
-import { useTranslations } from 'next-intl';
 
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
+import { useMeQuery } from '@/features/auth/api/authApi';
+import placeholder from '../../../../../../public/images/photo-placeholder.png';
+import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
+import { Carousel } from '@/features/posts/ui/create-post//Carousel/Carousel';
+import { Loader } from '@/shared/ui/loader/Loader';
+import { QueryStatus } from '@reduxjs/toolkit/query';
 
 type PropsType = {
   textAreaValue: string;
   // eslint-disable-next-line no-unused-vars
   setTextAreaValue: (textAreaValue: string) => void;
+  status: QueryStatus;
 };
 
 export const Publication = (props: PropsType) => {
   const { userPhotos } = useCreatePostContext();
-  const { setTextAreaValue, textAreaValue } = props;
+  const { setTextAreaValue, textAreaValue, status } = props;
   const { data: me } = useMeQuery();
   const t = useTranslations('Post');
 
@@ -74,6 +77,11 @@ export const Publication = (props: PropsType) => {
           </div>
         </div>
       </div>
+      {status === 'pending' && (
+        <div className={s.loaderWrapper}>
+          <Loader />
+        </div>
+      )}
     </>
   );
 };
