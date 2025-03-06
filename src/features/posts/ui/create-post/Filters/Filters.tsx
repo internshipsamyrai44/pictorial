@@ -19,6 +19,7 @@ export type FiltersType =
 export const Filters = () => {
   const { userPhotos, currentPhotoId } = useCreatePostContext();
   const [photoFilter, setPhotoFilter] = useState<FiltersType>('normal');
+  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0);
   const filters: FiltersType[] = [
     'normal',
     'clarendon',
@@ -47,11 +48,11 @@ export const Filters = () => {
     <>
       <div className={s.wrapper}>
         <div className={s.photo}>
-          <Carousel>
+          <Carousel onSlideChange={setActiveSlideIndex}>
             {userPhotos.map((photo) => (
               <Image
                 src={photo.uri || placeholder}
-                className={`${s.image} ${s[photoFilter]} ${s[photo.aspectRatio]}`}
+                className={`${s.image} ${s[photo.filter]} ${s[photoFilter]} ${s[photo.aspectRatio]}`}
                 alt={'User Photo'}
                 layout="responsive"
                 width={100}
@@ -77,7 +78,7 @@ export const Filters = () => {
               }}
             >
               <Image
-                src={userPhotos[0].uri}
+                src={userPhotos[activeSlideIndex].uri}
                 className={`${s.img} ${s[filter]}`}
                 alt={`User Photo ${filter}`}
                 width={108}
