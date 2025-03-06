@@ -17,7 +17,7 @@ export type FiltersType =
   | 'brooklyn';
 
 export const Filters = () => {
-  const { userPhotos } = useCreatePostContext();
+  const { userPhotos, currentPhotoId } = useCreatePostContext();
   const [photoFilter, setPhotoFilter] = useState<FiltersType>('normal');
   const filters: FiltersType[] = [
     'normal',
@@ -33,6 +33,14 @@ export const Filters = () => {
   const capitalizeFirstLetter = (str: string) => {
     if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  const setPhotoFilterHandler = (filter: FiltersType) => {
+    userPhotos.forEach((photo) => {
+      if (photo.id === currentPhotoId) {
+        photo.filter = filter;
+      }
+    });
   };
 
   return (
@@ -55,7 +63,14 @@ export const Filters = () => {
         </div>
         <div className={s.filters}>
           {filters.map((filter) => (
-            <div className={s.item} key={filter} onClick={() => setPhotoFilter(filter)}>
+            <div
+              className={s.item}
+              key={filter}
+              onClick={() => {
+                setPhotoFilter(filter);
+                setPhotoFilterHandler(filter);
+              }}
+            >
               <Image
                 src={userPhotos[0].uri}
                 className={`${s.img} ${s[filter]}`}

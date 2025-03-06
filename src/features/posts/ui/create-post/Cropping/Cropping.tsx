@@ -17,7 +17,7 @@ import { useUploadUserPhotoPreview } from '@/shared/hooks/useUploadUserPhotoPrev
 type optionType = 'thumbs' | 'resizer' | 'zoom' | null;
 
 export const Cropping = () => {
-  const { userPhotos } = useCreatePostContext();
+  const { userPhotos, setCurrentPhotoId } = useCreatePostContext();
   const { uploadUserPhotoPreview, errorUploadModal, setErrorUploadModal } = useUploadUserPhotoPreview();
   const t = useTranslations('Post');
 
@@ -25,7 +25,6 @@ export const Cropping = () => {
   const [activeOption, setActiveOption] = useState<optionType>(null);
   const [aspectRatio, setAspectRatio] = useState<AspectRatioType>('square');
   const [zoomValue, setZoomValue] = useState('1');
-  const [currentPhotoId, setCurrentPhotoId] = useState<string | undefined>(undefined);
   const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0);
 
   const handleButtonClick = () => {
@@ -43,8 +42,6 @@ export const Cropping = () => {
       setCurrentPhotoId(userPhotos[activeSlideIndex].id);
     }
   }, [activeSlideIndex, userPhotos]);
-
-  console.log(userPhotos);
 
   return (
     <>
@@ -85,7 +82,7 @@ export const Cropping = () => {
           >
             <ResizeIcon className={s.icon} />
           </Button>
-          {isActive('resizer') && <ResizePhoto setAspectRatio={setAspectRatio} currentPhotoId={currentPhotoId} />}
+          {isActive('resizer') && <ResizePhoto setAspectRatio={setAspectRatio} />}
           <Button
             variant={'ghost'}
             onClick={() => toggleOption('zoom')}
@@ -94,9 +91,7 @@ export const Cropping = () => {
           >
             <ZoomLensIcon className={s.icon} />
           </Button>
-          {isActive('zoom') && (
-            <ZoomPhoto setZoomValue={setZoomValue} zoomValue={zoomValue} currentPhotoId={currentPhotoId} />
-          )}
+          {isActive('zoom') && <ZoomPhoto setZoomValue={setZoomValue} zoomValue={zoomValue} />}
           <Button
             variant={'ghost'}
             onClick={() => toggleOption('thumbs')}

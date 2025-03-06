@@ -6,18 +6,16 @@ type PropsType = {
   zoomValue: string;
   // eslint-disable-next-line no-unused-vars
   setZoomValue: (zoomValue: string) => void;
-  currentPhotoId: string | undefined;
 };
 
 export const ZoomPhoto = (props: PropsType) => {
-  const { userPhotos } = useCreatePostContext();
-  const { zoomValue, setZoomValue, currentPhotoId } = props;
+  const { userPhotos, currentPhotoId } = useCreatePostContext();
+  const { zoomValue, setZoomValue } = props;
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setZoomValue(e.target.value);
-    setZoomScale();
   };
 
-  const setZoomScale = () => {
+  const setZoomScale = (zoomValue: string) => {
     userPhotos.forEach((photo) => {
       if (photo.id === currentPhotoId) {
         photo.zoom = zoomValue;
@@ -27,7 +25,17 @@ export const ZoomPhoto = (props: PropsType) => {
 
   return (
     <div className={s.wrapper}>
-      <input type="range" min="1" max="2.5" step={0.01} value={zoomValue} onChange={onChangeHandler} />
+      <input
+        type="range"
+        min="1"
+        max="2.5"
+        step={0.01}
+        value={zoomValue}
+        onChange={(e) => {
+          onChangeHandler(e);
+          setZoomScale(zoomValue);
+        }}
+      />
     </div>
   );
 };

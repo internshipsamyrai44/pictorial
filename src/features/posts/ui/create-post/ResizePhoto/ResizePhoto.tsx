@@ -10,14 +10,13 @@ import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
   setAspectRatio: (aspectRatio: AspectRatioType) => void;
-  currentPhotoId: string | undefined;
 };
 
 export type AspectRatioType = 'original' | 'square' | 'horizontal' | 'vertical';
 
 export const ResizePhoto = (props: PropsType) => {
-  const { userPhotos } = useCreatePostContext();
-  const { setAspectRatio, currentPhotoId } = props;
+  const { userPhotos, currentPhotoId } = useCreatePostContext();
+  const { setAspectRatio } = props;
   const t = useTranslations('Post');
 
   const [selectedFormat, setSelectedFormat] = useState<AspectRatioType>('square');
@@ -25,13 +24,13 @@ export const ResizePhoto = (props: PropsType) => {
   const handleFormatClick = (format: AspectRatioType) => {
     setSelectedFormat(format);
     setAspectRatio(format);
-    setAspectRatioHandler();
+    setAspectRatioHandler(format);
   };
 
-  const setAspectRatioHandler = () => {
+  const setAspectRatioHandler = (format: AspectRatioType) => {
     userPhotos.forEach((photo) => {
       if (photo.id === currentPhotoId) {
-        photo.aspectRatio = selectedFormat;
+        photo.aspectRatio = format;
       }
     });
   };
