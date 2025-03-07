@@ -62,7 +62,9 @@
     "dateFormat": "en-US",
     "EditPost": "Edit Post",
     "DeletePost": "Delete Post",
-    "AddComment": "Add a Comment..."
+    "AddComment": "Add a Comment...",
+    "Like": "Like",
+    "Answer": "Answer"
   },
   "Profile": {
     "FirstName": "First Name",
