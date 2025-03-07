@@ -1,3 +1,31 @@
+.postContainer {
+  display: flex;
+  background-color: #333333;
+}
+.postImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 565px;
+  height: 565px;
+  object-fit: contain;
+}
+
+.image {
+  width: 565px;
+  height: 565px;
+  border-radius: 4px;
+  background-image: linear-gradient(90deg, #4c4c4c, #535353, #4c4c4c);
+  animation: skeleton-animation 1.5s ease-in-out infinite;
+}
+
+.postContent {
+  width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .wrapper {
   width: 480px;
   height: 100%;
