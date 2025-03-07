@@ -1,18 +1,18 @@
 'use client';
 
 import s from './CreatePost.module.scss';
-import { KeyboardEventHandler, useState } from 'react';
+import { KeyboardEventHandler, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
+import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts/api/postsApi';
+import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 import { Startlayout } from '@/features/posts/ui/create-post/Start-layout/Startlayout';
 import { Cropping } from '@/features/posts/ui/create-post/Cropping/Cropping';
 import { Filters } from '@/features/posts/ui/create-post/Filters/Filters';
 import { Publication } from '@/features/posts/ui/create-post/Publication/Publication';
 import { CreatePostHeader } from '@/features/posts/ui/create-post/CreatePostHeader/CreatePostHeader';
-import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts/api/postsApi';
-import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
-import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 import { ModalClose } from '@/features/posts/ui/create-post/Modal/ModalClose';
+import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
 import { useApplyCanvasFilterZoomAspectRatio } from '@/shared/hooks/useApplyCanvasFilterZoomAspectRatio';
 
 type PropsType = {
@@ -103,9 +103,11 @@ export const CreatePost = (props: PropsType) => {
     }
   };
 
-  if (status === 'fulfilled') {
-    setCreatePostActive(false);
-  }
+  useEffect(() => {
+    if (status === 'fulfilled') {
+      setCreatePostActive(false);
+    }
+  }, [status, setCreatePostActive]);
 
   return (
     <>
