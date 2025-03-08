@@ -25,8 +25,8 @@ export default function Profile() {
   });
 
   // Запрос для публичного профиля (когда пользователь не авторизован)
-  const { id } = useParams<{ id: string }>();
-  const { data: publicProfileData, isLoading: isPublicProfileLoading } = useGetPublicUserProfileQuery(+id);
+  const { userId } = useParams<{ userId: string }>();
+  const { data: publicProfileData, isLoading: isPublicProfileLoading } = useGetPublicUserProfileQuery(Number(userId));
 
   // Если авторизован
   if (isAuth) {
