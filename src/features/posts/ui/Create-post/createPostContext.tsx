@@ -1,6 +1,6 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react';
-import { AspectRatioType } from '@/features/posts/ui/Create-post/ResizePhoto/ResizePhoto';
-import { FiltersType } from '@/features/posts/ui/Create-post/Filters/Filters';
+import { AspectRatioType } from '@/features/posts/ui/create-post/ResizePhoto/ResizePhoto';
+import { FiltersType } from '@/features/posts/ui/create-post/Filters/Filters';
 
 type CreatePostContextProps = {
   userPhotos: UserPhotoType[];

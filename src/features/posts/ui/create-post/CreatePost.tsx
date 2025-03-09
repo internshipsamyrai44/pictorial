@@ -6,12 +6,12 @@ import { useTranslations } from 'next-intl';
 
 import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts/api/postsApi';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
-import { Startlayout } from '@/features/posts/ui/Create-post/Start-layout/Startlayout';
-import { Cropping } from '@/features/posts/ui/Create-post/Cropping/Cropping';
-import { Filters } from '@/features/posts/ui/Create-post/Filters/Filters';
-import { Publication } from '@/features/posts/ui/Create-post/Publication/Publication';
-import { CreatePostHeader } from '@/features/posts/ui/Create-post/CreatePostHeader/CreatePostHeader';
-import { ModalClose } from '@/features/posts/ui/Create-post/Modal/ModalClose';
+import { Startlayout } from '@/features/posts/ui/create-post/Start-layout/Startlayout';
+import { Cropping } from '@/features/posts/ui/create-post/Cropping/Cropping';
+import { Filters } from '@/features/posts/ui/create-post/Filters/Filters';
+import { Publication } from '@/features/posts/ui/create-post/Publication/Publication';
+import { CreatePostHeader } from '@/features/posts/ui/create-post/CreatePostHeader/CreatePostHeader';
+import { ModalClose } from '@/features/posts/ui/create-post/Modal/ModalClose';
 import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
 import { useApplyCanvasFilterZoomAspectRatio } from '@/shared/hooks/useApplyCanvasFilterZoomAspectRatio';
 
