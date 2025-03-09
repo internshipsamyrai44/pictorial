@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import s from './Filters.module.scss';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
-import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
+import { Carousel } from '@/features/posts/ui/Create-post/Carousel/Carousel';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 import { useEffect, useState } from 'react';
 

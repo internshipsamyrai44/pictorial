@@ -1,4 +1,4 @@
-import { UserPhotoType } from '@/features/posts/ui/create-post/createPostContext';
+import { UserPhotoType } from '@/features/posts/ui/Create-post/createPostContext';
 
 export const useApplyCanvasFilterZoomAspectRatio = () => {
   const filterMap = {

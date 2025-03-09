@@ -4,7 +4,7 @@ import placeholder from '../../../../../../public/images/photo-placeholder.png';
 import PlusIcon from '../../../../../../public/icons/plus-circle.svg';
 import SmallCrossIcon from '../../../../../../public/icons/smallCross.svg';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
-import { UserPhotoType } from '@/features/posts/ui/create-post/createPostContext';
+import { UserPhotoType } from '@/features/posts/ui/Create-post/createPostContext';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 
 type PropsType = {
