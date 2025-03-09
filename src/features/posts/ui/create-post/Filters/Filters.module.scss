@@ -4,6 +4,20 @@
   padding: 0;
   flex-basis: calc(50% - 3rem);
   height: 504px;
+
+  .active {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 109px;
+      height: 109px;
+      border: 2px solid var(--accent-100);
+      border-radius: 1px;
+      z-index: 1;
+    }
+  }
 }
 
 .photo {
@@ -25,8 +39,9 @@
 }
 
 .item {
+  position: relative;
   width: 108px;
-  height: 130px;
+  height: 108px;
   text-align: center;
   margin-right: 2rem;
   cursor: pointer;
