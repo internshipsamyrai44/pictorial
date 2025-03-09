@@ -80,7 +80,7 @@ export const Filters = () => {
         <div className={s.filters}>
           {filters.map((filter) => (
             <div
-              className={s.item}
+              className={`${s.item}  ${filter === userPhotos[activeSlideIndex].filter ? s.active : ''}`}
               key={filter}
               onClick={() => {
                 setPhotoFilter(filter);
