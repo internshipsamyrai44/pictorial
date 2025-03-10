@@ -24,7 +24,7 @@ export type PublishedPostResponse = {
   id: number;
   userName: string;
   description: string;
-  location: string;
+  location: string | null;
   images: PostImageViewModel[];
   createdAt: string;
   updatedAt: string;

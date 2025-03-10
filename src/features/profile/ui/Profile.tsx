@@ -1,21 +1,19 @@
 'use client';
 
-import * as React from 'react';
-import { useGetProfileQuery, useGetUserByUserNameQuery } from '@/features/profile/api/profileApi';
-import { ProfileDashboard } from '@/widgets/profile-dashboard/ProfileDashboard';
-import { Button, LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 import Link from 'next/link';
-import { PATH } from '@/shared/const/PATH';
 import { useTranslations } from 'next-intl';
+
+import { ProfileDashboard } from '@/widgets/profile-dashboard/ProfileDashboard';
+import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import ProfilePosts from '@/features/posts/ui/posts/ProfilePosts';
+import { PATH } from '@/shared/const/PATH';
+import { useGetProfileQuery, useGetUserByUserNameQuery } from '@/features/profile/api/profileApi';
 
 export default function Profile() {
   const t = useTranslations('Profile');
 
-  const { data: profileData, isLoading: isProfileLoading } = useGetProfileQuery();
-  const { data: userData, isLoading: isUserDataLoading } = useGetUserByUserNameQuery(profileData?.userName ?? '', {
-    skip: !profileData
-  });
+  const { data: profileData } = useGetProfileQuery();
+  const { data: userData } = useGetUserByUserNameQuery(profileData?.userName ?? '', { skip: !profileData });
 
   return (
     <>
@@ -32,7 +30,6 @@ export default function Profile() {
         </Button>
       </ProfileDashboard>
       {profileData && <ProfilePosts userName={profileData.userName} />}
-      {(isProfileLoading || isUserDataLoading) && <LoaderLinear />}
     </>
   );
 }

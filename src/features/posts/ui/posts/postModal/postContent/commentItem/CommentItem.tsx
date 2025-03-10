@@ -1,6 +1,6 @@
 'use client';
 
-import s from './ComentItem.module.scss';
+import s from './CommentItem.module.scss';
 import Heart from '../../../../../../../../public/icons/heart.svg';
 import HeartOutline from '../../../../../../../../public/icons/HeartOutline';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
@@ -15,11 +15,11 @@ type Props = {
   descriptionPost?: boolean;
 };
 
-export default function ComentItem({ avatarSrc, userName, text, isLiked, descriptionPost }: Props) {
+export default function CommentItem({ avatarSrc, userName, text, isLiked, descriptionPost }: Props) {
   const t = useTranslations('Post');
   return (
-    <div className={s.comentItem}>
-      <div className={s.coment}>
+    <div className={s.commentItem}>
+      <div className={s.comment}>
         <ProfileAvatar src={avatarSrc} height={36} width={36} userName={userName} />
         <div>
           <Typography variant={'regular-text-14'}>

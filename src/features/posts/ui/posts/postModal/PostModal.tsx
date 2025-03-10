@@ -6,6 +6,9 @@ import CloseButton from './closeButton/CloseButton';
 import PostImage from './postImage/PostImage';
 import PostContent from './postContent/PostContent';
 import PostContentSkeleton from './postContentSkeleton/PostContentSkeleton';
+import { useGetPublicPostsByIdQuery } from '@/features/public-posts/api/publicPostApi';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
 
 type Props = {
   postID: number;
@@ -13,9 +16,13 @@ type Props = {
 };
 
 export default function PostModal({ postID, closeModal }: Props) {
-  const { data: post, isLoading } = useGetPostsByIdQuery(postID);
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+  const { data: privatePost } = useGetPostsByIdQuery(postID, { skip: !isAuth });
+  const { data: publicPost } = useGetPublicPostsByIdQuery(postID, { skip: isAuth });
 
-  console.log(post);
+  const post = isAuth ? privatePost : publicPost;
+
+  const isLoading = !post;
 
   return (
     <div className={s.wrap}>
@@ -28,7 +35,7 @@ export default function PostModal({ postID, closeModal }: Props) {
               <PostImage images={post.images} />
             </div>
             <div className={s.postContent}>
-              <PostContent post={post} closeModal={closeModal} />
+              <PostContent post={post} closeModal={closeModal} isAuth={isAuth} />
             </div>
           </div>
         )}
