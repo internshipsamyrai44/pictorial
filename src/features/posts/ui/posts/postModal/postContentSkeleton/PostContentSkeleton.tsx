@@ -3,7 +3,6 @@
 import s from './PostContentSkeleton.module.scss';
 
 export default function PostContentSkeleton() {
-  console.log('PostContentSkeleton');
   return (
     <div className={s.postContainer}>
       <div className={s.postImg}>
