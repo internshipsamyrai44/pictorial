@@ -32,7 +32,13 @@ export default function PostContent({ post, closeModal, isAuth }: Props) {
 
   return (
     <div className={s.wrapper}>
-      <PostHeader avatarOwner={post.avatarOwner} userName={post.userName} onDeletePost={handleDeletePostClick} />
+      `{' '}
+      <PostHeader
+        avatarOwner={post.avatarOwner}
+        userName={post.userName}
+        onDeletePost={handleDeletePostClick}
+        isAuth={isAuth}
+      />
       <div className={s.conversation}>
         <div className={s.description}>
           <CommentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} descriptionPost />
@@ -43,10 +49,9 @@ export default function PostContent({ post, closeModal, isAuth }: Props) {
         </div>
       </div>
       <div className={s.interactionPanel}>
-        <InteractionBlock post={post} />
+        <InteractionBlock post={post} isAuth={isAuth} />
         {isAuth && <AddCommentForm />}
       </div>
-
       <DeletePostModal id={post.id} isOpen={isOpenModalDeletePost} onModalClose={handleCloseModal} />
     </div>
   );
