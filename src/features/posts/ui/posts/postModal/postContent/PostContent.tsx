@@ -49,7 +49,7 @@ export default function PostContent({ post, closeModal, isAuth }: Props) {
         </div>
       </div>
       <div className={s.interactionPanel}>
-        <InteractionBlock post={post} />
+        <InteractionBlock post={post} isAuth={isAuth} />
         {isAuth && <AddCommentForm />}
       </div>
       <DeletePostModal id={post.id} isOpen={isOpenModalDeletePost} onModalClose={handleCloseModal} />

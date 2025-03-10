@@ -10,9 +10,10 @@ import { useTranslations } from 'next-intl';
 
 type Props = {
   post: PublishedPostResponse;
+  isAuth?: boolean;
 };
 
-export default function InteractionBlock({ post }: Props) {
+export default function InteractionBlock({ post, isAuth }: Props) {
   const t = useTranslations('Post');
   const date = new Date(post.createdAt);
   const formattedDate = date.toLocaleDateString(t('dateFormat'), {
@@ -23,13 +24,15 @@ export default function InteractionBlock({ post }: Props) {
 
   return (
     <div className={s.interactionBlock}>
-      <div className={s.interaction}>
-        <div className={s.iconsGroup}>
-          <HeartOutline width={24} height={24} />
-          <PaperPlaneOutline />
+      {isAuth && (
+        <div className={s.interaction}>
+          <div className={s.iconsGroup}>
+            <HeartOutline width={24} height={24} />
+            <PaperPlaneOutline />
+          </div>
+          <BookmarkOutline />
         </div>
-        <BookmarkOutline />
-      </div>
+      )}
       <div className={s.postLikes}>
         {post.avatarWhoLikes}
         <div className={s.likes}>
