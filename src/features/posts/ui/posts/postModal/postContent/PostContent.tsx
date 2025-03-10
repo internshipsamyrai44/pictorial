@@ -12,9 +12,10 @@ import { useState } from 'react';
 type Props = {
   post: PublishedPostResponse;
   closeModal?: () => void;
+  isAuth?: boolean;
 };
 
-export default function PostContent({ post, closeModal }: Props) {
+export default function PostContent({ post, closeModal, isAuth }: Props) {
   const [isOpenModalDeletePost, setIsOpenModalDeletePost] = useState(false);
 
   const handleDeltePostClick = () => {
@@ -25,6 +26,9 @@ export default function PostContent({ post, closeModal }: Props) {
     setIsOpenModalDeletePost(false);
     closeModal?.();
   };
+  if (!post) {
+    return;
+  }
 
   return (
     <div className={s.wrapper}>
@@ -40,7 +44,7 @@ export default function PostContent({ post, closeModal }: Props) {
       </div>
       <div className={s.interactionPanel}>
         <InteractionBlock post={post} />
-        <AddComentForm />
+        {isAuth && <AddComentForm />}
       </div>
 
       <DeletePostModal id={post.id} isOpen={isOpenModalDeletePost} onModalClose={handleCloseModal} />

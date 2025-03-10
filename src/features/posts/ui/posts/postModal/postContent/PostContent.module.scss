@@ -22,9 +22,10 @@
 }
 
 .interactionPanel {
-  height: 165px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-top: 1px solid #4c4c4c;
+  margin-top: auto;
 }

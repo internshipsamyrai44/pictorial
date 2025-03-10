@@ -14,7 +14,7 @@ export type GetPublicPostsResponse = {
 
 export type PublicPostResponse = {
   avatarOwner: string;
-  avatarWhoLikes: string[];
+  avatarWhoLikes: boolean;
   createdAt: string;
   description: string;
   id: number;
