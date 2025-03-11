@@ -1,7 +1,9 @@
+.postLink {
+  width: auto;
+}
 
 .userLink {
   margin-top: 15px;
-
 }
 
 .userAvatarLink {
@@ -39,7 +41,7 @@
 }
 
 .description {
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
@@ -51,7 +53,6 @@
 .imageWrapper {
   display: flex;
   flex-direction: column;
-
 }
 
 .image {

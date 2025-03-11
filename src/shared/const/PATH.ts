@@ -20,7 +20,8 @@ export const PATH = {
   },
   PUBLIC: {
     PUBLIC_PAGE: '/public-page',
-    PUBLIC_USER: /^\/public-user\/profile\/\d+$/
+    PUBLIC_USER: /^\/public-user\/profile\/\d+$/,
+    PUBLIC_USER_POST: /^\/public-user\/profile\/\d+\/\d+$/
   },
   HOME: '/home'
 };
