@@ -32,7 +32,6 @@ export default function PostContent({ post, closeModal, isAuth }: Props) {
 
   return (
     <div className={s.wrapper}>
-      `{' '}
       <PostHeader
         avatarOwner={post.avatarOwner}
         userName={post.userName}
