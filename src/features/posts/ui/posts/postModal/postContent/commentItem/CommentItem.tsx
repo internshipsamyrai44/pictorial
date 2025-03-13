@@ -29,9 +29,14 @@ export default function CommentItem({ avatarSrc, userName, text, isLiked, descri
             <Typography variant={'small-text'} as={'span'}>
               data
             </Typography>
-            <Typography variant={'small-text'} as={'span'}>
-              {t('Like')}:
-            </Typography>
+            {!descriptionPost ? (
+              <Typography variant={'small-text'} as={'span'}>
+                {t('Like')}:
+              </Typography>
+            ) : (
+              <></>
+            )}
+
             <Typography variant={'small-text'} as={'span'}>
               {t('Answer')}
             </Typography>

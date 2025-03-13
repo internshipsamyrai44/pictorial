@@ -37,7 +37,7 @@ export default function InteractionBlock({ post, isAuth }: Props) {
         {post.avatarWhoLikes}
         <div className={s.likes}>
           <Typography variant={'regular-text-14'}>{post.likesCount}</Typography>
-          <Typography variant={'bold-text-14'}> &quot;Like&quot;</Typography>
+          <Typography variant={'bold-text-14'}> &quot;{t('Like')}&quot;</Typography>
         </div>
       </div>
       <div>
