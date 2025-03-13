@@ -1,7 +1,7 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, DatePicker, Input, Select, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, DatePicker, Input, Select, SelectItem, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useForm } from 'react-hook-form';
 
 import { ProfileBase } from '@/features/profile/model/profileApi.types';
@@ -18,6 +18,9 @@ type Props = {
   onSubmitProfileForm: (data: Omit<ProfileBase, 'id' | 'createdAt'>) => Promise<void>;
   profileData: Partial<ProfileFormValidationScheme>;
 };
+
+const selectOptionsCountry: string[] = ['Russia', 'Belarus', 'Serbia'];
+const selectOptionsCity: string[] = ['Moscow', 'Saint Petersburg', 'Minsk', 'Gomel', 'Belgrade', 'Novi Sad'];
 
 export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: Props) => {
   const t = useTranslations('Auth');
@@ -93,8 +96,21 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
       />
 
       <div className={s.location}>
-        <Select placeholder={tProfile('Country')} />
-        <Select placeholder={tProfile('City')} />
+        <Select placeholder={tProfile('Country')}>
+          {selectOptionsCountry.map((option, index) => (
+            <SelectItem key={index} value={option}>
+              <span>{tProfile(`Countrys.${option}`)}</span>
+            </SelectItem>
+          ))}
+        </Select>
+
+        <Select placeholder={tProfile('City')}>
+          {selectOptionsCity.map((option, index) => (
+            <SelectItem key={index} value={option}>
+              <span>{tProfile(`Citys.${option}`)}</span>
+            </SelectItem>
+          ))}
+        </Select>
       </div>
       <Textarea placeholder={tProfile('AboutMe')} {...register('aboutMe')} label={tProfile('AboutMe')} />
 

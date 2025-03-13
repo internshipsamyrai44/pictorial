@@ -88,7 +88,20 @@
     "NoInfo": "нет информации",
     "Following": "Подписки",
     "Followers": "Подписчики",
-    "Publications": "Публикации"
+    "Publications": "Публикации",
+    "Countrys": {
+      "Russia": "Россия",
+      "Belarus": "Беларусь",
+      "Serbia": "Сербия"
+    },
+    "Citys": {
+      "Moscow": "Москва",
+      "Saint Petersburg": "Санкт-Петербург",
+      "Minsk": "Минск",
+      "Gomel": "Гомель",
+      "Belgrade": "Белград",
+      "Novi Sad": "Нови-Сад"
+    }
   },
   "Errors": {
     "404": "Извините! Страница не найдена!",
