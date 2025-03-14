@@ -96,7 +96,11 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
       />
 
       <div className={s.location}>
-        <Select placeholder={tProfile('Country')}>
+        <Select
+          placeholder={tProfile('Country')}
+          value={getValues('country')}
+          onValueChange={(value) => setValue('country', value)}
+        >
           {selectOptionsCountry.map((option, index) => (
             <SelectItem key={index} value={option}>
               <span>{tProfile(`Countrys.${option}`)}</span>
@@ -104,7 +108,11 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
           ))}
         </Select>
 
-        <Select placeholder={tProfile('City')}>
+        <Select
+          placeholder={tProfile('City')}
+          value={getValues('city')}
+          onValueChange={(value) => setValue('city', value)}
+        >
           {selectOptionsCity.map((option, index) => (
             <SelectItem key={index} value={option}>
               <span>{tProfile(`Citys.${option}`)}</span>
