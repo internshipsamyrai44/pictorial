@@ -11,9 +11,10 @@ type Props = {
   avatarOwner: string;
   userName: string;
   onDeletePost: () => void;
+  onEditPost: () => void;
 };
 
-export default function PostHeader({ avatarOwner, userName, onDeletePost }: Props) {
+export default function PostHeader({ avatarOwner, userName, onDeletePost, onEditPost }: Props) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const onMenuBtnClick = () => {
@@ -32,9 +33,7 @@ export default function PostHeader({ avatarOwner, userName, onDeletePost }: Prop
         <div className={s.menuIcon}>
           <PostModalMenuIcon onClick={onMenuBtnClick} />
         </div>
-        {menuIsOpen && (
-          <PostMenu setMenuIsOpen={setMenuIsOpen} onEditClick={() => alert('Edit')} onDeleteClick={onDeletePost} />
-        )}
+        {menuIsOpen && <PostMenu setMenuIsOpen={setMenuIsOpen} onEditClick={onEditPost} onDeleteClick={onDeletePost} />}
       </div>
     </div>
   );

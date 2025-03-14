@@ -12,23 +12,33 @@ import { useState } from 'react';
 type Props = {
   post: PublishedPostResponse;
   closeModal?: () => void;
+  editPost?: () => void;
 };
 
-export default function PostContent({ post, closeModal }: Props) {
+export default function PostContent({ post, closeModal, editPost }: Props) {
   const [isOpenModalDeletePost, setIsOpenModalDeletePost] = useState(false);
 
-  const handleDeltePostClick = () => {
+  const handleDeletePostClick = () => {
     setIsOpenModalDeletePost(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseDeleteModal = () => {
     setIsOpenModalDeletePost(false);
     closeModal?.();
   };
 
+  const handleEditPostClick = () => {
+    editPost?.();
+  };
+
   return (
     <div className={s.wrapper}>
-      <PostHeader avatarOwner={post.avatarOwner} userName={post.userName} onDeletePost={handleDeltePostClick} />
+      <PostHeader
+        avatarOwner={post.avatarOwner}
+        userName={post.userName}
+        onDeletePost={handleDeletePostClick}
+        onEditPost={handleEditPostClick}
+      />
       <div className={s.сonversation}>
         <div className={s.description}>
           <ComentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} descriptionPost />
@@ -43,7 +53,7 @@ export default function PostContent({ post, closeModal }: Props) {
         <AddComentForm />
       </div>
 
-      <DeletePostModal id={post.id} isOpen={isOpenModalDeletePost} onModalClose={handleCloseModal} />
+      <DeletePostModal id={post.id} isOpen={isOpenModalDeletePost} onModalClose={handleCloseDeleteModal} />
     </div>
   );
 }
