@@ -29,13 +29,14 @@ export default function PostModal({ postID, closeModal, editPost }: Props) {
     <div className={s.wrap}>
       <div className={s.postContainer}>
         <CloseButton onClick={closeModal} className={s.closeBtn} />
-        {isLoading ? (
-          <PostContentSkeleton />
-        ) : (
+        {isLoading && <PostContentSkeleton />}
+        {post && (
           <div className={s.contentContainer}>
-            <div className={s.postImg}>{post && <PostImage images={post.images} />}</div>
+            <div className={s.postImg}>
+              <PostImage images={post.images} />
+            </div>
             <div className={s.postContent}>
-              {post && <PostContent post={post} closeModal={closeModal} isAuth={isAuth} editPost={editPost} />}
+             <PostContent post={post} closeModal={closeModal} isAuth={isAuth} editPost={editPost} />
             </div>
           </div>
         )}

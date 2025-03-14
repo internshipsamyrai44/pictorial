@@ -27,6 +27,9 @@ export default function PostContent({ post, closeModal, isAuth, editPost }: Prop
     setIsOpenModalDeletePost(false);
     closeModal?.();
   };
+  if (!post) {
+    return;
+  }
 
   const handleEditPostClick = () => {
     editPost?.();
@@ -58,7 +61,6 @@ export default function PostContent({ post, closeModal, isAuth, editPost }: Prop
         <InteractionBlock post={post} isAuth={isAuth} />
         {isAuth && <AddCommentForm />}
       </div>
-
       <DeletePostModal id={post.id} isOpen={isOpenModalDeletePost} onModalClose={handleCloseDeleteModal} />
     </div>
   );
