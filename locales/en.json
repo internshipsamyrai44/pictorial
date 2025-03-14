@@ -88,7 +88,20 @@
     "NoInfo": "no info",
     "Following": "Following",
     "Followers": "Followers",
-    "Publications": "Publications"
+    "Publications": "Publications",
+    "Countrys": {
+      "Russia": "Russia",
+      "Belarus": "Belarus",
+      "Serbia": "Serbia"
+    },
+    "Citys": {
+      "Moscow": "Moscow",
+      "Saint Petersburg": "Saint Petersburg",
+      "Minsk": "Minsk",
+      "Gomel": "Gomel",
+      "Belgrade": "Belgrade",
+      "Novi Sad": "Novi Sad"
+    }
   },
   "Errors": {
     "404": "Sorry! Page not found!",
