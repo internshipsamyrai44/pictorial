@@ -6,7 +6,7 @@
   justify-content: space-between;
 }
 
-.сonversation {
+.conversation {
   height: 336px;
   display: flex;
   flex-direction: column;
@@ -15,16 +15,17 @@
   overflow-y: auto;
 }
 
-.coments {
+.comments {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
 .interactionPanel {
-  height: 165px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-top: 1px solid #4c4c4c;
+  margin-top: auto;
 }

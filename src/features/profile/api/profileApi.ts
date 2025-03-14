@@ -40,7 +40,8 @@ export const profileApi = inctagramApi.injectEndpoints({
       query: (userName) => ({
         method: 'GET',
         url: `/v1/users/${userName}`
-      })
+      }),
+      providesTags: ['Posts']
     }),
     updateProfile: build.mutation<void, ProfileFormValues>({
       invalidatesTags: ['Profile'],

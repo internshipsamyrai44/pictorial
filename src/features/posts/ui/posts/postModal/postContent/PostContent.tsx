@@ -3,9 +3,9 @@
 import s from './PostContent.module.scss';
 import { PublishedPostResponse } from '@/features/posts/model/postsApi.types';
 import PostHeader from './postHeader/PostHeader';
-import AddComentForm from './addComentForm/AddComentForm';
+import AddCommentForm from './addComentForm/AddComentForm';
 import InteractionBlock from './interactionBlock/InteractionBlock';
-import ComentItem from './comentItem/ComentItem';
+import CommentItem from '@/features/posts/ui/posts/postModal/postContent/commentItem/CommentItem';
 import { DeletePostModal } from '@/features/posts/ui/deletePostModal/DeletePostModal';
 import { useState } from 'react';
 
@@ -13,9 +13,10 @@ type Props = {
   post: PublishedPostResponse;
   closeModal?: () => void;
   editPost?: () => void;
+  isAuth?: boolean;
 };
 
-export default function PostContent({ post, closeModal, editPost }: Props) {
+export default function PostContent({ post, closeModal, isAuth, editPost }: Props) {
   const [isOpenModalDeletePost, setIsOpenModalDeletePost] = useState(false);
 
   const handleDeletePostClick = () => {
@@ -31,6 +32,10 @@ export default function PostContent({ post, closeModal, editPost }: Props) {
     editPost?.();
   };
 
+  if (!post) {
+    return;
+  }
+
   return (
     <div className={s.wrapper}>
       <PostHeader
@@ -38,19 +43,20 @@ export default function PostContent({ post, closeModal, editPost }: Props) {
         userName={post.userName}
         onDeletePost={handleDeletePostClick}
         onEditPost={handleEditPostClick}
+        isAuth={isAuth}
       />
-      <div className={s.сonversation}>
+      <div className={s.conversation}>
         <div className={s.description}>
-          <ComentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} descriptionPost />
+          <CommentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} descriptionPost />
         </div>
-        <div className={s.coments}>
-          <ComentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} />
-          <ComentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} />
+        <div className={s.comments}>
+          <CommentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} />
+          <CommentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} />
         </div>
       </div>
       <div className={s.interactionPanel}>
-        <InteractionBlock post={post} />
-        <AddComentForm />
+        <InteractionBlock post={post} isAuth={isAuth} />
+        {isAuth && <AddCommentForm />}
       </div>
 
       <DeletePostModal id={post.id} isOpen={isOpenModalDeletePost} onModalClose={handleCloseDeleteModal} />
