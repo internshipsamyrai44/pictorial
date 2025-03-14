@@ -11,6 +11,11 @@ export type UploadedImageViewModel = {
   images: PostImageViewModel[];
 };
 
+export type PostUpdateRequest = {
+  postId: number;
+  description: string;
+};
+
 export type PostRequestData = {
   description: string;
   childrenMetadata: uploadId[] | undefined;

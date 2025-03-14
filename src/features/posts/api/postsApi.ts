@@ -2,6 +2,7 @@ import { inctagramApi } from '@/app/services/inctagram.api';
 import {
   PostRequestData,
   PostResponse,
+  PostUpdateRequest,
   PublishedPostResponse,
   UploadedImageViewModel
 } from '@/features/posts/model/postsApi.types';
@@ -21,6 +22,16 @@ export const postsApi = inctagramApi.injectEndpoints({
         url: 'v1/posts',
         method: 'POST',
         body: postData
+      }),
+      invalidatesTags: ['Posts']
+    }),
+    updatePost: build.mutation<void, PostUpdateRequest>({
+      query: (postData) => ({
+        url: `v1/posts/${postData.postId}`,
+        method: 'PUT',
+        body: {
+          description: postData.description
+        }
       }),
       invalidatesTags: ['Posts']
     }),
@@ -50,6 +61,7 @@ export const postsApi = inctagramApi.injectEndpoints({
 
 export const {
   useUploadImagesMutation,
+  useUpdatePostMutation,
   useCreatePostMutation,
   useGetPostsByUsernameQuery,
   useDeletePostMutation,

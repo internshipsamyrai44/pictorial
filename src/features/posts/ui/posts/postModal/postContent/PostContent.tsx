@@ -12,20 +12,29 @@ import { useState } from 'react';
 type Props = {
   post: PublishedPostResponse;
   closeModal?: () => void;
+  editPost?: () => void;
   isAuth?: boolean;
 };
 
-export default function PostContent({ post, closeModal, isAuth }: Props) {
+export default function PostContent({ post, closeModal, isAuth, editPost }: Props) {
   const [isOpenModalDeletePost, setIsOpenModalDeletePost] = useState(false);
 
   const handleDeletePostClick = () => {
     setIsOpenModalDeletePost(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseDeleteModal = () => {
     setIsOpenModalDeletePost(false);
     closeModal?.();
   };
+  if (!post) {
+    return;
+  }
+
+  const handleEditPostClick = () => {
+    editPost?.();
+  };
+
   if (!post) {
     return;
   }
@@ -36,6 +45,7 @@ export default function PostContent({ post, closeModal, isAuth }: Props) {
         avatarOwner={post.avatarOwner}
         userName={post.userName}
         onDeletePost={handleDeletePostClick}
+        onEditPost={handleEditPostClick}
         isAuth={isAuth}
       />
       <div className={s.conversation}>
@@ -51,7 +61,7 @@ export default function PostContent({ post, closeModal, isAuth }: Props) {
         <InteractionBlock post={post} isAuth={isAuth} />
         {isAuth && <AddCommentForm />}
       </div>
-      <DeletePostModal id={post.id} isOpen={isOpenModalDeletePost} onModalClose={handleCloseModal} />
+      <DeletePostModal id={post.id} isOpen={isOpenModalDeletePost} onModalClose={handleCloseDeleteModal} />
     </div>
   );
 }

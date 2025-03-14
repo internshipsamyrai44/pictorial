@@ -11,10 +11,11 @@ type Props = {
   avatarOwner: string;
   userName: string;
   onDeletePost: () => void;
+  onEditPost: () => void;
   isAuth?: boolean;
 };
 
-export default function PostHeader({ avatarOwner, userName, onDeletePost, isAuth }: Props) {
+export default function PostHeader({ avatarOwner, userName, onDeletePost, onEditPost, isAuth }: Props) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const onMenuBtnClick = () => {
@@ -35,7 +36,7 @@ export default function PostHeader({ avatarOwner, userName, onDeletePost, isAuth
             <PostModalMenuIcon onClick={onMenuBtnClick} />
           </div>
           {menuIsOpen && (
-            <PostMenu setMenuIsOpen={setMenuIsOpen} onEditClick={() => alert('Edit')} onDeleteClick={onDeletePost} />
+          <PostMenu setMenuIsOpen={setMenuIsOpen} onEditClick={onEditPost} onDeleteClick={onDeletePost} />
           )}
         </div>
       )}

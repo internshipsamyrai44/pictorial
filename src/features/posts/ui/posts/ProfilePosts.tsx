@@ -5,6 +5,7 @@ import { useGetPostsByUsernameQuery } from '../../api/postsApi';
 import s from './ProfilePosts.module.scss';
 import PostModal from './postModal/PostModal';
 import PostsSkeleton from './postsSkeleton/PostsSkeleton';
+import { EditPostModal } from './editPostModal/EditPostModal';
 
 type Props = {
   userName: string;
@@ -13,9 +14,14 @@ type Props = {
 export default function ProfilePosts({ userName }: Props) {
   const { data: posts, isLoading } = useGetPostsByUsernameQuery(userName);
   const [selectedPostID, setSelectedPostID] = useState<number | null>(null);
+  const [isEdited, setIsEdited] = useState(false);
 
-  const openModal = (postID: number) => setSelectedPostID(postID);
-  const closeModal = () => setSelectedPostID(null);
+  const openPostModal = (postID: number) => setSelectedPostID(postID);
+  const closePostModal = () => setSelectedPostID(null);
+
+  const closeEditPostModal = () => setIsEdited(false);
+
+  const handleEditPost = () => setIsEdited(true);
 
   if (isLoading) {
     return (
@@ -35,12 +41,18 @@ export default function ProfilePosts({ userName }: Props) {
               className={s.post}
               src={post.images[0].url}
               alt={post.description || 'Post image'}
-              onClick={() => openModal(post.id)}
+              onClick={() => openPostModal(post.id)}
             />
           </div>
         ))}
       </div>
-      {selectedPostID && posts && <PostModal postID={selectedPostID} closeModal={closeModal} />}
+      {selectedPostID &&
+        posts &&
+        (isEdited ? (
+          <EditPostModal postID={selectedPostID} closeModal={closeEditPostModal} />
+        ) : (
+          <PostModal postID={selectedPostID} closeModal={closePostModal} editPost={handleEditPost} />
+        ))}
     </>
   );
 }

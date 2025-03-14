@@ -1,7 +1,7 @@
 'use client';
 
-import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
 import { PostImageViewModel } from '@/features/posts/model/postsApi.types';
+import { Carousel } from '../../create-post/Carousel/Carousel';
 
 type Props = {
   images: PostImageViewModel[];

@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useMeQuery } from '@/features/auth/api/authApi';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
-import { Carousel } from '@/features/posts/ui/create-post/Carousel/Carousel';
+import { Carousel } from '../Carousel/Carousel';
 import { Loader } from '@/shared/ui/loader/Loader';
 import placeholder from '../../../../../../public/images/photo-placeholder.png';
 
