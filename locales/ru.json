@@ -110,6 +110,22 @@
       "Gomel": "Гомель",
       "Belgrade": "Белград",
       "Novi Sad": "Нови-Сад"
+    },
+    "Errors": {
+      "UserNameRequired": "Имя пользователя обязательно",
+      "UserNameMatches": "Имя пользователя должно содержать a-z, A-Z, 0-9, -",
+      "UserNameMinCharacters": "Имя пользователя должно содержать не менее 1 символа",
+      "UserNameMaxCharacters": "Имя пользователя должно содержать не более 50 символов",
+      "FirstNameRequired": "Имя обязательно",
+      "FirstNameMatches": "Имя должно содержать a-z, A-Z, 0-9, -",
+      "FirstNameMinCharacters": "Имя должно содержать не менее 1 символа",
+      "FirstNameMaxCharacters": "Имя должно содержать не более 50 символов",
+      "LastNameRequired": "Фамилия обязательна",
+      "LastNameMatches": "Фамилия должна содержать a-z, A-Z, 0-9, -",
+      "LastNameMinCharacters": "Фамилия должна содержать не менее 1 символа",
+      "LastNameMaxCharacters": "Фамилия должна содержать не более 50 символов",
+      "AboutMeMatches": "Обо мне должно содержать допустимые символы",
+      "AboutMeMaxCharacters": "Обо мне должно содержать не более 200 символов"
     }
   },
   "Errors": {

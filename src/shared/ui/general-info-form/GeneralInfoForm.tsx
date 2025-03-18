@@ -55,7 +55,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         onBlur={async () => {
           await trigger('userName');
         }}
-        errorMessage={errors.userName && `${errors.userName}`}
+        errorMessage={errors.userName?.message ? tProfile(errors.userName.message) : undefined}
         required={true}
       />
 
@@ -67,7 +67,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         onBlur={async () => {
           await trigger('firstName');
         }}
-        errorMessage={errors.firstName && `${errors.firstName}`}
+        errorMessage={errors.firstName?.message ? tProfile(errors.firstName.message) : undefined}
         required={true}
       />
 
@@ -80,7 +80,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
           await trigger('lastName');
         }}
         className="flex"
-        errorMessage={errors.lastName && `${errors.lastName}`}
+        errorMessage={errors.lastName?.message ? tProfile(errors.lastName.message) : undefined}
         required={true}
       />
 
@@ -120,7 +120,12 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
           ))}
         </Select>
       </div>
-      <Textarea placeholder={tProfile('AboutMe')} {...register('aboutMe')} label={tProfile('AboutMe')} />
+      <Textarea
+        placeholder={tProfile('AboutMe')}
+        {...register('aboutMe')}
+        label={tProfile('AboutMe')}
+        errorText={errors.aboutMe?.message ? tProfile(errors.aboutMe.message) : undefined}
+      />
 
       <Button variant="primary" type="submit" className={s['submit-button']}>
         {tProfile('SaveChanges')}
