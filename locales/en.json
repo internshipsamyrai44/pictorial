@@ -111,6 +111,10 @@
       "Belgrade": "Belgrade",
       "Novi Sad": "Novi Sad"
     },
+    "Alert": {
+      "ErrorAlert": "Failed to update profile. Please try again.",
+      "SuccessAlert": "Profile updated successfully!"
+    },
     "Errors": {
       "UserNameRequired": "Username is required",
       "UserNameMatches": "Username must contain a-z, A-Z, 0-9, -",
