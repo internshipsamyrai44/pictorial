@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, use } from 'react';
+import { use, useState } from 'react';
 
 import PublicProfile from '@/features/profile/ui/settings/public-profile/PublicProfile';
 import PostModal from '@/features/posts/ui/posts/postModal/PostModal';
 import { useRouter } from 'next/navigation';
-import { PublicPostsParamsType } from '@/app/(pages)/public-page/page';
+import { PublicPostsParamsType } from '@/app/(pages)/public-user/profile/[id]/[postId]/data';
 
 export default function PublicUserPost({ params }: PublicPostsParamsType) {
   const [showModal, setShowModal] = useState(true);
