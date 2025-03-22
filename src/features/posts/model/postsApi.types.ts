@@ -52,3 +52,10 @@ export type UserName = {
   firstName: string;
   lastName: string;
 };
+
+export type PublicPostsResponse = {
+  pageSize: number;
+  totalCount: number;
+  totalUsers: number;
+  items: PublishedPostResponse[];
+};
