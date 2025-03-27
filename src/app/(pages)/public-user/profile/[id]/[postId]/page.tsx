@@ -19,7 +19,7 @@ export default function PublicUserPost({ params }: PublicPostsParamsType) {
 
   return (
     <>
-      <PublicProfile />
+      <PublicProfile id={id} />
       {showModal && <PostModal postID={Number(postId)} closeModal={handleCloseModal} />}
     </>
   );

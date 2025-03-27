@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
