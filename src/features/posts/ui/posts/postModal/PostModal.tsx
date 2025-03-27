@@ -9,6 +9,7 @@ import CloseButton from '../closeButton/CloseButton';
 import { useGetPublicPostsByIdQuery } from '@/features/public-posts/api/publicPostApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   postID: number;
@@ -16,7 +17,8 @@ type Props = {
   editPost?: () => void;
 };
 
-export default function PostModal({ postID, closeModal, editPost }: Props) {
+export default function PostModal({ postID, editPost }: Props) {
+  const router = useRouter();
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
   const { data: privatePost } = useGetPostsByIdQuery(postID, { skip: !isAuth });
   const { data: publicPost } = useGetPublicPostsByIdQuery(postID, { skip: isAuth });
@@ -24,6 +26,10 @@ export default function PostModal({ postID, closeModal, editPost }: Props) {
   const post = isAuth ? privatePost : publicPost;
 
   const isLoading = !post;
+
+  const closeModal = () => {
+    router.back();
+  };
 
   return (
     <div className={s.wrap}>
@@ -36,7 +42,7 @@ export default function PostModal({ postID, closeModal, editPost }: Props) {
               <PostImage images={post.images} />
             </div>
             <div className={s.postContent}>
-             <PostContent post={post} closeModal={closeModal} isAuth={isAuth} editPost={editPost} />
+              <PostContent post={post} closeModal={closeModal} isAuth={isAuth} editPost={editPost} />
             </div>
           </div>
         )}
