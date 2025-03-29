@@ -1,0 +1,33 @@
+.subscribe {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.content {
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  padding: 0.5rem;
+}
+
+.payment {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+
+  .payment__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 96px;
+    height: 64px;
+    background-color: var(--dark-500);
+    border: 1px solid var(--dark-300);
+    padding: 0;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
