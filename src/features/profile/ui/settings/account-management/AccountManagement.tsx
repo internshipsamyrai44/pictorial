@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import s from './AccountManagement.module.scss';
-import { RadioGroup, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, RadioGroup, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import StripeIcon from './../../../../../../public/icons/stripeIcon.svg';
+import PayPallIcon from './../../../../../../public/icons/paypallIcon.svg';
 
 export const AccountManagement = () => {
   // const t = useTranslations('Profile');
-  const [accountType, setAccountType] = useState<string>('business');
+  const [accountType, setAccountType] = useState<string>('personal');
   const accountTypeOptions = [
     { label: 'Personal', value: 'personal' },
     { label: 'Business', value: 'business' }
@@ -24,12 +26,23 @@ export const AccountManagement = () => {
           <RadioGroup defaultValue={accountType} onValueChange={setAccountType} options={accountTypeOptions} />
         </div>
       </div>
-      <div className={s.subscription}>
-        <Typography variant={'h3'}>Your subscription costs:</Typography>
-        <div className={s.radio}>
-          <RadioGroup defaultValue={subscription} onValueChange={setSubscription} options={subscriptionOptions} />
+      {accountType === 'business' && (
+        <div className={s.subscription}>
+          <Typography variant={'h3'}>Your subscription costs:</Typography>
+          <div className={s.radio}>
+            <RadioGroup defaultValue={subscription} onValueChange={setSubscription} options={subscriptionOptions} />
+          </div>
+          <div className={s.payment}>
+            <Button variant={'ghost'} className={s.payment__btn}>
+              <PayPallIcon />
+            </Button>
+            or
+            <Button variant={'ghost'} className={s.payment__btn}>
+              <StripeIcon />
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
