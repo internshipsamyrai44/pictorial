@@ -1,7 +1,7 @@
 import s from './AccountSelection.module.scss';
 import { RadioGroup, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useState } from 'react';
-import { SubscriptionCosts } from '@/features/profile/ui/settings/account-management/subscription-costs/SubscriptionCosts';
+import { SubscriptionPrice } from '@/features/profile/ui/settings/account-management/subscription-price/SubscriptionPrice';
 
 type Props = {
   // eslint-disable-next-line no-unused-vars
@@ -25,7 +25,7 @@ export const AccountSelection = ({ setIsSubscribed }: Props) => {
           <RadioGroup defaultValue={accountType} onValueChange={setAccountType} options={accountTypeOptions} />
         </div>
       </div>
-      {accountType === 'business' && <SubscriptionCosts />}
+      {accountType === 'business' && <SubscriptionPrice />}
     </>
   );
 };

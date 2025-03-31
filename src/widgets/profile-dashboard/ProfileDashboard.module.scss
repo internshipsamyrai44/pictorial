@@ -21,8 +21,13 @@
       display: flex;
       flex-flow: row nowrap;
       column-gap: 100px;
-
       text-transform: capitalize;
     }
+  }
+
+  .name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 }

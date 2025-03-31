@@ -29,5 +29,9 @@
     &:hover {
       opacity: 0.8;
     }
+
+    &:disabled {
+      filter: grayscale(1);
+    }
   }
 }

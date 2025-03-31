@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import { StatsItem } from '@/shared/ui/stats-item/StatsItem';
 import s from './ProfileDashboard.module.scss';
-import { useTranslations } from 'next-intl';
+import VerifiedIcon from '../../../public/icons/verifiedIcon.svg';
 
 interface iProps {
   about?: string;
@@ -33,9 +34,12 @@ export const ProfileDashboard = ({
       <ProfileAvatar height={204} src={avatar} width={204} userName={userName} />
       <div className={s['container-block']}>
         <div className={s['header-block']}>
-          <Typography as={'h1'} variant={'h1'}>
-            {userName}
-          </Typography>
+          <div className={s.name}>
+            <Typography as={'h1'} variant={'h1'}>
+              {userName}
+            </Typography>
+            <VerifiedIcon width={24} height={24} />
+          </div>
           {children}
         </div>
         <div className={s['stats-block']}>
