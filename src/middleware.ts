@@ -5,6 +5,7 @@ import { PATH } from './shared/const/PATH';
 export function middleware(request: NextRequest) {
   // publicPaths can be a string or a regex
   const publicPaths = [
+    PATH.NOT_FOUND,
     PATH.GITHUB,
     PATH.AUTH.LOGIN,
     PATH.AUTH.FORGOT_PASSWORD,
