@@ -8,7 +8,7 @@ import { StripeSubscribe } from '@/features/profile/ui/settings/account-manageme
 export const SubscriptionPrice = () => {
   const { data: me } = useMeQuery();
 
-  const [subscription, setSubscription] = useState<string>('monthly');
+  const [subscription, setSubscription] = useState<string>('daily');
   const subscriptionOptions = [
     { label: '$10 per 1 Day', value: 'daily', priceId: 'price_1R8gdY4WbmSHJid2wrxAWJFi' },
     { label: '$50 per 7 Day', value: 'weekly', priceId: 'price_1R8ge34WbmSHJid2crxjc3jX' },

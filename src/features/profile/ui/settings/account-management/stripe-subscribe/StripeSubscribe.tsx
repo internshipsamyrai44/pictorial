@@ -1,11 +1,13 @@
 'use client';
 import { useState } from 'react';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
-import s from '@/features/profile/ui/settings/account-management/subscription-price/SubscriptionPrice.module.scss';
 import StripeIcon from '../../../../../../../public/icons/stripeIcon.svg';
+import { ConfirmModal } from '@/features/profile/ui/settings/account-management/confirm-modal/ConfimModal';
+import s from './../subscription-price/SubscriptionPrice.module.scss';
 
 export const StripeSubscribe = ({ priceId, userEmail }: { priceId?: string; userEmail?: string }) => {
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleSubscribe = async () => {
     setLoading(true);
@@ -26,7 +28,7 @@ export const StripeSubscribe = ({ priceId, userEmail }: { priceId?: string; user
       }
 
       const data = await res.json();
-      window.location.href = data.url; // Перенаправляем на оплату
+      window.location.href = data.url;
     } catch (error) {
       console.error('Ошибка подписки:', error);
     } finally {
@@ -35,8 +37,11 @@ export const StripeSubscribe = ({ priceId, userEmail }: { priceId?: string; user
   };
 
   return (
-    <Button variant={'ghost'} className={s.payment__btn} onClick={handleSubscribe} disabled={loading}>
-      <StripeIcon />
-    </Button>
+    <>
+      <Button variant={'ghost'} className={s.payment__btn} onClick={() => setShowModal(true)} disabled={loading}>
+        <StripeIcon />
+      </Button>
+      {showModal && <ConfirmModal setShowModal={setShowModal} handleSubscribe={handleSubscribe} />}
+    </>
   );
 };
