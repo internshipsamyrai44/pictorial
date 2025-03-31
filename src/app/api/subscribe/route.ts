@@ -13,18 +13,18 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'email и priceId обязательны' }, { status: 400 });
     }
 
-    const customer = await stripe.customers.create({ email });
-
-    const subscription = await stripe.subscriptions.create({
-      customer: customer.id,
-      items: [{ price: priceId }],
-      payment_behavior: 'default_incomplete',
-      expand: ['latest_invoice.payment_intent']
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      mode: 'subscription',
+      customer_email: email,
+      line_items: [{ price: priceId, quantity: 1 }],
+      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel`
     });
 
-    return NextResponse.json({ subscriptionId: subscription.id });
+    return NextResponse.json({ url: session.url });
   } catch (error: any) {
-    console.error('Ошибка подписки:', error.message);
+    console.error('Ошибка создания сессии:', error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

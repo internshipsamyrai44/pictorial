@@ -26,7 +26,7 @@ export const StripeSubscribe = ({ priceId, userEmail }: { priceId?: string; user
       }
 
       const data = await res.json();
-      console.log('Subscription ID:', data.subscriptionId);
+      window.location.href = data.url; // Перенаправляем на оплату
     } catch (error) {
       console.error('Ошибка подписки:', error);
     } finally {
