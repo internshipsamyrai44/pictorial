@@ -36,7 +36,7 @@ export default function PostHeader({ avatarOwner, userName, onDeletePost, onEdit
             <PostModalMenuIcon onClick={onMenuBtnClick} />
           </div>
           {menuIsOpen && (
-          <PostMenu setMenuIsOpen={setMenuIsOpen} onEditClick={onEditPost} onDeleteClick={onDeletePost} />
+            <PostMenu setMenuIsOpen={setMenuIsOpen} onEditClick={onEditPost} onDeleteClick={onDeletePost} />
           )}
         </div>
       )}
