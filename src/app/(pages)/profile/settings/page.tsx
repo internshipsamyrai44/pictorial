@@ -20,6 +20,9 @@ export default function SettingsPage() {
   const initialTab = searchParams.get('tab') || 'general-information';
   const [activeTab, setActiveTab] = useState<string>(initialTab);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(!!searchParams.get('success'));
+  const sessionId = searchParams.get('session_id');
+  const [session, setSession] = useState(null);
+
   const tabs = useMemo<TabType[]>(
     () => [
       { title: t('GeneralInformation'), value: 'general-information' },
@@ -61,6 +64,17 @@ export default function SettingsPage() {
     setActiveTab(searchParams.get('tab') || 'general-information');
     setIsSuccessModalOpen(!!searchParams.get('success'));
   }, [searchParams]);
+
+  useEffect(() => {
+    if (sessionId) {
+      fetch(`/api/session?session_id=${sessionId}`)
+        .then((res) => res.json())
+        .then((data) => setSession(data))
+        .catch((error) => console.error('Session error:', error));
+    }
+  }, [sessionId]);
+
+  console.log('session', session);
 
   return (
     <>
