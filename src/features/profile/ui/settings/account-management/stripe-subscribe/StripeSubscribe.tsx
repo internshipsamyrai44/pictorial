@@ -7,11 +7,9 @@ import s from './../subscription-price/SubscriptionPrice.module.scss';
 
 export const StripeSubscribe = ({ priceId, userEmail }: { priceId?: string; userEmail?: string }) => {
   const [loading, setLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const handleSubscribe = async () => {
-    setLoading(true);
-
     try {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
@@ -38,10 +36,10 @@ export const StripeSubscribe = ({ priceId, userEmail }: { priceId?: string; user
 
   return (
     <>
-      <Button variant={'ghost'} className={s.payment__btn} onClick={() => setShowModal(true)} disabled={loading}>
+      <Button variant={'ghost'} className={s.payment__btn} onClick={() => setShowConfirmModal(true)} disabled={loading}>
         <StripeIcon />
       </Button>
-      {showModal && <ConfirmModal setShowModal={setShowModal} handleSubscribe={handleSubscribe} />}
+      {showConfirmModal && <ConfirmModal setShowModal={setShowConfirmModal} handleSubscribe={handleSubscribe} />}
     </>
   );
 };
