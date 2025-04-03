@@ -8,12 +8,15 @@ import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import ProfilePosts from '@/features/posts/ui/posts/ProfilePosts';
 import { PATH } from '@/shared/const/PATH';
 import { useGetProfileQuery, useGetUserByUserNameQuery } from '@/features/profile/api/profileApi';
+import { useGetCurrentSubscriptionsQuery } from '@/features/subscriptions/api/subscriptionsApi';
 
 export default function Profile() {
   const t = useTranslations('Profile');
 
   const { data: profileData } = useGetProfileQuery();
   const { data: userData } = useGetUserByUserNameQuery(profileData?.userName ?? '', { skip: !profileData });
+  const { data: subscriptionsData } = useGetCurrentSubscriptionsQuery();
+  console.log('subscriptionsData', subscriptionsData);
 
   return (
     <>
