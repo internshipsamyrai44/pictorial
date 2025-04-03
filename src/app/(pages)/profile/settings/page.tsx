@@ -6,11 +6,10 @@ import { useTranslations } from 'next-intl';
 
 import { ContentPage } from '@/widgets/content-page/ContentPage';
 import { GeneralInfo } from '@/features/profile/ui/settings/general-info/GeneralInfo';
-import { Modal, Tabs, TabsContent, TabType } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Tabs, TabsContent, TabType } from '@internshipsamyrai44-ui-kit/components-lib';
 import { Devices } from '@/features/profile/ui/settings/devices/Devices';
 import { Payments } from '@/features/profile/ui/settings/payments/Payments';
 import { AccountManagement } from '@/features/profile/ui/settings/account-management/AccountManagement';
-import s from './SettingsPage.module.scss';
 
 export default function SettingsPage() {
   const t = useTranslations('Profile');
@@ -19,7 +18,7 @@ export default function SettingsPage() {
 
   const initialTab = searchParams.get('tab') || 'general-information';
   const [activeTab, setActiveTab] = useState<string>(initialTab);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(!!searchParams.get('success'));
+
   const sessionId = searchParams.get('session_id');
   const [session, setSession] = useState(null);
 
@@ -52,17 +51,8 @@ export default function SettingsPage() {
     },
     [router]
   );
-
-  const handleCloseSuccessModal = () => {
-    setIsSuccessModalOpen(false);
-    const newParams = new URLSearchParams(searchParams);
-    newParams.delete('success');
-    router.replace(`?${newParams.toString()}`, { scroll: false });
-  };
-
   useEffect(() => {
     setActiveTab(searchParams.get('tab') || 'general-information');
-    setIsSuccessModalOpen(!!searchParams.get('success'));
   }, [searchParams]);
 
   useEffect(() => {
@@ -87,11 +77,6 @@ export default function SettingsPage() {
           ))}
         </Tabs>
       </ContentPage>
-      {isSuccessModalOpen && (
-        <Modal onClose={handleCloseSuccessModal} title="Payment Successful" className={s.modal}>
-          <p>Payment was successful!! 🎉</p>
-        </Modal>
-      )}
     </>
   );
 }
