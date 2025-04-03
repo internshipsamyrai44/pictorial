@@ -3,7 +3,7 @@ import { Button, RadioGroup, Typography } from '@internshipsamyrai44-ui-kit/comp
 import PayPallIcon from '../../../../../../../public/icons/paypallIcon.svg';
 import { useState } from 'react';
 import { useMeQuery } from '@/features/auth/api/authApi';
-import { StripeSubscribe } from '@/features/profile/ui/settings/account-management/stripe-subscribe/StripeSubscribe';
+import { StripeSubscribe } from '@/features/subscriptions/ui/stripe/stripe-subscribe/StripeSubscribe';
 
 export const SubscriptionPrice = () => {
   const { data: me } = useMeQuery();

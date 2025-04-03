@@ -1,9 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
-import StripeIcon from '../../../../../../../public/icons/stripeIcon.svg';
+import StripeIcon from '../../../../../../public/icons/stripeIcon.svg';
 import { ConfirmModal } from '@/features/profile/ui/settings/account-management/confirm-modal/ConfimModal';
-import s from './../subscription-price/SubscriptionPrice.module.scss';
+import s from './StripeSubscribe.module.scss';
 
 export const StripeSubscribe = ({ priceId, userEmail }: { priceId?: string; userEmail?: string }) => {
   const [loading, setLoading] = useState(false);
@@ -36,9 +36,16 @@ export const StripeSubscribe = ({ priceId, userEmail }: { priceId?: string; user
 
   return (
     <>
-      <Button variant={'ghost'} className={s.payment__btn} onClick={() => setShowConfirmModal(true)} disabled={loading}>
-        <StripeIcon />
-      </Button>
+      <div className={s.wrapper}>
+        <Button
+          variant={'ghost'}
+          className={s.payment__btn}
+          onClick={() => setShowConfirmModal(true)}
+          disabled={loading}
+        >
+          <StripeIcon />
+        </Button>
+      </div>
       {showConfirmModal && <ConfirmModal setShowModal={setShowConfirmModal} handleSubscribe={handleSubscribe} />}
     </>
   );
