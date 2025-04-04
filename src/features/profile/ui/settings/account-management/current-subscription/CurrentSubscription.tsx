@@ -1,21 +1,30 @@
 import s from './CurrentSubscription.module.scss';
 import { Checkbox, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
 
 export const CurrentSubscription = () => {
+  const { latestSubscription } = useIsSubscribed();
+
+  if (!latestSubscription) return null;
+
+  const dateFormatter = (date: Date) => date.toLocaleDateString('ru-RU', {});
+
+  const subscriptionEndDate = dateFormatter(new Date(latestSubscription.endDateOfSubscription));
+
   return (
     <div className={s.container}>
       <Typography variant={'h3'}>Current Subscription:</Typography>
       <div className={`${s.content} ${s.activeSubscription}`}>
         <div className={s.date}>
           <span>Expire at</span>
-          <p>12.12.2005</p>
+          <p>{subscriptionEndDate}</p>
         </div>
         <div className={s.date}>
           <span>Next payment</span>
-          <p>12.02.2005</p>
+          <p>{subscriptionEndDate}</p>
         </div>
       </div>
-      <Checkbox label={'Auto-Renewal'} />
+      <Checkbox label={'Auto-Renewal'} checked={latestSubscription.autoRenewal} />
     </div>
   );
 };

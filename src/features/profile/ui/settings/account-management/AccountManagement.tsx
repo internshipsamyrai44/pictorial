@@ -5,12 +5,13 @@ import { AccountSelection } from '@/features/profile/ui/settings/account-managem
 import { Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useSearchParams } from 'next/navigation';
 import { router } from 'next/client';
+import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
 
 export const AccountManagement = () => {
   // const t = useTranslations('Profile');
   const searchParams = useSearchParams();
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(!!searchParams.get('success'));
-  const [isSubscribed, setIsSubscribed] = useState(true);
+  const { isSubscribed } = useIsSubscribed();
 
   const handleCloseSuccessModal = () => {
     setIsSuccessModalOpen(false);
@@ -26,7 +27,7 @@ export const AccountManagement = () => {
   return (
     <div className={s.container}>
       {isSubscribed && <CurrentSubscription />}
-      <AccountSelection setIsSubscribed={setIsSubscribed} />
+      <AccountSelection />
 
       {isSuccessModalOpen && (
         <Modal onClose={handleCloseSuccessModal} title="Payment Successful" className={s.modal}>
