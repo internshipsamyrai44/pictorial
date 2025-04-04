@@ -4,49 +4,61 @@ import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import StripeIcon from '../../../../../../public/icons/stripeIcon.svg';
 import { ConfirmModal } from '@/features/profile/ui/settings/account-management/confirm-modal/ConfimModal';
 import s from './StripeSubscribe.module.scss';
+import { useCreateSubscriptionMutation } from '@/features/subscriptions/api/subscriptionsApi';
+import { SubscriptionType } from '@/features/subscriptions/model/subscriptionsApi.types';
 
-export const StripeSubscribe = ({ priceId, userEmail }: { priceId?: string; userEmail?: string }) => {
+export type SubscriptionTypes = 'daily' | 'weekly' | 'monthly';
+type Props = {
+  chosenSubscription: SubscriptionTypes;
+};
+
+export const StripeSubscribe = ({ chosenSubscription }: Props) => {
   const [loading, setLoading] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [paymentUrl, setPaymentUrl] = useState('');
+
+  const [createSubscription] = useCreateSubscriptionMutation();
+
+  const subscriptionPrice = {
+    daily: 10,
+    weekly: 50,
+    monthly: 100
+  };
+  const subscriptionToUpperCase = chosenSubscription.toUpperCase();
 
   const handleSubscribe = async () => {
     try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: userEmail,
-          priceId: priceId
-        })
-      });
+      const response = await createSubscription({
+        typeSubscription: subscriptionToUpperCase as SubscriptionType,
+        paymentType: 'STRIPE',
+        amount: subscriptionPrice[chosenSubscription],
+        baseUrl: 'http://localhost:3000/profile/settings?tab=account-management&success=true'
+      }).unwrap();
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || 'Ошибка запроса');
+      if (response?.url) {
+        setPaymentUrl(response.url);
       }
-
-      const data = await res.json();
-      window.location.href = data.url;
-    } catch (error) {
-      console.error('Ошибка подписки:', error);
-    } finally {
       setLoading(false);
+    } catch (err) {
+      console.error('Error subscription:', err);
     }
   };
-
   return (
     <>
       <div className={s.wrapper}>
         <Button
           variant={'ghost'}
           className={s.payment__btn}
-          onClick={() => setShowConfirmModal(true)}
+          onClick={() => {
+            handleSubscribe();
+            setShowConfirmModal(true);
+          }}
           disabled={loading}
         >
           <StripeIcon />
         </Button>
       </div>
-      {showConfirmModal && <ConfirmModal setShowModal={setShowConfirmModal} handleSubscribe={handleSubscribe} />}
+      {showConfirmModal && <ConfirmModal setShowModal={setShowConfirmModal} paymentUrl={paymentUrl} />}
     </>
   );
 };

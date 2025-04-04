@@ -10,7 +10,6 @@ import { Tabs, TabsContent, TabType } from '@internshipsamyrai44-ui-kit/componen
 import { Devices } from '@/features/profile/ui/settings/devices/Devices';
 import { Payments } from '@/features/profile/ui/settings/payments/Payments';
 import { AccountManagement } from '@/features/profile/ui/settings/account-management/AccountManagement';
-import { useCreateSubscriptionMutation } from '@/features/subscriptions/api/subscriptionsApi';
 
 export default function SettingsPage() {
   const t = useTranslations('Profile');
@@ -19,9 +18,6 @@ export default function SettingsPage() {
 
   const initialTab = searchParams.get('tab') || 'general-information';
   const [activeTab, setActiveTab] = useState<string>(initialTab);
-
-  const sessionId = searchParams.get('session_id');
-  const [session, setSession] = useState(null);
 
   const tabs = useMemo<TabType[]>(
     () => [
@@ -55,37 +51,6 @@ export default function SettingsPage() {
   useEffect(() => {
     setActiveTab(searchParams.get('tab') || 'general-information');
   }, [searchParams]);
-
-  const [createSubscription] = useCreateSubscriptionMutation();
-
-  const handleSubscribe = async () => {
-    try {
-      const response = await createSubscription({
-        typeSubscription: 'MONTHLY',
-        paymentType: 'STRIPE',
-        amount: 100,
-        baseUrl: 'http://localhost:3000/profile/settings?tab=account-management&success=true'
-      }).unwrap();
-
-      console.log('Подписка успешно создана:', response);
-    } catch (err) {
-      console.error('Ошибка при создании подписки:', err);
-    }
-  };
-
-  useEffect(() => {
-    if (sessionId) {
-      fetch(`/api/session?session_id=${sessionId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setSession(data);
-          handleSubscribe();
-        })
-        .catch((error) => console.error('Session error:', error));
-    }
-  }, [sessionId]);
-
-  console.log('session', session);
 
   return (
     <>
