@@ -1,5 +1,9 @@
 import { inctagramApi } from '@/app/services/inctagram.api';
-import { CurrentSubscriptions, SubscriptionsRequest } from '@/features/subscriptions/model/subscriptionsApi.types';
+import {
+  CurrentSubscriptions,
+  SubscriptionsRequest,
+  SubscriptionsResponse
+} from '@/features/subscriptions/model/subscriptionsApi.types';
 
 export const subscriptionsApi = inctagramApi.injectEndpoints({
   endpoints: (build) => ({
@@ -10,7 +14,7 @@ export const subscriptionsApi = inctagramApi.injectEndpoints({
       }),
       providesTags: ['Subscriptions']
     }),
-    createSubscription: build.mutation<void, SubscriptionsRequest>({
+    createSubscription: build.mutation<SubscriptionsResponse, SubscriptionsRequest>({
       query: (body) => {
         const token = localStorage.getItem('accessToken');
         return {

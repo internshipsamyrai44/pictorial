@@ -19,3 +19,7 @@ export type SubscriptionsRequest = {
   amount: number;
   baseUrl: string;
 };
+
+export type SubscriptionsResponse = {
+  url: 'string';
+};
