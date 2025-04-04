@@ -8,9 +8,9 @@ import {
 } from '@/features/subscriptions/ui/stripe/stripe-subscribe/StripeSubscribe';
 
 export const SubscriptionPrice = () => {
-  const [subscription, setSubscription] = useState<string>('daily');
+  const [subscription, setSubscription] = useState<string>('day');
   const subscriptionOptions = [
-    { label: '$10 per 1 Day', value: 'daily', priceId: 'price_1R8gdY4WbmSHJid2wrxAWJFi' },
+    { label: '$10 per 1 Day', value: 'day', priceId: 'price_1R8gdY4WbmSHJid2wrxAWJFi' },
     { label: '$50 per 7 Day', value: 'weekly', priceId: 'price_1R8ge34WbmSHJid2crxjc3jX' },
     { label: '$100 per month', value: 'monthly', priceId: 'price_1R8geX4WbmSHJid2n4wLgVXI' }
   ];

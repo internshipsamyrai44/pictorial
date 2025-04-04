@@ -7,7 +7,7 @@ import s from './StripeSubscribe.module.scss';
 import { useCreateSubscriptionMutation } from '@/features/subscriptions/api/subscriptionsApi';
 import { SubscriptionType } from '@/features/subscriptions/model/subscriptionsApi.types';
 
-export type SubscriptionTypes = 'daily' | 'weekly' | 'monthly';
+export type SubscriptionTypes = 'day' | 'weekly' | 'monthly';
 type Props = {
   chosenSubscription: SubscriptionTypes;
 };
@@ -20,7 +20,7 @@ export const StripeSubscribe = ({ chosenSubscription }: Props) => {
   const [createSubscription] = useCreateSubscriptionMutation();
 
   const subscriptionPrice = {
-    daily: 10,
+    day: 10,
     weekly: 50,
     monthly: 100
   };

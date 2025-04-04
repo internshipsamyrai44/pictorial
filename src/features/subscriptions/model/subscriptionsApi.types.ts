@@ -1,5 +1,5 @@
 export type MerchantProvider = 'STRIPE' | 'PAYPAL' | 'CREDIT_CARD';
-export type SubscriptionType = 'DAILY' | 'WEEKLY' | 'MONTHLY';
+export type SubscriptionType = 'DAY' | 'WEEKLY' | 'MONTHLY';
 
 export type ActiveSubscription = {
   subscriptionId: string;
