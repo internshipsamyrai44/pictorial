@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import { StatsItem } from '@/shared/ui/stats-item/StatsItem';
 import s from './ProfileDashboard.module.scss';
 import VerifiedIcon from '../../../public/icons/verifiedIcon.svg';
-import { useGetCurrentSubscriptionsQuery } from '@/features/subscriptions/api/subscriptionsApi';
+import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
 
 interface iProps {
   about?: string;
@@ -29,25 +29,7 @@ export const ProfileDashboard = ({
   children
 }: iProps) => {
   const t = useTranslations('Profile');
-  const { data: subscriptionsData } = useGetCurrentSubscriptionsQuery();
-
-  const latestSubscription = useMemo(() => {
-    if (!subscriptionsData?.data?.length) return null;
-
-    return subscriptionsData.data.reduce((latest, current) => {
-      const latestDate = new Date(latest.endDateOfSubscription);
-      const currentDate = new Date(current.endDateOfSubscription);
-
-      return currentDate > latestDate ? current : latest;
-    });
-  }, [subscriptionsData]);
-
-  const isSubscribed = useMemo(() => {
-    if (!latestSubscription) return false;
-
-    const endDate = new Date(latestSubscription.endDateOfSubscription);
-    return endDate > new Date();
-  }, [latestSubscription]);
+  const { isSubscribed } = useIsSubscribed();
 
   return (
     <div className={s.wrapper}>
