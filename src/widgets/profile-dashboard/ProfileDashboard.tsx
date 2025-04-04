@@ -30,7 +30,6 @@ export const ProfileDashboard = ({
 }: iProps) => {
   const t = useTranslations('Profile');
   const { isSubscribed } = useIsSubscribed();
-
   return (
     <div className={s.wrapper}>
       <ProfileAvatar height={204} src={avatar} width={204} userName={userName} />

@@ -22,5 +22,5 @@ export const useIsSubscribed = () => {
     return endDate > new Date();
   }, [latestSubscription]);
 
-  return { isSubscribed, latestSubscription };
+  return { isSubscribed, latestSubscription, subscriptionsData };
 };
