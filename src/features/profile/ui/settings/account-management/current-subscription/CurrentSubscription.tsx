@@ -1,15 +1,13 @@
 import s from './CurrentSubscription.module.scss';
 import { Checkbox, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
+import { convertToLocalDate } from '@/shared/utils/convertToLocalDate';
 
 export const CurrentSubscription = () => {
   const { latestSubscription } = useIsSubscribed();
 
   if (!latestSubscription) return null;
-
-  const dateFormatter = (date: Date) => date.toLocaleDateString('ru-RU', {});
-
-  const subscriptionEndDate = dateFormatter(new Date(latestSubscription.endDateOfSubscription));
+  const subscriptionEndDate = convertToLocalDate(latestSubscription.endDateOfSubscription);
 
   return (
     <div className={s.container}>
