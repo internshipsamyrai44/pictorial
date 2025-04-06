@@ -3,8 +3,8 @@ import s from './AccountManagement.module.scss';
 import { CurrentSubscription } from '@/features/profile/ui/settings/account-management/current-subscription/CurrentSubscription';
 import { AccountSelection } from '@/features/profile/ui/settings/account-management/account-selection/AccountSelection';
 import { Modal } from '@internshipsamyrai44-ui-kit/components-lib';
-import { useSearchParams } from 'next/navigation';
-import { router } from 'next/client';
+import { useRouter, useSearchParams } from 'next/navigation';
+
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
 
 export const AccountManagement = () => {
@@ -13,11 +13,13 @@ export const AccountManagement = () => {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(!!searchParams.get('success'));
   const { isSubscribed } = useIsSubscribed();
 
+  const router = useRouter();
+
   const handleCloseSuccessModal = () => {
     setIsSuccessModalOpen(false);
     const newParams = new URLSearchParams(searchParams);
     newParams.delete('success');
-    router.replace(`?${newParams.toString()}`);
+    router.replace(`?${newParams}`);
   };
 
   useEffect(() => {
