@@ -1,27 +1,30 @@
-'use client';
+'use server';
 
-import { useEffect } from 'react';
+import { redirect } from 'next/navigation';
 import { PATH } from '@/shared/const/PATH';
-import { useMeQuery } from '@/features/auth/api/authApi';
-import { useRouter } from 'next/navigation';
-import { LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
+import { baseUrl } from '../shared/const/baseApi';
+import { cookies } from 'next/headers';
 
-export default function IndexPage() {
-  const { data: me, error, isLoading } = useMeQuery();
-  const router = useRouter();
+export default async function IndexPage() {
+  let me;
+  try {
+    const cookieStore = await cookies();
+    const accessToken = cookieStore.get('accessToken')?.value;
+    const refreshToken = cookieStore.get('refreshToken')?.value;
 
-  useEffect(() => {
-    if (isLoading) return;
+    me = await fetch(`${baseUrl}v1/auth/me`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'X-Refresh-Token': refreshToken || ''
+      }
+    }).then((res) => res.json());
+  } catch (error) {
+    console.error(error);
+  }
 
-    // Если произошла ошибка или пользователь не аутентифицирован
-    if (error || !me?.userId) {
-      router.push(PATH.PUBLIC.PUBLIC_PAGE);
-      return;
-    }
+  if (!me?.userId) {
+    redirect(PATH.PUBLIC.PUBLIC_PAGE);
+  }
 
-    // Если пользователь аутентифицирован, перенаправляем на домашнюю страницу
-    router.push(PATH.HOME);
-  }, [isLoading, error, me, router]);
-
-  return <LoaderLinear />;
+  redirect(PATH.HOME);
 }

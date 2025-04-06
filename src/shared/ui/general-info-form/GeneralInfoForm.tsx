@@ -1,7 +1,7 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, DatePicker, Input, Select, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, DatePicker, Input, Select, SelectItem, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useForm } from 'react-hook-form';
 
 import { ProfileBase } from '@/features/profile/model/profileApi.types';
@@ -18,6 +18,9 @@ type Props = {
   onSubmitProfileForm: (data: Omit<ProfileBase, 'id' | 'createdAt'>) => Promise<void>;
   profileData: Partial<ProfileFormValidationScheme>;
 };
+
+const selectOptionsCountry: string[] = ['Russia', 'Belarus', 'Serbia'];
+const selectOptionsCity: string[] = ['Moscow', 'Saint Petersburg', 'Minsk', 'Gomel', 'Belgrade', 'Novi Sad'];
 
 export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: Props) => {
   const t = useTranslations('Auth');
@@ -52,7 +55,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         onBlur={async () => {
           await trigger('userName');
         }}
-        errorMessage={errors.userName && `${errors.userName}`}
+        errorMessage={errors.userName?.message ? tProfile(errors.userName.message) : undefined}
         required={true}
       />
 
@@ -64,7 +67,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         onBlur={async () => {
           await trigger('firstName');
         }}
-        errorMessage={errors.firstName && `${errors.firstName}`}
+        errorMessage={errors.firstName?.message ? tProfile(errors.firstName.message) : undefined}
         required={true}
       />
 
@@ -77,7 +80,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
           await trigger('lastName');
         }}
         className="flex"
-        errorMessage={errors.lastName && `${errors.lastName}`}
+        errorMessage={errors.lastName?.message ? tProfile(errors.lastName.message) : undefined}
         required={true}
       />
 
@@ -93,10 +96,36 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
       />
 
       <div className={s.location}>
-        <Select placeholder={tProfile('Country')} />
-        <Select placeholder={tProfile('City')} />
+        <Select
+          placeholder={tProfile('Country')}
+          value={getValues('country')}
+          onValueChange={(value) => setValue('country', value)}
+        >
+          {selectOptionsCountry.map((option, index) => (
+            <SelectItem key={index} value={option}>
+              <span>{tProfile(`Countrys.${option}`)}</span>
+            </SelectItem>
+          ))}
+        </Select>
+
+        <Select
+          placeholder={tProfile('City')}
+          value={getValues('city')}
+          onValueChange={(value) => setValue('city', value)}
+        >
+          {selectOptionsCity.map((option, index) => (
+            <SelectItem key={index} value={option}>
+              <span>{tProfile(`Citys.${option}`)}</span>
+            </SelectItem>
+          ))}
+        </Select>
       </div>
-      <Textarea placeholder={tProfile('AboutMe')} {...register('aboutMe')} label={tProfile('AboutMe')} />
+      <Textarea
+        placeholder={tProfile('AboutMe')}
+        {...register('aboutMe')}
+        label={tProfile('AboutMe')}
+        errorText={errors.aboutMe?.message ? tProfile(errors.aboutMe.message) : undefined}
+      />
 
       <Button variant="primary" type="submit" className={s['submit-button']}>
         {tProfile('SaveChanges')}

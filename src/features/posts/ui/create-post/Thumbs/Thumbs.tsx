@@ -6,6 +6,7 @@ import SmallCrossIcon from '../../../../../../public/icons/smallCross.svg';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import { UserPhotoType } from '@/features/posts/ui/create-post/createPostContext';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
+import { useEffect } from 'react';
 
 type PropsType = {
   userPhotos: UserPhotoType[];
@@ -14,12 +15,18 @@ type PropsType = {
 };
 
 export const Thumbs = (props: PropsType) => {
-  const { setUserPhotos } = useCreatePostContext();
+  const { setUserPhotos, paginate } = useCreatePostContext();
   const { userPhotos, handleButtonClick } = props;
 
   const removeUserPhotoHandler = (photoIndex: number) => {
     setUserPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== photoIndex));
   };
+
+  useEffect(() => {
+    if (userPhotos.length === 0) {
+      paginate('prev');
+    }
+  }, [userPhotos]);
 
   return (
     <div className={`${s.thumblist}`}>
@@ -38,7 +45,7 @@ export const Thumbs = (props: PropsType) => {
           </div>
         ))}
       </div>
-      <Button onClick={handleButtonClick} disabled={userPhotos.length >= 10} className={s.add}>
+      <Button onClick={handleButtonClick} disabled={userPhotos.length >= 10} className={s.add} aria-label={'Add photo'}>
         <PlusIcon className={`${s.icon} ${s.add}`} width={30} height={30} />
       </Button>
     </div>

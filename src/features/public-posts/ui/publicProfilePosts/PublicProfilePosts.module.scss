@@ -9,4 +9,11 @@
 .image {
   height: 235px;
   width: 230px;
+  cursor: pointer;
+}
+
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }

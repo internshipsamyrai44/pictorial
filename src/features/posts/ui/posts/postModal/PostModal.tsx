@@ -2,36 +2,50 @@
 
 import s from './PostModal.module.scss';
 import { useGetPostsByIdQuery } from '@/features/posts/api/postsApi';
-import { Loader } from '@/shared/ui/loader/Loader';
-import CloseButton from './closeButton/CloseButton';
-import PostImage from './postImage/PostImage';
+import PostImage from '../postImage/PostImage';
 import PostContent from './postContent/PostContent';
 import PostContentSkeleton from './postContentSkeleton/PostContentSkeleton';
+import CloseButton from '../closeButton/CloseButton';
+import { useGetPublicPostsByIdQuery } from '@/features/public-posts/api/publicPostApi';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   postID: number;
   closeModal?: () => void;
+  editPost?: () => void;
 };
 
-export default function PostModal({ postID, closeModal }: Props) {
-  const { data: post, isLoading } = useGetPostsByIdQuery(postID);
+export default function PostModal({ postID, editPost }: Props) {
+  const router = useRouter();
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+  const { data: privatePost } = useGetPostsByIdQuery(postID, { skip: !isAuth });
+  const { data: publicPost } = useGetPublicPostsByIdQuery(postID, { skip: isAuth });
 
-  console.log(post);
+  const post = isAuth ? privatePost : publicPost;
+
+  const isLoading = !post;
+
+  const closeModal = () => {
+    router.back();
+  };
 
   return (
     <div className={s.wrap}>
-      <div className={s.modalContainer}>
-        <CloseButton onClick={closeModal} />
-        <div className={s.postContainer}>
-          <div className={s.postImg}>
-            {isLoading && <Loader />}
-            {post && <PostImage images={post.images} />}
+      <div className={s.postContainer}>
+        <CloseButton onClick={closeModal} className={s.closeBtn} />
+        {isLoading && <PostContentSkeleton />}
+        {post && (
+          <div className={s.contentContainer}>
+            <div className={s.postImg}>
+              <PostImage images={post.images} />
+            </div>
+            <div className={s.postContent}>
+              <PostContent post={post} closeModal={closeModal} isAuth={isAuth} editPost={editPost} />
+            </div>
           </div>
-          <div className={s.postContent}>
-            {isLoading && <PostContentSkeleton />}
-            {post && <PostContent post={post} closeModal={closeModal} />}
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

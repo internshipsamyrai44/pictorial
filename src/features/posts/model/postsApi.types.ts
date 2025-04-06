@@ -11,6 +11,11 @@ export type UploadedImageViewModel = {
   images: PostImageViewModel[];
 };
 
+export type PostUpdateRequest = {
+  postId: number;
+  description: string;
+};
+
 export type PostRequestData = {
   description: string;
   childrenMetadata: uploadId[] | undefined;
@@ -24,7 +29,7 @@ export type PublishedPostResponse = {
   id: number;
   userName: string;
   description: string;
-  location: string;
+  location: string | null;
   images: PostImageViewModel[];
   createdAt: string;
   updatedAt: string;
@@ -46,4 +51,11 @@ export type PostResponse = {
 export type UserName = {
   firstName: string;
   lastName: string;
+};
+
+export type PublicPostsResponse = {
+  pageSize: number;
+  totalCount: number;
+  totalUsers: number;
+  items: PublishedPostResponse[];
 };

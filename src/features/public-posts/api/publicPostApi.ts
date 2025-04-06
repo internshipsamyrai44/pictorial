@@ -3,7 +3,8 @@ import { baseUrl } from '@/shared/const/baseApi';
 import {
   GetPublicPostsByUserIdParams,
   GetPublicPostsParams,
-  GetPublicPostsResponse
+  GetPublicPostsResponse,
+  PublicPostResponse
 } from '@/features/public-posts/model/publicPostApi.types';
 
 export const publicPostsApi = createApi({
@@ -23,8 +24,14 @@ export const publicPostsApi = createApi({
         params: arg ?? undefined,
         method: 'GET'
       })
+    }),
+    getPublicPostsById: build.query<PublicPostResponse, number>({
+      query: (postID) => ({
+        url: `/v1/public-posts/${postID}`,
+        method: 'GET'
+      })
     })
   })
 });
 
-export const { useGetPublicAllPostsQuery, useGetPublicUserPostsQuery } = publicPostsApi;
+export const { useGetPublicAllPostsQuery, useGetPublicUserPostsQuery, useGetPublicPostsByIdQuery } = publicPostsApi;

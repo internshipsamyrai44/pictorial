@@ -1,10 +1,11 @@
 'use client';
 
-import s from './ComentItem.module.scss';
+import s from './CommentItem.module.scss';
 import Heart from '../../../../../../../../public/icons/heart.svg';
 import HeartOutline from '../../../../../../../../public/icons/HeartOutline';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import { Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   avatarSrc: string;
@@ -14,10 +15,11 @@ type Props = {
   descriptionPost?: boolean;
 };
 
-export default function ComentItem({ avatarSrc, userName, text, isLiked, descriptionPost }: Props) {
+export default function CommentItem({ avatarSrc, userName, text, isLiked, descriptionPost }: Props) {
+  const t = useTranslations('Post');
   return (
-    <div className={s.comentItem}>
-      <div className={s.coment}>
+    <div className={s.commentItem}>
+      <div className={s.comment}>
         <ProfileAvatar src={avatarSrc} height={36} width={36} userName={userName} />
         <div>
           <Typography variant={'regular-text-14'}>
@@ -27,11 +29,16 @@ export default function ComentItem({ avatarSrc, userName, text, isLiked, descrip
             <Typography variant={'small-text'} as={'span'}>
               data
             </Typography>
+            {!descriptionPost ? (
+              <Typography variant={'small-text'} as={'span'}>
+                {t('Like')}:
+              </Typography>
+            ) : (
+              <></>
+            )}
+
             <Typography variant={'small-text'} as={'span'}>
-              Like:
-            </Typography>
-            <Typography variant={'small-text'} as={'span'}>
-              Answer
+              {t('Answer')}
             </Typography>
           </div>
         </div>
