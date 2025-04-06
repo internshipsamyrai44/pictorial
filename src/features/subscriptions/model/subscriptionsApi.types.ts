@@ -23,3 +23,13 @@ export type SubscriptionsRequest = {
 export type SubscriptionsResponse = {
   url: 'string';
 };
+
+export type PaymentResponse = {
+  userId: string;
+  subscriptionId: string;
+  dateOfPayment: string;
+  endDateOfSubscription: string;
+  price: number;
+  subscriptionType: SubscriptionType;
+  paymentType: MerchantProvider;
+};

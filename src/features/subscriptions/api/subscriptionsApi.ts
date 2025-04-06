@@ -1,8 +1,10 @@
 import { inctagramApi } from '@/app/services/inctagram.api';
+
 import {
   CurrentSubscriptions,
   SubscriptionsRequest,
-  SubscriptionsResponse
+  SubscriptionsResponse,
+  PaymentResponse,
 } from '@/features/subscriptions/model/subscriptionsApi.types';
 
 export const subscriptionsApi = inctagramApi.injectEndpoints({
@@ -13,6 +15,12 @@ export const subscriptionsApi = inctagramApi.injectEndpoints({
         method: 'GET'
       }),
       providesTags: ['Subscriptions']
+    }),
+    getMyPayments: build.query<PaymentResponse[], void>({
+      query: () => ({
+        url: 'v1/subscriptions/my-payments',
+        method: 'GET'
+      })
     }),
     createSubscription: build.mutation<SubscriptionsResponse, SubscriptionsRequest>({
       query: (body) => {
@@ -32,4 +40,4 @@ export const subscriptionsApi = inctagramApi.injectEndpoints({
   })
 });
 
-export const { useCreateSubscriptionMutation, useGetCurrentSubscriptionsQuery } = subscriptionsApi;
+export const { useCreateSubscriptionMutation, useGetCurrentSubscriptionsQuery, useGetMyPaymentsQuery } = subscriptionsApi;
