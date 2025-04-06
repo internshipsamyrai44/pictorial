@@ -58,7 +58,9 @@ export const StripeSubscribe = ({ chosenSubscription }: Props) => {
           <StripeIcon />
         </Button>
       </div>
-      {showConfirmModal && <ConfirmModal setShowModal={setShowConfirmModal} paymentUrl={paymentUrl} />}
+      {showConfirmModal && (
+        <ConfirmModal setShowModal={setShowConfirmModal} paymentUrl={paymentUrl} isLoading={loading} />
+      )}
     </>
   );
 };
