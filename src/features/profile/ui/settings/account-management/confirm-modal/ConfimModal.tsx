@@ -7,9 +7,10 @@ type Props = {
   // eslint-disable-next-line no-unused-vars
   setShowModal: (show: boolean) => void;
   paymentUrl: string;
+  isLoading: boolean;
 };
 
-export const ConfirmModal = ({ setShowModal, paymentUrl }: Props) => {
+export const ConfirmModal = ({ setShowModal, paymentUrl, isLoading }: Props) => {
   const [isChecked, setChecked] = useState(false);
   const router = useRouter();
   const handlePaymentClick = () => router.push(paymentUrl);
@@ -19,7 +20,7 @@ export const ConfirmModal = ({ setShowModal, paymentUrl }: Props) => {
       <div>Auto-renewal will be enabled with this payment. You can disable it anytime in your profile settings</div>
       <div className={s.checkbox}>
         <Checkbox label={'Agree'} checked={isChecked} onChange={() => setChecked(!isChecked)} />
-        <Button disabled={!isChecked} onClick={handlePaymentClick}>
+        <Button disabled={!isChecked || isLoading} onClick={handlePaymentClick}>
           Ok
         </Button>
       </div>
