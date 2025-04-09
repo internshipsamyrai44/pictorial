@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import s from './AccountManagement.module.scss';
 import { CurrentSubscription } from '@/features/profile/ui/settings/account-management/current-subscription/CurrentSubscription';
 import { AccountSelection } from '@/features/profile/ui/settings/account-management/account-selection/AccountSelection';
-import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, Modal, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
@@ -11,8 +11,8 @@ export const AccountManagement = () => {
   // const t = useTranslations('Profile');
   const searchParams = useSearchParams();
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(!!searchParams.get('success'));
-  const { isSubscribed } = useIsSubscribed();
-
+  const { isSubscribed, subscriptionsData } = useIsSubscribed();
+  console.log(subscriptionsData);
   const router = useRouter();
 
   const handleCloseSuccessModal = () => {
@@ -28,8 +28,15 @@ export const AccountManagement = () => {
 
   return (
     <div className={s.container}>
-      {isSubscribed && <CurrentSubscription />}
-      <AccountSelection />
+      {isSubscribed && (
+        <div className={s.activeSubscriptions}>
+          <Typography variant={'h3'}>Current Subscription:</Typography>
+          {subscriptionsData?.data.map((subscriptionItem) => (
+            <CurrentSubscription key={subscriptionItem.subscriptionId} subscription={subscriptionItem} />
+          ))}
+          <AccountSelection />
+        </div>
+      )}
 
       {isSuccessModalOpen && (
         <Modal onClose={handleCloseSuccessModal} title="Success" className={s.modal}>
