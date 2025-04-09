@@ -5,7 +5,7 @@ export type ActiveSubscription = {
   subscriptionId: string;
   dateOfPayment: string;
   endDateOfSubscription: string;
-  autoRenewal: boolean;
+  autoRenewal?: boolean;
 };
 
 export type CurrentSubscriptions = {

@@ -55,7 +55,6 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
       setProfileUrl(`${PATH.PROFILE.PROFILE}/${me?.userId}`);
     }
   }, [me]);
-  console.log(me);
 
   const options = [
     { icon: HomeIcon, iconActive: HomeActiveIcon, title: t('Home'), url: PATH.MAIN, value: 'home' },

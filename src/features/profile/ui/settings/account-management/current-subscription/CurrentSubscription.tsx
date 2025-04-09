@@ -1,30 +1,33 @@
 import s from './CurrentSubscription.module.scss';
-import { Checkbox, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import { ActiveSubscription } from '@/features/subscriptions/model/subscriptionsApi.types';
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
+import { convertToLocalDate } from '@/shared/utils/convertToLocalDate';
+import { useTranslations } from 'next-intl';
 
-export const CurrentSubscription = () => {
+type Props = {
+  subscription: ActiveSubscription;
+};
+
+export const CurrentSubscription = ({ subscription }: Props) => {
+  const t = useTranslations('Profile');
   const { latestSubscription } = useIsSubscribed();
-
-  if (!latestSubscription) return null;
-
-  const dateFormatter = (date: Date) => date.toLocaleDateString('ru-RU', {});
-
-  const subscriptionEndDate = dateFormatter(new Date(latestSubscription.endDateOfSubscription));
 
   return (
     <div className={s.container}>
-      <Typography variant={'h3'}>Current Subscription:</Typography>
       <div className={`${s.content} ${s.activeSubscription}`}>
         <div className={s.date}>
-          <span>Expire at</span>
-          <p>{subscriptionEndDate}</p>
+          <span>{t('Subscriptions.Expire')}</span>
+          <p>{convertToLocalDate(subscription.endDateOfSubscription)}</p>
         </div>
         <div className={s.date}>
-          <span>Next payment</span>
-          <p>{subscriptionEndDate}</p>
+          <span>{t('Subscriptions.NextPayment')}</span>
+          <p>
+            {latestSubscription?.autoRenewal
+              ? convertToLocalDate(latestSubscription?.endDateOfSubscription as string)
+              : t('Subscriptions.AutoRenewalCanceled')}
+          </p>
         </div>
       </div>
-      <Checkbox label={'Auto-Renewal'} checked={latestSubscription.autoRenewal} />
     </div>
   );
 };

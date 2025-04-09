@@ -1,9 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
-import StripeIcon from '../../../../../../public/icons/stripeIcon.svg';
+import PaypalIcon from '../../../../../public/icons/paypallIcon.svg';
 import { ConfirmModal } from '@/features/profile/ui/settings/account-management/confirm-modal/ConfimModal';
-import s from './StripeSubscribe.module.scss';
+import s from './Paypal.module.scss';
 import { useCreateSubscriptionMutation } from '@/features/subscriptions/api/subscriptionsApi';
 import { SubscriptionType } from '@/features/subscriptions/model/subscriptionsApi.types';
 
@@ -12,7 +12,7 @@ type Props = {
   chosenSubscription: SubscriptionTypes;
 };
 
-export const StripeSubscribe = ({ chosenSubscription }: Props) => {
+export const Paypal = ({ chosenSubscription }: Props) => {
   const [loading, setLoading] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState('');
@@ -30,7 +30,7 @@ export const StripeSubscribe = ({ chosenSubscription }: Props) => {
     try {
       const response = await createSubscription({
         typeSubscription: subscriptionToUpperCase as SubscriptionType,
-        paymentType: 'STRIPE',
+        paymentType: 'PAYPAL',
         amount: subscriptionPrice[chosenSubscription],
         baseUrl: 'http://localhost:3000/profile/settings?tab=account-management&success=true'
       }).unwrap();
@@ -55,11 +55,16 @@ export const StripeSubscribe = ({ chosenSubscription }: Props) => {
           }}
           disabled={loading}
         >
-          <StripeIcon />
+          <PaypalIcon />
         </Button>
       </div>
       {showConfirmModal && (
-        <ConfirmModal setShowModal={setShowConfirmModal} paymentUrl={paymentUrl} isLoading={loading} />
+        <ConfirmModal
+          setShowModal={setShowConfirmModal}
+          paymentUrl={paymentUrl}
+          isLoading={loading}
+          paymentType={'PAYPAL'}
+        />
       )}
     </>
   );

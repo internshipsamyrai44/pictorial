@@ -24,7 +24,7 @@ export const PaymentsTable = ({ payments }: Props) => {
             <td>{convertToLocalDate(payment.dateOfPayment)}</td>
             <td>{convertToLocalDate(payment.endDateOfSubscription)}</td>
             <td>{payment.price}</td>
-            <td>{payment.subscriptionType}</td>
+            <td>{payment.subscriptionType === 'DAY' ? 'DAILY' : payment.subscriptionType}</td>
             <td>{payment.paymentType}</td>
           </tr>
         ))}
