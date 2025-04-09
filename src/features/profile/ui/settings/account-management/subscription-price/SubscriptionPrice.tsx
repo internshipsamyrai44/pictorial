@@ -1,18 +1,15 @@
 import s from './SubscriptionPrice.module.scss';
-import { Button, RadioGroup, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
-import PayPallIcon from '../../../../../../../public/icons/paypallIcon.svg';
+import { RadioGroup, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useState } from 'react';
-import {
-  StripeSubscribe,
-  SubscriptionTypes
-} from '@/features/subscriptions/ui/stripe/stripe-subscribe/StripeSubscribe';
+import { Stripe, SubscriptionTypes } from '@/features/subscriptions/ui/stripe/Stripe';
+import { Paypal } from '@/features/subscriptions/ui/paypal/Paypal';
 
 export const SubscriptionPrice = () => {
   const [subscription, setSubscription] = useState<string>('day');
   const subscriptionOptions = [
-    { label: '$10 per 1 Day', value: 'day', priceId: 'price_1R8gdY4WbmSHJid2wrxAWJFi' },
-    { label: '$50 per 7 Day', value: 'weekly', priceId: 'price_1R8ge34WbmSHJid2crxjc3jX' },
-    { label: '$100 per month', value: 'monthly', priceId: 'price_1R8geX4WbmSHJid2n4wLgVXI' }
+    { label: '$10 per 1 Day', value: 'day' },
+    { label: '$50 per 7 Day', value: 'weekly' },
+    { label: '$100 per month', value: 'monthly' }
   ];
   const chosenSubscription = subscriptionOptions.find((option) => option.value === subscription)
     ?.value as SubscriptionTypes;
@@ -24,11 +21,9 @@ export const SubscriptionPrice = () => {
         <RadioGroup defaultValue={subscription} onValueChange={setSubscription} options={subscriptionOptions} />
       </div>
       <div className={s.payment}>
-        <Button variant={'ghost'} className={s.payment__btn} disabled>
-          <PayPallIcon />
-        </Button>
+        <Paypal chosenSubscription={chosenSubscription} />
         or
-        <StripeSubscribe chosenSubscription={chosenSubscription} />
+        <Stripe chosenSubscription={chosenSubscription} />
       </div>
     </div>
   );

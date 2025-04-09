@@ -6,14 +6,18 @@ import { Button, Checkbox, Modal, Typography } from '@internshipsamyrai44-ui-kit
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
-import { useCanselAutoRenewalSubscriptionMutation } from '@/features/subscriptions/api/subscriptionsApi';
+import {
+  useCanselAutoRenewalSubscriptionMutation,
+  useGetMyPaymentsQuery
+} from '@/features/subscriptions/api/subscriptionsApi';
 
 export const AccountManagement = () => {
   // const t = useTranslations('Profile');
   const searchParams = useSearchParams();
   const [cancelAutoRenewalSubscription] = useCanselAutoRenewalSubscriptionMutation();
+  const { data: subscriptionsData } = useGetMyPaymentsQuery();
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(!!searchParams.get('success'));
-  const { isSubscribed, latestSubscription, subscriptionsData } = useIsSubscribed();
+  const { isSubscribed, latestSubscription } = useIsSubscribed();
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const router = useRouter();
@@ -46,7 +50,7 @@ export const AccountManagement = () => {
       {isSubscribed && (
         <div className={s.activeSubscriptions}>
           <Typography variant={'h3'}>Current Subscription:</Typography>
-          {subscriptionsData?.data.map((subscriptionItem) => (
+          {subscriptionsData?.map((subscriptionItem) => (
             <CurrentSubscription key={subscriptionItem.subscriptionId} subscription={subscriptionItem} />
           ))}
           <Checkbox label={'Auto-Renewal'} checked={isChecked} onChange={handelUnchecked} />

@@ -2,9 +2,11 @@ import s from './AccountSelection.module.scss';
 import { RadioGroup, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useState } from 'react';
 import { SubscriptionPrice } from '@/features/profile/ui/settings/account-management/subscription-price/SubscriptionPrice';
+import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
 
 export const AccountSelection = () => {
-  const [accountType, setAccountType] = useState<string>('personal');
+  const { isSubscribed } = useIsSubscribed();
+  const [accountType, setAccountType] = useState<string>(isSubscribed ? 'business' : 'personal');
   const accountTypeOptions = [
     { label: 'Personal', value: 'personal' },
     { label: 'Business', value: 'business' }

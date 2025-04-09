@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { PATH } from '@/shared/const/PATH';
-import { baseUrl } from '../shared/const/baseApi';
+import { baseUrl } from '@/shared/const/baseApi';
 import { cookies } from 'next/headers';
 
 export default async function IndexPage() {

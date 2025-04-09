@@ -1,9 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
-import StripeIcon from '../../../../../../public/icons/stripeIcon.svg';
+import StripeIcon from '../../../../../public/icons/stripeIcon.svg';
 import { ConfirmModal } from '@/features/profile/ui/settings/account-management/confirm-modal/ConfimModal';
-import s from './StripeSubscribe.module.scss';
+import s from './Stripe.module.scss';
 import { useCreateSubscriptionMutation } from '@/features/subscriptions/api/subscriptionsApi';
 import { SubscriptionType } from '@/features/subscriptions/model/subscriptionsApi.types';
 
@@ -12,7 +12,7 @@ type Props = {
   chosenSubscription: SubscriptionTypes;
 };
 
-export const StripeSubscribe = ({ chosenSubscription }: Props) => {
+export const Stripe = ({ chosenSubscription }: Props) => {
   const [loading, setLoading] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState('');
