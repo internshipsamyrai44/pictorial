@@ -1,5 +1,4 @@
 import s from './CurrentSubscription.module.scss';
-import { Checkbox } from '@internshipsamyrai44-ui-kit/components-lib';
 import { ActiveSubscription } from '@/features/subscriptions/model/subscriptionsApi.types';
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
 import { convertToLocalDate } from '@/shared/utils/convertToLocalDate';
@@ -10,6 +9,7 @@ type Props = {
 
 export const CurrentSubscription = ({ subscription }: Props) => {
   const { latestSubscription } = useIsSubscribed();
+
   return (
     <div className={s.container}>
       <div className={`${s.content} ${s.activeSubscription}`}>
@@ -19,10 +19,13 @@ export const CurrentSubscription = ({ subscription }: Props) => {
         </div>
         <div className={s.date}>
           <span>Next payment</span>
-          <p>{convertToLocalDate(latestSubscription?.endDateOfSubscription as string)}</p>
+          <p>
+            {latestSubscription?.autoRenewal
+              ? convertToLocalDate(latestSubscription?.endDateOfSubscription as string)
+              : 'Auto Renewal Canceled'}
+          </p>
         </div>
       </div>
-      {subscription.autoRenewal && <Checkbox label={'Auto-Renewal'} checked={subscription.autoRenewal} />}{' '}
     </div>
   );
 };

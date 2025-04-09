@@ -2,18 +2,25 @@ import React, { useEffect, useState } from 'react';
 import s from './AccountManagement.module.scss';
 import { CurrentSubscription } from '@/features/profile/ui/settings/account-management/current-subscription/CurrentSubscription';
 import { AccountSelection } from '@/features/profile/ui/settings/account-management/account-selection/AccountSelection';
-import { Button, Modal, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, Checkbox, Modal, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
+import { useCanselAutoRenewalSubscriptionMutation } from '@/features/subscriptions/api/subscriptionsApi';
 
 export const AccountManagement = () => {
   // const t = useTranslations('Profile');
   const searchParams = useSearchParams();
+  const [cancelAutoRenewalSubscription] = useCanselAutoRenewalSubscriptionMutation();
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(!!searchParams.get('success'));
-  const { isSubscribed, subscriptionsData } = useIsSubscribed();
-  console.log(subscriptionsData);
+  const { isSubscribed, latestSubscription, subscriptionsData } = useIsSubscribed();
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
   const router = useRouter();
+
+  const handelUnchecked = () => {
+    isChecked ? cancelAutoRenewalSubscription() : setIsChecked(true);
+  };
 
   const handleCloseSuccessModal = () => {
     setIsSuccessModalOpen(false);
@@ -26,6 +33,14 @@ export const AccountManagement = () => {
     setIsSuccessModalOpen(!!searchParams.get('success'));
   }, [searchParams]);
 
+  useEffect(() => {
+    if (latestSubscription?.autoRenewal !== undefined) {
+      setIsChecked(latestSubscription.autoRenewal);
+    } else {
+      setIsChecked(false);
+    }
+  }, [latestSubscription]);
+
   return (
     <div className={s.container}>
       {isSubscribed && (
@@ -34,6 +49,7 @@ export const AccountManagement = () => {
           {subscriptionsData?.data.map((subscriptionItem) => (
             <CurrentSubscription key={subscriptionItem.subscriptionId} subscription={subscriptionItem} />
           ))}
+          <Checkbox label={'Auto-Renewal'} checked={isChecked} onChange={handelUnchecked} />
           <AccountSelection />
         </div>
       )}

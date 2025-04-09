@@ -2,9 +2,9 @@ import { inctagramApi } from '@/app/services/inctagram.api';
 
 import {
   CurrentSubscriptions,
-  SubscriptionsRequest,
-  SubscriptionsResponse,
   PaymentResponse,
+  SubscriptionsRequest,
+  SubscriptionsResponse
 } from '@/features/subscriptions/model/subscriptionsApi.types';
 
 export const subscriptionsApi = inctagramApi.injectEndpoints({
@@ -36,8 +36,26 @@ export const subscriptionsApi = inctagramApi.injectEndpoints({
         };
       },
       invalidatesTags: ['Subscriptions']
+    }),
+    canselAutoRenewalSubscription: build.mutation<void, void>({
+      query: () => {
+        const token = localStorage.getItem('accessToken');
+        return {
+          url: 'v1/subscriptions/canceled-auto-renewal',
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+      },
+      invalidatesTags: ['Subscriptions']
     })
   })
 });
 
-export const { useCreateSubscriptionMutation, useGetCurrentSubscriptionsQuery, useGetMyPaymentsQuery } = subscriptionsApi;
+export const {
+  useCreateSubscriptionMutation,
+  useGetCurrentSubscriptionsQuery,
+  useGetMyPaymentsQuery,
+  useCanselAutoRenewalSubscriptionMutation
+} = subscriptionsApi;
