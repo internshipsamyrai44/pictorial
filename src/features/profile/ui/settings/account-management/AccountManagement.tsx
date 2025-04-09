@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import s from './AccountManagement.module.scss';
 import { CurrentSubscription } from '@/features/profile/ui/settings/account-management/current-subscription/CurrentSubscription';
 import { AccountSelection } from '@/features/profile/ui/settings/account-management/account-selection/AccountSelection';
-import { Modal } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
@@ -32,8 +32,9 @@ export const AccountManagement = () => {
       <AccountSelection />
 
       {isSuccessModalOpen && (
-        <Modal onClose={handleCloseSuccessModal} title="Payment Successful" className={s.modal}>
+        <Modal onClose={handleCloseSuccessModal} title="Success" className={s.modal}>
           <p>Payment was successful!! 🎉</p>
+          <Button onClick={handleCloseSuccessModal}>Ok</Button>
         </Modal>
       )}
     </div>
