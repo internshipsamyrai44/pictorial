@@ -130,6 +130,37 @@
       "LastNameMaxCharacters": "Last Name must be at most 50 characters",
       "AboutMeMatches": "About Me must contain valid characters",
       "AboutMeMaxCharacters": "About Me must be at most 200 characters"
+    },
+    "Subscriptions": {
+      "CurrentSubscription": "Current Subscription",
+      "Expire": "Expire at",
+      "NextPayment": "Next Payment",
+      "AutoRenewalCanceled": "Auto Renewal Canceled",
+      "AutoRenewal": "Auto Renewal"
+    },
+    "SuccessModal": {
+      "Title": "Success",
+      "Text": "Payment was successful!!",
+      "Button": "Ok"
+    },
+    "AccountSelection": {
+      "AccountType": "Account Type",
+      "Personal": "Personal",
+      "Business": "Business"
+    },
+    "SubscriptionCost": {
+      "Title": "Your subscription costs",
+      "Daily": "$10 per 1 Day",
+      "Weekly": "$50 per 7 Day",
+      "Monthly": "$100 per month",
+      "Or": "Or"
+    },
+    "ConfirmModal": {
+      "Title": "Subscribe",
+      "Text": "Auto-renewal will be enabled with this payment. You can disable it anytime in your profile settings",
+      "PaypalText": "To pay via PayPal you must have an account",
+      "Agree": "Agree",
+      "Ok": "Ok"
     }
   },
   "Errors": {

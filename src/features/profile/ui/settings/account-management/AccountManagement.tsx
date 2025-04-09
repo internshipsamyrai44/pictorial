@@ -10,9 +10,10 @@ import {
   useCanselAutoRenewalSubscriptionMutation,
   useGetMyPaymentsQuery
 } from '@/features/subscriptions/api/subscriptionsApi';
+import { useTranslations } from 'next-intl';
 
 export const AccountManagement = () => {
-  // const t = useTranslations('Profile');
+  const t = useTranslations('Profile');
   const searchParams = useSearchParams();
   const [cancelAutoRenewalSubscription] = useCanselAutoRenewalSubscriptionMutation();
   const { data: subscriptionsData } = useGetMyPaymentsQuery();
@@ -49,19 +50,19 @@ export const AccountManagement = () => {
     <div className={s.container}>
       {isSubscribed && (
         <div className={s.activeSubscriptions}>
-          <Typography variant={'h3'}>Current Subscription:</Typography>
+          <Typography variant={'h3'}>{t('Subscriptions.CurrentSubscription')}:</Typography>
           {subscriptionsData?.map((subscriptionItem) => (
             <CurrentSubscription key={subscriptionItem.subscriptionId} subscription={subscriptionItem} />
           ))}
-          <Checkbox label={'Auto-Renewal'} checked={isChecked} onChange={handelUnchecked} />
+          <Checkbox label={t('Subscriptions.AutoRenewal')} checked={isChecked} onChange={handelUnchecked} />
           <AccountSelection />
         </div>
       )}
 
       {isSuccessModalOpen && (
-        <Modal onClose={handleCloseSuccessModal} title="Success" className={s.modal}>
-          <p>Payment was successful!! 🎉</p>
-          <Button onClick={handleCloseSuccessModal}>Ok</Button>
+        <Modal onClose={handleCloseSuccessModal} title={t('SuccessModal.Title')} className={s.modal}>
+          <p>{t('SuccessModal.Text')} 🎉</p>
+          <Button onClick={handleCloseSuccessModal}>{t('SuccessModal.Button')}</Button>
         </Modal>
       )}
     </div>
