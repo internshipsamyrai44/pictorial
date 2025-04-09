@@ -20,6 +20,7 @@ export const GeneralInfo = () => {
     alertType === 'error' ? t('Alert.ErrorAlert') : alertType === 'success' ? t('Alert.SuccessAlert') : '';
 
   const onSubmitProfileFormHandler = async (data: Omit<ProfileBase, 'id' | 'createdAt'>) => {
+    setAlertType(null);
     try {
       await updateProfile({
         ...data,

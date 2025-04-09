@@ -30,6 +30,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
     handleSubmit,
     setValue,
     getValues,
+    watch,
     trigger,
     formState: { errors }
   } = useForm<ProfileFormValidationScheme>({
@@ -37,6 +38,8 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
     resolver: yupResolver(profileFormValidationScheme),
     mode: 'onTouched'
   });
+  const selectedCountry = watch('country');
+  const selectedCity = watch('city');
 
   const onSubmitFormHandler = (data: ProfileFormValidationScheme) => {
     onSubmitProfileForm({
@@ -98,7 +101,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
       <div className={s.location}>
         <Select
           placeholder={tProfile('Country')}
-          value={getValues('country')}
+          value={selectedCountry}
           onValueChange={(value) => setValue('country', value)}
         >
           {selectOptionsCountry.map((option, index) => (
@@ -108,11 +111,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
           ))}
         </Select>
 
-        <Select
-          placeholder={tProfile('City')}
-          value={getValues('city')}
-          onValueChange={(value) => setValue('city', value)}
-        >
+        <Select placeholder={tProfile('City')} value={selectedCity} onValueChange={(value) => setValue('city', value)}>
           {selectOptionsCity.map((option, index) => (
             <SelectItem key={index} value={option}>
               <span>{tProfile(`Citys.${option}`)}</span>
