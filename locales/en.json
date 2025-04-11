@@ -143,6 +143,11 @@
       "Text": "Payment was successful!!",
       "Button": "Ok"
     },
+    "FailModal": {
+      "Title": "Failed",
+      "Text": "Payment was unsuccessful!!",
+      "Button": "Try Again"
+    },
     "AccountSelection": {
       "AccountType": "Account Type",
       "Personal": "Personal",

@@ -23,7 +23,7 @@ export const useSubscription = () => {
         typeSubscription: SUBSCRIPTION_TYPE_MAP[chosenSubscription],
         paymentType: paymentMerchant,
         amount: SUBSCRIPTION_PRICES[chosenSubscription],
-        baseUrl: 'http://localhost:3000/profile/settings?tab=account-management&success=true'
+        baseUrl: 'http://localhost:3000/profile/settings?tab=account-management&'
       }).unwrap();
 
       if (response?.url) {

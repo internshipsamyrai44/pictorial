@@ -143,6 +143,11 @@
       "Text": "Платеж прошел успешно",
       "Button": "Отлично"
     },
+    "FailModal": {
+      "Title": "Ошибка",
+      "Text": "Платеж не прошел",
+      "Button": "Попробуйте снова"
+    },
     "AccountSelection": {
       "AccountType": "Тип аккаунта",
       "Personal": "Личный",
