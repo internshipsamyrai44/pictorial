@@ -1,4 +1,4 @@
-import s from './AccountSelection.module.scss';
+import s from './AccountType.module.css';
 import { RadioGroup, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useEffect, useState } from 'react';
 import { SubscriptionPrice } from '@/features/profile/ui/settings/account-management/subscription-price/SubscriptionPrice';
@@ -8,7 +8,7 @@ type Props = {
   isSubscribed: boolean;
 };
 
-export const AccountSelection = ({ isSubscribed }: Props) => {
+export const AccountType = ({ isSubscribed }: Props) => {
   const t = useTranslations('Profile');
   const [accountType, setAccountType] = useState<string>('personal');
   const accountTypeOptions = [

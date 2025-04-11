@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import s from './AccountManagement.module.scss';
 import { CurrentSubscription } from '@/features/profile/ui/settings/account-management/current-subscription/CurrentSubscription';
-import { AccountSelection } from '@/features/profile/ui/settings/account-management/account-selection/AccountSelection';
+import { AccountType } from '@/features/profile/ui/settings/account-management/account-type/AccountType';
 import { useSearchParams } from 'next/navigation';
 
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
@@ -22,7 +22,7 @@ export const AccountManagement = () => {
   return (
     <div className={s.container}>
       {isSubscribed && <CurrentSubscription />}
-      <AccountSelection isSubscribed={isSubscribed} />
+      <AccountType isSubscribed={isSubscribed} />
       {isModalOpen && <SubscriptionModal setIsModalOpen={setIsModalOpen} isPaymentSuccessfull={isPaymentSuccessfull} />}
     </div>
   );
