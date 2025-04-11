@@ -1,14 +1,9 @@
 import s from './CurrentSubscription.module.scss';
-import { ActiveSubscription } from '@/features/subscriptions/model/subscriptionsApi.types';
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
 import { convertToLocalDate } from '@/shared/utils/convertToLocalDate';
 import { useTranslations } from 'next-intl';
 
-type Props = {
-  subscription: ActiveSubscription;
-};
-
-export const CurrentSubscription = ({ subscription }: Props) => {
+export const CurrentSubscription = () => {
   const t = useTranslations('Profile');
   const { latestSubscription } = useIsSubscribed();
 
@@ -17,7 +12,7 @@ export const CurrentSubscription = ({ subscription }: Props) => {
       <div className={`${s.content} ${s.activeSubscription}`}>
         <div className={s.date}>
           <span>{t('Subscriptions.Expire')}</span>
-          <p>{convertToLocalDate(subscription.endDateOfSubscription)}</p>
+          <p>{convertToLocalDate(latestSubscription?.endDateOfSubscription as string)}</p>
         </div>
         <div className={s.date}>
           <span>{t('Subscriptions.NextPayment')}</span>
