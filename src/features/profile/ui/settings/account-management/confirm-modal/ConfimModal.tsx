@@ -10,10 +10,10 @@ type Props = {
   setShowModal: (show: boolean) => void;
   paymentUrl: string;
   isLoading: boolean;
-  paymentType?: MerchantProvider;
+  paymentMerchant?: MerchantProvider;
 };
 
-export const ConfirmModal = ({ setShowModal, paymentUrl, isLoading, paymentType }: Props) => {
+export const ConfirmModal = ({ setShowModal, paymentUrl, isLoading, paymentMerchant }: Props) => {
   const t = useTranslations('Profile');
 
   const [isChecked, setChecked] = useState(false);
@@ -23,7 +23,7 @@ export const ConfirmModal = ({ setShowModal, paymentUrl, isLoading, paymentType 
   return (
     <Modal title={t('ConfirmModal.Title')} className={s.modal} onClose={() => setShowModal(false)}>
       <div>{t('ConfirmModal.Text')}</div>
-      {paymentType === 'PAYPAL' && <div className={s.paypal}>{t('ConfirmModal.PaypalText')}</div>}
+      {paymentMerchant === 'PAYPAL' && <div className={s.paypal}>{t('ConfirmModal.PaypalText')}</div>}
       <div className={s.checkbox}>
         <Checkbox label={t('ConfirmModal.Agree')} checked={isChecked} onChange={() => setChecked(!isChecked)} />
 

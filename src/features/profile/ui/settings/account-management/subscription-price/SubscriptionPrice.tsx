@@ -1,9 +1,10 @@
 import s from './SubscriptionPrice.module.scss';
 import { RadioGroup, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useState } from 'react';
-import { Stripe, SubscriptionTypes } from '@/features/subscriptions/ui/stripe/Stripe';
-import { Paypal } from '@/features/subscriptions/ui/paypal/Paypal';
+import { StripeSubscriptionButton } from '@/features/subscriptions/ui/stripeSubscriptionButton/StripeSubscriptionButton';
+import { PaypalSubscriptionButton } from '@/features/subscriptions/ui/paypalSubscriptionButton/PaypalSubscriptionButton';
 import { useTranslations } from 'next-intl';
+import { SubscriptionTypes } from '@/features/subscriptions/model/subscriptionConstants';
 
 export const SubscriptionPrice = () => {
   const t = useTranslations('Profile');
@@ -23,9 +24,9 @@ export const SubscriptionPrice = () => {
         <RadioGroup defaultValue={subscription} onValueChange={setSubscription} options={subscriptionOptions} />
       </div>
       <div className={s.payment}>
-        <Paypal chosenSubscription={chosenSubscription} />
+        <PaypalSubscriptionButton chosenSubscription={chosenSubscription} />
         {t('SubscriptionCost.Or')}
-        <Stripe chosenSubscription={chosenSubscription} />
+        <StripeSubscriptionButton chosenSubscription={chosenSubscription} />
       </div>
     </div>
   );

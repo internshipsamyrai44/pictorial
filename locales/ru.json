@@ -132,7 +132,7 @@
       "AboutMeMaxCharacters": "Обо мне должно содержать не более 200 символов"
     },
     "Subscriptions": {
-      "CurrentSubscription": "Действующие подписки",
+      "CurrentSubscription": "Действующая подписка",
       "Expire": "Заканчивается",
       "NextPayment": "Следующее списание",
       "AutoRenewalCanceled": "Отменено",
@@ -142,6 +142,11 @@
       "Title": "Успешно",
       "Text": "Платеж прошел успешно",
       "Button": "Отлично"
+    },
+    "FailModal": {
+      "Title": "Ошибка",
+      "Text": "Платеж не прошел",
+      "Button": "Попробуйте снова"
     },
     "AccountSelection": {
       "AccountType": "Тип аккаунта",

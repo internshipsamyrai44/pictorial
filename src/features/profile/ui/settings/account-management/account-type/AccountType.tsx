@@ -1,25 +1,32 @@
-import s from './AccountSelection.module.scss';
+import s from './AccountType.module.css';
 import { RadioGroup, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubscriptionPrice } from '@/features/profile/ui/settings/account-management/subscription-price/SubscriptionPrice';
-import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
 import { useTranslations } from 'next-intl';
 
-export const AccountSelection = () => {
+type Props = {
+  isSubscribed: boolean;
+};
+
+export const AccountType = ({ isSubscribed }: Props) => {
   const t = useTranslations('Profile');
-  const { isSubscribed } = useIsSubscribed();
-  const [accountType, setAccountType] = useState<string>(isSubscribed ? 'business' : 'personal');
+  const [accountType, setAccountType] = useState<string>('personal');
   const accountTypeOptions = [
     { label: t('AccountSelection.Personal'), value: 'personal' },
     { label: t('AccountSelection.Business'), value: 'business' }
   ];
+  useEffect(() => {
+    if (isSubscribed) {
+      setAccountType('business');
+    }
+  }, [isSubscribed]);
 
   return (
     <>
       <div className={s.account}>
         <Typography variant={'h3'}>{t('AccountSelection.AccountType')}</Typography>
         <div className={s.content}>
-          <RadioGroup defaultValue={accountType} onValueChange={setAccountType} options={accountTypeOptions} />
+          <RadioGroup value={accountType} onValueChange={setAccountType} options={accountTypeOptions} />
         </div>
       </div>
       {accountType === 'business' && <SubscriptionPrice />}
