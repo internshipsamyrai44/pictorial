@@ -1,11 +1,10 @@
 import s from './SubscriptionPrice.module.scss';
 import { RadioGroup, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useState } from 'react';
-import { StripeSubscriptionButton } from '@/features/subscriptions/ui/StripeSubscriptionButton/StripeSubscriptionButton';
-import { PaypalSubscriptionButton } from '@/features/subscriptions/ui/PaypalSubscriptionButton/PaypalSubscriptionButton';
+import { StripeSubscriptionButton } from '@/features/subscriptions/ui/stripeSubscriptionButton/StripeSubscriptionButton';
+import { PaypalSubscriptionButton } from '@/features/subscriptions/ui/paypalSubscriptionButton/PaypalSubscriptionButton';
 import { useTranslations } from 'next-intl';
-
-export type SubscriptionTypes = 'day' | 'weekly' | 'monthly';
+import { SubscriptionTypes } from '@/features/subscriptions/model/subscriptionConstants';
 
 export const SubscriptionPrice = () => {
   const t = useTranslations('Profile');

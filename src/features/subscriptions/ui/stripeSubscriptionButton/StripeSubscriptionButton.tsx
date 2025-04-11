@@ -4,8 +4,8 @@ import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import StripeIcon from '../../../../../public/icons/stripeIcon.svg';
 import { ConfirmModal } from '@/features/profile/ui/settings/account-management/confirm-modal/ConfimModal';
 import s from './StripeSubscriptionButton.module.scss';
-import { SubscriptionTypes } from '@/features/profile/ui/settings/account-management/subscription-price/SubscriptionPrice';
 import { useSubscription } from '@/shared/hooks/useSubscription';
+import { SubscriptionTypes } from '@/features/subscriptions/model/subscriptionConstants';
 
 type Props = {
   chosenSubscription: SubscriptionTypes;

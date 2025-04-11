@@ -1,6 +1,6 @@
 import { SubscriptionType } from '@/features/subscriptions/model/subscriptionsApi.types';
-import { SubscriptionTypes } from '@/features/profile/ui/settings/account-management/subscription-price/SubscriptionPrice';
 
+export type SubscriptionTypes = 'day' | 'weekly' | 'monthly';
 export const SUBSCRIPTION_PRICES: Record<SubscriptionTypes, number> = {
   day: 10,
   weekly: 50,

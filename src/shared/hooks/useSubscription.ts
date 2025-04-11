@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useCreateSubscriptionMutation } from '@/features/subscriptions/api/subscriptionsApi';
-import { SUBSCRIPTION_PRICES, SUBSCRIPTION_TYPE_MAP } from '@/features/subscriptions/model/subscriptionConstants';
-import { SubscriptionTypes } from '@/features/profile/ui/settings/account-management/subscription-price/SubscriptionPrice';
+import {
+  SUBSCRIPTION_PRICES,
+  SUBSCRIPTION_TYPE_MAP,
+  SubscriptionTypes
+} from '@/features/subscriptions/model/subscriptionConstants';
 import { MerchantProvider } from '@/features/subscriptions/model/subscriptionsApi.types';
 
 type SubscriptionProps = {
