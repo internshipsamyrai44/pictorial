@@ -161,6 +161,19 @@
       "PaypalText": "To pay via PayPal you must have an account",
       "Agree": "Agree",
       "Ok": "Ok"
+    },
+    "AddAvatarModal": {
+      "AddAvatar": "Add a Profile Photo",
+      "ErrorFormat": "Error! The format of the uploaded photo must be\n PNG and JPEG",
+      "ErrorSize": "Error! Photo size must be less than 10 MB!",
+      "AvatarSelect": "Select from Computer",
+      "SaveAvatar": "Save"
+    },
+    "DeleteAvatarModal": {
+      "DeleteAvatarTitle": "Delete Photo",
+      "DeleteAvatar": "Are you sure you want to delete the photo?",
+      "ConfirmButton": "Yes",
+      "RejectButton": "No"
     }
   },
   "Errors": {

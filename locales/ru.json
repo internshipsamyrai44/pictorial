@@ -161,8 +161,20 @@
       "PaypalText": "Для оплаты через PayPal у вас должна быть учетная запись",
       "Agree": "Я Согласен",
       "Ok": "Купить"
+    },
+    "AddAvatarModal": {
+      "AddAvatar": "Добавить фото профиля",
+      "ErrorFormat": "Ошибка! Формат загруженного фото должен быть\n PNG and JPEG",
+      "ErrorSize": "Ошибка! Размер фото должен быть меньше 10 МБ!",
+      "AvatarSelect": "Выбрать с Компьютера",
+      "SaveAvatar": "Сохранить"
+    },
+    "DeleteAvatarModal": {
+      "DeleteAvatarTitle": "Удалить Фото",
+      "DeleteAvatar": "Вы уверены, что хотите удалить фотографию?",
+      "ConfirmButton": "Да",
+      "RejectButton": "Нет"
     }
-
   },
   "Errors": {
     "404": "Извините! Страница не найдена!",

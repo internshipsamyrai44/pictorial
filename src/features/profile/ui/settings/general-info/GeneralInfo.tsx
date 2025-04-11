@@ -44,7 +44,7 @@ export const GeneralInfo = () => {
       {errorMessage && <Alertpopup alertType={'error'} message={errorMessage} />}
       {alertType && <Alertpopup alertType={alertType} message={alertSubmitProfileFormMessage} />}
       <div className={s.container}>
-        <AvatarActions />
+        <AvatarActions avatar={profileData?.avatars[0]?.url} userName={profileData?.userName} />
         <GeneralInfoForm
           disabled={updateProfileIsLoading}
           onSubmitProfileForm={onSubmitProfileFormHandler}
