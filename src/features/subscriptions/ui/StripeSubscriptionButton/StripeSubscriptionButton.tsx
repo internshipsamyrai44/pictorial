@@ -3,42 +3,34 @@ import { useState } from 'react';
 import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
 import StripeIcon from '../../../../../public/icons/stripeIcon.svg';
 import { ConfirmModal } from '@/features/profile/ui/settings/account-management/confirm-modal/ConfimModal';
-import s from './Stripe.module.scss';
+import s from './StripeSubscriptionButton.module.scss';
 import { useCreateSubscriptionMutation } from '@/features/subscriptions/api/subscriptionsApi';
-import { SubscriptionType } from '@/features/subscriptions/model/subscriptionsApi.types';
+import { SUBSCRIPTION_PRICES, SUBSCRIPTION_TYPE_MAP } from '@/features/subscriptions/model/subscriptionConstants';
+import { SubscriptionTypes } from '@/features/profile/ui/settings/account-management/subscription-price/SubscriptionPrice';
 
-export type SubscriptionTypes = 'day' | 'weekly' | 'monthly';
 type Props = {
   chosenSubscription: SubscriptionTypes;
 };
 
-export const Stripe = ({ chosenSubscription }: Props) => {
-  const [loading, setLoading] = useState(false);
+export const StripeSubscriptionButton = ({ chosenSubscription }: Props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState('');
 
-  const [createSubscription] = useCreateSubscriptionMutation();
-
-  const subscriptionPrice = {
-    day: 10,
-    weekly: 50,
-    monthly: 100
-  };
-  const subscriptionToUpperCase = chosenSubscription.toUpperCase();
+  const [createSubscription, { isLoading }] = useCreateSubscriptionMutation();
 
   const handleSubscribe = async () => {
     try {
       const response = await createSubscription({
-        typeSubscription: subscriptionToUpperCase as SubscriptionType,
+        typeSubscription: SUBSCRIPTION_TYPE_MAP[chosenSubscription],
         paymentType: 'STRIPE',
-        amount: subscriptionPrice[chosenSubscription],
+        amount: SUBSCRIPTION_PRICES[chosenSubscription],
         baseUrl: 'http://localhost:3000/profile/settings?tab=account-management&success=true'
       }).unwrap();
 
       if (response?.url) {
         setPaymentUrl(response.url);
+        setShowConfirmModal(true);
       }
-      setLoading(false);
     } catch (err) {
       console.error('Error subscription:', err);
     }
@@ -46,20 +38,12 @@ export const Stripe = ({ chosenSubscription }: Props) => {
   return (
     <>
       <div className={s.wrapper}>
-        <Button
-          variant={'ghost'}
-          className={s.payment__btn}
-          onClick={() => {
-            handleSubscribe();
-            setShowConfirmModal(true);
-          }}
-          disabled={loading}
-        >
+        <Button variant={'ghost'} className={s.payment__btn} onClick={handleSubscribe}>
           <StripeIcon />
         </Button>
       </div>
       {showConfirmModal && (
-        <ConfirmModal setShowModal={setShowConfirmModal} paymentUrl={paymentUrl} isLoading={loading} />
+        <ConfirmModal setShowModal={setShowConfirmModal} paymentUrl={paymentUrl} isLoading={isLoading} />
       )}
     </>
   );
