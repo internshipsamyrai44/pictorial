@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const DeleteAvatarModal = ({ onClose }: Props) => {
-  const [deleteAvatar] = useDeleteAvatarMutation();
+  const [deleteAvatar, { isLoading }] = useDeleteAvatarMutation();
   const t = useTranslations('Profile');
 
   const deletePhoto = async () => {
@@ -28,10 +28,10 @@ export const DeleteAvatarModal = ({ onClose }: Props) => {
         {t('DeleteAvatarModal.DeleteAvatar')}
       </Typography>
       <div className={s.buttonsBlock}>
-        <Button className={s.modalButton} onClick={deletePhoto} variant="outlined">
+        <Button className={s.modalButton} disabled={isLoading} onClick={deletePhoto} variant="outlined">
           {t('DeleteAvatarModal.ConfirmButton')}
         </Button>
-        <Button className={s.modalButton} onClick={() => onClose(false)} variant="primary">
+        <Button className={s.modalButton} disabled={isLoading} onClick={() => onClose(false)} variant="primary">
           {t('DeleteAvatarModal.RejectButton')}
         </Button>
       </div>

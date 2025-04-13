@@ -30,7 +30,7 @@ export const AddAvatarModal = ({
   const editorRef = useRef<AvatarEditor>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [changeAvatar] = useChangeAvatarMutation();
+  const [changeAvatar, { isLoading }] = useChangeAvatarMutation();
   const t = useTranslations('Profile');
 
   // Открытие диалога выбора файла
@@ -114,7 +114,7 @@ export const AddAvatarModal = ({
               scale={1.2}
               width={330}
             />
-            <Button className={s.saveButton} onClick={saveAvatar} variant="primary">
+            <Button className={s.saveButton} disabled={isLoading} onClick={saveAvatar} variant="primary">
               {t('AddAvatarModal.SaveAvatar')}
             </Button>
           </>
