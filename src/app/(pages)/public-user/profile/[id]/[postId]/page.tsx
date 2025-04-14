@@ -1,24 +1,24 @@
 import PublicProfile from '@/features/profile/ui/settings/public-profile/PublicProfile';
 import PostModal from '@/features/posts/ui/posts/postModal/PostModal';
-import { baseUrl } from '@/shared/const/baseApi';
-import { PublicPostsResponse } from '@/features/posts/model/postsApi.types';
 import { use } from 'react';
 import { PublicPostsParamsType } from '@/app/(pages)/public-user/profile/[id]/[postId]/data';
+import { baseUrl } from '@/shared/const/baseApi';
 import { notFound } from 'next/navigation';
+import { PublicPostResponse } from '@/features/public-posts/model/publicPostApi.types';
 
-const getUserPosts = async (id: string): Promise<PublicPostsResponse> => {
-  const res = await fetch(`${baseUrl}v1/public-posts/user/${id}`);
+const getUserPostByPostID = async (postID: string): Promise<PublicPostResponse> => {
+  const res = await fetch(`${baseUrl}v1/public-posts/${postID}`);
   return res.json();
 };
 
 export default function PublicUserPost({ params }: PublicPostsParamsType) {
   const { id, postId } = use(params);
 
-  const userPosts = use(getUserPosts(id));
+  const userPost = use(getUserPostByPostID(postId));
 
-  const isPostExist = userPosts.items.some((post) => post.id.toString() === postId);
+  const isPostBelongToUser = userPost.ownerId === Number(id);
 
-  if (!isPostExist) {
+  if (!isPostBelongToUser) {
     notFound();
   }
 
