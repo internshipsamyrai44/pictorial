@@ -91,9 +91,9 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         label={tProfile('DateOfBirth')}
         date={getValues('dateOfBirth')}
         disabledDates={{ after: new Date(), before: new Date('1900-01-01') }}
-        onChange={(date) => {
-          if (date) {
-            setValue('dateOfBirth', new Date(date.toLocaleString()));
+        onChange={(value: Date | unknown) => {
+          if (value instanceof Date) {
+            setValue('dateOfBirth', value);
           }
         }}
       />
