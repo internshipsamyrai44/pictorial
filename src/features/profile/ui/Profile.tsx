@@ -59,7 +59,7 @@ export default function Profile({ idArray }: ProfileProps) {
           </Button>
         </ProfileDashboard>
 
-        <ProfilePosts userName={profileData.userName} />
+        <ProfilePosts userName={profileData.userName} isMyProfile={isMyProfile} />
       </>
     );
   };

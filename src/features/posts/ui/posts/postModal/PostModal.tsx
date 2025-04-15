@@ -2,34 +2,37 @@
 
 import s from './PostModal.module.scss';
 import { useGetPostsByIdQuery } from '@/features/posts/api/postsApi';
+import { useGetPublicPostsByIdQuery } from '@/features/public-posts/api/publicPostApi';
+
 import PostImage from '../postImage/PostImage';
 import PostContent from './postContent/PostContent';
 import PostContentSkeleton from './postContentSkeleton/PostContentSkeleton';
 import CloseButton from '../closeButton/CloseButton';
-import { useGetPublicPostsByIdQuery } from '@/features/public-posts/api/publicPostApi';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/app/store/store';
+
 import { useRouter } from 'next/navigation';
 
 type Props = {
   postID: number;
   closeModal?: () => void;
   editPost?: () => void;
+  isMyProfile?: boolean;
 };
 
-export default function PostModal({ postID, editPost }: Props) {
+export default function PostModal({ postID, editPost, isMyProfile = false }: Props) {
   const router = useRouter();
-  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
-  const { data: privatePost } = useGetPostsByIdQuery(postID, { skip: !isAuth });
-  const { data: publicPost } = useGetPublicPostsByIdQuery(postID, { skip: isAuth });
 
-  const post = isAuth ? privatePost : publicPost;
+  const { data: privatePost } = useGetPostsByIdQuery(postID, {
+    skip: !isMyProfile
+  });
 
+  const { data: publicPost } = useGetPublicPostsByIdQuery(postID, {
+    skip: isMyProfile
+  });
+
+  const post = isMyProfile ? privatePost : publicPost;
   const isLoading = !post;
 
-  const closeModal = () => {
-    router.back();
-  };
+  const closeModal = () => router.back();
 
   return (
     <div className={s.wrap}>
@@ -42,7 +45,7 @@ export default function PostModal({ postID, editPost }: Props) {
               <PostImage images={post.images} />
             </div>
             <div className={s.postContent}>
-              <PostContent post={post} closeModal={closeModal} isAuth={isAuth} editPost={editPost} />
+              <PostContent post={post} closeModal={closeModal} isAuth={isMyProfile} editPost={editPost} />
             </div>
           </div>
         )}

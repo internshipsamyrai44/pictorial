@@ -54,7 +54,7 @@ export const Publication = (props: PropsType) => {
         </div>
 
         <div className={s.info}>
-          <Link href={`/public-user/profile/${me?.userId}`}>
+          <Link href={`/profile/${me?.userId}`}>
             <div className={s.avatar}>
               <ProfileAvatar src={''} userName={`${me?.userName}`} />
               <h3 className={s.userName}>{me?.userName}</h3>

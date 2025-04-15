@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useGetPostsByUsernameQuery } from '../../api/postsApi';
 import s from './ProfilePosts.module.scss';
 import PostModal from './postModal/PostModal';
@@ -9,19 +10,27 @@ import { EditPostModal } from './editPostModal/EditPostModal';
 
 type Props = {
   userName: string;
+  isMyProfile: boolean;
 };
 
-export default function ProfilePosts({ userName }: Props) {
-  const { data: posts, isLoading } = useGetPostsByUsernameQuery(userName);
+export default function ProfilePosts({ userName, isMyProfile }: Props) {
+  const { data, isLoading } = useGetPostsByUsernameQuery(userName);
+  const posts = data?.items ?? [];
+
   const [selectedPostID, setSelectedPostID] = useState<number | null>(null);
-  const [isEdited, setIsEdited] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
-  const openPostModal = (postID: number) => setSelectedPostID(postID);
-  const closePostModal = () => setSelectedPostID(null);
+  const openPostModal = (postID: number) => {
+    setSelectedPostID(postID);
+    setIsEditing(false);
+  };
 
-  const closeEditPostModal = () => setIsEdited(false);
+  const closePostModal = () => {
+    setSelectedPostID(null);
+    setIsEditing(false);
+  };
 
-  const handleEditPost = () => setIsEdited(true);
+  const handleEditPost = () => setIsEditing(true);
 
   if (isLoading) {
     return (
@@ -34,24 +43,37 @@ export default function ProfilePosts({ userName }: Props) {
   return (
     <>
       <div className={s.posts}>
-        {posts?.items.map((post) => (
-          <div key={post.id}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className={s.post}
-              src={post.images[0].url}
-              alt={post.description || 'Post image'}
-              onClick={() => openPostModal(post.id)}
-            />
-          </div>
-        ))}
+        {posts.map((post) => {
+          const imageUrl = post.images[0]?.url;
+
+          if (!imageUrl) return null;
+
+          return (
+            <div key={post.id}>
+              <Image
+                className={s.post}
+                src={imageUrl}
+                alt={post.description || 'Post image'}
+                width={235}
+                height={230}
+                style={{ objectFit: 'cover' }}
+                onClick={() => openPostModal(post.id)}
+              />
+            </div>
+          );
+        })}
       </div>
-      {selectedPostID &&
-        posts &&
-        (isEdited ? (
-          <EditPostModal postID={selectedPostID} closeModal={closeEditPostModal} />
+
+      {selectedPostID !== null &&
+        (isEditing ? (
+          <EditPostModal postID={selectedPostID} closeModal={closePostModal} />
         ) : (
-          <PostModal postID={selectedPostID} closeModal={closePostModal} editPost={handleEditPost} />
+          <PostModal
+            postID={selectedPostID}
+            closeModal={closePostModal}
+            editPost={handleEditPost}
+            isMyProfile={isMyProfile}
+          />
         ))}
     </>
   );

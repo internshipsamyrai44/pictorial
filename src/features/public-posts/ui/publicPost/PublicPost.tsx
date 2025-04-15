@@ -9,12 +9,12 @@ export default function PostItem({ item }: PostItemProps) {
   return (
     <li className={s.postItem}>
       <div className={s.imageWrapper}>
-        <Link href={`/public-user/profile/${item.ownerId}/${item.id}`} className={s.postList}>
+        <Link href={`/profile/${item.ownerId}`} className={s.postList}>
           {item.images[0]?.url && (
             <img className={s.image} src={item.images[0].url} alt={item.description || 'Post image'} />
           )}
         </Link>
-        <Link className={s.userLink} href={`/public-user/profile/${item.ownerId}`}>
+        <Link className={s.userLink} href={`/profile/${item.ownerId}`}>
           <div className={s.userAvatarLink}>
             <ProfileAvatar src={item.avatarOwner} userName={item.userName} />
             <h3 className={s.userName}>{item.userName}</h3>

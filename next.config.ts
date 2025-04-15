@@ -18,6 +18,10 @@ const regexEqual = (x: RegExp, y: RegExp): boolean => {
 };
 
 const nextConfig: NextConfig = {
+  images: {
+    domains: ['staging-it-incubator.s3.eu-central-1.amazonaws.com']
+  },
+
   env: {
     RECAPTCHA_ENTERPRISE_API_KEY: process.env.RECAPTCHA_ENTERPRISE_API_KEY,
     NEXT_PUBLIC_PATH_AUTH_GITHUB: process.env.NEXT_PUBLIC_PATH_AUTH_GITHUB,
