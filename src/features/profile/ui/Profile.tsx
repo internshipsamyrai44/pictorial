@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 import { ProfileDashboard } from '@/widgets/profile-dashboard/ProfileDashboard';
-import { Button } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
 import ProfilePosts from '@/features/posts/ui/posts/ProfilePosts';
 import { PATH } from '@/shared/const/PATH';
 
@@ -38,7 +38,7 @@ export default function Profile({ idArray }: ProfileProps) {
   });
 
   if (isMeLoading || isProfileLoading) {
-    return <div>Загрузка...</div>;
+    return <LoaderLinear />;
   }
 
   const renderPrivateProfile = () => {
