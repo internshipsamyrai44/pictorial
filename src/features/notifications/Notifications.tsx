@@ -1,7 +1,7 @@
 'use client';
 
 import s from './Notifications.module.scss';
-import Bell from '../../../../public/icons/Bell';
+import Bell from '../../../public/icons/Bell';
 import { useState } from 'react';
 import { Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useTranslations } from 'next-intl';
@@ -14,6 +14,14 @@ export const Notifications = () => {
   const toggleNotifications = () => {
     setIsOpen((prev) => !prev);
   };
+
+  // const accessToken = cookieStore.get('accessToken')?.value;
+  // const queryParams = {
+  //   query: {
+  //     accessToken: "your_access_token_here"
+  //   }
+  // };
+  // io('https://inctagram.work', queryParams);
 
   return (
     <div className={s.notifications} onClick={toggleNotifications}>
