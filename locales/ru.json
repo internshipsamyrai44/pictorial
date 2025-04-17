@@ -195,7 +195,7 @@
   "Terms": {
     "PrivacyPolicy": "Политика конфиденциальности",
     "PrivacyPolicyContentLanguage": "Ru",
-    "TermsOfService": "Terms of Service",
+    "TermsOfService": "Условия использования",
     "TermsOfServiceContentLanguage": "En"
   },
   "SideNavPanel": {
@@ -213,5 +213,14 @@
   },
   "NotFound": {
     "BacktoHomePage": "Вернуться на главную страницу"
+  },
+  "Notifications": {
+    "Notifications": "Уведомления",
+    "NewNotification": "Новое уведомление!",
+    "New": "Новое",
+    "SubscriptionActivated": "Ваша подписка активирована и действует до ",
+    "NextPaymentTomorrow": "Следующее платеж у вас спишется через 1 день",
+    "subscriptionExpiresIn7Days": "Ваша подписка истекает через 7 дней",
+    "subscriptionExpiresTomorrow": "Ваша подписка истекает через 1 день"
   }
 }
