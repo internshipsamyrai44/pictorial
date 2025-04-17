@@ -213,5 +213,14 @@
   },
   "NotFound": {
     "BacktoHomePage": "Back to home page"
+  },
+  "Notifications": {
+    "Notifications": "Notifications",
+    "NewNotification": "New notification!",
+    "New": "New",
+    "SubscriptionActivated": "Your subscription is activated and valid until ",
+    "NextPaymentTomorrow": "Your next payment will be deducted in 1 day",
+    "subscriptionExpiresIn7Days": "Your subscription expires in 7 days",
+    "subscriptionExpiresTomorrow": "Your subscription expires in 1 day"
   }
 }
