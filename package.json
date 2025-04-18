@@ -37,6 +37,7 @@
     "react-timeago": "^7.2.0",
     "sass-loader": "^16.0.4",
     "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "tailwindcss": "^4.0.6",
     "yup": "1.4.0"
   },

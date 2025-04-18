@@ -4,7 +4,7 @@ import { HeaderButton } from '@/widgets/general-header/headerButton/HeaderButton
 import { SelectTranslate } from '@/widgets/general-header/selectTranslate/SelectTranslate';
 import Link from 'next/link';
 import s from './GeneralHeader.module.scss';
-import { Notifications } from '../../features/notifications/Notifications';
+import { Notifications } from '../../features/notifications/ui/Notifications';
 
 type Props = {
   isPublic?: boolean;
