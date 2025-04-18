@@ -3,10 +3,9 @@
 import s from './PublicProfilePosts.module.scss';
 import { Alertpopup } from '@internshipsamyrai44-ui-kit/components-lib';
 import Image from 'next/image';
-import { useState } from 'react';
 import { useGetPublicUserPostsQuery } from '@/features/public-posts/api/publicPostApi';
 import PostsSkeleton from '@/features/posts/ui/posts/postsSkeleton/PostsSkeleton';
-import PostModal from '@/features/posts/ui/posts/postModal/PostModal';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   id: number;
@@ -14,12 +13,8 @@ type Props = {
 
 export const PublicProfilePosts = ({ id }: Props) => {
   const { data, error, isFetching } = useGetPublicUserPostsQuery({ userId: id });
+  const router = useRouter();
   const posts = data?.items ?? [];
-
-  const [selectedPostID, setSelectedPostID] = useState<number | null>(null);
-
-  const openPostModal = (postID: number) => setSelectedPostID(postID);
-  const closePostModal = () => setSelectedPostID(null);
 
   if (error) {
     return <Alertpopup alertType="error" message="Error fetching posts" />;
@@ -43,7 +38,7 @@ export const PublicProfilePosts = ({ id }: Props) => {
             const imageUrl = post.images[0].url;
 
             return (
-              <div key={post.id} onClick={() => openPostModal(post.id)} className={s.postList}>
+              <div key={post.id} onClick={() => router.push(`/profile/${id}/${post.id}`)} className={s.postList}>
                 <Image
                   className={s.image}
                   src={imageUrl}
@@ -59,8 +54,6 @@ export const PublicProfilePosts = ({ id }: Props) => {
           <p>No posts available</p>
         )}
       </div>
-
-      {selectedPostID !== null && <PostModal postID={selectedPostID} closeModal={closePostModal} />}
     </>
   );
 };

@@ -14,13 +14,13 @@ import { useGetPublicUserProfileQuery } from '@/features/profile/api/publicProfi
 import { PublicProfilePosts } from '@/features/public-posts/ui/publicProfilePosts/PublicProfilePosts';
 
 type ProfileProps = {
-  idArray: string[];
+  id: string;
 };
 
-export default function Profile({ idArray }: ProfileProps) {
+export default function Profile({ id }: ProfileProps) {
   const t = useTranslations('Profile');
 
-  const profileUserId = idArray?.[0] ?? '';
+  const profileUserId = id;
   const profileUserIdNumber = Number(profileUserId);
 
   const { data: meData, isLoading: isMeLoading } = useMeQuery();

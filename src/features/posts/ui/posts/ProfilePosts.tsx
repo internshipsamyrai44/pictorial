@@ -68,12 +68,7 @@ export default function ProfilePosts({ userName, isMyProfile }: Props) {
         (isEditing ? (
           <EditPostModal postID={selectedPostID} closeModal={closePostModal} />
         ) : (
-          <PostModal
-            postID={selectedPostID}
-            closeModal={closePostModal}
-            editPost={handleEditPost}
-            isMyProfile={isMyProfile}
-          />
+          <PostModal postID={selectedPostID} editPost={handleEditPost} isMyProfile={isMyProfile} />
         ))}
     </>
   );

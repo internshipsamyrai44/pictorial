@@ -13,12 +13,12 @@ import { useRouter } from 'next/navigation';
 
 type Props = {
   postID: number;
-  closeModal?: () => void;
+  userId?: number;
   editPost?: () => void;
   isMyProfile?: boolean;
 };
 
-export default function PostModal({ postID, editPost, isMyProfile = false }: Props) {
+export default function PostModal({ postID, userId, editPost, isMyProfile = false }: Props) {
   const router = useRouter();
 
   const { data: privatePost } = useGetPostsByIdQuery(postID, {
@@ -32,7 +32,7 @@ export default function PostModal({ postID, editPost, isMyProfile = false }: Pro
   const post = isMyProfile ? privatePost : publicPost;
   const isLoading = !post;
 
-  const closeModal = () => router.back();
+  const closeModal = () => router.push(`/profile/${userId}`);
 
   return (
     <div className={s.wrap}>
