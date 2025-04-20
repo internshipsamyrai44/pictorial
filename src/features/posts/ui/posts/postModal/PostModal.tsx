@@ -15,10 +15,11 @@ type Props = {
   postID: number;
   userId?: number;
   editPost?: () => void;
+  closePostModal?: () => void;
   isMyProfile?: boolean;
 };
 
-export default function PostModal({ postID, userId, editPost, isMyProfile = false }: Props) {
+export default function PostModal({ postID, userId, editPost, isMyProfile = false, closePostModal }: Props) {
   const router = useRouter();
 
   const { data: privatePost } = useGetPostsByIdQuery(postID, {
@@ -32,7 +33,9 @@ export default function PostModal({ postID, userId, editPost, isMyProfile = fals
   const post = isMyProfile ? privatePost : publicPost;
   const isLoading = !post;
 
-  const closeModal = () => router.push(`/profile/${userId}`);
+  const closeModal = () => {
+    closePostModal ? closePostModal() : router.push(`/profile/${userId}`);
+  };
 
   return (
     <div className={s.wrap}>
