@@ -13,7 +13,7 @@ type Props = {
   isMyProfile: boolean;
 };
 
-export default function ProfilePosts({ userName, isMyProfile }: Props) {
+export default function ProfillePosts({ userName, isMyProfile }: Props) {
   const { data, isLoading } = useGetPostsByUsernameQuery(userName);
   const posts = data?.items ?? [];
 
@@ -68,7 +68,12 @@ export default function ProfilePosts({ userName, isMyProfile }: Props) {
         (isEditing ? (
           <EditPostModal postID={selectedPostID} closeModal={closePostModal} />
         ) : (
-          <PostModal postID={selectedPostID} editPost={handleEditPost} isMyProfile={isMyProfile} />
+          <PostModal
+            postID={selectedPostID}
+            editPost={handleEditPost}
+            isMyProfile={isMyProfile}
+            closePostModal={closePostModal}
+          />
         ))}
     </>
   );
