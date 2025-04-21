@@ -7,9 +7,7 @@ export const notificationsApi = inctagramApi.injectEndpoints({
       query: (idsNotif) => ({
         url: `v1/notifications/mark-as-read`,
         method: 'PUT',
-        body: {
-          idsNotif
-        }
+        body: idsNotif
       }),
       invalidatesTags: ['Notification']
     }),

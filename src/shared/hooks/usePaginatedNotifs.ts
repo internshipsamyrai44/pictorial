@@ -1,9 +1,9 @@
 import { useGetNotifByProfileQuery } from '@/features/notifications/api/notificationsApi';
-import { NotifsResponse } from '@/features/notifications/model/notifications.types';
+import { NotifsSoketResponse } from '@/features/notifications/model/notifications.types';
 import { useEffect, useState } from 'react';
 
 export const usePaginatedNotifs = (clientId: string) => {
-  const [notifications, setNotifications] = useState<NotifsResponse[]>([]);
+  const [notifications, setNotifications] = useState<NotifsSoketResponse[]>([]);
   const [cursor, setCursor] = useState<number | undefined>(undefined);
   const [hasMore, setHasMore] = useState(true);
 
@@ -14,8 +14,7 @@ export const usePaginatedNotifs = (clientId: string) => {
   useEffect(() => {
     if (!data) return;
 
-    // нормализуем API уведомления под формат WebSocket уведомлений
-    const normalizedItems: NotifsResponse[] = data.items.map((item) => ({
+    const normalizedItems: NotifsSoketResponse[] = data.items.map((item) => ({
       ...item,
       notifyAt: item.createdAt,
       clientId: clientId
@@ -34,7 +33,7 @@ export const usePaginatedNotifs = (clientId: string) => {
 
   const loadMore = () => {
     if (isFetching || !hasMore) return;
-    setCursor((prev) => prev); // триггерим повторный запрос
+    setCursor((prev) => prev);
   };
 
   return {
