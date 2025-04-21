@@ -1,4 +1,4 @@
-export type NotifsResponse = {
+export type NotifsSoketResponse = {
   id: number;
   clientId: string;
   message: string;
