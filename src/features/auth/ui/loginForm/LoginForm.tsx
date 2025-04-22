@@ -27,7 +27,7 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
     register,
     handleSubmit,
     trigger,
-    formState: { errors, isValid }
+    formState: { errors }
   } = useForm<FormValidationSchema>({
     resolver: yupResolver(formValidationSchema),
     mode: 'onTouched'
@@ -71,7 +71,7 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
       </div>
 
       {/* Submit button */}
-      <Button variant="primary" fullWidth type="submit" disabled={disabled || !isValid}>
+      <Button variant="primary" fullWidth type="submit" disabled={disabled}>
         {t('signIn')}
       </Button>
     </form>
