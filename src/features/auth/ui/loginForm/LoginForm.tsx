@@ -8,6 +8,15 @@ import * as yup from 'yup';
 import s from './LoginForm.module.scss';
 import { useTranslations } from 'next-intl';
 
+const getPasswordErrorKey = (message: string): string => {
+  if (message.includes('required')) return 'required';
+  if (message.includes('Minimum number of characters')) return 'min';
+  if (message.includes('Maximum number of characters')) return 'max';
+  if (message.includes('Password must contain at least one digit')) return 'specialChars';
+  if (message.includes('The password contains invalid characters')) return 'invalidChars';
+  return 'required';
+};
+
 const formValidationSchema = yup.object().shape({
   email: getEmailValidationSchema(),
   password: getPasswordValidationSchema()
@@ -46,7 +55,7 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
         onBlur={async () => {
           await trigger('email');
         }}
-        errorMessage={errors.email?.message || (isError ? t('EmailValidation') : undefined)}
+        errorMessage={errors.email?.message === 'Email is required' ? t('EmailErrors.required') : undefined}
       />
 
       {/* Input for password */}
@@ -56,11 +65,21 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
         label={t('Password')}
         placeholder="⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑"
         disabled={disabled}
-        {...register('password')}
+        {...register('password', {
+          onChange: () => {
+            trigger('password');
+          }
+        })}
         onBlur={async () => {
           await trigger('password');
         }}
-        errorMessage={errors.password?.message || (isError ? t('PasswordValidation') : undefined)}
+        errorMessage={
+          errors.password?.message
+            ? t(`PasswordErrors.${getPasswordErrorKey(errors.password.message)}`)
+            : isError && !errors.password
+              ? t('PasswordValidation')
+              : undefined
+        }
       />
 
       {/* Forgot password link */}
