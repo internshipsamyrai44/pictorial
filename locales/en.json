@@ -14,6 +14,17 @@
     "accountText": "Don’t have an account?",
     "PasswordVerification": "Your password must be between 6 and 20 characters",
     "PasswordValidation": "The email or password are incorrect. Try again please",
+    "PasswordErrors": {
+      "required": "Password is required",
+      "min": "Minimum number of characters is 6",
+      "max": "Maximum number of characters is 20",
+      "specialChars": "Password must contain at least one digit, one uppercase letter, one lowercase letter, and one special character",
+      "invalidChars": "The password contains invalid characters"
+    },
+    "EmailErrors": {
+      "required": "Email is required",
+      "invalid": "Please enter a valid email address"
+    },
     "CreateNewPassword": "Create new password",
     "ForgotPasswordFormDescription": "Enter your email address and we will send you further instructions ",
     "SendLink": "Send Link",
