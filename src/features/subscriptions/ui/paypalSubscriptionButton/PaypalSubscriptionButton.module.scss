@@ -1,0 +1,18 @@
+.wrapper > .payment__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 96px;
+  height: 64px;
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-300) !important;
+  padding: 0;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    filter: grayscale(1);
+  }
+}

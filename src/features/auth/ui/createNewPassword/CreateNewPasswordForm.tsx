@@ -1,7 +1,7 @@
 'use client';
 
 import * as yup from 'yup';
-import { Alertpopup, Button, Card, Input, LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Alertpopup, Button, Card, Input } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { getPasswordValidationSchema } from '@/shared/utils/PasswordValidationSchema';
@@ -11,6 +11,8 @@ import { useRequestError } from '@/shared/hooks/useRequestError';
 import { Suspense, useEffect } from 'react';
 import { PATH } from '@/shared/const/PATH';
 import s from './CreateNewPasswordForm.module.scss';
+import { useTranslations } from 'next-intl';
+import { Loader } from '@/shared/ui/loader/Loader';
 
 type FormInput = {
   new_password: string;
@@ -22,6 +24,7 @@ const CreateNewPasswordFormContent = () => {
   const searchParams = useSearchParams();
   const errorMessage = useRequestError(error);
   const { push } = useRouter();
+  const t = useTranslations('Auth');
 
   const formValidationSchema = yup.object({
     new_password: getPasswordValidationSchema(),
@@ -54,7 +57,7 @@ const CreateNewPasswordFormContent = () => {
       {errorMessage && <Alertpopup alertType={'error'} message={errorMessage} />}
       <Card className={s.card}>
         <form onSubmit={handleSubmit(sendNewPassword)} className={s.form}>
-          <p className={s.header}>Forgot Password</p>
+          <p className={s.header}>{t('ForgotPassword')}</p>
           <Input
             {...register('new_password')}
             type="password"
@@ -67,9 +70,9 @@ const CreateNewPasswordFormContent = () => {
             label={'Password confirmation'}
             errorMessage={errors.password_confirmation?.message}
           />
-          <span className={s.description}>Your password must be between 6 and 20 characters</span>
+          <span className={s.description}>{t('PasswordVerification')}</span>
           <Button className={s.button} disabled={!isValid}>
-            Create new password
+            {t('CreateNewPassword')}
           </Button>
         </form>
       </Card>
@@ -79,7 +82,7 @@ const CreateNewPasswordFormContent = () => {
 
 export const CreateNewPasswordForm = () => {
   return (
-    <Suspense fallback={<LoaderLinear />}>
+    <Suspense fallback={<Loader />}>
       <CreateNewPasswordFormContent />
     </Suspense>
   );

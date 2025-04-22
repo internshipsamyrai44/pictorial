@@ -1,0 +1,46 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 50;
+}
+
+.header {
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 36px;
+  color: var(--light-100);
+  border-bottom: 1px solid var(--dark-100);
+}
+
+.postContent {
+  width: 480px;
+}
+
+.postContainer {
+  position: relative;
+  background-color: #333333;
+}
+
+.contentContainer {
+  display: flex;
+}
+
+.postImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 565px;
+  height: 565px;
+  object-fit: contain;
+}

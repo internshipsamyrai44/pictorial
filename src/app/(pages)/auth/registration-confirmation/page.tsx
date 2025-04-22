@@ -3,15 +3,13 @@
 import { useSearchParams } from 'next/navigation';
 import { RegistrationConfirmation } from '@/features/auth/ui/registrationConfirmation/RegistrationConfirmation';
 import { Suspense } from 'react';
-import { LoaderLinear } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Loader } from '@/shared/ui/loader/Loader';
 
 export default function Page() {
   return (
-    <div style={style}>
-      <Suspense fallback={<LoaderLinear />}>
-        <RegistrationConfirmationWrapper />
-      </Suspense>
-    </div>
+    <Suspense fallback={<Loader />}>
+      <RegistrationConfirmationWrapper />
+    </Suspense>
   );
 }
 
@@ -22,10 +20,4 @@ const RegistrationConfirmationWrapper = () => {
   const email = searchParams.get('email');
 
   return <RegistrationConfirmation token={code} email={email} />;
-};
-
-const style = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center'
 };

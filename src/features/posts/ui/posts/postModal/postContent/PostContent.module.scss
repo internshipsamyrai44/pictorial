@@ -1,0 +1,31 @@
+.wrapper {
+  width: 480px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.conversation {
+  height: 336px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 19px 24px;
+  overflow-y: auto;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.interactionPanel {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 1px solid #4c4c4c;
+  margin-top: auto;
+}

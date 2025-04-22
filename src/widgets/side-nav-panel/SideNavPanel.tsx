@@ -32,42 +32,45 @@ import {
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import s from './SideNavPanel.module.scss';
-import { CreatePost } from '@/widgets/create-post/CreatePost';
+import { useTranslations } from 'next-intl';
+import { CreatePost } from '@/features/posts/ui/create-post/CreatePost';
+import { CreatePostProvider } from '@/features/posts/ui/create-post/createPostContext';
 
 type SideNavBar = {
   className?: string;
 };
 
 export const SideNavPanel = ({ className }: SideNavBar) => {
-  const [logout] = useLogoutMutation();
+  const [logout, { isLoading }] = useLogoutMutation();
   const { data: me } = useMeQuery();
   const router = useRouter();
   const [activeIcon, setActiveIcon] = useState<string>('');
   const [isModalActive, setIsModalActive] = useState(false);
   const [isCreatePostActive, setCreatePostActive] = useState(false);
   const [profileUrl, setProfileUrl] = useState<string>('');
+  const t = useTranslations('SideNavPanel');
 
   useEffect(() => {
     if (me) {
-      setProfileUrl(`profile/${me.userId}`);
+      setProfileUrl(`${PATH.PROFILE.PROFILE}/${me?.userId}`);
     }
   }, [me]);
 
   const options = [
-    { icon: HomeIcon, iconActive: HomeActiveIcon, title: 'Home', url: PATH.MAIN, value: 'home' },
-    { icon: CreateIcon, iconActive: CreateActiveIcon, title: 'Create', url: '#', value: 'create' },
+    { icon: HomeIcon, iconActive: HomeActiveIcon, title: t('Home'), url: PATH.MAIN, value: 'home' },
+    { icon: CreateIcon, iconActive: CreateActiveIcon, title: t('Create'), url: '#', value: 'create' },
     {
       icon: MyProfileIcon,
       iconActive: MyProfileActiveIcon,
-      title: 'My Profile',
+      title: t('Profile'),
       url: profileUrl,
       value: 'profile'
     },
-    { icon: MessengerIcon, iconActive: MessengerActiveIcon, title: 'Messenger', url: '#', value: 'message' },
-    { icon: SearchIcon, iconActive: SearchActiveIcon, title: 'Search', url: '#', value: 'search' },
-    { icon: StatisticsIcon, iconActive: StatisticsActiveIcon, title: 'Statistics', url: '#', value: 'statistics' },
-    { icon: FavoritesIcon, iconActive: FavoritesActiveIcon, title: 'Favorites', url: '#', value: 'favorites' },
-    { icon: LogOutIcon, iconActive: LogOutActiveIcon, title: 'Log Out', url: PATH.AUTH.LOGIN, value: 'logout' }
+    { icon: MessengerIcon, iconActive: MessengerActiveIcon, title: t('Messenger'), url: '#', value: 'message' },
+    { icon: SearchIcon, iconActive: SearchActiveIcon, title: t('Search'), url: '#', value: 'search' },
+    { icon: StatisticsIcon, iconActive: StatisticsActiveIcon, title: t('Statistics'), url: '#', value: 'statistics' },
+    { icon: FavoritesIcon, iconActive: FavoritesActiveIcon, title: t('Favorites'), url: '#', value: 'favorites' },
+    { icon: LogOutIcon, iconActive: LogOutActiveIcon, title: t('LogOut'), url: PATH.AUTH.LOGIN, value: 'logout' }
   ];
 
   const handleLinkClick = async (value: string, url: string) => {
@@ -127,13 +130,13 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
         </SidebarContent>
       </Sidebar>
       {isModalActive && (
-        <Modal title={'Log out'} className={s.modal} onClose={() => setIsModalActive(false)}>
+        <Modal title={t('LogOut')} className={s.modal} onClose={() => setIsModalActive(false)}>
           <Typography variant={'regular-text-16'} className={s.text}>
-            Are you really want to log out of your account{' '}
+            {t('LogOutConfirmation')}
             <Typography as={'span'} variant={'bold-text-16'}>
-              “Epam@epam.com”
+              {` " ${me?.email} " `}
             </Typography>
-            ?`
+            ?
           </Typography>
           <div className={s['buttons-block']}>
             <Button
@@ -150,17 +153,22 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
                     console.error('Logout failed: ', error);
                   });
               }}
+              disabled={isLoading}
             >
-              Yes
+              {t('Yes')}
             </Button>
             <Button className={s['modal-button']} variant={'primary'} onClick={() => setIsModalActive(false)}>
-              No
+              {t('No')}
             </Button>
           </div>
         </Modal>
       )}
 
-      {isCreatePostActive && <CreatePost setCreatePostActive={setCreatePostActive} />}
+      {isCreatePostActive && (
+        <CreatePostProvider>
+          <CreatePost setCreatePostActive={setCreatePostActive} />{' '}
+        </CreatePostProvider>
+      )}
     </>
   );
 };

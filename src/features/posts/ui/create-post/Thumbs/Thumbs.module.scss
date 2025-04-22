@@ -1,0 +1,63 @@
+.thumblist {
+  display: flex;
+  gap: 0.6rem;
+  position: absolute;
+  bottom: 43px;
+  right: 8px;
+  background: rgb(23 23 23 / 90%);
+  padding: 0.6rem;
+  width: auto;
+  border-radius: 3px;
+
+  .add {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    padding: 0;
+
+    &:hover {
+      background-color: transparent;
+      opacity: 0.6;
+    }
+  }
+}
+
+.thumbnails {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.6rem;
+  overflow: hidden;
+  width: auto;
+}
+
+.thumb {
+  position: relative;
+
+  img {
+    width: 80px;
+    height: 80px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+
+  .remove {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 12px;
+    height: 13px;
+    padding: 0;
+    border-radius: 1px;
+    background: rgb(23 23 23 / 90%);
+    color: var(--light-100);
+
+    &:hover {
+      color: var(--light-900);
+    }
+  }
+}

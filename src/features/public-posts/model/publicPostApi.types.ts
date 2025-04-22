@@ -1,7 +1,7 @@
 export type GetPublicPostsParams = {
   pageSize?: number;
   sortBy?: string;
-  sortDirection?: 'asc' | 'desc';
+  sortDirection?: string;
   endCursorPostId?: number;
 };
 
@@ -14,7 +14,7 @@ export type GetPublicPostsResponse = {
 
 export type PublicPostResponse = {
   avatarOwner: string;
-  avatarWhoLikes: string[];
+  avatarWhoLikes: boolean;
   createdAt: string;
   description: string;
   id: number;
@@ -45,3 +45,5 @@ export type UserImage = {
 export type PostItemProps = {
   item: PublicPostResponse;
 };
+
+export type GetPublicPostsByUserIdParams = { userId: number } & GetPublicPostsParams;

@@ -52,7 +52,7 @@ export default function SignIn() {
             {t('accountText')}
           </Typography>
           <Button asChild variant="ghost" fullWidth>
-            <Link href={PATH.AUTH.SIGNUP}>{t('signUn')}</Link>
+            <Link href={PATH.AUTH.SIGNUP}>{t('signUp')}</Link>
           </Button>
         </Card>
       </BaseLayout>

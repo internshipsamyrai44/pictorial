@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 export type AppStore = ReturnType<typeof store.getState>;
 import { publicProfileApi } from '@/features/profile/api/publicProfileApi';
-import { publicUserPostApi } from '@/features/public-posts/api/publicPostApi';
+import { publicPostsApi } from '@/features/public-posts/api/publicPostApi';
 import { authReducer } from '@/redux/authSlice';
 
 export const store = configureStore({
@@ -13,10 +13,10 @@ export const store = configureStore({
     auth: authReducer,
     [publicProfileApi.reducerPath]: publicProfileApi.reducer,
     [inctagramApi.reducerPath]: inctagramApi.reducer,
-    [publicUserPostApi.reducerPath]: publicUserPostApi.reducer
+    [publicPostsApi.reducerPath]: publicPostsApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(publicProfileApi.middleware, inctagramApi.middleware, publicUserPostApi.middleware)
+    getDefaultMiddleware().concat(publicProfileApi.middleware, inctagramApi.middleware, publicPostsApi.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

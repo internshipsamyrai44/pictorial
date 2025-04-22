@@ -6,7 +6,7 @@ export const publicProfileApi = createApi({
   reducerPath: 'publicProfileApi',
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (build) => ({
-    getPublicUserProfile: build.query<PublicUserProfileByIdResponse, number>({
+    getPublicUserProfile: build.query<PublicUserProfileByIdResponse, string>({
       query: (profileId) => ({
         url: `v1/public-user/profile/${profileId}`,
         method: 'GET'

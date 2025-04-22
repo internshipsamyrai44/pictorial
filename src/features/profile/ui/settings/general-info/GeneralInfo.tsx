@@ -6,23 +6,34 @@ import { useGetProfileQuery, useUpdateProfileMutation } from '@/features/profile
 
 import s from './GeneralInfo.module.scss';
 import { ProfileBase } from '@/features/profile/model/profileApi.types';
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export const GeneralInfo = () => {
   const { data: profileData, isLoading, error } = useGetProfileQuery();
-
   const [updateProfile, { isLoading: updateProfileIsLoading }] = useUpdateProfileMutation();
-
   const errorMessage = useRequestError(error);
+  const t = useTranslations('Profile');
+  const [alertType, setAlertType] = useState<'success' | 'error' | null>(null);
+
+  const alertSubmitProfileFormMessage =
+    alertType === 'error' ? t('Alert.ErrorAlert') : alertType === 'success' ? t('Alert.SuccessAlert') : '';
 
   const onSubmitProfileFormHandler = async (data: Omit<ProfileBase, 'id' | 'createdAt'>) => {
-    updateProfile({
-      ...data,
-      city: data.city ?? '',
-      country: data.country ?? '',
-      region: data.region ?? '',
-      dateOfBirth: data.dateOfBirth ?? '',
-      aboutMe: data.aboutMe ?? ''
-    });
+    setAlertType(null);
+    try {
+      await updateProfile({
+        ...data,
+        city: data.city ?? '',
+        country: data.country ?? '',
+        region: data.region ?? '',
+        dateOfBirth: data.dateOfBirth ?? '',
+        aboutMe: data.aboutMe ?? ''
+      }).unwrap();
+      setAlertType('success');
+    } catch (err) {
+      setAlertType('error');
+    }
   };
 
   if (isLoading) return <LoaderLinear />;
@@ -31,8 +42,9 @@ export const GeneralInfo = () => {
     <>
       {updateProfileIsLoading && <LoaderLinear />}
       {errorMessage && <Alertpopup alertType={'error'} message={errorMessage} />}
+      {alertType && <Alertpopup alertType={alertType} message={alertSubmitProfileFormMessage} />}
       <div className={s.container}>
-        <AvatarActions />
+        <AvatarActions avatar={profileData?.avatars[0]?.url} userName={profileData?.userName} />
         <GeneralInfoForm
           disabled={updateProfileIsLoading}
           onSubmitProfileForm={onSubmitProfileFormHandler}

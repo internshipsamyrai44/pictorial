@@ -1,7 +1,7 @@
 'use client';
 
 import s from './PublicPostsPage.module.scss';
-import { useGetPublicUserPostQuery } from '@/features/public-posts/api/publicPostApi';
+import { useGetPublicAllPostsQuery } from '@/features/public-posts/api/publicPostApi';
 import UsersCounter from '@/features/public-posts/ui/usersCounter/UsersCounter';
 import PostItem from '@/features/public-posts/ui/publicPost/PublicPost';
 import { useEffect } from 'react';
@@ -17,7 +17,7 @@ export default function PublicPostsPage() {
   const { data: me, isLoading: meLoading } = useMeQuery();
 
   // Запрос публичных постов
-  const { data, isLoading, isError } = useGetPublicUserPostQuery({ pageSize: 4 });
+  const { data, isLoading, isError } = useGetPublicAllPostsQuery({ pageSize: 4 });
 
   useEffect(() => {
     // Если запрос me завершился и пользователь аутентифицирован, редиректим на HOME

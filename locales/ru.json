@@ -4,7 +4,223 @@
   },
   "Auth": {
     "signIn": "Войти",
-    "signUn": "Зарегистрироваться",
-    "accountText": "У вас нет учетной записи?"
+    "signUp": "Зарегистрироваться",
+    "LogIn": "Войти",
+    "BackToSignUp": "Вернуться к регистрации",
+    "Username": "Имя пользователя",
+    "Password": "Пароль",
+    "ConfirmPassword": "Подтвердите пароль",
+    "ForgotPassword": "Забыли пароль?",
+    "accountText": "У вас нет учетной записи?",
+    "PasswordVerification": "Ваш пароль должен содержать от 6 до 20 символов",
+    "PasswordValidation": "Электронная почта или пароль неверны. Попробуйте еще раз, пожалуйста",
+    "CreateNewPassword": "Создать новый пароль",
+    "ForgotPasswordFormDescription": "Введите свой адрес электронной почты, и мы отправим вам дальнейшие инструкции ",
+    "SendLink": "Отправить ссылку",
+    "BackToSignIn": "Вернуться к входу",
+    "LinkSentByEmail": "Ссылка отправлена по электронной почте. Если вы не получили письмо, отправьте ссылку еще раз",
+    "EmailConfirmationLinkSent": "Мы отправили ссылку для подтверждения вашего адреса электронной почты на ",
+    "LinkExpired": "Ссылка на подтверждение электронной почты устарела",
+    "LinkExpiredDescription": "Похоже, что срок действия ссылки для подтверждения истек. Не волнуйтесь, мы можем отправить ссылку еще раз",
+    "ResendLink": "Отправить ссылку повторно",
+    "Congratulations": "Поздравляем!",
+    "EmailConfirmed": "Ваш адрес электронной почты подтвержден.",
+    "TermsAndConditions": "Согласен с условиями и положениями",
+    "HaveAnAccount": "Есть учетная запись?"
+  },
+  "GithubPage": {
+    "BackHomePage": "Вернуться на главную страницу",
+    "ProcessingAuthorization": "Обработка авторизации GitHub..."
+  },
+  "Post": {
+    "Delete": {
+      "Post": "Удалить публикацию",
+      "Sure?": "Вы уверены, что хотите удалить эту публикацию?"
+    },
+    "ClosePost": {
+      "ClosePost": "Закрытие публикации",
+      "Sure?": "Вы действительно хотите завершить редактирование? Если вы закроете, изменения, которые вы сделали, не будут сохранены."
+    },
+    "Edit": {
+      "EditPost": "Редактировать публикацию",
+      "AddPublicationDescriptions": "Добавить описание публикации",
+      "SaveChanges": "Сохранить изменения"
+    },
+    "CreatePost": {
+      "AddPhoto": "Добавить фотографию",
+      "Cropping": "Обрезать",
+      "Filters": "Редактировать",
+      "Publications": "Описание",
+      "SelectFromComputer": "Загрузить с компьютера",
+      "OpenDraft": "Открыть черновик",
+      "Next": "Далее",
+      "Original": "Оригинал",
+      "Publish": "Опубликовать",
+      "AddDescriptions": "Добавить описание",
+      "AddLocation": "Добавить местоположение",
+      "Close": "Закрыть",
+      "CloseDescription": "Вы действительно хотите закрыть создание публикации? Если вы закроете, все будет удалено!",
+      "Discard": "Отменить",
+      "SaveDraft": "Сохранить черновик",
+      "ErrorUpload": "Ошибка загрузки",
+      "TryAgain": "Попробовать еще",
+      "ErrorUploadDescription": "Пожалуйста, загрузите изображение в формате JPEG или PNG! Загрузите файл размером менее 20 МБ!"
+    },
+    "Yes": "Да",
+    "No": "Нет",
+    "dateFormat": "ru-RU",
+    "EditPost": "Редактировать",
+    "DeletePost": "Удалить",
+    "AddComment": "Добавить комментарий...",
+    "Like": "Нравится",
+    "Answer": "Ответить"
+  },
+  "Profile": {
+    "FirstName": "Имя",
+    "LastName": "Фамилия",
+    "DateOfBirth": "Дата рождения",
+    "Country": "Страна",
+    "City": "Город",
+    "AboutMe": "Обо мне",
+    "SaveChanges": "Сохранить изменения",
+    "ProfileSettings": "Настройки профиля",
+    "GeneralInformation": "Общая информация",
+    "Devices": "Устройства",
+    "AccountManagement": "Управление учетной записью",
+    "MyPayments": "Мои платежи",
+    "SendMessage": "Отправить сообщение",
+    "Follow": "Подписаться",
+    "AddAProfilePhoto": "Добавить фото",
+    "AccountManagementContent": "Содержание управления учетной записью",
+    "DevicesContent": "Содержание устройств",
+    "PaymentsContent": "Содержание платежей",
+    "NoInfo": "нет информации",
+    "Following": "Подписки",
+    "Followers": "Подписчики",
+    "Publications": "Публикации",
+    "Countrys": {
+      "Russia": "Россия",
+      "Belarus": "Беларусь",
+      "Serbia": "Сербия"
+    },
+    "Citys": {
+      "Moscow": "Москва",
+      "Saint Petersburg": "Санкт-Петербург",
+      "Minsk": "Минск",
+      "Gomel": "Гомель",
+      "Belgrade": "Белград",
+      "Novi Sad": "Нови-Сад"
+    },
+    "Alert": {
+      "ErrorAlert": "Не удалось обновить профиль. Попробуйте еще раз.",
+      "SuccessAlert": "Профиль успешно обновлен!"
+    },
+    "Errors": {
+      "UserNameRequired": "Имя пользователя обязательно",
+      "UserNameMatches": "Имя пользователя должно содержать a-z, A-Z, 0-9, -",
+      "UserNameMinCharacters": "Имя пользователя должно содержать не менее 1 символа",
+      "UserNameMaxCharacters": "Имя пользователя должно содержать не более 50 символов",
+      "FirstNameRequired": "Имя обязательно",
+      "FirstNameMatches": "Имя должно содержать a-z, A-Z, 0-9, -",
+      "FirstNameMinCharacters": "Имя должно содержать не менее 1 символа",
+      "FirstNameMaxCharacters": "Имя должно содержать не более 50 символов",
+      "LastNameRequired": "Фамилия обязательна",
+      "LastNameMatches": "Фамилия должна содержать a-z, A-Z, 0-9, -",
+      "LastNameMinCharacters": "Фамилия должна содержать не менее 1 символа",
+      "LastNameMaxCharacters": "Фамилия должна содержать не более 50 символов",
+      "AboutMeMatches": "Обо мне должно содержать допустимые символы",
+      "AboutMeMaxCharacters": "Обо мне должно содержать не более 200 символов"
+    },
+    "Subscriptions": {
+      "CurrentSubscription": "Действующая подписка",
+      "Expire": "Заканчивается",
+      "NextPayment": "Следующее списание",
+      "AutoRenewalCanceled": "Отменено",
+      "AutoRenewal": "Автоматическое продление подписки"
+    },
+    "SuccessModal": {
+      "Title": "Успешно",
+      "Text": "Платеж прошел успешно",
+      "Button": "Отлично"
+    },
+    "FailModal": {
+      "Title": "Ошибка",
+      "Text": "Платеж не прошел",
+      "Button": "Попробуйте снова"
+    },
+    "AccountSelection": {
+      "AccountType": "Тип аккаунта",
+      "Personal": "Личный",
+      "Business": "Бизнес"
+    },
+    "SubscriptionCost": {
+      "Title": "Стоимость подписки",
+      "Daily": "10$ в день",
+      "Weekly": "50$ в неделю",
+      "Monthly": "100$ в месяц",
+      "Or": "или"
+    },
+    "ConfirmModal": {
+      "Title": "Купить подписку",
+      "Text": "С этим платежом будет включено Автопродление. Вы можете отключить его в любое время в настройках вашего профиля",
+      "PaypalText": "Для оплаты через PayPal у вас должна быть учетная запись",
+      "Agree": "Я Согласен",
+      "Ok": "Купить"
+    },
+    "AddAvatarModal": {
+      "AddAvatar": "Добавить фото профиля",
+      "ErrorFormat": "Ошибка! Формат загруженного фото должен быть\n PNG and JPEG",
+      "ErrorSize": "Ошибка! Размер фото должен быть меньше 10 МБ!",
+      "AvatarSelect": "Выбрать с Компьютера",
+      "SaveAvatar": "Сохранить"
+    },
+    "DeleteAvatarModal": {
+      "DeleteAvatarTitle": "Удалить Фото",
+      "DeleteAvatar": "Вы уверены, что хотите удалить фотографию?",
+      "ConfirmButton": "Да",
+      "RejectButton": "Нет"
+    }
+  },
+  "Errors": {
+    "404": "Извините! Страница не найдена!",
+    "500": "Внутренняя ошибка сервера",
+    "ErrorUserIdNotFound": "Ошибка: userId не найден",
+    "ErrorDecodingToken": "Ошибка при декодировании токена:"
+  },
+  "PublicPosts": {
+    "RegisteredUsers": "Зарегистрированные пользователи:",
+    "ShowMore": "Показать больше",
+    "Hide": "Скрыть"
+  },
+  "Terms": {
+    "PrivacyPolicy": "Политика конфиденциальности",
+    "PrivacyPolicyContentLanguage": "Ru",
+    "TermsOfService": "Условия использования",
+    "TermsOfServiceContentLanguage": "En"
+  },
+  "SideNavPanel": {
+    "Home": "Главная",
+    "Create": "Создать",
+    "Profile": "Мой профиль",
+    "Messenger": "Сообщения",
+    "Search": "Поиск",
+    "Statistics": "Статистика",
+    "Favorites": "Избранное",
+    "LogOut": "Выйти",
+    "LogOutConfirmation": "Вы действительно хотите выйти из своей учетной записи",
+    "Yes": "Да",
+    "No": "Нет"
+  },
+  "NotFound": {
+    "BacktoHomePage": "Вернуться на главную страницу"
+  },
+  "Notifications": {
+    "Notifications": "Уведомления",
+    "NewNotification": "Новое уведомление!",
+    "New": "Новое",
+    "SubscriptionActivated": "Ваша подписка активирована и действует до ",
+    "NextPaymentTomorrow": "Следующее платеж у вас спишется через 1 день",
+    "subscriptionExpiresIn7Days": "Ваша подписка истекает через 7 дней",
+    "subscriptionExpiresTomorrow": "Ваша подписка истекает через 1 день"
   }
 }

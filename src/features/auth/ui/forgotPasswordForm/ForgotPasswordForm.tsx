@@ -14,6 +14,7 @@ import { getBaseUrl } from '@/shared/utils';
 import { useRequestError } from '@/shared/hooks/useRequestError';
 import { useRouter } from 'next/navigation';
 import s from './ForgotPasswordForm.module.scss';
+import { useTranslations } from 'next-intl';
 
 type FormInput = {
   email: string;
@@ -28,6 +29,7 @@ export const ForgotPasswordForm = () => {
   const [email, setEmail] = useState<string | null>(null);
   const baseUrl = getBaseUrl();
   const errorMessage = useRequestError(error);
+  const t = useTranslations('Auth');
 
   const EmailValidationSchema = yup
     .object({
@@ -71,14 +73,14 @@ export const ForgotPasswordForm = () => {
       {errorMessage && <Alertpopup alertType={'error'} message={errorMessage} />}
       <Card className={s.card}>
         <form onSubmit={handleSubmit(sendLinkToEmail)} className={s.form}>
-          <p className={s.header}>Forgot Password</p>
+          <p className={s.header}>{t('ForgotPassword')}</p>
           <Input {...register('email')} type="text" label={'Email'} errorMessage={errors.email?.message} />
-          <span className={s.description}>Enter your email address and we will send you further instructions </span>
+          <span className={s.description}>{t('ForgotPasswordFormDescription')}</span>
           <Button className={s.button} disabled={!captchaToken || !isValid}>
-            Send Link
+            {t('SendLink')}
           </Button>
           <Link className={s.link} href={PATH.AUTH.LOGIN}>
-            Back to Sign In
+            {t('BackToSignIn')}
           </Link>
           {!isSendEmailSuccess ? (
             <ReCAPTCHAComponent
@@ -86,11 +88,14 @@ export const ForgotPasswordForm = () => {
               onChange={onsetCaptchaChange}
             />
           ) : (
-            <div>The link has been sent by email. If you don’t receive an email send link again</div>
+            <div>{t('LinkSentByEmail')}</div>
           )}
           {isModalActive && isSendEmailSuccess && (
             <Modal className={s.modal} title={'Email sent'} onClose={onModalClose}>
-              <div className={s.modalText}>We have sent a link to confirm your email to {email}</div>
+              <div className={s.modalText}>
+                {t('EmailConfirmationLinkSent')}
+                {email}
+              </div>
               <div className={s.modalButton}>
                 <Button onClick={onModalClose}>OK</Button>
               </div>

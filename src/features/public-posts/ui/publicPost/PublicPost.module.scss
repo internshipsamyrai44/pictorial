@@ -1,7 +1,9 @@
+.postLink {
+  width: auto;
+}
 
 .userLink {
   margin-top: 15px;
-
 }
 
 .userAvatarLink {
@@ -35,11 +37,13 @@
 
 .postItem {
   position: relative;
-  width: 23%;
+  width: 100%;
+  max-width: 230px;
+  flex: 1 1 240px;
 }
 
 .description {
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
@@ -51,11 +55,10 @@
 .imageWrapper {
   display: flex;
   flex-direction: column;
-
 }
 
 .image {
+  width: 100%;
+  height: auto;
   object-fit: cover;
-  width: 240px;
-  height: 230px;
 }

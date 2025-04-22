@@ -4,20 +4,22 @@ import { HeaderButton } from '@/widgets/general-header/headerButton/HeaderButton
 import { SelectTranslate } from '@/widgets/general-header/selectTranslate/SelectTranslate';
 import Link from 'next/link';
 import s from './GeneralHeader.module.scss';
+import { Notifications } from '../../features/notifications/ui/Notifications';
 
-type GeneralHeaderProps = {
-  isPublic: boolean;
+type Props = {
+  isPublic?: boolean;
 };
 
-export const GeneralHeader = ({ isPublic = false }: GeneralHeaderProps) => (
+export const GeneralHeader = ({ isPublic }: Props) => (
   <header className={s.wrapper}>
     <div className={s.container}>
       <Link href="/" className={s.logo}>
         Inctagram
       </Link>
       <div className={s.headerActions}>
+        {!isPublic && <Notifications />}
         <SelectTranslate />
-        {!isPublic && <HeaderButton />}
+        {isPublic && <HeaderButton />}
       </div>
     </div>
   </header>

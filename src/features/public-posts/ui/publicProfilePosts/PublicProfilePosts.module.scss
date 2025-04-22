@@ -1,0 +1,19 @@
+.images {
+  width: 100%;
+  display: flex;
+  padding: 15px 25px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.image {
+  height: 235px;
+  width: 230px;
+  cursor: pointer;
+}
+
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

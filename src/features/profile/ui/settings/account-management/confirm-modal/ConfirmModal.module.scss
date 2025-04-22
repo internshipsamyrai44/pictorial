@@ -1,0 +1,16 @@
+.modal {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.paypal {
+  font-weight: 500;
+  font-size: 18px;
+}
