@@ -46,7 +46,7 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
         onBlur={async () => {
           await trigger('email');
         }}
-        errorMessage={(isError || errors.email) && ''}
+        errorMessage={errors.email?.message || (isError ? t('EmailValidation') : undefined)}
       />
 
       {/* Input for password */}
@@ -60,7 +60,7 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
         onBlur={async () => {
           await trigger('password');
         }}
-        errorMessage={(isError || errors.password || errors.email) && t('PasswordValidation')}
+        errorMessage={errors.password?.message || (isError ? t('PasswordValidation') : undefined)}
       />
 
       {/* Forgot password link */}
