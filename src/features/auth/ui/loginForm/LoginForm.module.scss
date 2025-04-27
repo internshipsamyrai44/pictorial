@@ -23,13 +23,13 @@
     }
 
     .forgot-password-wrapper {
-      align-self: flex-end;
+      display: flex;
+      justify-content: flex-end;
       margin: 36px 0 24px;
       width: 100%;
 
       .forgot-password {
         color: var(--light-900);
-        text-align: end;
       }
     }
   }
