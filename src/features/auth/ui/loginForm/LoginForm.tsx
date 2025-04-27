@@ -1,7 +1,7 @@
 import { PATH } from '@/shared/const/PATH';
 import { getEmailValidationSchema, getPasswordValidationSchema } from '@/shared/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, Input } from '@internshipsamyrai44-ui-kit/components-lib';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -84,8 +84,8 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
 
       {/* Forgot password link */}
       <div className={s['forgot-password-wrapper']}>
-        <Link href={PATH.AUTH.FORGOT_PASSWORD}>
-          <Typography className={s['forgot-password']}>{t('ForgotPassword')}</Typography>
+        <Link href={PATH.AUTH.FORGOT_PASSWORD} className={s['forgot-password']}>
+          {t('ForgotPassword')}
         </Link>
       </div>
 

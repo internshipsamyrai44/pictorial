@@ -51,7 +51,7 @@ export default function SignIn() {
           <Typography variant="regular-text-16" className={s['account-text']}>
             {t('accountText')}
           </Typography>
-          <Button asChild variant="ghost" fullWidth>
+          <Button asChild variant="ghost">
             <Link href={PATH.AUTH.SIGNUP}>{t('signUp')}</Link>
           </Button>
         </Card>
