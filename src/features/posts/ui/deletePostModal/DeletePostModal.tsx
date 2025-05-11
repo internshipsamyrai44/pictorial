@@ -8,9 +8,10 @@ type DeletePostModalProps = {
   id: number;
   isOpen: boolean;
   onModalClose: () => void;
+  closePostModal: () => void;
 };
 
-export const DeletePostModal: React.FC<DeletePostModalProps> = ({ id, isOpen, onModalClose }) => {
+export const DeletePostModal: React.FC<DeletePostModalProps> = ({ id, isOpen, onModalClose, closePostModal }) => {
   const [open, setOpen] = useState(isOpen);
   const t = useTranslations('Post');
 
@@ -32,6 +33,9 @@ export const DeletePostModal: React.FC<DeletePostModalProps> = ({ id, isOpen, on
 
   const handleDelete = () => {
     deletePost(id);
+    if (closePostModal) {
+      closePostModal();
+    }
   };
 
   return (

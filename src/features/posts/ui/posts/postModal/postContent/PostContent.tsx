@@ -11,7 +11,7 @@ import { useState } from 'react';
 
 type Props = {
   post: PublishedPostResponse;
-  closeModal?: () => void;
+  closeModal: () => void;
   editPost?: () => void;
   isAuth?: boolean;
 };
@@ -25,7 +25,6 @@ export default function PostContent({ post, closeModal, isAuth, editPost }: Prop
 
   const handleCloseDeleteModal = () => {
     setIsOpenModalDeletePost(false);
-    closeModal?.();
   };
   if (!post) {
     return;
@@ -61,7 +60,12 @@ export default function PostContent({ post, closeModal, isAuth, editPost }: Prop
         <InteractionBlock post={post} isAuth={isAuth} />
         {isAuth && <AddCommentForm />}
       </div>
-      <DeletePostModal id={post.id} isOpen={isOpenModalDeletePost} onModalClose={handleCloseDeleteModal} />
+      <DeletePostModal
+        id={post.id}
+        isOpen={isOpenModalDeletePost}
+        onModalClose={handleCloseDeleteModal}
+        closePostModal={closeModal}
+      />
     </div>
   );
 }
