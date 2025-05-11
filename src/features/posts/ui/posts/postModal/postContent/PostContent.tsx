@@ -51,10 +51,7 @@ export default function PostContent({ post, closeModal, isAuth, editPost }: Prop
         <div className={s.description}>
           <CommentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} descriptionPost />
         </div>
-        <div className={s.comments}>
-          <CommentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} />
-          <CommentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} />
-        </div>
+        <div className={s.comments}></div>
       </div>
       <div className={s.interactionPanel}>
         <InteractionBlock post={post} isAuth={isAuth} />
