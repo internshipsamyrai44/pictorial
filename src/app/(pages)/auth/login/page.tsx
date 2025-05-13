@@ -25,9 +25,7 @@ export default function SignIn() {
     try {
       const data = await login({ email: email!, password: password! }).unwrap();
       const userId = getDecodedToken(data.accessToken);
-      // replace(`/profile/${userId}`);
-      console.log(`${userId}`);
-      replace(`/home`);
+      replace(`/profile/${userId}`);
     } catch (error) {
       return <Alertpopup alertType={'error'} message={`${error}`} />;
     }

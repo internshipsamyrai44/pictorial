@@ -109,6 +109,7 @@
     "Following": "Following",
     "Followers": "Followers",
     "Publications": "Publications",
+    "UserUnder13": "A user under 13 cannot create a profile. Privacy Policy.",
     "Countrys": {
       "Russia": "Russia",
       "Belarus": "Belarus",

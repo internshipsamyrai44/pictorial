@@ -1,7 +1,16 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, DatePicker, Input, Select, SelectItem, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
+import {
+  Alertpopup,
+  Button,
+  DatePicker,
+  Input,
+  Select,
+  SelectItem,
+  Textarea,
+  Typography
+} from '@internshipsamyrai44-ui-kit/components-lib';
 import { useForm } from 'react-hook-form';
 
 import { ProfileBase } from '@/features/profile/model/profileApi.types';
@@ -11,6 +20,7 @@ import {
 } from '@/features/profile/model/profileFormValidationScheme';
 import s from './GeneralInfoForm.module.scss';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 
 type Props = {
   disabled: boolean;
@@ -25,6 +35,7 @@ const selectOptionsCity: string[] = ['Moscow', 'Saint Petersburg', 'Minsk', 'Gom
 export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: Props) => {
   const t = useTranslations('Auth');
   const tProfile = useTranslations('Profile');
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -32,7 +43,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
     getValues,
     watch,
     trigger,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm<ProfileFormValidationScheme>({
     defaultValues: profileData,
     resolver: yupResolver(profileFormValidationScheme),
@@ -42,6 +53,24 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
   const selectedCity = watch('city');
 
   const onSubmitFormHandler = (data: ProfileFormValidationScheme) => {
+    setAlertMessage(null);
+    console.log(alertMessage);
+
+    const today = new Date();
+    const birthDate = new Date(data.dateOfBirth ?? '');
+    const age = today.getFullYear() - birthDate.getFullYear();
+    const birthdayThisYear = new Date(birthDate);
+    birthdayThisYear.setFullYear(today.getFullYear());
+    const isUnder13 = age < 13 || (age === 13 && today < birthdayThisYear);
+
+    if (isUnder13) {
+      setAlertMessage(null);
+      setTimeout(() => {
+        setAlertMessage(tProfile('UserUnder13'));
+      }, 0);
+      return;
+    }
+
     onSubmitProfileForm({
       ...data,
       dateOfBirth: data.dateOfBirth?.toISOString() ?? ''
@@ -50,6 +79,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
 
   return (
     <form onSubmit={handleSubmit(onSubmitFormHandler)} noValidate className={s.form}>
+      {alertMessage && <Alertpopup alertType="error" message={alertMessage} />}
       <Input
         label={t('Username')}
         placeholder="Usertest"
@@ -98,26 +128,39 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         }}
       />
 
-      <div className={s.location}>
-        <Select
-          placeholder={tProfile('Country')}
-          value={selectedCountry}
-          onValueChange={(value) => setValue('country', value)}
-        >
-          {selectOptionsCountry.map((option, index) => (
-            <SelectItem key={index} value={option}>
-              <span>{tProfile(`Countrys.${option}`)}</span>
-            </SelectItem>
-          ))}
-        </Select>
-
-        <Select placeholder={tProfile('City')} value={selectedCity} onValueChange={(value) => setValue('city', value)}>
-          {selectOptionsCity.map((option, index) => (
-            <SelectItem key={index} value={option}>
-              <span>{tProfile(`Citys.${option}`)}</span>
-            </SelectItem>
-          ))}
-        </Select>
+      <div className={s.locations}>
+        <div className={s.location}>
+          <Typography variant={'regular-text-14'} className={s.locationLabel}>
+            {tProfile('Country')}
+          </Typography>
+          <Select
+            placeholder={tProfile('Country')}
+            value={selectedCountry}
+            onValueChange={(value) => setValue('country', value)}
+          >
+            {selectOptionsCountry.map((option, index) => (
+              <SelectItem key={index} value={option}>
+                <span>{tProfile(`Countrys.${option}`)}</span>
+              </SelectItem>
+            ))}
+          </Select>
+        </div>
+        <div className={s.location}>
+          <Typography variant={'regular-text-14'} className={s.locationLabel}>
+            {tProfile('City')}
+          </Typography>
+          <Select
+            placeholder={tProfile('City')}
+            value={selectedCity}
+            onValueChange={(value) => setValue('city', value)}
+          >
+            {selectOptionsCity.map((option, index) => (
+              <SelectItem key={index} value={option}>
+                <span>{tProfile(`Citys.${option}`)}</span>
+              </SelectItem>
+            ))}
+          </Select>
+        </div>
       </div>
       <Textarea
         placeholder={tProfile('AboutMe')}
@@ -126,7 +169,7 @@ export const GeneralInfoForm = ({ disabled, onSubmitProfileForm, profileData }: 
         errorText={errors.aboutMe?.message ? tProfile(errors.aboutMe.message) : undefined}
       />
 
-      <Button variant="primary" type="submit" className={s['submit-button']}>
+      <Button variant="primary" type="submit" className={s['submit-button']} disabled={!isValid || disabled}>
         {tProfile('SaveChanges')}
       </Button>
     </form>
