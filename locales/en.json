@@ -233,5 +233,9 @@
     "NextPaymentTomorrow": "Your next payment will be deducted in 1 day",
     "subscriptionExpiresIn7Days": "Your subscription expires in 7 days",
     "subscriptionExpiresTomorrow": "Your subscription expires in 1 day"
+  },
+  "search": {
+    "title": "Search",
+    "recent": "Resent Request"
   }
 }

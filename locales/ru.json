@@ -233,5 +233,9 @@
     "NextPaymentTomorrow": "Следующее платеж у вас спишется через 1 день",
     "subscriptionExpiresIn7Days": "Ваша подписка истекает через 7 дней",
     "subscriptionExpiresTomorrow": "Ваша подписка истекает через 1 день"
+  },
+  "search": {
+    "title": "Поиск",
+    "recent": "Ваш запрос"
   }
 }

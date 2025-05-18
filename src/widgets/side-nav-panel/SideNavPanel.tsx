@@ -67,7 +67,7 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
       value: 'profile'
     },
     { icon: MessengerIcon, iconActive: MessengerActiveIcon, title: t('Messenger'), url: '#', value: 'message' },
-    { icon: SearchIcon, iconActive: SearchActiveIcon, title: t('Search'), url: '#', value: 'search' },
+    { icon: SearchIcon, iconActive: SearchActiveIcon, title: t('Search'), url: PATH.SEARCH, value: 'search' },
     { icon: StatisticsIcon, iconActive: StatisticsActiveIcon, title: t('Statistics'), url: '#', value: 'statistics' },
     { icon: FavoritesIcon, iconActive: FavoritesActiveIcon, title: t('Favorites'), url: '#', value: 'favorites' },
     { icon: LogOutIcon, iconActive: LogOutActiveIcon, title: t('LogOut'), url: PATH.AUTH.LOGIN, value: 'logout' }
