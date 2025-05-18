@@ -50,3 +50,11 @@ export type UserProfileResponse = ProfileBase & {
   isFollowing: boolean;
   avatars: Avatar[];
 };
+
+export type UserFollower = ProfileBase & {
+  avatars: Avatar[];
+};
+
+export type UserFollowing = ProfileBase & {
+  avatars: Avatar[];
+};

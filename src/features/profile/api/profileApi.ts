@@ -4,7 +4,9 @@ import {
   AvatarResponse,
   Profile,
   ProfileFormValues,
-  UserProfileResponse
+  UserProfileResponse,
+  UserFollower,
+  UserFollowing
 } from '@/features/profile/model/profileApi.types';
 
 export const profileApi = inctagramApi.injectEndpoints({
@@ -58,6 +60,18 @@ export const profileApi = inctagramApi.injectEndpoints({
           url: `v1/users/profile`
         };
       }
+    }),
+    getFollowersByUserName: build.query<UserFollower[], string>({
+      query: (userName) => ({
+        method: 'GET',
+        url: `/v1/users/${userName}/followers`
+      })
+    }),
+    getFollowingByUserName: build.query<UserFollowing[], string>({
+      query: (userName) => ({
+        method: 'GET',
+        url: `/v1/users/${userName}/following`
+      })
     })
   })
 });
@@ -67,5 +81,7 @@ export const {
   useDeleteAvatarMutation,
   useGetProfileQuery,
   useGetUserByUserNameQuery,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useGetFollowersByUserNameQuery,
+  useGetFollowingByUserNameQuery
 } = profileApi;

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
@@ -8,6 +8,8 @@ import { StatsItem } from '@/shared/ui/stats-item/StatsItem';
 import s from './ProfileDashboard.module.scss';
 import VerifiedIcon from '../../../public/icons/verifiedIcon.svg';
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
+import { FollowersModal } from '@/features/profile/ui/followers-modal/FollowersModal';
+import { FollowingModal } from '@/features/profile/ui/following-modal/FollowingModal';
 
 interface iProps {
   about?: string;
@@ -30,6 +32,26 @@ export const ProfileDashboard = ({
 }: iProps) => {
   const t = useTranslations('Profile');
   const { isSubscribed } = useIsSubscribed();
+
+  const [isFollowersModalOpen, setIsFollowersModalOpen] = useState(false);
+  const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
+
+  const handleFollowersClick = () => {
+    setIsFollowersModalOpen(true);
+  };
+
+  const handleFollowingClick = () => {
+    setIsFollowingModalOpen(true);
+  };
+
+  const closeFollowersModal = () => {
+    setIsFollowersModalOpen(false);
+  };
+
+  const closeFollowingModal = () => {
+    setIsFollowingModalOpen(false);
+  };
+
   return (
     <div className={s.wrapper}>
       <ProfileAvatar height={204} src={avatar} width={204} userName={userName} />
@@ -44,14 +66,26 @@ export const ProfileDashboard = ({
           {children}
         </div>
         <div className={s['stats-block']}>
-          <StatsItem value={userFollowing} title={t('Following')} />
-          <StatsItem value={userFollowers} title={t('Followers')} />
+          <StatsItem
+            value={userFollowing}
+            title={t('Following')}
+            onClick={userFollowing > 0 ? handleFollowingClick : undefined}
+          />
+          <StatsItem
+            value={userFollowers}
+            title={t('Followers')}
+            onClick={userFollowers > 0 ? handleFollowersClick : undefined}
+          />
           <StatsItem value={userPublications} title={t('Publications')} />
         </div>
         <Typography variant={'regular-text-16'} style={{ width: '750px' }}>
           {about}
         </Typography>
       </div>
+
+      <FollowersModal isOpen={isFollowersModalOpen} onClose={closeFollowersModal} userName={userName} />
+
+      <FollowingModal isOpen={isFollowingModalOpen} onClose={closeFollowingModal} userName={userName} />
     </div>
   );
 };

@@ -191,7 +191,11 @@
       "DeleteAvatar": "Вы уверены, что хотите удалить фотографию?",
       "ConfirmButton": "Да",
       "RejectButton": "Нет"
-    }
+    },
+    "Error loading followers": "Ошибка при загрузке подписчиков",
+    "Error loading following": "Ошибка при загрузке подписок",
+    "No followers yet": "Пока нет подписчиков",
+    "Not following anyone yet": "Пока нет подписок"
   },
   "Errors": {
     "404": "Извините! Страница не найдена!",

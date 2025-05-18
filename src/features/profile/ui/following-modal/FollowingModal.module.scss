@@ -1,0 +1,67 @@
+.modal {
+  min-width: 400px;
+  max-width: 500px;
+}
+
+.modalContent {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 0 5px;
+}
+
+.error {
+  color: var(--danger-500);
+  text-align: center;
+  padding: 20px 0;
+}
+
+.noUsers {
+  text-align: center;
+  padding: 20px 0;
+  color: var(--light-900);
+}
+
+.userList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.userItem {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--dark-300);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.userLink {
+  text-decoration: none;
+  color: var(--light-100);
+  display: block;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.userData {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--light-100);
+}
+
+.fullName {
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--light-900);
+}
