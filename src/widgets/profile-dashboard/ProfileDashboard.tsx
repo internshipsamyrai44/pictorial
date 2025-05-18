@@ -66,16 +66,8 @@ export const ProfileDashboard = ({
           {children}
         </div>
         <div className={s['stats-block']}>
-          <StatsItem
-            value={userFollowing}
-            title={t('Following')}
-            onClick={userFollowing > 0 ? handleFollowingClick : undefined}
-          />
-          <StatsItem
-            value={userFollowers}
-            title={t('Followers')}
-            onClick={userFollowers > 0 ? handleFollowersClick : undefined}
-          />
+          <StatsItem value={userFollowing} title={t('Following')} onClick={handleFollowingClick} />
+          <StatsItem value={userFollowers} title={t('Followers')} onClick={handleFollowersClick} />
           <StatsItem value={userPublications} title={t('Publications')} />
         </div>
         <Typography variant={'regular-text-16'} style={{ width: '750px' }}>
