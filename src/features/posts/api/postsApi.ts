@@ -1,9 +1,12 @@
 import { inctagramApi } from '@/app/services/inctagram.api';
 import {
+  GetPostLikesArgs,
+  GetPostLikesResponse,
   PostRequestData,
   PostResponse,
   PostUpdateRequest,
   PublishedPostResponse,
+  UpdateLikeStatusRequest,
   UploadedImageViewModel
 } from '@/features/posts/model/postsApi.types';
 
@@ -55,6 +58,24 @@ export const postsApi = inctagramApi.injectEndpoints({
         method: 'GET'
       }),
       providesTags: ['Posts']
+    }),
+    getPostLikes: build.query<GetPostLikesResponse, GetPostLikesArgs>({
+      query: ({ postId, ...args }) => ({
+        url: `v1/posts/${postId}/likes`,
+        method: 'GET',
+        params: args
+      }),
+      providesTags: ['LikesInfo', 'LikeInteractions']
+    }),
+    updateLikeStatusPost: build.mutation<void, UpdateLikeStatusRequest>({
+      query: (postData) => ({
+        url: `v1/posts/${postData.postId}/like-status`,
+        method: 'PUT',
+        body: {
+          likeStatus: postData.likeStatus
+        }
+      }),
+      invalidatesTags: ['Posts', 'LikesInfo', 'LikeInteractions']
     })
   })
 });
@@ -65,5 +86,7 @@ export const {
   useCreatePostMutation,
   useGetPostsByUsernameQuery,
   useDeletePostMutation,
-  useGetPostsByIdQuery
+  useGetPostsByIdQuery,
+  useGetPostLikesQuery,
+  useUpdateLikeStatusPostMutation
 } = postsApi;

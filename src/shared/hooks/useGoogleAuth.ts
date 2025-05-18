@@ -23,8 +23,7 @@ export const useGoogleAuth = () => {
           setCookie('accessToken', accessToken, 7);
           const userId = getDecodedToken(accessToken);
           if (userId) {
-            // push(`/profile/${userId}`);
-            push(`/home`);
+            push(`/profile/${userId}`);
           } else {
             console.error('Ошибка: userId не найден');
             push(PATH.AUTH.LOGIN);

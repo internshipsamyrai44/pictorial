@@ -36,8 +36,7 @@ const GithubPageContent = () => {
         setCookie('accessToken', accessToken, 7);
         const userId = getDecodedToken(accessToken);
         if (userId) {
-          // replace(`/profile/${userId}`);
-          replace(`/home`);
+          replace(`/profile/${userId}`);
         } else {
           console.error(tError('ErrorUserIdNotFound'));
           replace(PATH.AUTH.LOGIN);

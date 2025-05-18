@@ -38,7 +38,7 @@ export type PublishedPostResponse = {
   owner: UserName;
   likesCount: number;
   isLiked: boolean;
-  avatarWhoLikes: boolean;
+  avatarWhoLikes: string[];
 };
 
 export type PostResponse = {
@@ -58,4 +58,40 @@ export type PublicPostsResponse = {
   totalCount: number;
   totalUsers: number;
   items: PublishedPostResponse[];
+};
+
+export type AvatarsType = {
+  url: string;
+  width: number;
+  height: number;
+  fileSize: number;
+};
+
+export type UpdateLikeStatusRequest = {
+  likeStatus: string;
+  postId: number;
+};
+
+export type GetPostLikesArgs = {
+  cursor?: number;
+  pageNumber?: number;
+  pageSize?: number;
+  postId: number;
+  search?: string;
+};
+
+export type GetPostLikesResponse = {
+  isLiked: boolean;
+  items: {
+    avatars: AvatarsType[];
+    createdAt: string;
+    id: number;
+    isFollowedBy: boolean;
+    isFollowing: boolean;
+    userId: number;
+    userName: string;
+  }[];
+  notReadCount: number;
+  pageSize: number;
+  totalCount: number;
 };
