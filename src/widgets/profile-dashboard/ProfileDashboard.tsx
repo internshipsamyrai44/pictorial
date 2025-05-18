@@ -18,7 +18,7 @@ interface iProps {
   userName: string;
   userPublications: number;
   children?: React.ReactNode;
-  isMyProfile: boolean;
+  isMyProfile?: boolean;
 }
 
 export const ProfileDashboard = ({
@@ -44,7 +44,7 @@ export const ProfileDashboard = ({
             </Typography>
             {isBusinessAccount && <VerifiedIcon width={24} height={24} />}
             <div className={s.buttons}>
-              <FollowButtons isMyProfile={isMyProfile} />
+              <FollowButtons isMyProfile={isMyProfile} userName={userName} />
             </div>
           </div>
           {children}

@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { debounce } from 'lodash';
-import { useLazyGetUserByUsernameQuery } from '@/features/search/api/searchApi';
 import { GetUserByUsernameParams, UserItem } from '@/features/search/model/searchApi.types';
+import { useLazySearchUsersByUsernameQuery } from '@/features/search/api/searchApi';
 
 export const useSearch = () => {
   const [searchResult, setSearchResult] = useState<UserItem[]>([]);
   const [isResultsVisible, setIsResultsVisible] = useState(false);
-  const [trigger, { data, isLoading }] = useLazyGetUserByUsernameQuery();
+  const [trigger, { data, isLoading }] = useLazySearchUsersByUsernameQuery();
 
   useEffect(() => {
     if (data?.items) {

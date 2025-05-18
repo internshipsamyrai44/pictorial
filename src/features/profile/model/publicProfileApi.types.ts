@@ -4,6 +4,7 @@ export type PublicUserProfileByIdResponse = {
   aboutMe: any;
   avatars: PublicUserProfileAvatar[];
   userMetadata: PublicUserMetadata;
+  hasPaymentSubscription: boolean;
 };
 
 type PublicUserProfileAvatar = {

@@ -1,17 +1,17 @@
+export type UserAvatar = {
+  url: string;
+  width: number;
+  height: number;
+  fileSize: number;
+  createdAt: string;
+};
+
 export type UserItem = {
   id: 0;
   userName: string;
   firstName: string;
   lastName: string;
-  avatars: [
-    {
-      url: string;
-      width: number;
-      height: number;
-      fileSize: number;
-      createdAt: string;
-    }
-  ];
+  avatars: UserAvatar[];
   createdAt: string;
   user?: UserItem;
 };
@@ -35,4 +35,22 @@ export type GetUserByUsernameParams = {
 
 export type FollowRequest = {
   selectedUserId: number;
+};
+
+export type UserResponse = {
+  id: number;
+  userName: string;
+  firstName: string;
+  lastName: string;
+  city: string;
+  country: string;
+  region: string;
+  dateOfBirth: string;
+  aboutMe: string;
+  avatars: UserAvatar[];
+  isFollowing: boolean;
+  isFollowedBy: boolean;
+  followingCount: number;
+  followersCount: number;
+  publicationsCount: number;
 };
