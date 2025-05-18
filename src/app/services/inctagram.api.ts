@@ -16,6 +16,7 @@ export const inctagramApi = createApi({
     'Subscriptions',
     'Notification',
     'LikesInfo',
-    'LikeInteractions'
+    'LikeInteractions',
+    'Followers'
   ]
 });

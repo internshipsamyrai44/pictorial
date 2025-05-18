@@ -15,12 +15,12 @@ export const useIsSubscribed = () => {
     });
   }, [subscriptionsData]);
 
-  const isSubscribed = useMemo(() => {
+  const isBusinessAccount = useMemo(() => {
     if (!latestSubscription) return false;
 
     const endDate = new Date(latestSubscription.endDateOfSubscription);
     return endDate > new Date();
   }, [latestSubscription]);
 
-  return { isSubscribed, latestSubscription, subscriptionsData };
+  return { isBusinessAccount, latestSubscription, subscriptionsData };
 };

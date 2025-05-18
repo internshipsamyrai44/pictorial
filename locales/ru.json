@@ -101,6 +101,7 @@
     "MyPayments": "Мои платежи",
     "SendMessage": "Отправить сообщение",
     "Follow": "Подписаться",
+    "Unfollow": "Отписаться",
     "AddAProfilePhoto": "Добавить фото",
     "AccountManagementContent": "Содержание управления учетной записью",
     "DevicesContent": "Содержание устройств",
@@ -234,5 +235,9 @@
     "NextPaymentTomorrow": "Следующее платеж у вас спишется через 1 день",
     "subscriptionExpiresIn7Days": "Ваша подписка истекает через 7 дней",
     "subscriptionExpiresTomorrow": "Ваша подписка истекает через 1 день"
+  },
+  "search": {
+    "title": "Поиск",
+    "recent": "Ваш запрос"
   }
 }

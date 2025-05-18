@@ -8,6 +8,7 @@ import { StatsItem } from '@/shared/ui/stats-item/StatsItem';
 import s from './ProfileDashboard.module.scss';
 import VerifiedIcon from '../../../public/icons/verifiedIcon.svg';
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
+import { FollowButtons } from '@/features/profile/ui/follow-buttons/follow-buttons';
 
 interface iProps {
   about?: string;
@@ -17,6 +18,7 @@ interface iProps {
   userName: string;
   userPublications: number;
   children?: React.ReactNode;
+  isMyProfile?: boolean;
 }
 
 export const ProfileDashboard = ({
@@ -26,10 +28,11 @@ export const ProfileDashboard = ({
   userFollowing,
   userName,
   userPublications,
-  children
+  children,
+  isMyProfile
 }: iProps) => {
   const t = useTranslations('Profile');
-  const { isSubscribed } = useIsSubscribed();
+  const { isBusinessAccount } = useIsSubscribed();
   return (
     <div className={s.wrapper}>
       <ProfileAvatar height={204} src={avatar} width={204} userName={userName} />
@@ -39,7 +42,10 @@ export const ProfileDashboard = ({
             <Typography as={'h1'} variant={'h1'}>
               {userName}
             </Typography>
-            {isSubscribed && <VerifiedIcon width={24} height={24} />}
+            {isBusinessAccount && <VerifiedIcon width={24} height={24} />}
+            <div className={s.buttons}>
+              <FollowButtons isMyProfile={isMyProfile} userName={userName} />
+            </div>
           </div>
           {children}
         </div>

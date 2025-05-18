@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import { useFormattedDate } from '@/shared/hooks/useFormattedDate';
 import { useGetPostLikesQuery, useUpdateLikeStatusPostMutation } from '@/features/posts/api/postsApi';
-import { useState, KeyboardEvent, useEffect } from 'react';
+import { KeyboardEvent, useEffect, useState } from 'react';
 
 type Props = {
   post: PublishedPostResponse;

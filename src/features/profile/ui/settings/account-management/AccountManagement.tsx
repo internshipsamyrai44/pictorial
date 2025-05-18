@@ -11,7 +11,7 @@ export const AccountManagement = () => {
   const searchParams = useSearchParams();
   const isPaymentSuccessfull = searchParams.get('?success') === 'true';
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { isSubscribed } = useIsSubscribed();
+  const { isBusinessAccount } = useIsSubscribed();
 
   useEffect(() => {
     if (searchParams.get('?success')) {
@@ -21,8 +21,8 @@ export const AccountManagement = () => {
 
   return (
     <div className={s.container}>
-      {isSubscribed && <CurrentSubscription />}
-      <AccountType isSubscribed={isSubscribed} />
+      {isBusinessAccount && <CurrentSubscription />}
+      <AccountType isBusinessAccount={isBusinessAccount} />
       {isModalOpen && <SubscriptionModal setIsModalOpen={setIsModalOpen} isPaymentSuccessfull={isPaymentSuccessfull} />}
     </div>
   );

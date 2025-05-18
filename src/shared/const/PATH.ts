@@ -24,5 +24,6 @@ export const PATH = {
     PUBLIC_USER_POST: /^\/profile\/\d+\/\d+$/
   },
   HOME: '/home',
-  NOT_FOUND: '/not-found'
+  NOT_FOUND: '/not-found',
+  SEARCH: '/search'
 };

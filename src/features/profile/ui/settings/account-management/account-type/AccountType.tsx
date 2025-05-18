@@ -5,10 +5,10 @@ import { SubscriptionPrice } from '@/features/profile/ui/settings/account-manage
 import { useTranslations } from 'next-intl';
 
 type Props = {
-  isSubscribed: boolean;
+  isBusinessAccount: boolean;
 };
 
-export const AccountType = ({ isSubscribed }: Props) => {
+export const AccountType = ({ isBusinessAccount }: Props) => {
   const t = useTranslations('Profile');
   const [accountType, setAccountType] = useState<string>('personal');
   const accountTypeOptions = [
@@ -16,10 +16,10 @@ export const AccountType = ({ isSubscribed }: Props) => {
     { label: t('AccountSelection.Business'), value: 'business' }
   ];
   useEffect(() => {
-    if (isSubscribed) {
+    if (isBusinessAccount) {
       setAccountType('business');
     }
-  }, [isSubscribed]);
+  }, [isBusinessAccount]);
 
   return (
     <>
