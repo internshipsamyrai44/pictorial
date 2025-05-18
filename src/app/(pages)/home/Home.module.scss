@@ -3,22 +3,17 @@
   justify-content: center;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0;
 }
 
 .home {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  max-width: 620px;
   width: 100%;
 }
 
 .title {
-  font-size: 24px;
-  font-weight: 600;
-  color: var(--light-100);
-  margin: 0;
+  display: none;
 }
 
 .loadingContainer {
