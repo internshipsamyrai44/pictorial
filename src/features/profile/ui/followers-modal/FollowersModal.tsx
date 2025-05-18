@@ -39,7 +39,6 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
             {isError && <div className={s.error}>{t('Error loading followers')}</div>}
             {followers && followers.items.length === 0 && (
               <div className={s.emptyState}>
-                <div className={s.emoji}>👤</div>
                 <div className={s.noUsers}>{t('No followers yet')}</div>
                 <div className={s.emptyStateDescription}>{t('When someone follows you, they will appear here')}</div>
               </div>

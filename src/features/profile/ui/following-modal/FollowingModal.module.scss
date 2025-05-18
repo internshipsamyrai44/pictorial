@@ -17,8 +17,10 @@
 
 .noUsers {
   text-align: center;
-  padding: 20px 0;
-  color: var(--light-900);
+  padding: 10px 0;
+  color: var(--light-100);
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .userList {
@@ -80,9 +82,10 @@
 }
 
 .emptyStateDescription {
-  color: var(--light-900);
+  color: var(--light-500);
   font-size: 14px;
   text-align: center;
   margin-top: 8px;
-  max-width: 250px;
+  max-width: 300px;
+  line-height: 1.5;
 }

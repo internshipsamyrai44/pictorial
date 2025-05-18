@@ -195,9 +195,9 @@
     "Error loading followers": "Error loading followers",
     "Error loading following": "Error loading following",
     "No followers yet": "No followers yet",
-    "Not following anyone yet": "Not following anyone yet",
-    "When someone follows you, they will appear here": "When someone follows you, they will appear here",
-    "When you follow someone, they will appear here": "When you follow someone, they will appear here"
+    "Not following anyone yet": "No following yet",
+    "When someone follows you, they will appear here": "Followers will be displayed here",
+    "When you follow someone, they will appear here": "Following accounts will be displayed here"
   },
   "Errors": {
     "404": "Sorry! Page not found!",
