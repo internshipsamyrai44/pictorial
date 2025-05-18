@@ -37,7 +37,13 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
           <div className={s.modalContent}>
             {isLoading && <Loader />}
             {isError && <div className={s.error}>{t('Error loading followers')}</div>}
-            {followers && followers.length === 0 && <div className={s.noUsers}>{t('No followers yet')}</div>}
+            {followers && followers.length === 0 && (
+              <div className={s.emptyState}>
+                <div className={s.emoji}>👤</div>
+                <div className={s.noUsers}>{t('No followers yet')}</div>
+                <div className={s.emptyStateDescription}>{t('When someone follows you, they will appear here')}</div>
+              </div>
+            )}
             {followers && followers.length > 0 && (
               <ul className={s.userList}>
                 {followers.map((follower) => (

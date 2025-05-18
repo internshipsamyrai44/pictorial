@@ -195,7 +195,9 @@
     "Error loading followers": "Ошибка при загрузке подписчиков",
     "Error loading following": "Ошибка при загрузке подписок",
     "No followers yet": "Пока нет подписчиков",
-    "Not following anyone yet": "Пока нет подписок"
+    "Not following anyone yet": "Пока нет подписок",
+    "When someone follows you, they will appear here": "Когда кто-то подпишется на вас, они появятся здесь",
+    "When you follow someone, they will appear here": "Когда вы подпишетесь на кого-то, они появятся здесь"
   },
   "Errors": {
     "404": "Извините! Страница не найдена!",
