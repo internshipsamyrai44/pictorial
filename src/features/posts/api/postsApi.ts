@@ -7,7 +7,8 @@ import {
   PostUpdateRequest,
   PublishedPostResponse,
   UpdateLikeStatusRequest,
-  UploadedImageViewModel
+  UploadedImageViewModel,
+  FeedPostsResponse
 } from '@/features/posts/model/postsApi.types';
 
 export const postsApi = inctagramApi.injectEndpoints({
@@ -59,6 +60,14 @@ export const postsApi = inctagramApi.injectEndpoints({
       }),
       providesTags: ['Posts']
     }),
+    getFeedPosts: build.query<FeedPostsResponse, { endCursorPostId?: number; pageSize?: number }>({
+      query: (params) => ({
+        url: 'v1/posts/feed',
+        method: 'GET',
+        params
+      }),
+      providesTags: ['Posts']
+    }),
     getPostLikes: build.query<GetPostLikesResponse, GetPostLikesArgs>({
       query: ({ postId, ...args }) => ({
         url: `v1/posts/${postId}/likes`,
@@ -82,11 +91,12 @@ export const postsApi = inctagramApi.injectEndpoints({
 
 export const {
   useUploadImagesMutation,
-  useUpdatePostMutation,
   useCreatePostMutation,
-  useGetPostsByUsernameQuery,
+  useUpdatePostMutation,
   useDeletePostMutation,
+  useGetPostsByUsernameQuery,
   useGetPostsByIdQuery,
+  useGetFeedPostsQuery,
   useGetPostLikesQuery,
   useUpdateLikeStatusPostMutation
 } = postsApi;

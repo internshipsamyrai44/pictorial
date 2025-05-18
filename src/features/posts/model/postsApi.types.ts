@@ -48,6 +48,14 @@ export type PostResponse = {
   items: PublishedPostResponse[];
 };
 
+export type FeedPostsResponse = {
+  pageSize: number;
+  totalCount: number;
+  endCursor: number | null;
+  hasNextPage: boolean;
+  items: PublishedPostResponse[];
+};
+
 export type UserName = {
   firstName: string;
   lastName: string;

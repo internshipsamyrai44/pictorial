@@ -61,17 +61,40 @@ export const profileApi = inctagramApi.injectEndpoints({
         };
       }
     }),
-    getFollowersByUserName: build.query<FollowersResponse, string>({
-      query: (userName) => ({
+    getFollowersByUserName: build.query<
+      FollowersResponse,
+      { userName: string; search?: string; pageSize?: number; pageNumber?: number; cursor?: number }
+    >({
+      query: ({ userName, ...params }) => ({
         method: 'GET',
-        url: `/v1/users/${userName}/followers`
+        url: `/v1/users/${userName}/followers`,
+        params
       })
     }),
-    getFollowingByUserName: build.query<FollowingResponse, string>({
-      query: (userName) => ({
+    getFollowingByUserName: build.query<
+      FollowingResponse,
+      { userName: string; search?: string; pageSize?: number; pageNumber?: number; cursor?: number }
+    >({
+      query: ({ userName, ...params }) => ({
+        url: `v1/users/${userName}/following`,
         method: 'GET',
-        url: `/v1/users/${userName}/following`
+        params
       })
+    }),
+    followUser: build.mutation<void, number>({
+      query: (userId) => ({
+        url: `v1/users/following`,
+        method: 'POST',
+        body: { selectedUserId: userId }
+      }),
+      invalidatesTags: ['Profile']
+    }),
+    unfollowUser: build.mutation<void, number>({
+      query: (userId) => ({
+        url: `v1/users/follower/${userId}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['Profile']
     })
   })
 });
@@ -83,5 +106,7 @@ export const {
   useGetUserByUserNameQuery,
   useUpdateProfileMutation,
   useGetFollowersByUserNameQuery,
-  useGetFollowingByUserNameQuery
+  useGetFollowingByUserNameQuery,
+  useFollowUserMutation,
+  useUnfollowUserMutation
 } = profileApi;
