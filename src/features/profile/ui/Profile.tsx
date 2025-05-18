@@ -36,6 +36,7 @@ export default function Profile({ id }: ProfileProps) {
   const { data: publicProfileData } = useGetPublicUserProfileQuery(profileUserId, {
     skip: isMyProfile || !profileUserId
   });
+  console.log('publicProfileData', publicProfileData);
 
   if (isMeLoading || isProfileLoading) {
     return <LoaderLinear />;
@@ -53,6 +54,7 @@ export default function Profile({ id }: ProfileProps) {
           userFollowing={userData?.followingCount || 0}
           userName={profileData.userName || t('NoInfo')}
           userPublications={userData?.publicationsCount || 0}
+          isMyProfile={isMyProfile}
         >
           <Button variant="secondary">
             <Link href={PATH.PROFILE.SETTINGS}>{t('ProfileSettings')}</Link>
@@ -78,6 +80,7 @@ export default function Profile({ id }: ProfileProps) {
           userFollowing={userMetadata?.following || 0}
           userName={userName || t('NoInfo')}
           userPublications={userMetadata?.publications || 0}
+          isMyProfile={isMyProfile}
         />
         <PublicProfilePosts id={id} />
       </>

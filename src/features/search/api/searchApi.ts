@@ -1,5 +1,5 @@
 import { inctagramApi } from '@/app/services/inctagram.api';
-import { GetUserByUsernameParams, SearchUserResponse } from '@/features/search/model/searchApi.types';
+import { FollowRequest, GetUserByUsernameParams, SearchUserResponse } from '@/features/search/model/searchApi.types';
 
 export const searchApi = inctagramApi.injectEndpoints({
   endpoints: (build) => ({
@@ -14,9 +14,25 @@ export const searchApi = inctagramApi.injectEndpoints({
           cursor: params.cursor || 0
         }
       }),
-      providesTags: ['Search']
+      providesTags: ['Followers']
+    }),
+    follow: build.mutation<void, FollowRequest>({
+      query: (selectedUserId) => ({
+        url: 'v1/users/following',
+        method: 'POST',
+        body: selectedUserId
+      }),
+      invalidatesTags: ['Followers']
+    }),
+    unfollow: build.mutation<void, number>({
+      query: (userId: number) => ({
+        url: `v1/users/follower/${userId}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['Followers']
     })
   })
 });
 
-export const { useGetUserByUsernameQuery, useLazyGetUserByUsernameQuery } = searchApi;
+export const { useGetUserByUsernameQuery, useLazyGetUserByUsernameQuery, useFollowMutation, useUnfollowMutation } =
+  searchApi;

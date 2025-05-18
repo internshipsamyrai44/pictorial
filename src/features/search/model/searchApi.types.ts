@@ -32,3 +32,7 @@ export type GetUserByUsernameParams = {
   pageNumber?: number;
   cursor?: number;
 };
+
+export type FollowRequest = {
+  selectedUserId: number;
+};
