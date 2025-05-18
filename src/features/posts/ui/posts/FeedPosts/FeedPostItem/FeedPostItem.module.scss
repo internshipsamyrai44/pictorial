@@ -1,17 +1,18 @@
 .feedPostItem {
   display: flex;
   flex-direction: column;
-  border-radius: 12px;
   background-color: var(--dark-500);
   overflow: hidden;
   width: 100%;
+  margin-bottom: 1px;
+  border-bottom: 1px solid var(--dark-100);
 }
 
 .postHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
+  padding: 10px 16px;
+  position: relative;
 }
 
 .userInfo {
@@ -21,17 +22,64 @@
   text-decoration: none;
 }
 
+.userNameContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .userName {
   font-weight: 600;
   font-size: 14px;
   color: var(--light-100);
 }
 
+.postTime {
+  font-size: 12px;
+  color: var(--light-900);
+  margin-left: 6px;
+}
+
+.moreButton {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
 .postImage {
   width: 100%;
+  position: relative;
   display: flex;
   justify-content: center;
   cursor: pointer;
+}
+
+.imageIndicators {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--dark-100);
+}
+
+.activeIndicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-500);
 }
 
 .postActions {
@@ -99,9 +147,49 @@
   word-wrap: break-word;
 }
 
-.postDate {
-  padding: 0 16px;
-  margin-bottom: 12px;
-  font-size: 12px;
+.commentsSection {
+  padding: 0 16px 16px;
+}
+
+.viewComments {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 8px;
+  font-size: 14px;
   color: var(--light-900);
+  cursor: pointer;
+  text-align: left;
+}
+
+.addComment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--dark-100);
+  padding-top: 10px;
+}
+
+.commentInput {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: var(--light-100);
+  font-size: 14px;
+  padding: 0;
+
+  &::placeholder {
+    color: var(--light-900);
+  }
+}
+
+.publishButton {
+  background: none;
+  border: none;
+  color: var(--accent-500);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
 }
