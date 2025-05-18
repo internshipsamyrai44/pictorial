@@ -37,18 +37,18 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
           <div className={s.modalContent}>
             {isLoading && <Loader />}
             {isError && <div className={s.error}>{t('Error loading followers')}</div>}
-            {followers && followers.length === 0 && (
+            {followers && followers.items.length === 0 && (
               <div className={s.emptyState}>
                 <div className={s.emoji}>👤</div>
                 <div className={s.noUsers}>{t('No followers yet')}</div>
                 <div className={s.emptyStateDescription}>{t('When someone follows you, they will appear here')}</div>
               </div>
             )}
-            {followers && followers.length > 0 && (
+            {followers && followers.items.length > 0 && (
               <ul className={s.userList}>
-                {followers.map((follower) => (
+                {followers.items.map((follower) => (
                   <li key={follower.id} className={s.userItem}>
-                    <Link href={`${PATH.PROFILE}/${follower.id}`} className={s.userLink}>
+                    <Link href={`${PATH.PROFILE}/${follower.userId}`} className={s.userLink}>
                       <div className={s.userInfo}>
                         <ProfileAvatar
                           src={follower.avatars[0]?.url}
@@ -58,11 +58,6 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
                         />
                         <div className={s.userData}>
                           <div className={s.userName}>{follower.userName}</div>
-                          {(follower.firstName || follower.lastName) && (
-                            <div className={s.fullName}>
-                              {follower.firstName} {follower.lastName}
-                            </div>
-                          )}
                         </div>
                       </div>
                     </Link>

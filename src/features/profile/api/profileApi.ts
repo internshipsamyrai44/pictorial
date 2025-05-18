@@ -5,8 +5,8 @@ import {
   Profile,
   ProfileFormValues,
   UserProfileResponse,
-  UserFollower,
-  UserFollowing
+  FollowersResponse,
+  FollowingResponse
 } from '@/features/profile/model/profileApi.types';
 
 export const profileApi = inctagramApi.injectEndpoints({
@@ -61,13 +61,13 @@ export const profileApi = inctagramApi.injectEndpoints({
         };
       }
     }),
-    getFollowersByUserName: build.query<UserFollower[], string>({
+    getFollowersByUserName: build.query<FollowersResponse, string>({
       query: (userName) => ({
         method: 'GET',
         url: `/v1/users/${userName}/followers`
       })
     }),
-    getFollowingByUserName: build.query<UserFollowing[], string>({
+    getFollowingByUserName: build.query<FollowingResponse, string>({
       query: (userName) => ({
         method: 'GET',
         url: `/v1/users/${userName}/following`

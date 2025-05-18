@@ -51,10 +51,35 @@ export type UserProfileResponse = ProfileBase & {
   avatars: Avatar[];
 };
 
-export type UserFollower = ProfileBase & {
+export type UserFollower = {
+  id: number;
+  userId: number;
+  userName: string;
+  createdAt: string;
   avatars: Avatar[];
+  isFollowing: boolean;
+  isFollowedBy: boolean;
 };
 
-export type UserFollowing = ProfileBase & {
+export type UserFollowing = {
+  id: number;
+  userId: number;
+  userName: string;
+  createdAt: string;
   avatars: Avatar[];
+  isFollowing: boolean;
+  isFollowedBy: boolean;
 };
+
+export type PaginatedResponse<T> = {
+  totalCount: number;
+  pagesCount: number;
+  page: number;
+  pageSize: number;
+  prevCursor: number | null;
+  nextCursor: number | null;
+  items: T[];
+};
+
+export type FollowersResponse = PaginatedResponse<UserFollower>;
+export type FollowingResponse = PaginatedResponse<UserFollowing>;
