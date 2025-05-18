@@ -87,7 +87,8 @@
     "Answer": "Answer",
     "NoContentYet": "No content from users you follow yet. Follow more users to see their posts here.",
     "Publish": "Publish",
-    "ViewAllComments": "View all comments"
+    "ViewAllComments": "View all comments",
+    "NoUserPostsYet": "This user doesn't have any posts yet."
   },
   "Profile": {
     "FirstName": "First Name",

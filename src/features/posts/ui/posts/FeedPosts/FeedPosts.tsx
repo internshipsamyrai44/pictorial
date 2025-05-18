@@ -10,8 +10,10 @@ import { useTranslations } from 'next-intl';
 export const FeedPosts = () => {
   const t = useTranslations('Post');
   const [endCursor, setEndCursor] = useState<number | undefined>(undefined);
+  const [pageNumber, setPageNumber] = useState<number>(1);
   const [allPosts, setAllPosts] = useState<any[]>([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
@@ -20,7 +22,11 @@ export const FeedPosts = () => {
     isLoading,
     isFetching
   } = useGetFeedPostsQuery(
-    { endCursorPostId: endCursor, pageSize: 5 },
+    {
+      endCursorPostId: endCursor,
+      pageSize: 12,
+      pageNumber
+    },
     {
       skip: isLoadingMore && endCursor !== undefined
     }
@@ -28,24 +34,29 @@ export const FeedPosts = () => {
 
   useEffect(() => {
     if (feedData) {
-      if (endCursor === undefined) {
+      if (pageNumber === 1) {
         setAllPosts(feedData.items);
       } else {
         setAllPosts((prev) => [...prev, ...feedData.items]);
       }
 
-      if (feedData.hasNextPage && feedData.endCursor) {
-        setEndCursor(feedData.endCursor);
+      if (feedData.nextCursor !== null) {
+        setEndCursor(feedData.nextCursor);
+        setHasMore(true);
+      } else {
+        setHasMore(false);
       }
+
       setIsLoadingMore(false);
     }
-  }, [feedData, endCursor]);
+  }, [feedData, pageNumber]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && feedData?.hasNextPage && !isLoading && !isFetching) {
+        if (entries[0].isIntersecting && hasMore && !isLoading && !isFetching) {
           setIsLoadingMore(true);
+          setPageNumber((prev) => prev + 1);
         }
       },
       { threshold: 1.0 }
@@ -58,7 +69,7 @@ export const FeedPosts = () => {
         observerRef.current.disconnect();
       }
     };
-  }, [feedData?.hasNextPage, isLoading, isFetching]);
+  }, [hasMore, isLoading, isFetching]);
 
   useEffect(() => {
     const currentLoadMoreRef = loadMoreRef.current;
@@ -92,7 +103,7 @@ export const FeedPosts = () => {
               <FeedPostItem key={`${post.id}-${index}`} post={post} />
             ))}
           </div>
-          {feedData?.hasNextPage && (
+          {hasMore && (
             <div ref={loadMoreRef} className={s.loadMore}>
               {isLoadingMore && <Loader />}
             </div>

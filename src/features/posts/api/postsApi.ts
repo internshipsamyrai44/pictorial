@@ -60,9 +60,9 @@ export const postsApi = inctagramApi.injectEndpoints({
       }),
       providesTags: ['Posts']
     }),
-    getFeedPosts: build.query<FeedPostsResponse, { endCursorPostId?: number; pageSize?: number }>({
+    getFeedPosts: build.query<FeedPostsResponse, { endCursorPostId?: number; pageSize?: number; pageNumber?: number }>({
       query: (params) => ({
-        url: 'v1/posts/feed',
+        url: 'v1/home/publications-followers',
         method: 'GET',
         params
       }),

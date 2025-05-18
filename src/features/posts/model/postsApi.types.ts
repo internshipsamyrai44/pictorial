@@ -51,8 +51,10 @@ export type PostResponse = {
 export type FeedPostsResponse = {
   pageSize: number;
   totalCount: number;
-  endCursor: number | null;
-  hasNextPage: boolean;
+  page: number;
+  pagesCount: number;
+  nextCursor: number | null;
+  prevCursor: number | null;
   items: PublishedPostResponse[];
 };
 
