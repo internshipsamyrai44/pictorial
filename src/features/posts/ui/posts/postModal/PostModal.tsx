@@ -10,6 +10,8 @@ import PostContentSkeleton from './postContentSkeleton/PostContentSkeleton';
 import CloseButton from '../closeButton/CloseButton';
 
 import { useRouter } from 'next/navigation';
+import { getIsAuth } from '@/redux/authSlice';
+import { useSelector } from 'react-redux';
 
 type Props = {
   postID: number;
@@ -20,6 +22,8 @@ type Props = {
 };
 
 export default function PostModal({ postID, userId, editPost, isMyProfile = false, closePostModal }: Props) {
+  const isAuth = useSelector(getIsAuth);
+
   const router = useRouter();
 
   const { data: privatePost } = useGetPostsByIdQuery(postID, {
@@ -48,7 +52,7 @@ export default function PostModal({ postID, userId, editPost, isMyProfile = fals
               <PostImage images={post.images} />
             </div>
             <div className={s.postContent}>
-              <PostContent post={post} closeModal={closeModal} isAuth={isMyProfile} editPost={editPost} />
+              <PostContent post={post} closeModal={closeModal} isAuth={isAuth} editPost={editPost} />
             </div>
           </div>
         )}
