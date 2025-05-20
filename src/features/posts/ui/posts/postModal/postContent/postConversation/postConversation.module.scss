@@ -1,0 +1,13 @@
+.conversation {
+  height: 336px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 19px 24px;
+  overflow-y: auto;
+}
+
+.date {
+  padding-left: 48px;
+  color: var(--light-900) !important;
+}

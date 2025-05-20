@@ -1,0 +1,36 @@
+.commentItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 24px;
+}
+
+.interaction {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+  padding-left: 48px;
+}
+
+.interaction span {
+  color: #8d9094 !important;
+}
+
+.answers {
+  padding: 4px 0 0 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
