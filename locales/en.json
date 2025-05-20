@@ -77,6 +77,10 @@
       "TryAgain": "Try Again",
       "ErrorUploadDescription": "Please upload JPEG or PNG image format! >Upload a file smaller than 20MB!"
     },
+    "Comment": {
+      "MinLength": "Комментарий должен содержать не менее 1 символа",
+      "MaxLength": "Комментарий должен содержать не более 300 символов"
+    },
     "Yes": "Yes",
     "No": "No",
     "dateFormat": "en-US",
