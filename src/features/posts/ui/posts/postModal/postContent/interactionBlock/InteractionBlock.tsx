@@ -21,7 +21,7 @@ type Props = {
 export default function InteractionBlock({ post, isAuth }: Props) {
   const t = useTranslations('Post');
   const formatDate = useFormattedDate();
-  const { data: likesData, isLoading } = useGetPostLikesQuery({ postId: post.id });
+  const { data: likesData, isLoading } = useGetPostLikesQuery({ postId: post.id }, { skip: !isAuth });
   const [updateLikeStatus] = useUpdateLikeStatusPostMutation();
   const [isLiked, setIsLiked] = useState(post.isLiked);
   const [likesCount, setLikesCount] = useState<number | null>(null);

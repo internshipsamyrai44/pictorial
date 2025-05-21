@@ -4,8 +4,6 @@ import { CommentResponse } from '@/features/posts/model/postsApi.types';
 import UserCommentContent from '../../userCommentContent/UserCommentContent';
 import { useFormattedDateDistanceToNow } from '@/shared/hooks/useFormattedDateDistanceToNow';
 import { Typography } from '@internshipsamyrai44-ui-kit/components-lib';
-import HeartOutline from '../../../../../../../../../../public/icons/HeartOutline';
-import HeartFilled from '../../../../../../../../../../public/icons/HeartLike';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import AddComentForm from '../../../addComentForm/AddComentForm';
@@ -15,19 +13,24 @@ import {
   useUpdateLikeStatusCommentMutation
 } from '@/features/posts/api/postsApi';
 import { AnswerItem } from './answerItem/AnswerItem';
+import { LikeToggle } from './likeToggle/LikeToggle';
 
 type Props = {
   comment: CommentResponse;
   postId: number;
+  isAuth: boolean;
 };
 
-export const CommentItem = ({ comment, postId }: Props) => {
+export const CommentItem = ({ comment, postId, isAuth }: Props) => {
   const t = useTranslations('Post');
   const [isReplyFieldVisible, setIsReplyFieldVisible] = useState(false);
 
   const formatDateDistanceToNow = useFormattedDateDistanceToNow();
   const [createAnswerToComment] = useCreateAnswerToCommentMutation();
-  const { data } = useGetAnswersToCommentQuery({ postId, commentId: comment.id }, { skip: comment.answerCount === 0 });
+  const { data } = useGetAnswersToCommentQuery(
+    { postId, commentId: comment.id },
+    { skip: !isAuth || comment.answerCount === 0 }
+  );
   const [updateLikeStatusComment, { isLoading }] = useUpdateLikeStatusCommentMutation();
 
   const handleAddAnswer = (value: string) => {
@@ -48,9 +51,7 @@ export const CommentItem = ({ comment, postId }: Props) => {
           userName={comment.from.username}
           text={comment.content}
         />
-        <div onClick={handleLike} className={isLoading ? s.disabled : ''}>
-          {comment.isLiked ? <HeartFilled width={16} height={16} /> : <HeartOutline width={16} height={16} />}
-        </div>
+        {isAuth && <LikeToggle handleLike={handleLike} isLiked={comment.isLiked} isLoading={isLoading} />}
       </div>
       <div className={s.interaction}>
         <Typography variant={'small-text'} as={'span'}>
@@ -61,9 +62,16 @@ export const CommentItem = ({ comment, postId }: Props) => {
             {t('Like')}: {comment.likeCount}
           </Typography>
         )}
-        <Typography onClick={() => setIsReplyFieldVisible(!isReplyFieldVisible)} variant={'small-text'} as={'span'}>
-          {t('Answer')}
-        </Typography>
+        {isAuth && (
+          <Typography
+            onClick={() => setIsReplyFieldVisible(!isReplyFieldVisible)}
+            variant={'small-text'}
+            as={'span'}
+            className={s.answerButton}
+          >
+            {t('Answer')}
+          </Typography>
+        )}
       </div>
       {data?.items && (
         <div className={s.answers}>

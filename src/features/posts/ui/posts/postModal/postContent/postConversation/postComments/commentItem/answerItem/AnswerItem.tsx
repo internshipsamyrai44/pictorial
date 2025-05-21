@@ -4,9 +4,8 @@ import s from './AnswerItem.module.scss';
 import { Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useFormattedDateDistanceToNow } from '@/shared/hooks/useFormattedDateDistanceToNow';
 import { useTranslations } from 'next-intl';
-import HeartOutline from '../../../../../../../../../../../public/icons/HeartOutline';
-import HeartFilled from '../../../../../../../../../../../public/icons/HeartLike';
 import { useUpdateLikeStatusAnswerMutation } from '@/features/posts/api/postsApi';
+import { LikeToggle } from '../likeToggle/LikeToggle';
 
 type Props = {
   answer: AnswerResponse;
@@ -16,7 +15,7 @@ type Props = {
 export const AnswerItem = ({ answer, postId }: Props) => {
   const t = useTranslations('Post');
   const formatDateDistanceToNow = useFormattedDateDistanceToNow();
-  const [updateLikeStatusAnswer] = useUpdateLikeStatusAnswerMutation();
+  const [updateLikeStatusAnswer, { isLoading }] = useUpdateLikeStatusAnswerMutation();
 
   const handleLike = () => {
     updateLikeStatusAnswer({
@@ -35,7 +34,7 @@ export const AnswerItem = ({ answer, postId }: Props) => {
           userName={answer.from.username}
           text={answer.content}
         />
-        <div onClick={handleLike}>{answer.isLiked ? <HeartFilled /> : <HeartOutline width={16} height={16} />}</div>
+        <LikeToggle handleLike={handleLike} isLiked={answer.isLiked} isLoading={isLoading} />
       </div>
       <div className={s.interaction}>
         <Typography variant={'small-text'} as={'span'}>
