@@ -4,16 +4,17 @@
 }
 
 .searchResults {
-  padding: 20px 0;
+  padding: 25px 0;
   overflow: hidden;
-  max-height: 0;
   opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
   transition:
-    max-height 0.5s ease,
+    transform 0.5s ease,
     opacity 0.3s ease;
 
   &.visible {
-    max-height: 2000px;
+    transform: scaleY(1);
     opacity: 1;
   }
 }

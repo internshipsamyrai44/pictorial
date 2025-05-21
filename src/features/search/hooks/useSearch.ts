@@ -3,9 +3,10 @@ import { debounce } from 'lodash';
 import { GetUserByUsernameParams, UserItem } from '@/features/search/model/searchApi.types';
 import { useLazySearchUsersByUsernameQuery } from '@/features/search/api/searchApi';
 
-export const useSearch = () => {
+export const useSearch = (initialQuery = '') => {
   const [searchResult, setSearchResult] = useState<UserItem[]>([]);
   const [isResultsVisible, setIsResultsVisible] = useState(false);
+  const [query, setQuery] = useState('');
   const [trigger, { data, isLoading }] = useLazySearchUsersByUsernameQuery();
 
   useEffect(() => {
@@ -26,10 +27,12 @@ export const useSearch = () => {
           pageSize: 12,
           pageNumber: 1
         };
+        setQuery(name);
         trigger(params);
       } else if (name.length === 0) {
         setIsResultsVisible(false);
         setSearchResult([]);
+        setQuery('');
       }
     }, 300),
     [trigger, setIsResultsVisible, setSearchResult]
@@ -42,11 +45,20 @@ export const useSearch = () => {
     [debouncedSearch]
   );
 
+  useEffect(() => {
+    if (initialQuery) {
+      sendQuery(initialQuery);
+    }
+  }, [initialQuery]);
+
   return {
     searchResult,
     isResultsVisible,
     isLoading,
     totalCount: data?.totalCount,
-    sendQuery
+    sendQuery,
+    query
   };
 };
+
+export class useSearchParams {}

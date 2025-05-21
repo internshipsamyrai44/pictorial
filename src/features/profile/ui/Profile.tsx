@@ -69,7 +69,6 @@ export default function Profile({ id }: ProfileProps) {
     if (!publicProfileData) return null;
 
     const { aboutMe, avatars, userMetadata, userName, id } = publicProfileData;
-    console.log(publicProfileData);
     return (
       <>
         <ProfileDashboard

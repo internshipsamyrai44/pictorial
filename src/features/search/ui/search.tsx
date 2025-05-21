@@ -11,22 +11,45 @@ import { Loader } from '@/shared/ui/loader/Loader';
 import clsx from 'clsx';
 import { useSearch } from '@/features/search/hooks/useSearch';
 
+import { LazyLoadResults } from '@/features/search/ui/lazy-load-results/lazy-load-results';
+import { useRouter, useSearchParams } from 'next/navigation';
+
 export const Search = () => {
-  const { isLoading, sendQuery, searchResult, isResultsVisible, totalCount } = useSearch();
+  const searchParams = useSearchParams();
   const t = useTranslations('search');
+  const router = useRouter();
+  const initialQuery = searchParams.get('query') || '';
+
+  const { isLoading, sendQuery, searchResult, isResultsVisible, totalCount, query } = useSearch(initialQuery);
+
+  const handleSearch = (searchQuery: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (searchQuery) {
+      params.set('query', searchQuery);
+    } else {
+      params.delete('query');
+    }
+    router.push(`/search?${params.toString()}`);
+
+    sendQuery(searchQuery);
+  };
 
   return (
     <div className={s.container}>
       <Typography variant={'h1'}> {t('title')}</Typography>
-      <SearchInput sendQuery={sendQuery} />
+      <SearchInput sendQuery={handleSearch} initialValue={initialQuery} />
       <div className={clsx(s.searchResults, { [s.visible]: isResultsVisible || isLoading })}>
         <div className={s.resultsContainer}>
-          {searchResult.length > 0 && searchResult.map((user) => <SearchResultItem user={user} key={user.id} />)}
+          {searchResult.length > 0 &&
+            searchResult.map((user, i) => <SearchResultItem user={user} key={`${user.userName}-${i}`} />)}
           <div className={s.loader}>{isLoading && <Loader />}</div>
         </div>
-      </div>
 
-      {totalCount === 0 && <EmptySearch />}
+        <LazyLoadResults query={query} searchResult={searchResult} />
+
+        {totalCount === 0 && <EmptySearch />}
+      </div>
     </div>
   );
 };
