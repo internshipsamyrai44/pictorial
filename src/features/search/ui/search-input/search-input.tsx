@@ -5,11 +5,12 @@ import { ChangeEvent, useState } from 'react';
 type Props = {
   // eslint-disable-next-line no-unused-vars
   sendQuery: (name: string) => void;
+  initialValue?: string;
 };
 
-export const SearchInput = ({ sendQuery }: Props) => {
+export const SearchInput = ({ sendQuery, initialValue = '' }: Props) => {
   const t = useTranslations('search');
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(initialValue);
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -19,6 +20,5 @@ export const SearchInput = ({ sendQuery }: Props) => {
       sendQuery(newValue);
     }
   };
-  console.log(value);
-  return <Input type={'search'} placeholder={t('title')} value={value} onChange={onChangeHandler} />;
+  return <Input type={'search'} placeholder={initialValue ?? t('title')} value={value} onChange={onChangeHandler} />;
 };

@@ -12,17 +12,33 @@ import clsx from 'clsx';
 import { useSearch } from '@/features/search/hooks/useSearch';
 
 import { LazyLoadResults } from '@/features/search/ui/lazy-load-results/lazy-load-results';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export const Search = () => {
+  const searchParams = useSearchParams();
   const t = useTranslations('search');
+  const router = useRouter();
+  const initialQuery = searchParams.get('query') || '';
 
-  const { isLoading, sendQuery, searchResult, isResultsVisible, totalCount, query } = useSearch();
-  // const [resentSearch, setResentSearch] = useState<UserItem[]>(searchResult);
+  const { isLoading, sendQuery, searchResult, isResultsVisible, totalCount, query } = useSearch(initialQuery);
+
+  const handleSearch = (searchQuery: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (searchQuery) {
+      params.set('query', searchQuery);
+    } else {
+      params.delete('query');
+    }
+    router.push(`/search?${params.toString()}`);
+
+    sendQuery(searchQuery);
+  };
 
   return (
     <div className={s.container}>
       <Typography variant={'h1'}> {t('title')}</Typography>
-      <SearchInput sendQuery={sendQuery} />
+      <SearchInput sendQuery={handleSearch} initialValue={initialQuery} />
       <div className={clsx(s.searchResults, { [s.visible]: isResultsVisible || isLoading })}>
         <div className={s.resultsContainer}>
           {searchResult.length > 0 &&
