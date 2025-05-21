@@ -5,9 +5,10 @@ import { PublishedPostResponse } from '@/features/posts/model/postsApi.types';
 import PostHeader from './postHeader/PostHeader';
 import AddCommentForm from './addComentForm/AddComentForm';
 import InteractionBlock from './interactionBlock/InteractionBlock';
-import CommentItem from '@/features/posts/ui/posts/postModal/postContent/commentItem/CommentItem';
 import { DeletePostModal } from '@/features/posts/ui/deletePostModal/DeletePostModal';
 import { useState } from 'react';
+import { useCreateCommentMutation } from '@/features/posts/api/postsApi';
+import { PostConversation } from './postConversation/PostConversation';
 
 type Props = {
   post: PublishedPostResponse;
@@ -18,6 +19,7 @@ type Props = {
 
 export default function PostContent({ post, closeModal, isAuth, editPost }: Props) {
   const [isOpenModalDeletePost, setIsOpenModalDeletePost] = useState(false);
+  const [createComment] = useCreateCommentMutation();
 
   const handleDeletePostClick = () => {
     setIsOpenModalDeletePost(true);
@@ -38,6 +40,10 @@ export default function PostContent({ post, closeModal, isAuth, editPost }: Prop
     return;
   }
 
+  const handleAddComment = (value: string) => {
+    createComment({ postId: post.id, content: value });
+  };
+
   return (
     <div className={s.wrapper}>
       <PostHeader
@@ -47,15 +53,10 @@ export default function PostContent({ post, closeModal, isAuth, editPost }: Prop
         onEditPost={handleEditPostClick}
         isAuth={isAuth}
       />
-      <div className={s.conversation}>
-        <div className={s.description}>
-          <CommentItem avatarSrc={post.avatarOwner} userName={post.userName} text={post.description} descriptionPost />
-        </div>
-        <div className={s.comments}></div>
-      </div>
+      <PostConversation post={post} />
       <div className={s.interactionPanel}>
         <InteractionBlock post={post} isAuth={isAuth} />
-        {isAuth && <AddCommentForm />}
+        {isAuth && <AddCommentForm onClick={handleAddComment} />}
       </div>
       <DeletePostModal
         id={post.id}

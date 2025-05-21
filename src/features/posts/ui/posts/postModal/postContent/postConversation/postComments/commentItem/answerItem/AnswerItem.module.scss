@@ -1,0 +1,24 @@
+.answerItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.answer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 24px;
+}
+
+.interaction {
+  padding-left: 48px;
+  display: flex;
+  width: 100%;
+  gap: 12px;
+}
+
+.interaction span {
+  color: #8d9094 !important;
+}
