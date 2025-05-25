@@ -95,6 +95,13 @@ export const profileApi = inctagramApi.injectEndpoints({
         method: 'DELETE'
       }),
       invalidatesTags: ['Profile']
+    }),
+    deleteUser: build.mutation<void, number>({
+      query: (userId) => ({
+        url: `v1/users/follower/${userId}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['Profile']
     })
   })
 });
@@ -108,5 +115,6 @@ export const {
   useGetFollowersByUserNameQuery,
   useGetFollowingByUserNameQuery,
   useFollowUserMutation,
-  useUnfollowUserMutation
+  useUnfollowUserMutation,
+  useDeleteUserMutation
 } = profileApi;

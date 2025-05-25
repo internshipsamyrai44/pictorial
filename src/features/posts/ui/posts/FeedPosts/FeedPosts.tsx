@@ -9,7 +9,6 @@ import { useTranslations } from 'next-intl';
 
 export const FeedPosts = () => {
   const t = useTranslations('Post');
-  const [endCursor, setEndCursor] = useState<number | undefined>(undefined);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [allPosts, setAllPosts] = useState<any[]>([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -23,12 +22,11 @@ export const FeedPosts = () => {
     isFetching
   } = useGetFeedPostsQuery(
     {
-      endCursorPostId: endCursor,
       pageSize: 12,
       pageNumber
     },
     {
-      skip: isLoadingMore && endCursor !== undefined
+      skip: isLoadingMore
     }
   );
 
@@ -41,7 +39,6 @@ export const FeedPosts = () => {
       }
 
       if (feedData.nextCursor !== null) {
-        setEndCursor(feedData.nextCursor);
         setHasMore(true);
       } else {
         setHasMore(false);

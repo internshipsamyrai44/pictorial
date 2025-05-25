@@ -6,7 +6,9 @@ import { useTranslations } from 'next-intl';
 import {
   useGetFollowersByUserNameQuery,
   useFollowUserMutation,
-  useUnfollowUserMutation
+  useUnfollowUserMutation,
+  useDeleteUserMutation,
+  useGetProfileQuery
 } from '@/features/profile/api/profileApi';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import s from './FollowersModal.module.scss';
@@ -26,6 +28,7 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredFollowers, setFilteredFollowers] = useState<UserFollower[]>([]);
   const t = useTranslations('Profile');
+  const { data: user } = useGetProfileQuery();
 
   const {
     data: followers,
@@ -45,6 +48,7 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
 
   const [followUser] = useFollowUserMutation();
   const [unfollowUser] = useUnfollowUserMutation();
+  const [deleteUser] = useDeleteUserMutation();
 
   useEffect(() => {
     setOpen(isOpen);
@@ -67,7 +71,7 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
     setSearchTerm(e.target.value);
   };
 
-  const handleFollow = async (userId: number) => {
+  const handleFollow = (userId: number) => async () => {
     try {
       await followUser(userId);
       refetch();
@@ -76,12 +80,21 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
     }
   };
 
-  const handleUnfollow = async (userId: number) => {
+  const handleUnfollow = (userId: number) => async () => {
     try {
       await unfollowUser(userId);
       refetch();
     } catch (error) {
       console.error('Error unfollowing user:', error);
+    }
+  };
+
+  const handleDelete = (userId: number) => async () => {
+    try {
+      await deleteUser(userId);
+      refetch();
+    } catch (error) {
+      console.error('Error deleting user:', error);
     }
   };
 
@@ -105,7 +118,7 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
                 {filteredFollowers.map((follower) => (
                   <li key={follower.id} className={s.userItem}>
                     <div className={s.userInfo}>
-                      <Link href={`${PATH.PROFILE}/${follower.userId}`} className={s.userLink}>
+                      <Link href={`${PATH.PROFILE.PROFILE}/${follower.userId}`} className={s.userLink}>
                         <div className={s.userAvatar}>
                           <ProfileAvatar
                             src={follower.avatars[0]?.url}
@@ -117,14 +130,19 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
                         <div className={s.userName}>{follower.userName}</div>
                       </Link>
                     </div>
-                    <div className={s.followButton}>
+                    <div className={s.buttonsContainer}>
                       {follower.isFollowing ? (
-                        <Button className={s.unfollowButton} onClick={() => handleUnfollow(follower.userId)}>
+                        <Button variant="outlined" className={s.button} onClick={handleUnfollow(follower.userId)}>
                           {t('Unfollow')}
                         </Button>
                       ) : (
-                        <Button className={s.followButtonActive} onClick={() => handleFollow(follower.userId)}>
+                        <Button variant="primary" className={s.button} onClick={handleFollow(follower.userId)}>
                           {t('Follow')}
+                        </Button>
+                      )}
+                      {user?.userName === userName && (
+                        <Button variant="ghost" className={s.button} onClick={handleDelete(follower.userId)}>
+                          {t('Delete')}
                         </Button>
                       )}
                     </div>

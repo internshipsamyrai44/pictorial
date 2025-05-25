@@ -1,6 +1,6 @@
 'use client';
 
-import { Input, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, Input, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
 import React, { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import {
@@ -10,10 +10,10 @@ import {
 } from '@/features/profile/api/profileApi';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import s from './FollowingModal.module.scss';
-import Link from 'next/link';
-import { PATH } from '@/shared/const/PATH';
 import { Loader } from '@/shared/ui/loader/Loader';
 import { UserFollower } from '@/features/profile/model/profileApi.types';
+import { PATH } from '@/shared/const/PATH';
+import Link from 'next/link';
 
 type FollowingModalProps = {
   isOpen: boolean;
@@ -105,27 +105,27 @@ export const FollowingModal = ({ isOpen, onClose, userName }: FollowingModalProp
                 {filteredFollowing.map((follow) => (
                   <li key={follow.id} className={s.userItem}>
                     <div className={s.userInfo}>
-                      <Link href={`${PATH.PROFILE}/${follow.userId}`} className={s.userLink}>
-                        <div className={s.userAvatar}>
+                      <div className={s.userLink}>
+                        <Link href={`${PATH.PROFILE.PROFILE}/${follow.userId}`} className={s.userAvatar}>
                           <ProfileAvatar
                             src={follow.avatars[0]?.url}
                             height={40}
                             width={40}
                             userName={follow.userName}
                           />
-                        </div>
+                        </Link>
                         <div className={s.userName}>{follow.userName}</div>
-                      </Link>
+                      </div>
                     </div>
                     <div className={s.followButton}>
                       {follow.isFollowing ? (
-                        <button className={s.unfollowButton} onClick={() => handleUnfollow(follow.userId)}>
+                        <Button variant="outlined" className={s.button} onClick={() => handleUnfollow(follow.userId)}>
                           {t('Unfollow')}
-                        </button>
+                        </Button>
                       ) : (
-                        <button className={s.followButtonActive} onClick={() => handleFollow(follow.userId)}>
+                        <Button variant="primary" className={s.button} onClick={() => handleFollow(follow.userId)}>
                           {t('Follow')}
-                        </button>
+                        </Button>
                       )}
                     </div>
                   </li>

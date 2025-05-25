@@ -3,13 +3,14 @@
   flex-direction: column;
   width: 100%;
   max-width: 470px;
-  margin: 0 auto;
+  margin: 24px auto;
 }
 
 .posts {
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: 36px;
 }
 
 .loading {

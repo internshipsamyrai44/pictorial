@@ -1,17 +1,16 @@
 .feedPostItem {
   display: flex;
   flex-direction: column;
-  background-color: var(--dark-500);
   overflow: hidden;
   width: 100%;
-  margin-bottom: 1px;
+  padding-bottom: 10px;
   border-bottom: 1px solid var(--dark-100);
 }
 
 .postHeader {
   display: flex;
   align-items: center;
-  padding: 10px 16px;
+  padding-bottom: 12px;
   position: relative;
 }
 
@@ -85,7 +84,7 @@
 .postActions {
   display: flex;
   justify-content: space-between;
-  padding: 10px 16px;
+  margin-top: 12px;
 }
 
 .leftActions {
@@ -104,8 +103,7 @@
 }
 
 .likedIcon {
-  fill: var(--danger-500);
-  stroke: var(--danger-500);
+  color: var(--danger-300);
   width: 24px;
   height: 24px;
 }
@@ -119,19 +117,41 @@
   height: 24px;
 }
 
-.likesCount {
-  padding: 0 16px;
-  margin-bottom: 8px;
+.likesCountContainer {
   font-size: 14px;
   font-weight: 500;
   color: var(--light-100);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.likesAuthorsImagesContainer {
+  display: flex;
+  align-items: center;
+}
+
+.likesAuthorImage {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+
+  &:not(:first-child) {
+    margin-left: -12px;
+  }
 }
 
 .postContent {
-  padding: 0 16px;
+  margin-top: 17px;
   margin-bottom: 8px;
   display: flex;
-  gap: 6px;
+  gap: 12px;
+}
+
+.postUserAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
 }
 
 .postUserName {
@@ -148,15 +168,14 @@
 }
 
 .commentsSection {
-  padding: 0 16px 16px;
+  margin-top: 24px;
 }
 
 .viewComments {
-  background: none;
-  border: none;
-  padding: 0;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
   color: var(--light-900);
   cursor: pointer;
   text-align: left;
@@ -166,8 +185,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid var(--dark-100);
-  padding-top: 10px;
 }
 
 .commentInput {
@@ -177,6 +194,7 @@
   width: 100%;
   color: var(--light-100);
   font-size: 14px;
+  line-height: 24px;
   padding: 0;
 
   &::placeholder {
@@ -185,11 +203,9 @@
 }
 
 .publishButton {
-  background: none;
-  border: none;
   color: var(--accent-500);
   font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 0;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 6px 12px !important;
 }
