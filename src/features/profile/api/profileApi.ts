@@ -4,7 +4,9 @@ import {
   AvatarResponse,
   Profile,
   ProfileFormValues,
-  UserProfileResponse
+  UserProfileResponse,
+  FollowersResponse,
+  FollowingResponse
 } from '@/features/profile/model/profileApi.types';
 
 export const profileApi = inctagramApi.injectEndpoints({
@@ -58,6 +60,48 @@ export const profileApi = inctagramApi.injectEndpoints({
           url: `v1/users/profile`
         };
       }
+    }),
+    getFollowersByUserName: build.query<
+      FollowersResponse,
+      { userName: string; search?: string; pageSize?: number; pageNumber?: number; cursor?: number }
+    >({
+      query: ({ userName, ...params }) => ({
+        method: 'GET',
+        url: `/v1/users/${userName}/followers`,
+        params
+      })
+    }),
+    getFollowingByUserName: build.query<
+      FollowingResponse,
+      { userName: string; search?: string; pageSize?: number; pageNumber?: number; cursor?: number }
+    >({
+      query: ({ userName, ...params }) => ({
+        url: `v1/users/${userName}/following`,
+        method: 'GET',
+        params
+      })
+    }),
+    followUser: build.mutation<void, number>({
+      query: (userId) => ({
+        url: `v1/users/following`,
+        method: 'POST',
+        body: { selectedUserId: userId }
+      }),
+      invalidatesTags: ['Profile']
+    }),
+    unfollowUser: build.mutation<void, number>({
+      query: (userId) => ({
+        url: `v1/users/follower/${userId}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['Profile']
+    }),
+    deleteUser: build.mutation<void, number>({
+      query: (userId) => ({
+        url: `v1/users/follower/${userId}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['Profile']
     })
   })
 });
@@ -67,5 +111,10 @@ export const {
   useDeleteAvatarMutation,
   useGetProfileQuery,
   useGetUserByUserNameQuery,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useGetFollowersByUserNameQuery,
+  useGetFollowingByUserNameQuery,
+  useFollowUserMutation,
+  useUnfollowUserMutation,
+  useDeleteUserMutation
 } = profileApi;

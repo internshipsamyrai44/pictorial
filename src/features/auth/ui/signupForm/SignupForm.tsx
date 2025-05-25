@@ -3,12 +3,9 @@ import { Alertpopup, Button, Card, Input, Modal, Typography } from '@internships
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
 import { PATH } from '@/shared/const/PATH';
 import { cn, getBaseUrl } from '@/shared/utils';
-
 import { useRequestError } from '@/shared/hooks/useRequestError';
-
 import { useSignUpMutation } from '@/features/auth/api/authApi';
 import { FormSignUp, signUpSchema } from '@/features/auth/model/validationScheme';
 import { CheckboxControl } from '@/shared/ui/сontrolled';
@@ -28,10 +25,10 @@ export const SignupForm = ({ className }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     getValues,
     control
-  } = useForm<FormSignUp>({ resolver: yupResolver(signUpSchema) });
+  } = useForm<FormSignUp>({ resolver: yupResolver(signUpSchema), mode: 'onChange' });
 
   const [signUp, { isLoading, isSuccess, error }] = useSignUpMutation();
 
@@ -100,7 +97,13 @@ export const SignupForm = ({ className }: Props) => {
           />
           {errors.terms?.message && <p className={s['terms-error']}>{errors.terms?.message}</p>}
 
-          <Button variant={'primary'} fullWidth className={s['signup-button']} type="submit" disabled={isLoading}>
+          <Button
+            variant={'primary'}
+            fullWidth
+            className={s['signup-button']}
+            type="submit"
+            disabled={isLoading || !isValid}
+          >
             {t('signUp')}
           </Button>
 

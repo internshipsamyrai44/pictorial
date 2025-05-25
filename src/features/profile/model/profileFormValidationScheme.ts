@@ -26,7 +26,7 @@ export const profileFormValidationScheme = yup.object({
     .string()
     .trim()
     .max(200, 'Errors.AboutMeMaxCharacters')
-    .matches(/^[a-zA-Zа-яА-Я0-9!#$%&'()*+,\-./:;<=>?@[\\\]^_`{|} ]*$/g, `Errors.AboutMeMatches`)
+    .matches(/^[\s\S]*$/, `Errors.AboutMeMatches`)
     .transform((value) => (value === null ? '' : value)),
   city: yup.string().transform((value) => (value === null ? '' : value)),
   country: yup.string().transform((value) => (value === null ? '' : value)),

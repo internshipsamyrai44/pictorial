@@ -25,9 +25,7 @@ export default function SignIn() {
     try {
       const data = await login({ email: email!, password: password! }).unwrap();
       const userId = getDecodedToken(data.accessToken);
-      // replace(`/profile/${userId}`);
-      console.log(`${userId}`);
-      replace(`/home`);
+      replace(`/profile/${userId}`);
     } catch (error) {
       return <Alertpopup alertType={'error'} message={`${error}`} />;
     }
@@ -51,7 +49,7 @@ export default function SignIn() {
           <Typography variant="regular-text-16" className={s['account-text']}>
             {t('accountText')}
           </Typography>
-          <Button asChild variant="ghost" fullWidth>
+          <Button asChild variant="ghost">
             <Link href={PATH.AUTH.SIGNUP}>{t('signUp')}</Link>
           </Button>
         </Card>

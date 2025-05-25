@@ -6,7 +6,11 @@ export const signUpSchema = yup
     userName: yup
       .string()
       .min(6, 'Username must be at least 6 characters')
-      .max(20, 'Username must be at most 20 characters')
+      .max(30, 'Username must be at most 30 characters')
+      .matches(
+        /^[a-zA-Z0-9_]+$/,
+        'Username can only contain letters, numbers, and underscores, without spaces or special characters'
+      )
       .required('Username is required'),
     email: getEmailValidationSchema().required('Email is required'),
     password: getPasswordValidationSchema().required('Password is required'),

@@ -1,10 +1,14 @@
 import { inctagramApi } from '@/app/services/inctagram.api';
 import {
+  GetPostLikesArgs,
+  GetPostLikesResponse,
   PostRequestData,
   PostResponse,
   PostUpdateRequest,
   PublishedPostResponse,
-  UploadedImageViewModel
+  UpdateLikeStatusRequest,
+  UploadedImageViewModel,
+  FeedPostsResponse
 } from '@/features/posts/model/postsApi.types';
 
 export const postsApi = inctagramApi.injectEndpoints({
@@ -55,15 +59,44 @@ export const postsApi = inctagramApi.injectEndpoints({
         method: 'GET'
       }),
       providesTags: ['Posts']
+    }),
+    getFeedPosts: build.query<FeedPostsResponse, { endCursorPostId?: number; pageSize?: number; pageNumber?: number }>({
+      query: (params) => ({
+        url: 'v1/home/publications-followers',
+        method: 'GET',
+        params
+      }),
+      providesTags: ['Posts']
+    }),
+    getPostLikes: build.query<GetPostLikesResponse, GetPostLikesArgs>({
+      query: ({ postId, ...args }) => ({
+        url: `v1/posts/${postId}/likes`,
+        method: 'GET',
+        params: args
+      }),
+      providesTags: ['LikesInfo', 'LikeInteractions']
+    }),
+    updateLikeStatusPost: build.mutation<void, UpdateLikeStatusRequest>({
+      query: (postData) => ({
+        url: `v1/posts/${postData.postId}/like-status`,
+        method: 'PUT',
+        body: {
+          likeStatus: postData.likeStatus
+        }
+      }),
+      invalidatesTags: ['Posts', 'LikesInfo', 'LikeInteractions']
     })
   })
 });
 
 export const {
   useUploadImagesMutation,
-  useUpdatePostMutation,
   useCreatePostMutation,
-  useGetPostsByUsernameQuery,
+  useUpdatePostMutation,
   useDeletePostMutation,
-  useGetPostsByIdQuery
+  useGetPostsByUsernameQuery,
+  useGetPostsByIdQuery,
+  useGetFeedPostsQuery,
+  useGetPostLikesQuery,
+  useUpdateLikeStatusPostMutation
 } = postsApi;

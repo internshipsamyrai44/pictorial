@@ -1,12 +1,21 @@
 import { PATH } from '@/shared/const/PATH';
 import { getEmailValidationSchema, getPasswordValidationSchema } from '@/shared/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import { Button, Input } from '@internshipsamyrai44-ui-kit/components-lib';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import s from './LoginForm.module.scss';
 import { useTranslations } from 'next-intl';
+
+const getPasswordErrorKey = (message: string): string => {
+  if (message.includes('required')) return 'required';
+  if (message.includes('Minimum number of characters')) return 'min';
+  if (message.includes('Maximum number of characters')) return 'max';
+  if (message.includes('Password must contain at least one digit')) return 'specialChars';
+  if (message.includes('The password contains invalid characters')) return 'invalidChars';
+  return 'required';
+};
 
 const formValidationSchema = yup.object().shape({
   email: getEmailValidationSchema(),
@@ -27,7 +36,7 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
     register,
     handleSubmit,
     trigger,
-    formState: { errors, isValid }
+    formState: { errors }
   } = useForm<FormValidationSchema>({
     resolver: yupResolver(formValidationSchema),
     mode: 'onTouched'
@@ -46,7 +55,7 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
         onBlur={async () => {
           await trigger('email');
         }}
-        errorMessage={(isError || errors.email) && ''}
+        errorMessage={errors.email?.message === 'Email is required' ? t('EmailErrors.required') : undefined}
       />
 
       {/* Input for password */}
@@ -56,22 +65,32 @@ export const LoginForm = ({ disabled, onSubmit, isError }: LoginFormProps) => {
         label={t('Password')}
         placeholder="⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑⭑"
         disabled={disabled}
-        {...register('password')}
+        {...register('password', {
+          onChange: () => {
+            trigger('password');
+          }
+        })}
         onBlur={async () => {
           await trigger('password');
         }}
-        errorMessage={(isError || errors.password || errors.email) && t('PasswordValidation')}
+        errorMessage={
+          errors.password?.message
+            ? t(`PasswordErrors.${getPasswordErrorKey(errors.password.message)}`)
+            : isError && !errors.password
+              ? t('PasswordValidation')
+              : undefined
+        }
       />
 
       {/* Forgot password link */}
       <div className={s['forgot-password-wrapper']}>
-        <Link href={PATH.AUTH.FORGOT_PASSWORD}>
-          <Typography className={s['forgot-password']}>{t('ForgotPassword')}</Typography>
+        <Link href={PATH.AUTH.FORGOT_PASSWORD} className={s['forgot-password']}>
+          {t('ForgotPassword')}
         </Link>
       </div>
 
       {/* Submit button */}
-      <Button variant="primary" fullWidth type="submit" disabled={disabled || !isValid}>
+      <Button variant="primary" fullWidth type="submit" disabled={disabled}>
         {t('signIn')}
       </Button>
     </form>

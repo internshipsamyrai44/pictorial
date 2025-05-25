@@ -22,7 +22,6 @@ export const ModalClose = (props: PropsType) => {
           variant={'primary'}
           onClick={() => {
             setModalCloseActive(false);
-            setCreatePostActive(false);
           }}
         >
           {t('CreatePost.Discard')}

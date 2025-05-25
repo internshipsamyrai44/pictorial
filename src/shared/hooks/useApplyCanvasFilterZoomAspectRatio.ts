@@ -36,30 +36,45 @@ export const useApplyCanvasFilterZoomAspectRatio = () => {
 
         let cropWidth = imgWidth / Number(zoom);
         let cropHeight = imgHeight / Number(zoom);
+        let cropX = (imgWidth - cropWidth) / 2;
+        let cropY = (imgHeight - cropHeight) / 2;
 
-        const currentRatio = cropWidth / cropHeight;
+        if (aspectRatio !== 'original') {
+          const currentRatio = cropWidth / cropHeight;
 
-        if (currentRatio > aspectRatioNumber) {
-          cropWidth = cropHeight * aspectRatioNumber;
-        } else if (currentRatio < aspectRatioNumber) {
-          cropHeight = cropWidth / aspectRatioNumber;
+          if (currentRatio > aspectRatioNumber) {
+            cropWidth = cropHeight * aspectRatioNumber;
+          } else if (currentRatio < aspectRatioNumber) {
+            cropHeight = cropWidth / aspectRatioNumber;
+          }
+
+          cropX = (imgWidth - cropWidth) / 2;
+          cropY = (imgHeight - cropHeight) / 2;
         }
 
-        const cropX = (imgWidth - cropWidth) / 2;
-        const cropY = (imgHeight - cropHeight) / 2;
+        const resultWidth = cropWidth;
+        const resultHeight = cropHeight;
+
+        const squareSize = Math.max(resultWidth, resultHeight);
 
         const canvas = document.createElement('canvas');
-        canvas.width = cropWidth;
-        canvas.height = cropHeight;
+        canvas.width = squareSize;
+        canvas.height = squareSize;
         const ctx = canvas.getContext('2d');
+
         if (!ctx) {
           reject(new Error('Canvas context не поддерживается'));
           return;
         }
 
-        ctx.filter = filterSettings;
+        ctx.fillStyle = '#333';
+        ctx.fillRect(0, 0, squareSize, squareSize);
 
-        ctx.drawImage(image, cropX, cropY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
+        ctx.filter = filterSettings;
+        const offsetX = (squareSize - resultWidth) / 2;
+        const offsetY = (squareSize - resultHeight) / 2;
+
+        ctx.drawImage(image, cropX, cropY, cropWidth, cropHeight, offsetX, offsetY, resultWidth, resultHeight);
 
         const dataUrl = canvas.toDataURL('image/jpeg');
         resolve(dataUrl);

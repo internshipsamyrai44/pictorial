@@ -1,9 +1,11 @@
 import { jwtDecode } from 'jwt-decode';
 
-export const getDecodedToken = (accessToken: string | undefined) => {
-  if (accessToken) {
-    const decodedToken = jwtDecode<{ userId: string }>(accessToken);
-    return decodedToken.userId;
+export const getDecodedToken = (token: string): string | null => {
+  try {
+    const decoded: { userId: string } = jwtDecode(token);
+    return decoded.userId;
+  } catch (err) {
+    console.error('Failed to decode token:', err);
+    return null;
   }
-  return null;
 };
