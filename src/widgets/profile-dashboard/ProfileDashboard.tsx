@@ -9,9 +9,9 @@ import s from './ProfileDashboard.module.scss';
 import VerifiedIcon from '../../../public/icons/verifiedIcon.svg';
 import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
 import { FollowButtons } from '@/features/profile/ui/follow-buttons/follow-buttons';
-import { useGetUserProfileByUsernameQuery } from '@/features/search/api/searchApi';
 import Link from 'next/link';
 import { PATH } from '@/shared/const/PATH';
+import { useProfileData } from '@/features/profile/hooks/useProfileData';
 
 interface iProps {
   userName: string;
@@ -22,8 +22,8 @@ interface iProps {
 export const ProfileDashboard = ({ userName, isMyProfile }: iProps) => {
   const t = useTranslations('Profile');
   const { isBusinessAccount } = useIsSubscribed();
+  const { userData, refetch } = useProfileData({ userName });
 
-  const { data: userData, refetch } = useGetUserProfileByUsernameQuery(userName);
   if (!userData) {
     return null;
   }
@@ -35,7 +35,7 @@ export const ProfileDashboard = ({ userName, isMyProfile }: iProps) => {
         <div className={s['header-block']}>
           <div className={s.name}>
             <Typography as={'h1'} variant={'h1'}>
-              {userName || t('NoInfo')}
+              {userName}
             </Typography>
             {isBusinessAccount && <VerifiedIcon width={24} height={24} />}
             <div className={s.buttons}>
