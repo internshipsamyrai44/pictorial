@@ -11,26 +11,36 @@ import { useIsSubscribed } from '@/shared/hooks/useIsSubscribed';
 import { FollowButtons } from '@/features/profile/ui/follow-buttons/follow-buttons';
 import Link from 'next/link';
 import { PATH } from '@/shared/const/PATH';
-import { useProfileData } from '@/features/profile/hooks/useProfileData';
+import { useGetUserProfileByUsernameQuery } from '@/features/search/api/searchApi';
+import { useAuth } from '@/shared/hooks/useAuth';
+import { PublicUserProfileByIdResponse } from '@/features/profile/model/publicProfileApi.types';
 
-interface iProps {
+type Props = {
   userName: string;
-  children?: React.ReactNode;
   isMyProfile?: boolean;
-}
+  publicProfileData?: PublicUserProfileByIdResponse;
+};
 
-export const ProfileDashboard = ({ userName, isMyProfile }: iProps) => {
+export const ProfileDashboard = ({ userName, publicProfileData, isMyProfile = false }: Props) => {
+  const { isAuth } = useAuth();
   const t = useTranslations('Profile');
   const { isBusinessAccount } = useIsSubscribed();
-  const { userData, refetch } = useProfileData({ userName });
 
-  if (!userData) {
-    return null;
-  }
+  const { data: userData, refetch } = useGetUserProfileByUsernameQuery(userName, {
+    skip: !isAuth
+  });
+
+  const followingCount = isAuth && userData ? userData.followingCount : publicProfileData?.userMetadata.following || 0;
+  const followersCount = isAuth && userData ? userData.followersCount : publicProfileData?.userMetadata.followers || 0;
+  const publications =
+    isAuth && userData ? userData.publicationsCount : publicProfileData?.userMetadata.publications || 0;
+  const aboutMe = isAuth && userData ? userData.aboutMe : publicProfileData?.aboutMe || t('NoInfo');
+  const avatarUrl =
+    isAuth && userData?.avatars?.[0]?.url ? userData.avatars[0].url : publicProfileData?.avatars?.[0]?.url;
 
   return (
     <div className={s.wrapper}>
-      <ProfileAvatar height={204} src={userData?.avatars[0]?.url} width={204} userName={userName} />
+      <ProfileAvatar height={204} src={avatarUrl} width={204} userName={userName} />
       <div className={s['container-block']}>
         <div className={s['header-block']}>
           <div className={s.name}>
@@ -49,12 +59,12 @@ export const ProfileDashboard = ({ userName, isMyProfile }: iProps) => {
           )}
         </div>
         <div className={s['stats-block']}>
-          <StatsItem value={userData?.followingCount} title={t('Following')} />
-          <StatsItem value={userData?.followersCount} title={t('Followers')} />
-          <StatsItem value={userData?.publicationsCount} title={t('Publications')} />
+          <StatsItem value={followingCount} title={t('Following')} />
+          <StatsItem value={followersCount} title={t('Followers')} />
+          <StatsItem value={publications} title={t('Publications')} />
         </div>
         <Typography variant={'regular-text-16'} style={{ width: '750px' }}>
-          {userData?.aboutMe || t('NoInfo')}
+          {aboutMe}
         </Typography>
       </div>
     </div>
