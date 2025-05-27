@@ -16,10 +16,6 @@ export default function Profile({ id }: ProfileProps) {
     return <LoaderLinear />;
   }
 
-  if (!profileData && !publicProfileData) {
-    return null;
-  }
-
   return isMyProfile ? (
     <PrivateProfile isMyProfile={isMyProfile} profileData={profileData} />
   ) : (
