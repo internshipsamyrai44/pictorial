@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import { useFormattedDate } from '@/shared/hooks/useFormattedDate';
 import { useGetPostLikesQuery, useUpdateLikeStatusPostMutation } from '@/features/posts/api/postsApi';
-import { useState, KeyboardEvent, useEffect } from 'react';
+import { KeyboardEvent, useEffect, useState } from 'react';
 
 type Props = {
   post: PublishedPostResponse;
@@ -21,7 +21,7 @@ type Props = {
 export default function InteractionBlock({ post, isAuth }: Props) {
   const t = useTranslations('Post');
   const formatDate = useFormattedDate();
-  const { data: likesData, isLoading } = useGetPostLikesQuery({ postId: post.id });
+  const { data: likesData, isLoading } = useGetPostLikesQuery({ postId: post.id }, { skip: !isAuth });
   const [updateLikeStatus] = useUpdateLikeStatusPostMutation();
   const [isLiked, setIsLiked] = useState(post.isLiked);
   const [likesCount, setLikesCount] = useState<number | null>(null);

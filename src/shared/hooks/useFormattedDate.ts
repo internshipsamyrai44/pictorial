@@ -1,6 +1,6 @@
 import { useLocale } from 'next-intl';
 import { format } from 'date-fns';
-import { ru, enUS } from 'date-fns/locale';
+import { enUS, ru } from 'date-fns/locale';
 
 export const useFormattedDate = () => {
   const locale = useLocale();

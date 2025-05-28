@@ -6,6 +6,7 @@ import {
   GetPublicPostsResponse,
   PublicPostResponse
 } from '@/features/public-posts/model/publicPostApi.types';
+import { CommentsRequest, CommentsResponse } from '@/features/posts/model/postsApi.types';
 
 export const publicPostsApi = createApi({
   reducerPath: 'publicPostsApi',
@@ -30,8 +31,20 @@ export const publicPostsApi = createApi({
         url: `/v1/public-posts/${postID}`,
         method: 'GET'
       })
+    }),
+    getUnauthorizedComments: build.query<CommentsResponse, CommentsRequest>({
+      query: ({ postId, ...args }) => ({
+        url: `v1/public-posts/${postId}/comments`,
+        method: 'GET',
+        params: args
+      })
     })
   })
 });
 
-export const { useGetPublicAllPostsQuery, useGetPublicUserPostsQuery, useGetPublicPostsByIdQuery } = publicPostsApi;
+export const {
+  useGetPublicAllPostsQuery,
+  useGetPublicUserPostsQuery,
+  useGetPublicPostsByIdQuery,
+  useGetUnauthorizedCommentsQuery
+} = publicPostsApi;

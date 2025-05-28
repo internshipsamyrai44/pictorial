@@ -1,0 +1,35 @@
+.container {
+  padding: 25px;
+  position: relative;
+}
+
+.searchResults {
+  padding: 25px 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition:
+    transform 0.5s ease,
+    opacity 0.3s ease;
+
+  &.visible {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.resultsContainer {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.searchResultsVisible {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.title {
+  margin-bottom: 20px;
+}

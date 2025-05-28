@@ -1,11 +1,21 @@
 import { inctagramApi } from '@/app/services/inctagram.api';
 import {
+  AnswerRequest,
+  AnswerResponse,
+  AnswersRequest,
+  AnswersResponse,
+  CommentRequest,
+  CommentResponse,
+  CommentsRequest,
+  CommentsResponse,
   GetPostLikesArgs,
   GetPostLikesResponse,
   PostRequestData,
   PostResponse,
   PostUpdateRequest,
   PublishedPostResponse,
+  UpdateLikeStatusAnswerRequest,
+  UpdateLikeStatusCommentRequest,
   UpdateLikeStatusRequest,
   UploadedImageViewModel,
   FeedPostsResponse
@@ -85,6 +95,62 @@ export const postsApi = inctagramApi.injectEndpoints({
         }
       }),
       invalidatesTags: ['Posts', 'LikesInfo', 'LikeInteractions']
+    }),
+    createComment: build.mutation<CommentResponse, CommentRequest>({
+      query: ({ postId, content }) => ({
+        url: `v1/posts/${postId}/comments`,
+        method: 'POST',
+        body: {
+          content
+        }
+      }),
+      invalidatesTags: ['Posts', 'Comments']
+    }),
+    getComments: build.query<CommentsResponse, CommentsRequest>({
+      query: ({ postId, ...args }) => ({
+        url: `v1/posts/${postId}/comments`,
+        method: 'GET',
+        params: args
+      }),
+      providesTags: ['Posts', 'Comments']
+    }),
+    getAnswersToComment: build.query<AnswersResponse, AnswersRequest>({
+      query: ({ postId, commentId, ...args }) => ({
+        url: `v1/posts/${postId}/comments/${commentId}/answers`,
+        method: 'GET',
+        params: args
+      }),
+      providesTags: ['Posts', 'Comments']
+    }),
+    createAnswerToComment: build.mutation<AnswerResponse, AnswerRequest>({
+      query: ({ postId, commentId, content }) => ({
+        url: `v1/posts/${postId}/comments/${commentId}/answers`,
+        method: 'POST',
+        body: {
+          content
+        }
+      }),
+      invalidatesTags: ['Posts', 'Comments']
+    }),
+    updateLikeStatusComment: build.mutation<void, UpdateLikeStatusCommentRequest>({
+      query: ({ postId, commentId, likeStatus }) => ({
+        url: `v1/posts/${postId}/comments/${commentId}/like-status`,
+        method: 'PUT',
+        body: {
+          likeStatus
+        }
+      }),
+      invalidatesTags: ['Posts', 'Comments']
+    }),
+    updateLikeStatusAnswer: build.mutation<void, UpdateLikeStatusAnswerRequest>({
+      query: ({ postId, commentId, likeStatus, answerId }) => ({
+        url: `v1/posts/${postId}/comments/${commentId}/answers/${answerId}/like-status`,
+        method: 'PUT',
+        body: {
+          likeStatus: likeStatus
+        }
+      }),
+      invalidatesTags: ['Posts', 'Comments']
     })
   })
 });
@@ -98,5 +164,11 @@ export const {
   useGetPostsByIdQuery,
   useGetFeedPostsQuery,
   useGetPostLikesQuery,
-  useUpdateLikeStatusPostMutation
+  useUpdateLikeStatusPostMutation,
+  useCreateCommentMutation,
+  useGetCommentsQuery,
+  useCreateAnswerToCommentMutation,
+  useGetAnswersToCommentQuery,
+  useUpdateLikeStatusCommentMutation,
+  useUpdateLikeStatusAnswerMutation
 } = postsApi;

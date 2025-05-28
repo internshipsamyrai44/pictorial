@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.3s ease-in-out;
+  animation-fill-mode: both;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.link {
+  color: var(--light-100);
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.userName {
+  color: var(--light-900);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

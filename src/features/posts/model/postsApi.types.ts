@@ -77,11 +77,6 @@ export type AvatarsType = {
   fileSize: number;
 };
 
-export type UpdateLikeStatusRequest = {
-  likeStatus: string;
-  postId: number;
-};
-
 export type GetPostLikesArgs = {
   cursor?: number;
   pageNumber?: number;
@@ -104,4 +99,86 @@ export type GetPostLikesResponse = {
   notReadCount: number;
   pageSize: number;
   totalCount: number;
+};
+
+export type CommentResponse = {
+  id: number;
+  postId: number;
+  from: {
+    id: number;
+    username: string;
+    avatars: AvatarsType[];
+  };
+  content: string;
+  createdAt: string;
+  answerCount: number;
+  likeCount: number;
+  isLiked: boolean;
+};
+
+export type CommentRequest = {
+  postId: number;
+  content: string;
+};
+
+export type CommentsRequest = {
+  postId: number;
+  pageSize?: number;
+  pageNumber?: number;
+};
+
+export type CommentsResponse = {
+  pageSize: number;
+  totalCount: number;
+  notReadCount: number;
+  items: CommentResponse[];
+};
+
+export type AnswersRequest = {
+  postId: number;
+  commentId: number;
+  pageSize?: number;
+  pageNumber?: number;
+};
+
+export type AnswerResponse = {
+  id: number;
+  commentId: number;
+  from: {
+    id: number;
+    username: string;
+    avatars: AvatarsType[];
+  };
+  content: string;
+  createdAt: string;
+  likeCount: number;
+  isLiked: boolean;
+};
+
+export type AnswersResponse = {
+  pageSize: number;
+  totalCount: number;
+  notReadCount: number;
+  items: AnswerResponse[];
+};
+
+export type AnswerRequest = {
+  postId: number;
+  commentId: number;
+  content: string;
+};
+
+type likeStatus = 'LIKE' | 'DISLIKE ' | 'NONE';
+
+export type UpdateLikeStatusRequest = {
+  likeStatus: likeStatus;
+  postId: number;
+};
+
+export type UpdateLikeStatusCommentRequest = UpdateLikeStatusRequest & {
+  commentId: number;
+};
+
+export type UpdateLikeStatusAnswerRequest = UpdateLikeStatusCommentRequest & {
+  answerId: number;
 };
