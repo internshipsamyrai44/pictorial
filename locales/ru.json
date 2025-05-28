@@ -88,7 +88,11 @@
     "DeletePost": "Удалить",
     "AddComment": "Добавить комментарий...",
     "Like": "Нравится",
-    "Answer": "Ответить"
+    "Answer": "Ответить",
+    "NoContentYet": "Пока нет публикаций от пользователей, на которых вы подписаны. Подпишитесь на больше пользователей, чтобы видеть их публикации здесь.",
+    "Publish": "Опубликовать",
+    "ViewAllComments": "Смотреть все комментарии",
+    "NoUserPostsYet": "У этого пользователя ещё нет публикаций."
   },
   "Profile": {
     "FirstName": "Имя",
@@ -106,6 +110,8 @@
     "SendMessage": "Отправить сообщение",
     "Follow": "Подписаться",
     "Unfollow": "Отписаться",
+    "Search": "Поиск",
+    "Delete": "Удалить",
     "AddAProfilePhoto": "Добавить фото",
     "AccountManagementContent": "Содержание управления учетной записью",
     "DevicesContent": "Содержание устройств",
@@ -196,7 +202,13 @@
       "DeleteAvatar": "Вы уверены, что хотите удалить фотографию?",
       "ConfirmButton": "Да",
       "RejectButton": "Нет"
-    }
+    },
+    "Error loading followers": "Ошибка при загрузке подписчиков",
+    "Error loading following": "Ошибка при загрузке подписок",
+    "No followers yet": "Пока нет подписчиков",
+    "Not following anyone yet": "Пока нет подписок",
+    "When someone follows you, they will appear here": "Здесь будут отображаться подписчики",
+    "When you follow someone, they will appear here": "Здесь будут отображаться подписки"
   },
   "Errors": {
     "404": "Извините! Страница не найдена!",

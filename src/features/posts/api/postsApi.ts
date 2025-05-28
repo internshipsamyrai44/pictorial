@@ -17,7 +17,8 @@ import {
   UpdateLikeStatusAnswerRequest,
   UpdateLikeStatusCommentRequest,
   UpdateLikeStatusRequest,
-  UploadedImageViewModel
+  UploadedImageViewModel,
+  FeedPostsResponse
 } from '@/features/posts/model/postsApi.types';
 
 export const postsApi = inctagramApi.injectEndpoints({
@@ -66,6 +67,14 @@ export const postsApi = inctagramApi.injectEndpoints({
       query: (postID) => ({
         url: `v1/posts/id/${postID}`,
         method: 'GET'
+      }),
+      providesTags: ['Posts']
+    }),
+    getFeedPosts: build.query<FeedPostsResponse, { endCursorPostId?: number; pageSize?: number; pageNumber?: number }>({
+      query: (params) => ({
+        url: 'v1/home/publications-followers',
+        method: 'GET',
+        params
       }),
       providesTags: ['Posts']
     }),
@@ -148,11 +157,12 @@ export const postsApi = inctagramApi.injectEndpoints({
 
 export const {
   useUploadImagesMutation,
-  useUpdatePostMutation,
   useCreatePostMutation,
-  useGetPostsByUsernameQuery,
+  useUpdatePostMutation,
   useDeletePostMutation,
+  useGetPostsByUsernameQuery,
   useGetPostsByIdQuery,
+  useGetFeedPostsQuery,
   useGetPostLikesQuery,
   useUpdateLikeStatusPostMutation,
   useCreateCommentMutation,

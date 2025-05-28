@@ -1,0 +1,38 @@
+.feedPosts {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 470px;
+  margin: 24px auto;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 36px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.loadMore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  margin-top: 20px;
+}
+
+.noContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  font-size: 16px;
+  color: var(--light-900);
+}
