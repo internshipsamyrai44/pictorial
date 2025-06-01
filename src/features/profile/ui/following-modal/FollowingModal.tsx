@@ -105,17 +105,17 @@ export const FollowingModal = ({ isOpen, onClose, userName }: FollowingModalProp
                 {filteredFollowing.map((follow) => (
                   <li key={follow.id} className={s.userItem}>
                     <div className={s.userInfo}>
-                      <div className={s.userLink}>
-                        <Link href={`${PATH.PROFILE.PROFILE}/${follow.userId}`} className={s.userAvatar}>
+                      <Link href={`${PATH.PROFILE.PROFILE}/${follow.userId}`} className={s.userLink}>
+                        <div className={s.userAvatar}>
                           <ProfileAvatar
                             src={follow.avatars[0]?.url}
                             height={40}
                             width={40}
                             userName={follow.userName}
                           />
-                        </Link>
+                        </div>
                         <div className={s.userName}>{follow.userName}</div>
-                      </div>
+                      </Link>
                     </div>
                     <div className={s.followButton}>
                       {follow.isFollowing ? (
