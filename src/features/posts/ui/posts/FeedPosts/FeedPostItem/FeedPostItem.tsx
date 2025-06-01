@@ -40,7 +40,7 @@ const FeedPostItem = ({ post }: FeedPostItemProps) => {
     try {
       await updateLikeStatus({
         postId: post.id,
-        likeStatus: newLikeStatus ? 'Like' : 'None'
+        likeStatus: newLikeStatus ? 'LIKE' : 'NONE'
       }).unwrap();
     } catch (error) {
       // Восстанавливаем состояние при ошибке

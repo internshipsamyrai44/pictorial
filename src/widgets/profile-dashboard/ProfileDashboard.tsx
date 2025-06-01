@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
@@ -26,11 +26,10 @@ type Props = {
 export const ProfileDashboard = ({ userName, publicProfileData, isMyProfile = false }: Props) => {
   const { isAuth } = useAuth();
   const t = useTranslations('Profile');
-  const { isSubscribed } = useIsSubscribed();
+  const { isBusinessAccount } = useIsSubscribed();
 
   const [isFollowersModalOpen, setIsFollowersModalOpen] = useState(false);
   const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
-  const { isBusinessAccount } = useIsSubscribed();
 
   const { data: userData, refetch } = useGetUserProfileByUsernameQuery(userName, {
     skip: !isAuth
@@ -43,7 +42,7 @@ export const ProfileDashboard = ({ userName, publicProfileData, isMyProfile = fa
   const aboutMe = isAuth && userData ? userData.aboutMe : publicProfileData?.aboutMe || t('NoInfo');
   const avatarUrl =
     isAuth && userData?.avatars?.[0]?.url ? userData.avatars[0].url : publicProfileData?.avatars?.[0]?.url;
-    
+
   const handleFollowersClick = () => {
     setIsFollowersModalOpen(true);
   };
