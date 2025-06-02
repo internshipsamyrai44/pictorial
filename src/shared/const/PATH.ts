@@ -23,6 +23,7 @@ export const PATH = {
     PUBLIC_USER: /^\/profile\/\d+$/,
     PUBLIC_USER_POST: /^\/profile\/\d+\/\d+$/
   },
+  DIRECT: '/direct',
   HOME: '/home',
   NOT_FOUND: '/not-found',
   SEARCH: '/search'
