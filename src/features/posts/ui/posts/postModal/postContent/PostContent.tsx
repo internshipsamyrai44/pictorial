@@ -10,6 +10,8 @@ import { useState } from 'react';
 import { useCreateCommentMutation } from '@/features/posts/api/postsApi';
 import { PostConversation } from './postConversation/PostConversation';
 import { useMeQuery } from '@/features/auth/api/authApi';
+import { Typography } from '@internshipsamyrai44-ui-kit/components-lib';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   post: PublishedPostResponse;
@@ -21,8 +23,9 @@ type Props = {
 export default function PostContent({ post, closeModal, isAuth, editPost }: Props) {
   const [isOpenModalDeletePost, setIsOpenModalDeletePost] = useState(false);
   const [createComment] = useCreateCommentMutation();
-  const { data } = useMeQuery();
-  const isBlocked = data?.isBlocked;
+  const { data } = useMeQuery(undefined, { skip: !isAuth });
+  const isBlocked = isAuth ? data?.isBlocked : false;
+  const t = useTranslations('Account');
 
   const handleDeletePostClick = () => {
     setIsOpenModalDeletePost(true);
@@ -57,7 +60,13 @@ export default function PostContent({ post, closeModal, isAuth, editPost }: Prop
         isAuth={isAuth}
         isBlocked={isBlocked}
       />
-      {!isBlocked && <PostConversation post={post} />}
+      {isBlocked ? (
+        <div className={s.blockedMessage}>
+          <Typography variant="regular-text-14">{t('blocked.message')}</Typography>
+        </div>
+      ) : (
+        <PostConversation post={post} />
+      )}
       <div className={s.interactionPanel}>
         {isAuth && !isBlocked && (
           <>

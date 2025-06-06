@@ -39,6 +39,11 @@
     "TermsAndConditions": "Agree to terms and conditions",
     "HaveAnAccount": "Have an account?"
   },
+  "Account": {
+    "blocked": {
+      "message": "Your account has been blocked for violating site policies. Please contact the administrator for more information."
+    }
+  },
   "GithubPage": {
     "BackHomePage": "Back to home page",
     "ProcessingAuthorization": "Processing GitHub authorization..."

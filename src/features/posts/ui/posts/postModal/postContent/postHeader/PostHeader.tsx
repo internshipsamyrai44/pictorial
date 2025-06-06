@@ -26,22 +26,21 @@ export default function PostHeader({ avatarOwner, userName, onDeletePost, onEdit
   return (
     <div className={s.header}>
       <div className={s.postOwner}>
-        <ProfileAvatar src={avatarOwner} userName={userName} />
+        {!isBlocked && <ProfileAvatar src={avatarOwner} userName={userName} />}
         <Typography as={'h3'} variant={'h3'}>
-          {userName} {isBlocked && <span className={s.banned}>[Banned]</span>}
+          {isBlocked ? <span className={s.banned}>[Banned]</span> : userName}
         </Typography>
       </div>
-      {isAuth ??
-        (isBlocked && (
-          <div className={s.postModalMenu}>
-            <div className={s.menuIcon}>
-              <PostModalMenuIcon onClick={onMenuBtnClick} />
-            </div>
-            {menuIsOpen && (
-              <PostMenu setMenuIsOpen={setMenuIsOpen} onEditClick={onEditPost} onDeleteClick={onDeletePost} />
-            )}
+      {isAuth && !isBlocked && (
+        <div className={s.postModalMenu}>
+          <div className={s.menuIcon}>
+            <PostModalMenuIcon onClick={onMenuBtnClick} />
           </div>
-        ))}
+          {menuIsOpen && (
+            <PostMenu setMenuIsOpen={setMenuIsOpen} onEditClick={onEditPost} onDeleteClick={onDeletePost} />
+          )}
+        </div>
+      )}
     </div>
   );
 }
