@@ -14,7 +14,7 @@ export const ProfileAvatar = ({ height = 36, src, width = 36, userName }: Props)
       style={{ borderRadius: '50%' }}
       height={height}
       loader={() => src || ''}
-      src={src || emptyAvatar}
+      src={src && src.trim() !== '' ? src : emptyAvatar}
       width={width}
       priority
       unoptimized

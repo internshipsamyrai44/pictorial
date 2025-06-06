@@ -104,11 +104,17 @@ export default function InteractionBlock({ post, isAuth }: Props) {
         </div>
       )}
       <div className={s.postLikes}>
-        {post.avatarWhoLikes?.slice(-3).map((avatar) => (
-          <div key={post.ownerId} className={s.avatarWrapper}>
-            <ProfileAvatar src={avatar} userName={post.userName} />
-          </div>
-        ))}
+        {likesData?.items
+          .slice(-3)
+          .reverse()
+          .map((items) => {
+            const lastAvatar = items.avatars?.[items.avatars.length - 1]?.url;
+            return (
+              <div key={items.id} className={s.avatarWrapper}>
+                <ProfileAvatar src={lastAvatar} userName={post.userName} />
+              </div>
+            );
+          })}
         <div className={s.likes}>
           <Typography variant={'regular-text-14'}>{displayLikesCount}</Typography>
           <Typography variant={'bold-text-14'}> &quot;{t('Like')}&quot;</Typography>
