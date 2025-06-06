@@ -12,6 +12,7 @@ import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import { useFormattedDate } from '@/shared/hooks/useFormattedDate';
 import { useGetPostLikesQuery, useUpdateLikeStatusPostMutation } from '@/features/posts/api/postsApi';
 import { KeyboardEvent, useEffect, useState } from 'react';
+import { useMeQuery } from '@/features/auth/api/authApi';
 
 type Props = {
   post: PublishedPostResponse;
@@ -22,11 +23,11 @@ export default function InteractionBlock({ post, isAuth }: Props) {
   const t = useTranslations('Post');
   const formatDate = useFormattedDate();
   const { data: likesData, isLoading } = useGetPostLikesQuery({ postId: post.id }, { skip: !isAuth });
+  const { data: userData } = useMeQuery(undefined, { skip: !isAuth });
   const [updateLikeStatus] = useUpdateLikeStatusPostMutation();
   const [isLiked, setIsLiked] = useState(post.isLiked);
   const [likesCount, setLikesCount] = useState<number | null>(null);
 
-  // Синхронизируем локальный счетчик лайков с данными с сервера
   useEffect(() => {
     if (likesData?.totalCount !== undefined) {
       setLikesCount(likesData.totalCount);
@@ -35,29 +36,34 @@ export default function InteractionBlock({ post, isAuth }: Props) {
     }
   }, [likesData?.totalCount, post.likesCount]);
 
+  useEffect(() => {
+    if (userData?.userId && likesData?.items) {
+      const hasUserLiked = likesData.items.some((like) => like.userId === userData.userId);
+      setIsLiked(hasUserLiked);
+    }
+  }, [likesData?.items, userData?.userId]);
+
   const handleLikeClick = async () => {
     if (!isAuth) return;
 
     try {
-      // Оптимистическое обновление UI
       const newIsLiked = !isLiked;
       setIsLiked(newIsLiked);
 
       if (likesCount !== null) {
-        // Увеличиваем или уменьшаем счетчик лайков на 1
         setLikesCount((prev) => (prev !== null ? prev + (newIsLiked ? 1 : -1) : prev));
       }
 
-      // Отправляем запрос на сервер
+      // запрос на сервер
       const newLikeStatus = newIsLiked ? 'LIKE' : 'NONE';
       await updateLikeStatus({ postId: post.id, likeStatus: newLikeStatus });
     } catch (error) {
       console.error('Error updating like status:', error);
 
-      // Откатываем изменения в случае ошибки
+      // откат в случае ошибки
       setIsLiked(!isLiked);
       if (likesCount !== null) {
-        // Возвращаем счетчик лайков к предыдущему значению
+        // счетчик к предыдущему значению
         setLikesCount((prev) => (prev !== null ? prev + (isLiked ? 1 : -1) : prev));
       }
     }
@@ -70,7 +76,6 @@ export default function InteractionBlock({ post, isAuth }: Props) {
     }
   };
 
-  // Отображаемое количество лайков
   const displayLikesCount =
     likesCount !== null ? likesCount : isLoading ? '...' : (likesData?.totalCount ?? post.likesCount);
 
@@ -99,8 +104,8 @@ export default function InteractionBlock({ post, isAuth }: Props) {
         </div>
       )}
       <div className={s.postLikes}>
-        {post.avatarWhoLikes?.slice(-3).map((avatar, index) => (
-          <div key={index} className={s.avatarWrapper}>
+        {post.avatarWhoLikes?.slice(-3).map((avatar) => (
+          <div key={post.ownerId} className={s.avatarWrapper}>
             <ProfileAvatar src={avatar} userName={post.userName} />
           </div>
         ))}
