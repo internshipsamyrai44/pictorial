@@ -9,6 +9,7 @@ import { DeletePostModal } from '@/features/posts/ui/deletePostModal/DeletePostM
 import { useState } from 'react';
 import { useCreateCommentMutation } from '@/features/posts/api/postsApi';
 import { PostConversation } from './postConversation/PostConversation';
+import { useMeQuery } from '@/features/auth/api/authApi';
 
 type Props = {
   post: PublishedPostResponse;
@@ -20,6 +21,8 @@ type Props = {
 export default function PostContent({ post, closeModal, isAuth, editPost }: Props) {
   const [isOpenModalDeletePost, setIsOpenModalDeletePost] = useState(false);
   const [createComment] = useCreateCommentMutation();
+  const { data } = useMeQuery();
+  const isBlocked = data?.isBlocked;
 
   const handleDeletePostClick = () => {
     setIsOpenModalDeletePost(true);
@@ -52,11 +55,16 @@ export default function PostContent({ post, closeModal, isAuth, editPost }: Prop
         onDeletePost={handleDeletePostClick}
         onEditPost={handleEditPostClick}
         isAuth={isAuth}
+        isBlocked={isBlocked}
       />
-      <PostConversation post={post} />
+      {!isBlocked && <PostConversation post={post} />}
       <div className={s.interactionPanel}>
-        <InteractionBlock post={post} isAuth={isAuth} />
-        {isAuth && <AddCommentForm onClick={handleAddComment} />}
+        {isAuth && !isBlocked && (
+          <>
+            <InteractionBlock post={post} isAuth={isAuth} />
+            <AddCommentForm onClick={handleAddComment} />
+          </>
+        )}
       </div>
       <DeletePostModal
         id={post.id}
