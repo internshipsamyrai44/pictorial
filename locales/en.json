@@ -78,6 +78,7 @@
       "CloseDescription": "Do you really want to close the creation of the post? If you close, everything will be deleted!",
       "Discard": "Discard",
       "SaveDraft": "Save Draft",
+      "DraftSaved": "Draft saved!",
       "ErrorUpload": "Error Upload",
       "TryAgain": "Try Again",
       "ErrorUploadDescription": "Please upload a photo in JPEG or PNG format! Upload file size less than 20 MB!"

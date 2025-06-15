@@ -1,19 +1,57 @@
 import s from './StartLayot.module.scss';
 import FileIcon from '../../../../../../public/icons/PicIcon.svg';
 import { Button, Modal } from '@internshipsamyrai44-ui-kit/components-lib';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useUploadUserPhotoPreview } from '@/shared/hooks/useUploadUserPhotoPreview';
 import { useTranslations } from 'next-intl';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
+import { usePostDraft } from '@/shared/hooks/usePostDraft';
 
-export const Startlayout = () => {
+type PropsType = {
+  // eslint-disable-next-line no-unused-vars
+  setTextAreaValue: (value: string) => void;
+};
+
+export const StartLayout = ({ setTextAreaValue }: PropsType) => {
   const { uploadUserPhotoPreview, errorUploadModal, setErrorUploadModal } = useUploadUserPhotoPreview();
-  const { paginate } = useCreatePostContext();
+  const { paginate, setUserPhotos, setPage } = useCreatePostContext();
+  const { loadPostDraft } = usePostDraft();
   const t = useTranslations('Post');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [isDraftAvailable, setIsDraftAvailable] = useState<boolean>(false);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
+  };
+
+  useEffect(() => {
+    const checkDraft = async () => {
+      try {
+        const draft = await loadPostDraft();
+        setIsDraftAvailable(Boolean(draft && draft.userPhotos.length > 0));
+      } catch (error) {
+        console.error('Error checking draft:', error);
+        setIsDraftAvailable(false);
+      }
+    };
+
+    void checkDraft();
+  }, [loadPostDraft]);
+
+  const handleOpenDraft = async () => {
+    try {
+      const draft = await loadPostDraft();
+      if (draft && draft.userPhotos.length > 0) {
+        setUserPhotos(draft.userPhotos);
+        setTextAreaValue(draft.textAreaValue);
+        setPage(draft.page);
+        if (draft.page === 0) {
+          paginate('next');
+        }
+      }
+    } catch (error) {
+      console.error('Error loading draft:', error);
+    }
   };
 
   return (
@@ -37,7 +75,7 @@ export const Startlayout = () => {
           <Button variant={'primary'} onClick={handleButtonClick}>
             {t('CreatePost.SelectFromComputer')}
           </Button>
-          <Button variant={'outlined'} fullWidth={true}>
+          <Button variant={'outlined'} fullWidth={true} onClick={handleOpenDraft} disabled={!isDraftAvailable}>
             {t('CreatePost.OpenDraft')}
           </Button>
         </div>
