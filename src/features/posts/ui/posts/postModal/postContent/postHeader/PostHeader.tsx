@@ -13,9 +13,10 @@ type Props = {
   onDeletePost: () => void;
   onEditPost: () => void;
   isAuth?: boolean;
+  isBlocked?: boolean;
 };
 
-export default function PostHeader({ avatarOwner, userName, onDeletePost, onEditPost, isAuth }: Props) {
+export default function PostHeader({ avatarOwner, userName, onDeletePost, onEditPost, isAuth, isBlocked }: Props) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const onMenuBtnClick = () => {
@@ -25,12 +26,12 @@ export default function PostHeader({ avatarOwner, userName, onDeletePost, onEdit
   return (
     <div className={s.header}>
       <div className={s.postOwner}>
-        <ProfileAvatar src={avatarOwner} userName={userName} />
+        {!isBlocked && <ProfileAvatar src={avatarOwner} userName={userName} />}
         <Typography as={'h3'} variant={'h3'}>
-          {userName}
+          {isBlocked ? <span className={s.banned}>[Banned]</span> : userName}
         </Typography>
       </div>
-      {isAuth && (
+      {isAuth && !isBlocked && (
         <div className={s.postModalMenu}>
           <div className={s.menuIcon}>
             <PostModalMenuIcon onClick={onMenuBtnClick} />

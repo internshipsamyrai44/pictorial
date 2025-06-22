@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 
 import { useCreatePostMutation, useUploadImagesMutation } from '@/features/posts/api/postsApi';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
-import { Startlayout } from '@/features/posts/ui/create-post/Start-layout/Startlayout';
+import { StartLayout } from '@/features/posts/ui/create-post/Start-layout/StartLayout';
 import { Cropping } from '@/features/posts/ui/create-post/Cropping/Cropping';
 import { Filters } from '@/features/posts/ui/create-post/Filters/Filters';
 import { Publication } from '@/features/posts/ui/create-post/Publication/Publication';
@@ -14,6 +14,7 @@ import { CreatePostHeader } from '@/features/posts/ui/create-post/CreatePostHead
 import { ModalClose } from '@/features/posts/ui/create-post/Modal/ModalClose';
 import { dataURLtoFile } from '@/shared/utils/dataUrlToFile';
 import { useApplyCanvasFilterZoomAspectRatio } from '@/shared/hooks/useApplyCanvasFilterZoomAspectRatio';
+import { usePostDraft } from '@/shared/hooks/usePostDraft';
 
 type PropsType = {
   // eslint-disable-next-line no-unused-vars
@@ -25,6 +26,7 @@ export const CreatePost = (props: PropsType) => {
   const { setCreatePostActive } = props;
   const { userPhotos, page, setModalCloseActive, modalCloseActive } = useCreatePostContext();
   const [textAreaValue, setTextAreaValue] = useState<string>('');
+  const { clearPostDraft } = usePostDraft();
 
   const [uploadImages, { status }] = useUploadImagesMutation();
   const [createPost] = useCreatePostMutation();
@@ -53,7 +55,7 @@ export const CreatePost = (props: PropsType) => {
   const renderStep = () => {
     switch (page) {
       case 0: {
-        return <Startlayout />;
+        return <StartLayout setTextAreaValue={setTextAreaValue} />;
       }
       case 1: {
         return <Cropping />;
@@ -65,7 +67,7 @@ export const CreatePost = (props: PropsType) => {
         return <Publication textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue} status={status} />;
       }
       default: {
-        return <Startlayout />;
+        return <StartLayout setTextAreaValue={setTextAreaValue} />;
       }
     }
   };
@@ -98,6 +100,8 @@ export const CreatePost = (props: PropsType) => {
         description: textAreaValue,
         childrenMetadata: uploadIdObjects
       });
+
+      await clearPostDraft();
     } catch (error) {
       alert('Error creating post');
     }
@@ -117,7 +121,7 @@ export const CreatePost = (props: PropsType) => {
           {renderStep()}
         </div>
       </div>
-      {modalCloseActive && <ModalClose setCreatePostActive={setCreatePostActive} />}
+      {modalCloseActive && <ModalClose setCreatePostActive={setCreatePostActive} textAreaValue={textAreaValue} />}
     </>
   );
 };

@@ -10,6 +10,7 @@ type CreatePostContextProps = {
   // eslint-disable-next-line no-unused-vars
   paginate: (action: 'next' | 'prev' | 'close') => void;
   page: number;
+  setPage: Dispatch<SetStateAction<number>>;
   TOTAL_PAGES: number;
   currentPhotoId: string | undefined;
   setCurrentPhotoId: Dispatch<SetStateAction<string | undefined>>;
@@ -70,6 +71,7 @@ export const CreatePostProvider = ({ children }: CreatePostProviderProps) => {
         setModalCloseActive,
         paginate,
         page,
+        setPage,
         TOTAL_PAGES,
         currentPhotoId,
         setCurrentPhotoId
