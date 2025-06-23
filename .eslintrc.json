@@ -35,7 +35,12 @@
   },
   "plugins": ["react", "@typescript-eslint", "import", "prettier", "unused-imports"],
   "rules": {
-    // ваши правила
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": ["^https?://"]
+      }
+    ]
   },
   "settings": {
     "import/parsers": {
