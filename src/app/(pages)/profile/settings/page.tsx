@@ -10,11 +10,16 @@ import { Tabs, TabsContent, TabType } from '@internshipsamyrai44-ui-kit/componen
 import { Devices } from '@/features/profile/ui/settings/devices/Devices';
 import { Payments } from '@/features/profile/ui/settings/payments/Payments';
 import { AccountManagement } from '@/features/profile/ui/settings/account-management/AccountManagement';
+import { useMeQuery } from '@/features/auth/api/authApi';
+import { Loader } from '@/shared/ui/loader/Loader';
 
 export default function SettingsPage() {
   const t = useTranslations('Profile');
   const searchParams = useSearchParams();
   const router = useRouter();
+
+  // Проверяем, авторизован ли пользователь
+  const { data: me, isLoading } = useMeQuery();
 
   const initialTab = searchParams.get('tab') || 'general-information';
   const [activeTab, setActiveTab] = useState<string>(initialTab);
@@ -49,8 +54,25 @@ export default function SettingsPage() {
     [router]
   );
   useEffect(() => {
+    // Если запрос завершен и пользователь не авторизован, редиректим на страницу входа
+    if (!isLoading && !me?.userId) {
+      router.push('/auth/login');
+    }
+  }, [me, isLoading, router]);
+
+  useEffect(() => {
     setActiveTab(searchParams.get('tab') || 'general-information');
   }, [searchParams]);
+
+  // Показываем загрузку, пока проверяем авторизацию
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  // Если пользователь не авторизован, ничего не показываем (будет редирект)
+  if (!me?.userId) {
+    return null;
+  }
 
   return (
     <>

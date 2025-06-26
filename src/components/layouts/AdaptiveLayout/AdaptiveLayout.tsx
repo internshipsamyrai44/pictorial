@@ -5,6 +5,7 @@ import { getIsAuth } from '@/redux/authSlice';
 import { ReactNode } from 'react';
 import { AuthorizedLayout } from '@/components/layouts/AuthorizedLayout/AuthorizedLayout';
 import { BaseLayout } from '@/components/layouts/BaseLayout/BaseLayout';
+import { usePathname } from 'next/navigation';
 
 type Props = {
   children: ReactNode;
@@ -12,6 +13,14 @@ type Props = {
 
 export const AdaptiveLayout = ({ children }: Props) => {
   const isAuth = useSelector(getIsAuth);
+  const pathname = usePathname();
+
+  // Для страниц настроек всегда показываем авторизованный layout
+  const isSettingsPage = pathname.includes('/profile/settings');
+
+  if (isSettingsPage) {
+    return <AuthorizedLayout>{children}</AuthorizedLayout>;
+  }
 
   return isAuth ? <AuthorizedLayout>{children}</AuthorizedLayout> : <BaseLayout>{children}</BaseLayout>;
 };
