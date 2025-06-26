@@ -4,18 +4,25 @@ import { convertToLocalDate } from '@/shared/utils/convertToLocalDate';
 import { useTranslations } from 'next-intl';
 import { Checkbox, Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import React, { useEffect, useState } from 'react';
-import { useCanselAutoRenewalSubscriptionMutation } from '@/features/subscriptions/api/subscriptionsApi';
+import {
+  useCancelAutoRenewalSubscriptionMutation,
+  useRenewAutoRenewalSubscriptionMutation
+} from '@/features/subscriptions/api/subscriptionsApi';
 import { Loader } from '@/shared/ui/loader/Loader';
 
 export const CurrentSubscription = () => {
   const t = useTranslations('Profile');
   const { latestSubscription } = useIsSubscribed();
-  const [cancelAutoRenewalSubscription, { isLoading }] = useCanselAutoRenewalSubscriptionMutation();
+  const [cancelAutoRenewalSubscription, { isLoading: isLoadingCancelAutoRenewal }] =
+    useCancelAutoRenewalSubscriptionMutation();
+  const [renewAutoRenewalSubscription, { isLoading: isLoadingRenewAutoRenewal }] =
+    useRenewAutoRenewalSubscriptionMutation();
+  const isLoading = isLoadingCancelAutoRenewal && isLoadingRenewAutoRenewal;
 
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const handelUnchecked = () => {
-    isChecked ? cancelAutoRenewalSubscription() : setIsChecked(true);
+    isChecked ? cancelAutoRenewalSubscription() : renewAutoRenewalSubscription();
   };
   useEffect(() => {
     if (latestSubscription?.autoRenewal !== undefined) {
