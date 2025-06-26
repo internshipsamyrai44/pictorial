@@ -24,41 +24,28 @@ export const subscriptionsApi = inctagramApi.injectEndpoints({
     }),
     createSubscription: build.mutation<SubscriptionsResponse, SubscriptionsRequest>({
       query: (body) => {
-        const token = localStorage.getItem('accessToken');
         return {
           url: 'v1/subscriptions',
           method: 'POST',
-          body: body,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
+          body: body
         };
       },
       invalidatesTags: ['Subscriptions']
     }),
     cancelAutoRenewalSubscription: build.mutation<void, void>({
       query: () => {
-        const token = localStorage.getItem('accessToken');
         return {
           url: 'v1/subscriptions/canceled-auto-renewal',
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+          method: 'POST'
         };
       },
       invalidatesTags: ['Subscriptions']
     }),
     renewAutoRenewalSubscription: build.mutation<void, void>({
       query: () => {
-        const token = localStorage.getItem('accessToken');
         return {
           url: '/v1/subscriptions/renew-auto-renewal',
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+          method: 'POST'
         };
       },
       invalidatesTags: ['Subscriptions']
