@@ -17,7 +17,7 @@ export const CurrentSubscription = () => {
     useCancelAutoRenewalSubscriptionMutation();
   const [renewAutoRenewalSubscription, { isLoading: isLoadingRenewAutoRenewal }] =
     useRenewAutoRenewalSubscriptionMutation();
-  const isLoading = isLoadingCancelAutoRenewal && isLoadingRenewAutoRenewal;
+  const isLoading = isLoadingCancelAutoRenewal || isLoadingRenewAutoRenewal;
 
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
@@ -49,7 +49,12 @@ export const CurrentSubscription = () => {
           </p>
         </div>
       </div>
-      <Checkbox label={t('Subscriptions.AutoRenewal')} checked={isChecked} onChange={handelUnchecked} />
+      <Checkbox
+        label={t('Subscriptions.AutoRenewal')}
+        checked={isChecked}
+        onChange={handelUnchecked}
+        disabled={isLoading}
+      />
       {isLoading && <Loader />}
     </div>
   );
