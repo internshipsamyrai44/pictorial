@@ -1,0 +1,16 @@
+.logoutModal {
+  .logoutModalText {
+    margin-bottom: 48px;
+    color: var(--light-100);
+  }
+
+  .logoutModalButtons {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .logoutModalButton {
+    flex: 1;
+  }
+}

@@ -1,0 +1,12 @@
+.section {
+  margin-bottom: 32px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sectionTitle {
+  margin-bottom: 24px;
+  color: var(--light-100);
+}

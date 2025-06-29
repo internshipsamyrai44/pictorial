@@ -249,6 +249,17 @@
   "NotFound": {
     "BacktoHomePage": "Back to home page"
   },
+  "Sessions": {
+    "TerminateAllOtherSessions": "Terminate all other sessions",
+    "CurrentDevice": "Current Device",
+    "ActiveSessions": "Active sessions",
+    "LastVisit": "Last Visit",
+    "LogOut": "Log Out",
+    "LogOutConfirmation": "Are you really want to log out of your account",
+    "Yes": "Yes",
+    "No": "No",
+    "ErrorLoadingSessions": "Error loading sessions"
+  },
   "Notifications": {
     "Notifications": "Notifications",
     "NewNotification": "New notification!",

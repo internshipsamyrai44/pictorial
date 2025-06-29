@@ -10,6 +10,7 @@ export const inctagramApi = createApi({
     'Me',
     'Profile',
     'Sessions',
+    'Devices',
     'Posts',
     'Payment',
     'Comments',

@@ -1,31 +1,30 @@
 import { inctagramApi } from '@/app/services/inctagram.api';
-import { UserDevicesResponse } from '../model/userDevices.types';
+import { DevicesResponse } from '@/features/profile/model/devices.types';
 
-export const userDevicesApi = inctagramApi.injectEndpoints({
+export const devicesApi = inctagramApi.injectEndpoints({
   endpoints: (build) => ({
-    getUserDevices: build.query<UserDevicesResponse, void>({
+    getDevices: build.query<DevicesResponse, void>({
       query: () => ({
         url: 'v1/sessions',
         method: 'GET'
       }),
-      providesTags: ['UserDevices']
+      providesTags: ['Devices']
     }),
     logoutFromDevice: build.mutation<void, string>({
       query: (deviceId) => ({
         url: `v1/sessions/${deviceId}`,
         method: 'DELETE'
       }),
-      invalidatesTags: ['UserDevices']
+      invalidatesTags: ['Devices']
     }),
     terminateAllOtherDevices: build.mutation<void, void>({
       query: () => ({
         url: 'v1/sessions/terminate-all',
         method: 'DELETE'
       }),
-      invalidatesTags: ['UserDevices']
+      invalidatesTags: ['Devices']
     })
   })
 });
 
-export const { useGetUserDevicesQuery, useLogoutFromDeviceMutation, useTerminateAllOtherDevicesMutation } =
-  userDevicesApi;
+export const { useGetDevicesQuery, useLogoutFromDeviceMutation, useTerminateAllOtherDevicesMutation } = devicesApi;

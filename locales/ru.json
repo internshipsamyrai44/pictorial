@@ -249,6 +249,17 @@
   "NotFound": {
     "BacktoHomePage": "Вернуться на главную страницу"
   },
+  "Sessions": {
+    "TerminateAllOtherSessions": "Завершить все другие сессии",
+    "CurrentDevice": "Текущее устройство",
+    "ActiveSessions": "Активные сессии",
+    "LastVisit": "Последний визит",
+    "LogOut": "Выйти",
+    "LogOutConfirmation": "Вы действительно хотите выйти из своей учетной записи",
+    "Yes": "Да",
+    "No": "Нет",
+    "ErrorLoadingSessions": "Ошибка загрузки сессий"
+  },
   "Notifications": {
     "Notifications": "Уведомления",
     "NewNotification": "Новое уведомление!",
