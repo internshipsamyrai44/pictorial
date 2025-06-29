@@ -3,7 +3,7 @@ import { EditPostContent } from './editPostContent/EditPostContent';
 import s from './EditPostModal.module.scss';
 import PostImage from '../postImage/PostImage';
 import CloseButton from '../closeButton/CloseButton';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useState, useEffect } from 'react';
 import { ClosePostModal } from './closePostModal/ClosePostModal';
 import { useTranslations } from 'next-intl';
 
@@ -14,8 +14,16 @@ type Props = {
 
 export const EditPostModal = ({ postID, closeModal }: Props) => {
   const t = useTranslations('Post');
-  const { data: post } = useGetPostsByIdQuery(postID);
+  const [isClient, setIsClient] = useState(false);
   const [isCloseModalOpen, setIsCloseModalOpen] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const { data: post } = useGetPostsByIdQuery(postID, {
+    skip: !isClient
+  });
 
   const handleCloseCloseModal = () => {
     setIsCloseModalOpen(false);

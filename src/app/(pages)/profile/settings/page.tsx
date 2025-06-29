@@ -18,11 +18,19 @@ export default function SettingsPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  // Проверяем, авторизован ли пользователь
-  const { data: me, isLoading } = useMeQuery();
+  const [isClient, setIsClient] = useState(false);
+
+  // Проверяем, авторизован ли пользователь только на клиенте
+  const { data: me, isLoading } = useMeQuery(undefined, {
+    skip: !isClient
+  });
 
   const initialTab = searchParams.get('tab') || 'general-information';
   const [activeTab, setActiveTab] = useState<string>(initialTab);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const tabs = useMemo<TabType[]>(
     () => [
@@ -33,6 +41,7 @@ export default function SettingsPage() {
     ],
     [t]
   );
+
   const renderActiveSection = () => {
     switch (activeTab) {
       case 'devices':
@@ -46,6 +55,7 @@ export default function SettingsPage() {
         return <GeneralInfo />;
     }
   };
+
   const handleActiveTabChange = useCallback(
     (value: string) => {
       setActiveTab(value);
@@ -53,19 +63,20 @@ export default function SettingsPage() {
     },
     [router]
   );
+
   useEffect(() => {
     // Если запрос завершен и пользователь не авторизован, редиректим на страницу входа
-    if (!isLoading && !me?.userId) {
+    if (isClient && !isLoading && !me?.userId) {
       router.push('/auth/login');
     }
-  }, [me, isLoading, router]);
+  }, [me, isLoading, router, isClient]);
 
   useEffect(() => {
     setActiveTab(searchParams.get('tab') || 'general-information');
   }, [searchParams]);
 
-  // Показываем загрузку, пока проверяем авторизацию
-  if (isLoading) {
+  // Показываем загрузку, пока не инициализирован клиент или идет загрузка
+  if (!isClient || isLoading) {
     return <Loader />;
   }
 

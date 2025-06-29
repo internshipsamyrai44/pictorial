@@ -12,20 +12,24 @@ import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import s from './FollowingModal.module.scss';
 import { Loader } from '@/shared/ui/loader/Loader';
 import { UserFollower } from '@/features/profile/model/profileApi.types';
-import { PATH } from '@/shared/const/PATH';
 import Link from 'next/link';
 
 type FollowingModalProps = {
   isOpen: boolean;
-  onClose: () => void;
+  onCloseAction: () => void;
   userName: string;
 };
 
-export const FollowingModal = ({ isOpen, onClose, userName }: FollowingModalProps) => {
+export const FollowingModal = ({ isOpen, onCloseAction, userName }: FollowingModalProps) => {
   const [open, setOpen] = useState(isOpen);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredFollowing, setFilteredFollowing] = useState<UserFollower[]>([]);
+  const [isClient, setIsClient] = useState(false);
   const t = useTranslations('Profile');
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const {
     data: following,
@@ -39,7 +43,7 @@ export const FollowingModal = ({ isOpen, onClose, userName }: FollowingModalProp
       search: searchTerm
     },
     {
-      skip: !open
+      skip: !open || !isClient
     }
   );
 
@@ -88,7 +92,7 @@ export const FollowingModal = ({ isOpen, onClose, userName }: FollowingModalProp
   return (
     <>
       {open && (
-        <Modal className={s.modal} title={`${following?.totalCount || 0} ${t('Following')}`} onClose={onClose}>
+        <Modal className={s.modal} title={`${following?.totalCount || 0} ${t('Following')}`} onClose={onCloseAction}>
           <div className={s.modalContent}>
             <Input placeholder={t('Search')} type="search" onChange={handleSearchChange} value={searchTerm} />
 
@@ -105,7 +109,7 @@ export const FollowingModal = ({ isOpen, onClose, userName }: FollowingModalProp
                 {filteredFollowing.map((follow) => (
                   <li key={follow.id} className={s.userItem}>
                     <div className={s.userInfo}>
-                      <Link href={`${PATH.PROFILE.PROFILE}/${follow.userId}`} className={s.userLink}>
+                      <Link href={`/profile/${follow.userId}`} className={s.userLink}>
                         <div className={s.userAvatar}>
                           <ProfileAvatar
                             src={follow.avatars[0]?.url}

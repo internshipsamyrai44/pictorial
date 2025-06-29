@@ -6,9 +6,14 @@ export const usePaginatedNotifs = (clientId: string) => {
   const [notifications, setNotifications] = useState<NotifsSoketResponse[]>([]);
   const [cursor, setCursor] = useState<number | undefined>(undefined);
   const [hasMore, setHasMore] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const { data, isFetching } = useGetNotifByProfileQuery(cursor, {
-    skip: cursor === -1
+    skip: cursor === -1 || !isClient
   });
 
   useEffect(() => {

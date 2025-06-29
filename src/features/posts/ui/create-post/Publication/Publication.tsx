@@ -4,6 +4,7 @@ import { Input, Textarea } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Publication.module.scss';
 import { QueryStatus } from '@reduxjs/toolkit/query';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 import { useMeQuery } from '@/features/auth/api/authApi';
 import { useCreatePostContext } from '@/shared/hooks/useCreatePostContext';
@@ -22,8 +23,16 @@ type PropsType = {
 export const Publication = (props: PropsType) => {
   const { userPhotos } = useCreatePostContext();
   const { setTextAreaValue, textAreaValue, status } = props;
-  const { data: me } = useMeQuery();
+  const [isClient, setIsClient] = useState(false);
   const t = useTranslations('Post');
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const { data: me } = useMeQuery(undefined, {
+    skip: !isClient
+  });
 
   const textAreaHandler = (e: any) => {
     setTextAreaValue(e.target.value);

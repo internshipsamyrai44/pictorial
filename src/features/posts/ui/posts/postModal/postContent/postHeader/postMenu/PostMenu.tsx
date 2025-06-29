@@ -8,19 +8,19 @@ import { useTranslations } from 'next-intl';
 /* eslint-disable no-unused-vars */
 type Props = {
   setMenuIsOpen: (menuIsOpen: boolean) => void;
-  onEditClick: () => void;
-  onDeleteClick: () => void;
+  onEditClickAction: () => void;
+  onDeleteClickAction: () => void;
 };
 
-export default function PostMenu({ setMenuIsOpen, onEditClick, onDeleteClick }: Props) {
+export default function PostMenu({ setMenuIsOpen, onEditClickAction, onDeleteClickAction }: Props) {
   const t = useTranslations('Post');
 
   const onEditClickHandler = () => {
-    onEditClick();
+    onEditClickAction();
     setMenuIsOpen(false);
   };
   const onDeleteClickHandler = () => {
-    onDeleteClick();
+    onDeleteClickAction();
     setMenuIsOpen(false);
   };
 

@@ -42,7 +42,10 @@ type SideNavBar = {
 
 export const SideNavPanel = ({ className }: SideNavBar) => {
   const [logout, { isLoading }] = useLogoutMutation();
-  const { data: me } = useMeQuery();
+  const [isClient, setIsClient] = useState(false);
+  const { data: me } = useMeQuery(undefined, {
+    skip: !isClient
+  });
   const router = useRouter();
   const [activeIcon, setActiveIcon] = useState<string>('');
   const [isModalActive, setIsModalActive] = useState(false);
@@ -51,8 +54,12 @@ export const SideNavPanel = ({ className }: SideNavBar) => {
   const t = useTranslations('SideNavPanel');
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
     if (me) {
-      setProfileUrl(`${PATH.PROFILE.PROFILE}/${me?.userId}`);
+      setProfileUrl(`/profile/${me?.userId}`);
     }
   }, [me]);
 

@@ -55,8 +55,8 @@ export default function PostContent({ post, closeModal, isAuth, editPost }: Prop
       <PostHeader
         avatarOwner={post.avatarOwner}
         userName={post.userName}
-        onDeletePost={handleDeletePostClick}
-        onEditPost={handleEditPostClick}
+        onDeletePostAction={handleDeletePostClick}
+        onEditPostAction={handleEditPostClick}
         isAuth={isAuth}
         isBlocked={isBlocked}
       />

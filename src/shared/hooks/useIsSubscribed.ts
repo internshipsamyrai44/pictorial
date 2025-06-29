@@ -1,8 +1,16 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import { useGetCurrentSubscriptionsQuery } from '@/features/subscriptions/api/subscriptionsApi';
 
 export const useIsSubscribed = () => {
-  const { data: subscriptionsData } = useGetCurrentSubscriptionsQuery();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const { data: subscriptionsData } = useGetCurrentSubscriptionsQuery(undefined, {
+    skip: !isClient
+  });
 
   const latestSubscription = useMemo(() => {
     if (!subscriptionsData?.data?.length) return null;

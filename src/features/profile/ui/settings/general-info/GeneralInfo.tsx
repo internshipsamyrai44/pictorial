@@ -6,15 +6,27 @@ import { useGetProfileQuery, useUpdateProfileMutation } from '@/features/profile
 
 import s from './GeneralInfo.module.scss';
 import { ProfileBase } from '@/features/profile/model/profileApi.types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 
 export const GeneralInfo = () => {
-  const { data: profileData, isLoading, error } = useGetProfileQuery();
+  const [isClient, setIsClient] = useState(false);
+
+  const {
+    data: profileData,
+    isLoading,
+    error
+  } = useGetProfileQuery(undefined, {
+    skip: !isClient
+  });
   const [updateProfile, { isLoading: updateProfileIsLoading }] = useUpdateProfileMutation();
   const errorMessage = useRequestError(error);
   const t = useTranslations('Profile');
   const [alertType, setAlertType] = useState<'success' | 'error' | null>(null);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const alertSubmitProfileFormMessage =
     alertType === 'error' ? t('Alert.ErrorAlert') : alertType === 'success' ? t('Alert.SuccessAlert') : '';
@@ -36,7 +48,7 @@ export const GeneralInfo = () => {
     }
   };
 
-  if (isLoading) return <LoaderLinear />;
+  if (!isClient || isLoading) return <LoaderLinear />;
 
   return (
     <>

@@ -13,22 +13,29 @@ import {
 import { ProfileAvatar } from '@/shared/ui/profile-avatar/ProfileAvatar';
 import s from './FollowersModal.module.scss';
 import Link from 'next/link';
-import { PATH } from '@/shared/const/PATH';
 import { Loader } from '@/shared/ui/loader/Loader';
 import { UserFollower } from '@/features/profile/model/profileApi.types';
 
 type FollowersModalProps = {
   isOpen: boolean;
-  onClose: () => void;
+  onCloseAction: () => void;
   userName: string;
 };
 
-export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProps) => {
+export const FollowersModal = ({ isOpen, onCloseAction, userName }: FollowersModalProps) => {
   const [open, setOpen] = useState(isOpen);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredFollowers, setFilteredFollowers] = useState<UserFollower[]>([]);
+  const [isClient, setIsClient] = useState(false);
   const t = useTranslations('Profile');
-  const { data: user } = useGetProfileQuery();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const { data: user } = useGetProfileQuery(undefined, {
+    skip: !isClient
+  });
 
   const {
     data: followers,
@@ -42,7 +49,7 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
       search: searchTerm
     },
     {
-      skip: !open
+      skip: !open || !isClient
     }
   );
 
@@ -101,7 +108,7 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
   return (
     <>
       {open && (
-        <Modal className={s.modal} title={`${followers?.totalCount || 0} ${t('Followers')}`} onClose={onClose}>
+        <Modal className={s.modal} title={`${followers?.totalCount || 0} ${t('Followers')}`} onClose={onCloseAction}>
           <div className={s.modalContent}>
             <Input placeholder={t('Search')} type="search" onChange={handleSearchChange} value={searchTerm} />
 
@@ -118,7 +125,7 @@ export const FollowersModal = ({ isOpen, onClose, userName }: FollowersModalProp
                 {filteredFollowers.map((follower) => (
                   <li key={follower.id} className={s.userItem}>
                     <div className={s.userInfo}>
-                      <Link href={`${PATH.PROFILE.PROFILE}/${follower.userId}`} className={s.userLink}>
+                      <Link href={`/profile/${follower.userId}`} className={s.userLink}>
                         <div className={s.userAvatar}>
                           <ProfileAvatar
                             src={follower.avatars[0]?.url}

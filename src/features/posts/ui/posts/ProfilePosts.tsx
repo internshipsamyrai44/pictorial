@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useGetPostsByUsernameQuery } from '../../api/postsApi';
 import s from './ProfilePosts.module.scss';
@@ -14,7 +14,15 @@ type Props = {
 };
 
 export default function ProfillePosts({ userName, isMyProfile }: Props) {
-  const { data, isLoading } = useGetPostsByUsernameQuery(userName);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const { data, isLoading } = useGetPostsByUsernameQuery(userName, {
+    skip: !isClient
+  });
   const posts = data?.items ?? [];
 
   const [selectedPostID, setSelectedPostID] = useState<number | null>(null);
@@ -32,7 +40,7 @@ export default function ProfillePosts({ userName, isMyProfile }: Props) {
 
   const handleEditPost = () => setIsEditing(true);
 
-  if (isLoading) {
+  if (!isClient || isLoading) {
     return (
       <div className={s.posts}>
         <PostsSkeleton quantity={12} />

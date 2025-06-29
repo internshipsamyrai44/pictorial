@@ -51,11 +51,11 @@ export const ProfileDashboard = ({ userName, publicProfileData, isMyProfile = fa
     setIsFollowingModalOpen(true);
   };
 
-  const closeFollowersModal = () => {
+  const closeFollowersModalAction = () => {
     setIsFollowersModalOpen(false);
   };
 
-  const closeFollowingModal = () => {
+  const closeFollowingModalAction = () => {
     setIsFollowingModalOpen(false);
   };
 
@@ -89,9 +89,9 @@ export const ProfileDashboard = ({ userName, publicProfileData, isMyProfile = fa
         </Typography>
       </div>
 
-      <FollowersModal isOpen={isFollowersModalOpen} onClose={closeFollowersModal} userName={userName} />
+      <FollowersModal isOpen={isFollowersModalOpen} onCloseAction={closeFollowersModalAction} userName={userName} />
 
-      <FollowingModal isOpen={isFollowingModalOpen} onClose={closeFollowingModal} userName={userName} />
+      <FollowingModal isOpen={isFollowingModalOpen} onCloseAction={closeFollowingModalAction} userName={userName} />
     </div>
   );
 };

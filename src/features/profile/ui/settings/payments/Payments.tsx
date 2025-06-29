@@ -1,14 +1,21 @@
 import { Pagination, Select, SelectContainer, SelectItem } from '@internshipsamyrai44-ui-kit/components-lib';
 import s from './Payments.module.scss';
 import { PaymentsTable } from './payments-table/PaymentsTable';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useGetMyPaymentsQuery } from '@/features/subscriptions/api/subscriptionsApi';
 
 export const Payments = () => {
   const [pageSize, setPageSize] = useState(10);
   const [page, setPage] = useState(1);
+  const [isClient, setIsClient] = useState(false);
 
-  const { data: payments } = useGetMyPaymentsQuery();
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const { data: payments } = useGetMyPaymentsQuery(undefined, {
+    skip: !isClient
+  });
 
   const handlePageSizeChange = (value: string) => {
     setPageSize(+value);

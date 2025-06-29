@@ -1,16 +1,24 @@
 import { NotifsSoketResponse } from '@/features/notifications/model/notifications.types';
 import { getCookie } from '../utils/cookieUtils';
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
 export const useNotificationSocket = (
   userId: string | undefined,
   setNotifications: Dispatch<SetStateAction<NotifsSoketResponse[]>>
 ) => {
-  const accessToken = getCookie('accessToken');
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+
+    const accessToken = getCookie('accessToken');
     if (!accessToken || !userId) return;
+
     const socket = io('https://inctagram.work', { query: { accessToken } });
 
     socket.on('NOTIFICATION', (data: NotifsSoketResponse) => {
@@ -26,5 +34,5 @@ export const useNotificationSocket = (
     return () => {
       socket.disconnect();
     };
-  }, [accessToken, userId, setNotifications]);
+  }, [isClient, userId, setNotifications]);
 };

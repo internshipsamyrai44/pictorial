@@ -2,7 +2,7 @@
 
 import s from './Notifications.module.scss';
 import Bell from '../../../../public/icons/Bell';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Typography } from '@internshipsamyrai44-ui-kit/components-lib';
 import { useTranslations } from 'next-intl';
 import { useMeQuery } from '@/features/auth/api/authApi';
@@ -14,7 +14,15 @@ import { useNotificationSocket } from '@/shared/hooks/useNotificationSocket';
 export const Notifications = () => {
   const t = useTranslations('Notifications');
   const [isOpen, setIsOpen] = useState(false);
-  const { data: { userId } = {} } = useMeQuery();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const { data: { userId } = {} } = useMeQuery(undefined, {
+    skip: !isClient
+  });
   const { notifications, setNotifications } = usePaginatedNotifs(userId?.toString() ?? '');
   const [markAsRead] = useUpdateNotifMarkMutation();
   const filteredNotifs = notifications.filter((n) => n.clientId === userId?.toString());
