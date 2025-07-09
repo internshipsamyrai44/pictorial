@@ -22,6 +22,9 @@ export const Devices = () => {
 
   const [isClient, setIsClient] = useState(false);
   const [isLogoutModalActive, setIsLogoutModalActive] = useState(false);
+  const [isTerminateSessionModalActive, setIsTerminateSessionModalActive] = useState(false);
+  const [isTerminateAllModalActive, setIsTerminateAllModalActive] = useState(false);
+  const [selectedDeviceId, setSelectedDeviceId] = useState<number | null>(null);
 
   const {
     data: devicesData,
@@ -31,9 +34,11 @@ export const Devices = () => {
   } = useGetDevicesQuery(undefined, {
     skip: !isClient
   });
+
   const { data: me } = useMeQuery(undefined, {
     skip: !isClient
   });
+
   const [logoutFromDevice, { isLoading: isLogoutLoading }] = useLogoutFromDeviceMutation();
   const [logout, { isLoading: isGlobalLogoutLoading }] = useLogoutMutation();
   const [terminateAllOtherDevices, { isLoading: isTerminateAllLoading }] = useTerminateAllOtherDevicesMutation();
@@ -41,31 +46,34 @@ export const Devices = () => {
   const hasOtherDevices = Boolean(devicesData?.others && devicesData.others.length > 0);
   const isAnyLoading = isLogoutLoading || isGlobalLogoutLoading;
 
+  // Установка флага клиентского рендеринга
   useEffect(() => {
     setIsClient(true);
   }, []);
 
+  // Обработка ошибок авторизации
   useEffect(() => {
-    if (error && isClient) {
-      console.log('Devices error:', error);
+    if (!error || !isClient) return;
 
-      const isUnauthorized =
-        ('status' in error && (error.status === 401 || error.status === 400 || error.status === 'FETCH_ERROR')) ||
-        ('originalStatus' in error && (error.originalStatus === 401 || error.originalStatus === 400)) ||
-        ('data' in error &&
-          error.data &&
-          typeof error.data === 'object' &&
-          'statusCode' in error.data &&
-          (error.data.statusCode === 401 || error.data.statusCode === 400));
+    console.log('Devices error:', error);
 
-      if (isUnauthorized) {
-        console.log('Unauthorized error detected, redirecting to login');
-        deleteCookie('accessToken');
-        router.push(PATH.AUTH.LOGIN);
-      }
+    const isUnauthorized =
+      ('status' in error && (error.status === 401 || error.status === 400 || error.status === 'FETCH_ERROR')) ||
+      ('originalStatus' in error && (error.originalStatus === 401 || error.originalStatus === 400)) ||
+      ('data' in error &&
+        error.data &&
+        typeof error.data === 'object' &&
+        'statusCode' in error.data &&
+        (error.data.statusCode === 401 || error.data.statusCode === 400));
+
+    if (isUnauthorized) {
+      console.log('Unauthorized error detected, redirecting to login');
+      deleteCookie('accessToken');
+      router.push(PATH.AUTH.LOGIN);
     }
   }, [error, router, isClient]);
 
+  // Периодическое обновление списка устройств
   useEffect(() => {
     if (!isClient) return;
 
@@ -78,6 +86,7 @@ export const Devices = () => {
     return () => clearInterval(interval);
   }, [isLoading, error, refetch, isClient]);
 
+  // Форматирование даты с учетом клиентского рендеринга
   const formatDate = (dateString: string) => {
     if (!isClient) {
       return new Date(dateString).toISOString().replace('T', ' ').substring(0, 19);
@@ -85,19 +94,31 @@ export const Devices = () => {
     return new Date(dateString).toLocaleString();
   };
 
-  const handleLogoutFromDevice = async (deviceId: number) => {
+  // Обработчик выхода из устройства
+  const handleLogoutFromDevice = (deviceId: number) => {
     if (devicesData?.current && devicesData.current.deviceId === deviceId) {
       setIsLogoutModalActive(true);
       return;
     }
 
+    setSelectedDeviceId(deviceId);
+    setIsTerminateSessionModalActive(true);
+  };
+
+  // Подтверждение выхода из устройства
+  const handleConfirmLogoutFromDevice = async () => {
+    if (selectedDeviceId === null) return;
+
     try {
-      await logoutFromDevice(deviceId.toString()).unwrap();
+      await logoutFromDevice(selectedDeviceId.toString()).unwrap();
+      setIsTerminateSessionModalActive(false);
+      setSelectedDeviceId(null);
     } catch (error) {
       console.error('Failed to logout from device:', error);
     }
   };
 
+  // Глобальный выход
   const handleGlobalLogout = () => {
     logout()
       .unwrap()
@@ -110,22 +131,43 @@ export const Devices = () => {
       });
   };
 
-  const handleTerminateAllOtherDevices = async () => {
+  // Завершение всех других сессий
+  const handleTerminateAllOtherDevices = () => {
+    setIsTerminateAllModalActive(true);
+  };
+
+  // Подтверждение завершения всех других сессий
+  const handleConfirmTerminateAllOtherDevices = async () => {
     try {
       await terminateAllOtherDevices().unwrap();
+      setIsTerminateAllModalActive(false);
     } catch (error) {
       console.error('Failed to terminate all other devices:', error);
     }
   };
 
+  // Закрытие всех модальных окон
   const handleCloseModal = () => {
     setIsLogoutModalActive(false);
+    setIsTerminateSessionModalActive(false);
+    setIsTerminateAllModalActive(false);
+    setSelectedDeviceId(null);
   };
 
+  // Получение информации о выбранном устройстве
+  const getSelectedDeviceInfo = () => {
+    if (!selectedDeviceId || !devicesData?.others) return null;
+
+    const device = devicesData.others.find((d) => d.deviceId === selectedDeviceId);
+    return device || null;
+  };
+
+  // Состояния загрузки
   if (!isClient || isLoading) {
     return <LoaderLinear />;
   }
 
+  // Обработка ошибок
   if (error) {
     const isUnauthorized =
       ('status' in error && (error.status === 401 || error.status === 400 || error.status === 'FETCH_ERROR')) ||
@@ -143,8 +185,13 @@ export const Devices = () => {
     return <div>{t('ErrorLoadingSessions')}</div>;
   }
 
+  const selectedDevice = getSelectedDeviceInfo();
+  const deviceInfo = selectedDevice
+    ? `${selectedDevice.browserName || selectedDevice.deviceName} (${selectedDevice.ip})`
+    : '';
+
   return (
-    <div className={s.container}>
+    <div className={s.container} data-testid="devices-container">
       {devicesData?.current && (
         <CurrentDevice device={devicesData.current} onLogout={handleLogoutFromDevice} isLoading={isAnyLoading} />
       )}
@@ -162,12 +209,32 @@ export const Devices = () => {
         formatDate={formatDate}
       />
 
+      {/* Модальные окна */}
       <LogoutModal
         isOpen={isLogoutModalActive}
         onClose={handleCloseModal}
         onConfirm={handleGlobalLogout}
         isLoading={isGlobalLogoutLoading}
         userEmail={me?.email}
+      />
+
+      <LogoutModal
+        isOpen={isTerminateSessionModalActive}
+        onClose={handleCloseModal}
+        onConfirm={handleConfirmLogoutFromDevice}
+        isLoading={isLogoutLoading}
+        title={t('TerminateSession')}
+        message={t('TerminateSessionConfirmation')}
+        deviceInfo={deviceInfo}
+      />
+
+      <LogoutModal
+        isOpen={isTerminateAllModalActive}
+        onClose={handleCloseModal}
+        onConfirm={handleConfirmTerminateAllOtherDevices}
+        isLoading={isTerminateAllLoading}
+        title={t('TerminateAllSessions')}
+        message={t('TerminateAllSessionsConfirmation')}
       />
     </div>
   );

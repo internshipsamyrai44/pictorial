@@ -258,7 +258,11 @@
     "LogOutConfirmation": "Вы действительно хотите выйти из своей учетной записи",
     "Yes": "Да",
     "No": "Нет",
-    "ErrorLoadingSessions": "Ошибка загрузки сессий"
+    "ErrorLoadingSessions": "Ошибка загрузки сессий",
+    "TerminateSession": "Завершить сессию",
+    "TerminateSessionConfirmation": "Вы действительно хотите завершить эту сессию",
+    "TerminateAllSessions": "Завершить все сессии",
+    "TerminateAllSessionsConfirmation": "Вы действительно хотите завершить все другие сессии"
   },
   "Notifications": {
     "Notifications": "Уведомления",

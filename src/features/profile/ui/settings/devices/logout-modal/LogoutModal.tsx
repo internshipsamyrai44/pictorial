@@ -8,29 +8,59 @@ type LogoutModalProps = {
   onConfirm: () => void;
   isLoading: boolean;
   userEmail?: string;
+  title?: string;
+  message?: string;
+  deviceInfo?: string;
 };
 
-export const LogoutModal = ({ isOpen, onClose, onConfirm, isLoading, userEmail }: LogoutModalProps) => {
+export const LogoutModal = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  isLoading,
+  userEmail,
+  title,
+  message,
+  deviceInfo
+}: LogoutModalProps) => {
   const t = useTranslations('Sessions');
 
+  // Раннее возвращение, если модальное окно не открыто
   if (!isOpen) {
     return null;
   }
 
+  const modalTitle = title || t('LogOut');
+  const modalMessage = message || t('LogOutConfirmation');
+  const showQuestionMark = Boolean(userEmail || deviceInfo);
+
   return (
-    <Modal title={t('LogOut')} className={s.logoutModal} onClose={onClose}>
+    <Modal title={modalTitle} className={s.logoutModal} onClose={onClose}>
       <Typography variant={'regular-text-16'} className={s.logoutModalText}>
-        {t('LogOutConfirmation')}
-        <Typography as={'span'} variant={'bold-text-16'}>
-          {` " ${userEmail} " `}
-        </Typography>
-        ?
+        {modalMessage}
+        {userEmail && (
+          <Typography as={'span'} variant={'bold-text-16'}>
+            {` " ${userEmail} " `}
+          </Typography>
+        )}
+        {deviceInfo && (
+          <Typography as={'span'} variant={'bold-text-16'}>
+            {` ${deviceInfo} `}
+          </Typography>
+        )}
+        {showQuestionMark && '?'}
       </Typography>
       <div className={s.logoutModalButtons}>
-        <Button className={s.logoutModalButton} variant={'outlined'} onClick={onConfirm} disabled={isLoading}>
+        <Button
+          className={s.logoutModalButton}
+          variant={'outlined'}
+          onClick={onConfirm}
+          disabled={isLoading}
+          data-testid="confirm-button"
+        >
           {t('Yes')}
         </Button>
-        <Button className={s.logoutModalButton} onClick={onClose}>
+        <Button className={s.logoutModalButton} onClick={onClose} data-testid="cancel-button">
           {t('No')}
         </Button>
       </div>

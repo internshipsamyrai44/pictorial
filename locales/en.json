@@ -251,14 +251,18 @@
   },
   "Sessions": {
     "TerminateAllOtherSessions": "Terminate all other sessions",
-    "CurrentDevice": "Current Device",
+    "CurrentDevice": "Current device",
     "ActiveSessions": "Active sessions",
-    "LastVisit": "Last Visit",
-    "LogOut": "Log Out",
-    "LogOutConfirmation": "Are you really want to log out of your account",
+    "LastVisit": "Last visit",
+    "LogOut": "Log out",
+    "LogOutConfirmation": "Are you sure you want to log out of your account",
     "Yes": "Yes",
     "No": "No",
-    "ErrorLoadingSessions": "Error loading sessions"
+    "ErrorLoadingSessions": "Error loading sessions",
+    "TerminateSession": "Terminate session",
+    "TerminateSessionConfirmation": "Are you sure you want to terminate this session",
+    "TerminateAllSessions": "Terminate all sessions",
+    "TerminateAllSessionsConfirmation": "Are you sure you want to terminate all other sessions"
   },
   "Notifications": {
     "Notifications": "Notifications",
