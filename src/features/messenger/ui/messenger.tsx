@@ -1,9 +1,10 @@
 'use client';
 import React, { lazy, Suspense } from 'react';
 import { Loader } from '@/shared/ui/loader/Loader';
+import { MeResponse } from '@/features/auth/model/authApi.types';
 
 type RemoteMessengerProps = {
-  userId: string;
+  user: MeResponse;
 };
 
 const RemoteMessengerWidget = lazy(async (): Promise<{ default: React.ComponentType<RemoteMessengerProps> }> => {
@@ -48,10 +49,10 @@ const RemoteMessengerWidget = lazy(async (): Promise<{ default: React.ComponentT
   }
 });
 
-export const Messenger = ({ userId }: RemoteMessengerProps) => {
+export const Messenger = ({ user }: RemoteMessengerProps) => {
   return (
     <Suspense fallback={<Loader />}>
-      <RemoteMessengerWidget userId={userId} />
+      <RemoteMessengerWidget user={user} />
     </Suspense>
   );
 };
