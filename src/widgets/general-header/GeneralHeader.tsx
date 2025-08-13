@@ -14,7 +14,7 @@ export const GeneralHeader = ({ isPublic }: Props) => (
   <header className={s.wrapper}>
     <div className={s.container}>
       <Link href="/" className={s.logo}>
-        Inctagram
+        Pictorial
       </Link>
       <div className={s.headerActions}>
         {!isPublic && <Notifications />}
