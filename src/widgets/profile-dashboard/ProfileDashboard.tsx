@@ -26,6 +26,7 @@ type Props = {
 export const ProfileDashboard = ({ userName, publicProfileData, isMyProfile = false }: Props) => {
   const { isAuth } = useAuth();
   const t = useTranslations('Profile');
+
   const { isBusinessAccount } = useIsSubscribed();
 
   const [isFollowersModalOpen, setIsFollowersModalOpen] = useState(false);
